@@ -10,4 +10,6 @@
 	{{ $org->website }}<br/>
 	</p>
 
+	<a href="{{ $org->id }}/edit">EDIT</a>
+
 @stop

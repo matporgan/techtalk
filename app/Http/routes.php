@@ -17,4 +17,10 @@ Route::get('/', function () {
 
 Route::resource('orgs', 'OrgsController');
 
-Route::get('orgs/{id}/{name}', 'OrgsController@show');
+Route::get('orgs/create', 'OrgsController@create');
+
+Route::post('orgs', 'OrgsController@store');
+
+Route::get('orgs/{id}', 'OrgsController@show');
+
+Route::get('orgs/{id}/edit', 'OrgsController@edit');

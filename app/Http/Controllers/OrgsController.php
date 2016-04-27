@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
+use App\Http\Requests\OrgRequest;
 
 use App\Org;
 
@@ -29,7 +29,7 @@ class OrgsController extends Controller
      */
     public function create()
     {
-        //
+        return view('orgs.create');
     }
 
     /**
@@ -38,9 +38,14 @@ class OrgsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OrgRequest $request)
     {
-        //
+        // below will execute if FlyerRequest has validated the form
+        Org::create($request->all());
+
+        // flash()->success('Success!', 'Your organisation has been created.');
+
+        return redirect('orgs');
     }
 
     /**
@@ -49,10 +54,10 @@ class OrgsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id, $name)
+    public function show($id)
     {
         $org = Org::where('id', $id)->first();
-
+        
         return view('orgs.show', compact('org'));
     }
 
@@ -64,7 +69,9 @@ class OrgsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $org = Org::where('id', $id)->first();
+        
+        return view('orgs.edit', compact('org'));
     }
 
     /**
