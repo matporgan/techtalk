@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('pages.home');
 });
+
+Route::resource('orgs', 'OrgsController');
+
+Route::get('orgs/{id}/{name}', 'OrgsController@show');
