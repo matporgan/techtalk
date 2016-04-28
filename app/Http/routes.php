@@ -17,10 +17,15 @@ Route::get('/', function () {
 
 Route::resource('orgs', 'OrgsController');
 
-Route::get('orgs/create', 'OrgsController@create');
+//Route::get('orgs/create', 'OrgsController@create');
 
-Route::post('orgs', 'OrgsController@store');
+// Route::post('orgs', 'OrgsController@store');
 
-Route::get('orgs/{id}', 'OrgsController@show');
+// Route::get('orgs/{id}', 'OrgsController@show');
 
-Route::get('orgs/{id}/edit', 'OrgsController@edit');
+// Route::get('orgs/{id}/edit', 'OrgsController@edit');
+
+// Route::patch('orgs/{id}', 'OrgsController@update');
+
+// Route::delete('orgs/{id}', 'OrgsController@destroy');
+
