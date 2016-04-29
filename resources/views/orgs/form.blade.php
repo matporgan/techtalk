@@ -67,7 +67,8 @@
 	$('#tag_list').select2({ 
 		placeholder: 'Select all applicable, or add your own', 
 		tags: true,
-		tokenSeparators: [',', ';']
+		tokenSeparators: [',', ';'],
+		minimumInputLength: 1,
     });
 
     $eventSelect
