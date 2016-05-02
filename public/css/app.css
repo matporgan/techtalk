@@ -5767,4 +5767,9 @@ body {
   height: 60px;
   background-color: #f5f5f5; }
 
+/* Lightbox styles
+-------------------------------------------------- */
+.lightbox {
+  padding: 0 15px 15px 15px; }
+
 /*# sourceMappingURL=app.css.map */

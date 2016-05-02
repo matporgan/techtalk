@@ -69,4 +69,4 @@
 	</div>
 </div>
 
-@include('orgs/_form-js')
+@include('orgs._form-js')

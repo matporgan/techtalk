@@ -14,9 +14,7 @@
 </head>
 
 <body>
-	<header class="row">
-		@include('includes.header')
-	</header>
+	@include('includes.header')
 
 	<div class="container">
 		<div if="main" class="row">
@@ -24,9 +22,6 @@
 		</div>
 	</div>
 
-
-	<footer class="row">
-		@include('includes.footer')
-	</footer>
+	@include('includes.footer')
 </body>
 </html>
