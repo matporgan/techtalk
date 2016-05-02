@@ -4,21 +4,20 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Document extends Model
+class Link extends Model
 {
 	/**
-	 * Fillable fields for a document.
+	 * Fillable fields for a link.
 	 *
 	 * @var array
 	 */
     protected $fillable = [
-    	'name', 
     	'description', 
-    	'path'
+    	'url'
     ];
 
     /**
-     * Get the org associated with the given document.
+     * Get the org associated with the given link.
      *
      * @return \Illuminate\Database\Eloquent\Relations\belongsTo
      */

@@ -19,8 +19,9 @@ Route::get('/', function () {
 Route::resource('orgs', 'OrgsController');
 
 Route::post('orgs/{id}/documents', 'DocumentsController@addDocument');
-
 Route::get('document/{id}', 'DocumentsController@downloadDocument');
+
+Route::post('orgs/{id}/links', 'LinksController@addLink');
 
 //Route::get('orgs/create', 'OrgsController@create');
 

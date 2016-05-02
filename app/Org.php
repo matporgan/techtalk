@@ -115,5 +115,15 @@ class Org extends Model
     {
         return $this->hasMany('App\Document');
     }
+    
+    /**
+     * Get the links associated with the given org.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function links()
+    {
+        return $this->hasMany('App\Link');
+    }
 
 }

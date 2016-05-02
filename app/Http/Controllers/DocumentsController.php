@@ -20,18 +20,24 @@ class DocumentsController extends Controller
     public function addDocument(Request $request, $id) 
     {
         $org = Org::findOrFail($id);
-
-        $file = $request->file('file');
-
-        // get file names
-        $name = $file->getClientOriginalName();
+        
+        // create filenames
+        $file = $request->file('upload');
+        $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+        $name = $request->name . '.' . $ext;
         $unique_name = time() . $name;
-
+        
         // move file
         $file->move('storage/documents', $unique_name);
 
         // create DB entry
-        $org->documents()->create(['name' => $name, 'path' => '/storage/documents/'.$unique_name]);
+        $org->documents()->create([
+            'name' => $name, 
+            'description' => $request->description,
+            'path' => '/storage/documents/'.$unique_name
+        ]);
+        
+        return redirect("/orgs/{$org->id}");
     }
 
     /**
