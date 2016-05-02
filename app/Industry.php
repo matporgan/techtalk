@@ -22,6 +22,16 @@ class Industry extends Model
 	 */
     public function orgs()
     {
-    	return $this->belongsToMany('App\Org', 'org_industry', 'industry_id', 'org_id');
+    	return $this->belongsToMany('App\Org', 'org_industry', 'industry_id', 'org_id')->withTimestamps();
+    }
+
+	/**
+	 * Get the domains associated with the given industry.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+    public function domains()
+    {
+    	return $this->hasMany('App\Domain');
     }
 }

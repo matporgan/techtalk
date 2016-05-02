@@ -14,6 +14,8 @@ class CreateTechnologiesTable extends Migration
     {
         Schema::create('technologies', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('position');
+            $table->string('subcategory');
             $table->string('name');
             $table->timestamps();
         });
@@ -27,16 +29,49 @@ class CreateTechnologiesTable extends Migration
             $table->timestamps();
         });
 
-        // Predefined fields
+       // Predefined fields
         $feilds = array(
-            'IoT', 
-            'Cloud Computing',
-            'Visualisation'
+            [1 , 'Emerging', 'Advanced Materials'],
+            [2 , 'Emerging', 'Hydrogen'],
+            [3 , 'Emerging', 'Neuro technology'],
+            [4 , 'Emerging', 'Advanced Nanotehcnology'],
+
+            [5 , 'Stable', 'IT Infrastructure'],
+            [6 , 'Stable', 'Telecommunications'],
+            [7 , 'Stable', 'Enterprise Software'],
+            [8 , 'Stable', 'Software Development'],
+            [9 , 'Stable', 'Operations Systems'],
+            [10, 'Stable', 'Visualisation'],
+            [11, 'Stable', 'Digitisation'],
+            [12, 'Stable', 'Computer Aided Design'],
+            [13, 'Stable', 'Computer Aided Construction'],
+
+            [14, 'Accelerating', 'Internet of Things / Cybersecurity'],
+            [15, 'Accelerating', 'Machine Learning / Artificial Intelligence'],
+            [16, 'Accelerating', 'Cloud Computing / Cloud-Based Platforms'],
+            [17, 'Accelerating', 'Big Data / Open Data'],
+            [18, 'Accelerating', 'Real-Time and Predictive Analytics'],
+            [19, 'Accelerating', 'Unmanned Ariel Vehicles /  Nano Satellites'],
+            [20, 'Accelerating', 'Wearables / VR / AR'],
+            [21, 'Accelerating', 'Computer Vision / Image Recognition'],
+            [22, 'Accelerating', '3D Printing'],
+            [23, 'Accelerating', 'Robotics / Autonomous Vehicles'],
+            [24, 'Accelerating', 'Electric Vehicles'],
+            [25, 'Accelerating', 'Solar PV / Electricity Storage'],
+            [26, 'Accelerating', 'eMoney'],
+
+            [27, 'Other', 'Other'],
         );
 
         // Prepopulate table with fields
         foreach($feilds as $field)
-           DB::table('technologies')->insert(['name' => $field]);        
+        {
+            DB::table('technologies')->insert([
+                'position' => $field[0],
+                'subcategory' => $field[1],
+                'name' => $field[2]
+            ]); 
+        }    
     }
 
     /**

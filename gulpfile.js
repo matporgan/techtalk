@@ -15,7 +15,8 @@ elixir(function(mix) {
     mix.sass('app.scss')
        .scripts([
        		'libs/jquery-2.2.3.min.js',
-       		'libs/select2.min.js'
+       		'libs/select2.min.js',
+       		'libs/dropzone.js'
        	], './public/js/libs.js')
        .styles([
        		'libs/select2.min.css'

@@ -6,7 +6,7 @@
 
 <div class="row">
 	{!! Form::model($org, ['method' => 'PATCH', 'action' => ['OrgsController@update', $org->id], 'files' => true, 'class' => 'col-md-12']) !!}
-	    @include('orgs.form', ['submitText' => 'Update Organisation'])
+	    @include('orgs._form', ['submitText' => 'Update Organisation'])
 	{!! Form::close() !!}
 </div>
 

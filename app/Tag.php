@@ -22,6 +22,6 @@ class Tag extends Model
 	 */
     public function orgs()
     {
-    	return $this->belongsToMany('App\Org', 'org_tag', 'tag_id', 'org_id');
+    	return $this->belongsToMany('App\Org', 'org_tag', 'tag_id', 'org_id')->withTimestamps();
     }
 }

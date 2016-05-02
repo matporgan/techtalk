@@ -15,6 +15,7 @@ class CreateTagsTable extends Migration
         Schema::create('tags', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->integer('count');
             $table->timestamps();
         });
 
@@ -29,14 +30,19 @@ class CreateTagsTable extends Migration
 
         // Predefined fields
         $feilds = array(
-            'tag1',
-            'tag2',
-            'tag3'
+            ['tag1', 2],
+            ['tag2', 5],
+            ['tag3', 1]
         );
 
         // Prepopulate table with fields
         foreach($feilds as $field)
-            DB::table('tags')->insert(['name' => $field]); 
+        {
+            DB::table('tags')->insert([
+                'name' => $field[0],
+                'count' => $field[1],
+            ]);   
+        }
     }
 
     /**
@@ -46,6 +52,7 @@ class CreateTagsTable extends Migration
      */
     public function down()
     {
+        Schema::drop('org_tag');
         Schema::drop('tags');
     }
 }

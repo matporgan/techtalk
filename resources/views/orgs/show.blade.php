@@ -23,17 +23,10 @@
 			@endforeach
 		</ul>
 
-		Cycles:
+		Domains:
 		<ul>
-			@foreach($org->cycles as $cycle)
-				<li>{{ $cycle->name }}</li>
-			@endforeach
-		</ul>
-
-		Phases:
-		<ul>
-			@foreach($org->phases as $phase)
-				<li>{{ $phase->name }}</li>
+			@foreach($org->domains as $domain)
+				<li>{{ $domain->name }}</li>
 			@endforeach
 		</ul>
 
@@ -46,5 +39,10 @@
 	</p>
 
 	<a href="{{ $org->id }}/edit">EDIT</a> | <a href="{{ $org->id }}">DELETE</a>
+
+	<div class="row">
+		{!! Form::open(['method' => 'POST', 'action' => ['OrgsController@addDocument', $org->id], 'files' => true, 'class' => 'dropzone']) !!}
+		{!! Form::close() !!}
+	</div>
 
 @stop

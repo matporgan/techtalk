@@ -15,7 +15,10 @@ Route::get('/', function () {
     return view('pages.home');
 });
 
+Route::post('orgs/{id}/documents', 'OrgsController@addDocument');
+
 Route::resource('orgs', 'OrgsController');
+
 
 //Route::get('orgs/create', 'OrgsController@create');
 

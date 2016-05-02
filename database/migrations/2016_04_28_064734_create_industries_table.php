@@ -14,6 +14,7 @@ class CreateIndustriesTable extends Migration
     {
         Schema::create('industries', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('position');
             $table->string('name');
             $table->timestamps();
         });
@@ -29,14 +30,25 @@ class CreateIndustriesTable extends Migration
 
         // Predefined fields
         $feilds = array(
-            'Oil & Gas',
-            'Mining',
-            'Other'
+            [1, 'Energy & Resources'],
+            [2, 'Utilities'],
+            [3, 'Built Environment'],
+            [4, 'Transport & Logistics'],
+            [5, 'Automotive & Manufacturing'],
+            [6, 'Aerospace & Defence'],
+            [7, 'Telecom'],
+            [8, 'Healthcare'],
+            [9, 'Other']
         );
 
         // Prepopulate table with fields
         foreach($feilds as $field)
-            DB::table('industries')->insert(['name' => $field]);   
+        {
+            DB::table('industries')->insert([
+                'position' => $field[0],
+                'name' => $field[1],
+            ]);   
+        }
     }
 
     /**
@@ -46,6 +58,7 @@ class CreateIndustriesTable extends Migration
      */
     public function down()
     {
+        Schema::drop('org_industry');
         Schema::drop('industries');
     }
 }

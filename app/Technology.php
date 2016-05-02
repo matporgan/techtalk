@@ -22,6 +22,6 @@ class Technology extends Model
 	 */
     public function orgs()
     {
-    	return $this->belongsToMany('App\Org', 'org_technology', 'technology_id', 'org_id');
+    	return $this->belongsToMany('App\Org', 'org_technology', 'technology_id', 'org_id')->withTimestamps();
     }
 }

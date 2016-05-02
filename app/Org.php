@@ -16,7 +16,9 @@ class Org extends Model
 		'logo',
 		'short_desc',
 		'long_desc',
-		'website'
+		'website',
+        'in_talks',
+        'partner_status'
 	];
 
     public function scopeWithName($query, $name)
@@ -31,7 +33,7 @@ class Org extends Model
 	 */
 	public function technologies()
     {
-    	return $this->belongsToMany('App\Technology', 'org_technology', 'org_id', 'technology_id');
+    	return $this->belongsToMany('App\Technology', 'org_technology', 'org_id', 'technology_id')->withTimestamps();
     }
 
     /**
@@ -51,7 +53,7 @@ class Org extends Model
 	 */
 	public function industries()
     {
-    	return $this->belongsToMany('App\Industry', 'org_industry', 'org_id', 'industry_id');
+    	return $this->belongsToMany('App\Industry', 'org_industry', 'org_id', 'industry_id')->withTimestamps();
     }
 
     /**
@@ -63,45 +65,25 @@ class Org extends Model
     {
     	return $this->industries->lists('id')->all();
     }
-    
+
     /**
-	 * Get the cycles associated with the given org.
-	 *
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-	 */
-	public function cycles()
+     * Get the domains associated with the given org.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function domains()
     {
-    	return $this->belongsToMany('App\Cycle', 'org_cycle', 'org_id', 'cycle_id');
+        return $this->belongsToMany('App\Domain', 'org_domain', 'org_id', 'domain_id')->withTimestamps();
     }
 
     /**
-     * Get a list of technology ids associated with the current organisation.
+     * Get a list of domain ids associated with the current organisation.
      *
      * @return array 
      */
-    public function getCycleListAttribute()
+    public function getDomainListAttribute()
     {
-    	return $this->cycles->lists('id')->all();
-    }
-
-    /**
-	 * Get the phases associated with the given org.
-	 *
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-	 */
-	public function phases()
-    {
-    	return $this->belongsToMany('App\Phase', 'org_phase', 'org_id', 'phase_id');
-    }
-
-    /**
-     * Get a list of technology ids associated with the current organisation.
-     *
-     * @return array 
-     */
-    public function getPhaseListAttribute()
-    {
-    	return $this->phases->lists('id')->all();
+        return $this->domains->lists('id')->all();
     }
 
 	/**
@@ -111,11 +93,11 @@ class Org extends Model
 	 */
 	public function tags()
     {
-    	return $this->belongsToMany('App\Tag', 'org_tag', 'org_id', 'tag_id');
+    	return $this->belongsToMany('App\Tag', 'org_tag', 'org_id', 'tag_id')->withTimestamps();
     }
 
     /**
-     * Get a list of technology ids associated with the current organisation.
+     * Get a list of tag ids associated with the current organisation.
      *
      * @return array 
      */
