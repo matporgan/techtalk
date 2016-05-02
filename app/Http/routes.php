@@ -15,10 +15,12 @@ Route::get('/', function () {
     return view('pages.home');
 });
 
-Route::post('orgs/{id}/documents', 'OrgsController@addDocument');
 
 Route::resource('orgs', 'OrgsController');
 
+Route::post('orgs/{id}/documents', 'DocumentsController@addDocument');
+
+Route::get('document/{id}', 'DocumentsController@downloadDocument');
 
 //Route::get('orgs/create', 'OrgsController@create');
 

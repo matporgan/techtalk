@@ -10,8 +10,6 @@ use App\Org;
 use App\Technology;
 use App\Industry;
 use App\Domain;
-use App\Cycle;
-use App\Phase;
 use App\Tag;
 
 class OrgsController extends Controller
@@ -118,24 +116,6 @@ class OrgsController extends Controller
         $org->destroy();
 
         return redirect("/orgs/{$org->id}");
-    }
-
-    /**
-     * 
-     */
-    public function addDocument(Request $request, $id) 
-    {
-        $org = Org::findOrFail($id);
-
-        $file = $request->file('file');
-
-        $name = time() . $file->getClientOriginalName();
-
-        $file->move('orgs/documents', $name);
-
-
-
-        return 'done';
     }
 
     /**

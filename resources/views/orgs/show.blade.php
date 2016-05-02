@@ -36,12 +36,19 @@
 				<li>{{ $tag->name }}</li>
 			@endforeach
 		</ul>
+
+		Documents:
+		<ul>
+			@foreach($org->documents as $document)
+				<li><a href="/document/{{ $document->id }}">{{ $document->name }}</li>
+			@endforeach
+		</ul>
 	</p>
 
 	<a href="{{ $org->id }}/edit">EDIT</a> | <a href="{{ $org->id }}">DELETE</a>
 
 	<div class="row">
-		{!! Form::open(['method' => 'POST', 'action' => ['OrgsController@addDocument', $org->id], 'files' => true, 'class' => 'dropzone']) !!}
+		{!! Form::open(['method' => 'POST', 'action' => ['DocumentsController@addDocument', $org->id], 'files' => true, 'class' => 'dropzone']) !!}
 		{!! Form::close() !!}
 	</div>
 

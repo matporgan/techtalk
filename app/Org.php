@@ -106,4 +106,14 @@ class Org extends Model
     	return $this->tags->lists('id')->all();
     }
 
+    /**
+     * Get the documents associated with the given org.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function documents()
+    {
+        return $this->hasMany('App\Document');
+    }
+
 }
