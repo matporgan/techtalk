@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests\OrgRequest;
+use App\Http\Requests\OrgUpdateRequest;
 
 use App\Org;
 use App\Technology;
@@ -52,6 +52,8 @@ class OrgsController extends Controller
 
         $this->syncCategories($request, $org);
 
+        $this->moveLogo($request, $org);
+
         // flash()->success('Success!', 'Your organisation has been created.');
 
         return redirect("/orgs/{$org->id}");
@@ -92,13 +94,16 @@ class OrgsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(OrgRequest $request, $id)
+    public function update(OrgUpdateRequest $request, $id)
     {
         $org = Org::findOrFail($id);
 
         $org->update($request->all());
 
         $this->syncCategories($request, $org);
+
+        if($request->file('logo') != null)
+            $this->moveLogo($request, $org);
 
         return redirect("/orgs/{$org->id}");
     }
@@ -119,12 +124,35 @@ class OrgsController extends Controller
     }
 
     /**
+     * Move logo to storage location and add to database.
+     *
+     * @param  OrgRequest  $request
+     * @param  Org  $org
+     */
+    public function moveLogo(Request $request, Org $org) 
+    {
+        $storage = 'storage/logos/';
+
+        // create filenames
+        $file = $request->file('logo');
+        $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+        $name = 'logo_' . $org->id . '.' . $ext;
+        
+        // move file
+        $file->move($storage, $name);
+
+        // update DB entry
+        $org->logo = '/' . $storage . $name;
+        $org->save();
+    }
+
+    /**
      * Sync up the lists of categories in the database.
      * 
      * @param  OrgRequest  $request
      * @param  Org  $org
      */
-    private function syncCategories(OrgRequest $request, Org $org)
+    private function syncCategories(Request $request, Org $org)
     {
         // sync categories
         $org->technologies()->sync($request->input('technology_list'));

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class OrgRequest extends Request
+class OrgUpdateRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,10 +26,8 @@ class OrgRequest extends Request
         return [
             'name' => 'required',
             'short_desc' => 'required',
-            //'long_desc' => 'required',
-            'logo' => 'required|image',
+            'logo' => 'image',
             'website' => 'required',
-            //'tag_list' => 'required',
             'technology_list' => 'required',
             'industry_list' => 'required',
             'domain_list' => 'required'

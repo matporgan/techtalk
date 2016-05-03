@@ -19,6 +19,8 @@ class DocumentsController extends Controller
      */
     public function addDocument(Request $request, $id) 
     {
+        $storage = 'storage/documents/';
+
         $org = Org::findOrFail($id);
         
         // create filenames
@@ -28,13 +30,12 @@ class DocumentsController extends Controller
         $unique_name = time() . $name;
         
         // move file
-        $file->move('storage/documents', $unique_name);
+        $file->move($storage, $unique_name);
 
-        // create DB entry
         $org->documents()->create([
             'name' => $name, 
             'description' => $request->description,
-            'path' => '/storage/documents/'.$unique_name
+            'path' => '/' . $storage . $unique_name
         ]);
         
         return redirect("/orgs/{$org->id}");

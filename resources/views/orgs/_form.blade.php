@@ -5,10 +5,30 @@
 		{!! Form::text('name', null, ['class' => 'form-control']) !!}
 	</div>
 
-	<div class="form-group">
-		{!! Form::label('logo', 'Logo:') !!}
-		{!! Form::text('logo', null, ['class' => 'form-control']) !!}
-	</div>
+	@if($type == 'create')
+		<div class="form-group">
+			{!! Form::label('logo', 'Logo:') !!}
+			{!! Form::file('logo', ['id' => 'logo']) !!}
+		</div>
+	@else
+		<div class="form-group" id="cur_logo">
+			{!! Form::label('logo', 'Logo:') !!}<br />
+			<img src="{{ $org->logo }}" alt="{{ $org->name . " - Logo" }}" class="logo" />
+			<a class="btn" id="edit_logo" href="#">Edit</a>
+		</div>
+
+		<div class="form-group" id="new_logo" style="display:none;">
+			{!! Form::label('logo', 'Logo:') !!}
+			{!! Form::file('logo', ['id' => 'logo']) !!}
+		</div>
+		
+		<script type="text/javascript">
+			$("a#edit_logo").click(function(){
+				document.getElementById("new_logo").style.display='block';
+				document.getElementById("cur_logo").style.display='none';
+			});
+		</script>
+	@endif
 
 	<div class="form-group">
 		{!! Form::label('short_desc', 'Short Description:') !!}

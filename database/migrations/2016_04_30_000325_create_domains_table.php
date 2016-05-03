@@ -16,8 +16,8 @@ class CreateDomainsTable extends Migration
             $table->increments('id');
             $table->integer('industry_id')->unsigned()->index();
             $table->foreign('industry_id')->references('id')->on('industries')->onDelete('cascade');            
-            $table->string('position');
             $table->string('name');
+            $table->string('position');
             $table->timestamps();
         });
 
@@ -72,8 +72,8 @@ class CreateDomainsTable extends Migration
         {
             DB::table('domains')->insert([
                 'industry_id' => $field[0],
-                'name' => $field[1],
-                'position' => $field[2]
+                'position' => $field[1],
+                'name' => $field[2]
             ]); 
         }
     }

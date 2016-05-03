@@ -3,10 +3,13 @@
 @section('content')
 	
 	<h1>{!! $org->name !!}</h1>
+
+	<img src="{{ $org->logo }}" alt="{{ $org->name . " - Logo" }}" class="logo" />
+
 	<p>
-		{{ $org->logo }}<br/>
-		{{ $org->short_desc }}<br/>
-		{{ $org->long_desc }}<br/>
+		<br/>
+		{{ $org->short_desc }}<br/><br/>
+		{{ $org->long_desc }}<br/><br/>
 		{{ $org->website }}<br/><br/>
 
 		Technologies:
@@ -40,7 +43,7 @@
 		Documents:
 		<ul>
 			@foreach($org->documents as $document)
-				<li><a href="/document/{{ $document->id }}">{{ $document->name }} | {{ $document->description }}</a></li>
+				<li><a href="/document/{{ $document->id }}">{{ $document->name }} | {{ $document->description }}</a><a href="" class="btn btn-xs btn-danger">Delete</a></li>
 			@endforeach
 		</ul>
 
@@ -52,19 +55,6 @@
 		</ul>
 	</p>
 
-
-
-	<!-- Add fancyBox main JS and CSS files -->
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen" />
-
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$(".fancybox").fancybox({
-				padding: 0
-			});
-		});
-	</script>
 
 	@include('documents.show')
 
