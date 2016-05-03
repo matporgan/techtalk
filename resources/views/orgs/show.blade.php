@@ -2,7 +2,7 @@
 
 @section('content')
 	
-	<h1>{!! $org->name !!}</h1>
+	<h1>{!! $org->name !!}</h1><a href="/orgs/{{ $org->id }}/delete" class="btn btn-xs btn-danger">Delete</a>
 
 	<img src="{{ $org->logo }}" alt="{{ $org->name . " - Logo" }}" class="logo" />
 
@@ -43,24 +43,31 @@
 		Documents:
 		<ul>
 			@foreach($org->documents as $document)
-				<li><a href="/document/{{ $document->id }}">{{ $document->name }} | {{ $document->description }}</a><a href="" class="btn btn-xs btn-danger">Delete</a></li>
+				<li><a href="/document/{{ $document->id }}">{{ $document->name }} | {{ $document->description }}</a><a href="/document/{{ $document->id }}/delete" class="btn btn-xs btn-danger">Delete</a></li>
 			@endforeach
 		</ul>
 
 		Links:
 		<ul>
 			@foreach($org->links as $link)
-				<li><a href="{{ $link->url }}">{{ $link->url }} | {{ $link->description }}</a></li>
+				<li><a href="{{ $link->url }}">{{ $link->url }} | {{ $link->description }}</a><a href="/link/{{ $link->id }}/delete" class="btn btn-xs btn-danger">Delete</a></li>
+			@endforeach
+		</ul>
+
+		Contacts:
+		<ul>
+			@foreach($org->contacts as $contact)
+				<li><a href="mailto:{{ $contact->email }}">{{ $contact->name }}</a><a href="/contact/{{ $contact->id }}/delete" class="btn btn-xs btn-danger">Delete</a></li>
 			@endforeach
 		</ul>
 	</p>
-
 
 	@include('documents.show')
 
 	@include('links.show')
 	
-
+	@include('contacts.show')
+	
 	<a href="{{ $org->id }}/edit">EDIT</a> | <a href="{{ $org->id }}">DELETE</a>
 	
 @stop

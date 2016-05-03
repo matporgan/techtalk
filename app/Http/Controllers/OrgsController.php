@@ -116,11 +116,8 @@ class OrgsController extends Controller
      */
     public function destroy($id)
     {
-        $org = Org::findOrFail($id);
-
-        $org->destroy();
-
-        return redirect("/orgs/{$org->id}");
+        Org::destroy($id);
+        return redirect("/orgs");
     }
 
     /**

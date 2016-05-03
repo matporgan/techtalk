@@ -3,42 +3,41 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ContactRequest;
 
-use App\Http\Requests;
-
-use App\Link;
+use App\Contact;
 use App\Org;
 
-class LinksController extends Controller
+class ContactsController extends Controller
 {
     /**
-     * Add link to database.
+     * Add contact to database.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id) 
+    public function store(ContactRequest $request, $id) 
     {
         $org = Org::findOrFail($id);
 
         // create DB entry
-        $org->links()->create([
-            'url' => $request->url,
-            'description' => $request->description
+        $org->contacts()->create([
+            'name' => $request->name,
+            'email' => $request->email
         ]);
         
         return redirect("/orgs/{$org->id}");
     }
 
     /**
-     * Destroy the link.
+     * Destroy the contact.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-    	Link::destroy($id);
+    	Contact::destroy($id);
     	return back();
     }
 }

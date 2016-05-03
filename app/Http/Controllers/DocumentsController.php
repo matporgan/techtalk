@@ -17,7 +17,7 @@ class DocumentsController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function addDocument(Request $request, $id) 
+    public function store(Request $request, $id) 
     {
         $storage = 'storage/documents/';
 
@@ -42,14 +42,13 @@ class DocumentsController extends Controller
     }
 
     /**
-     * Download the document.
+     * Destroy the document.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function downloadDocument($id) {
-    	$document = Document::findOrFail($id);
-
-    	return view('documents.download', compact('document'));
+    public function destroy($id) {
+    	Document::destroy($id);
+    	return back();
     }
 }

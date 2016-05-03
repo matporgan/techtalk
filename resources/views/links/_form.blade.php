@@ -1,7 +1,7 @@
 @include('links._form-js')
 
 <div id="link_form" class="lightbox" style="display:none;">
-	{!! Form::open(['method' => 'POST', 'action' => ['LinksController@addLink', $org->id]]) !!}
+	{!! Form::open(['method' => 'POST', 'action' => ['LinksController@store', $org->id]]) !!}
 		<h2>Add Link</h2>
 		<div class="form-group">
 			{!! Form::label('url', 'URL:') !!}

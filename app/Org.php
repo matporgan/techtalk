@@ -125,5 +125,14 @@ class Org extends Model
     {
         return $this->hasMany('App\Link');
     }
-
+    
+    /**
+     * Get the contacts associated with the given org.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function contacts()
+    {
+        return $this->hasMany('App\Contact');
+    }
 }

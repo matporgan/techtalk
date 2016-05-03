@@ -17,11 +17,17 @@ Route::get('/', function () {
 
 
 Route::resource('orgs', 'OrgsController');
+Route::get('orgs/{id}/delete', 'OrgsController@destroy');
 
-Route::post('orgs/{id}/documents', 'DocumentsController@addDocument');
-Route::get('document/{id}', 'DocumentsController@downloadDocument');
+Route::post('orgs/{id}/documents', 'DocumentsController@store');
+Route::get('document/{id}/delete', 'DocumentsController@destroy');
+Route::get('document/{id}', 'DocumentsController@download');
 
-Route::post('orgs/{id}/links', 'LinksController@addLink');
+Route::post('orgs/{id}/links', 'LinksController@store');
+Route::get('link/{id}/delete', 'LinksController@destroy');
+
+Route::post('orgs/{id}/contacts', 'ContactsController@store');
+Route::get('contact/{id}/delete', 'ContactsController@destroy');
 
 //Route::get('orgs/create', 'OrgsController@create');
 
