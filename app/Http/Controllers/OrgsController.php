@@ -88,10 +88,10 @@ class OrgsController extends Controller
      */
     public function edit($id)
     {
-        if(! $this->isUserLegit($id)) 
-        {
-            return $this->unauthorized();
-        }
+        // if(! $this->isUserLegit($id)) 
+        // {
+        //     return $this->unauthorized();
+        // }
 
         $org = Org::findOrFail($id);
 
@@ -109,10 +109,10 @@ class OrgsController extends Controller
      */
     public function update(OrgUpdateRequest $request, $id)
     {
-        if(! $this->isUserLegit($id)) 
-        {
-            return $this->unauthorized();
-        }
+        // if(! $this->isUserLegit($id)) 
+        // {
+        //     return $this->unauthorized();
+        // }
 
         $org = Org::findOrFail($id);
 

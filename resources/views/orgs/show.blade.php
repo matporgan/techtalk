@@ -18,21 +18,21 @@
 		Technologies:
 		<ul>
 			@foreach($org->technologies as $technology)
-				<li>{{ $technology->name }}</li>
+				<li><a href="/technology/{{ $technology->id }}">{{ $technology->name }}</a></li>
 			@endforeach
 		</ul>
 
 		Industries:
 		<ul>
 			@foreach($org->industries as $industry)
-				<li>{{ $industry->name }}</li>
+				<li><a href="/industry/{{ $industry->id }}">{{ $industry->name }}</a></li>
 			@endforeach
 		</ul>
 
 		Domains:
 		<ul>
 			@foreach($org->domains as $domain)
-				<li>{{ $domain->name }}</li>
+				<li><a href="/domain/{{ $domain->id }}">{{ $domain->name }}</a></li>
 			@endforeach
 		</ul>
 
@@ -47,9 +47,9 @@
 		<ul>
 			@foreach($org->documents as $document)
 				<li>
-					<a href="/document/{{ $document->id }}">{{ $document->name }} | {{ $document->description }}</a>
+					<a href="{{ $org->id }}/document/{{ $document->id }}">{{ $document->name }} | {{ $document->description }}</a>
 					@if(Auth::id() == $org->user_id) 
-						<a href="/document/{{ $document->id }}/delete" class="btn btn-xs btn-danger">Delete</a>
+						<a href="{{ $org->id }}/document/{{ $document->id }}/delete" class="btn btn-xs btn-danger">Delete</a>
 					@endif
 				</li>
 			@endforeach
@@ -58,26 +58,33 @@
 		Links:
 		<ul>
 			@foreach($org->links as $link)
-				<li><a href="{{ $link->url }}">{{ $link->url }} | {{ $link->description }}</a><a href="/link/{{ $link->id }}/delete" class="btn btn-xs btn-danger">Delete</a></li>
+				<li><a href="{{ $link->url }}">{{ $link->url }} | {{ $link->description }}</a>
+				@if(Auth::id() == $org->user_id) 
+					<a href="{{ $org->id }}/link/{{ $link->id }}/delete" class="btn btn-xs btn-danger">Delete</a></li>
+				@endif
 			@endforeach
 		</ul>
 
 		Contacts:
 		<ul>
 			@foreach($org->contacts as $contact)
-				<li><a href="mailto:{{ $contact->email }}">{{ $contact->name }}</a><a href="/contact/{{ $contact->id }}/delete" class="btn btn-xs btn-danger">Delete</a></li>
+				<li><a href="mailto:{{ $contact->email }}">{{ $contact->name }}</a>
+				@if(Auth::id() == $org->user_id) 
+					<a href="{{ $org->id }}/contact/{{ $contact->id }}/delete" class="btn btn-xs btn-danger">Delete</a></li>
+				@endif
 			@endforeach
 		</ul>
 	</p>
-	@if(Auth::id() == $org->user_id) 
-
+		
+	@if(Auth::id() == $org->user_id)
 		@include('documents.show')
 
 		@include('links.show')
 		
 		@include('contacts.show')
-
-		<a href="{{ $org->id }}/edit">EDIT</a> | <a href="{{ $org->id }}">DELETE</a>
+		
 	@endif
 	
+	<a href="{{ $org->id }}/edit">EDIT</a> | <a href="{{ $org->id }}">DELETE</a>
+
 @stop

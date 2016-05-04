@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Http\Requests\ContactRequest;
+use App\Http\Controllers\Traits\AuthorizesUsers;
 
 use App\Contact;
 use App\Org;
 
 class ContactsController extends Controller
 {
+    use AuthorizesUsers; 
+
     /**
      * Add contact to database.
      *
@@ -19,6 +23,11 @@ class ContactsController extends Controller
      */
     public function store(ContactRequest $request, $id) 
     {
+        if(! $this->isUserLegit($id)) 
+        {
+            return $this->unauthorized();
+        }
+        
         $org = Org::findOrFail($id);
 
         // create DB entry
@@ -36,8 +45,13 @@ class ContactsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
-    	Contact::destroy($id);
+    public function destroy($org_id, $contact_id) {
+        if(! $this->isUserLegit($org_id)) 
+        {
+            return $this->unauthorized();
+        }
+        
+    	Contact::destroy($contact_id);
     	return back();
     }
 }

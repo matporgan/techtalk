@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Traits;
 use Illuminate\Http\Request;
 
 use App\Org;
+use App\Document;
 
 trait AuthorizesUsers {
 
@@ -18,7 +19,7 @@ trait AuthorizesUsers {
             'user_id' => \Auth::id()
         ])->exists();
     }
-
+    
     /**
      * 
      */
