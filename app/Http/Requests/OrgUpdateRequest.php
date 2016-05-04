@@ -13,7 +13,7 @@ class OrgUpdateRequest extends Request
      */
     public function authorize()
     {
-        return true;
+        true;
     }
 
     /**

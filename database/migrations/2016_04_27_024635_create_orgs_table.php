@@ -14,6 +14,8 @@ class CreateOrgsTable extends Migration
     {
         Schema::create('orgs', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned()->index();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');  
             $table->string('name', 40);
             $table->string('logo');
             $table->text('short_desc', 160);

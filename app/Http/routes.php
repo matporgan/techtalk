@@ -41,3 +41,7 @@ Route::get('contact/{id}/delete', 'ContactsController@destroy');
 
 // Route::delete('orgs/{id}', 'OrgsController@destroy');
 
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');

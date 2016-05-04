@@ -12,6 +12,13 @@ use App\Org;
 class DocumentsController extends Controller
 {
     /**
+     * The base directory, where documents are stored.
+     *
+     * @var string
+     */
+    protected $baseDir = 'storage/documents';
+
+    /**
      * Move document to storage location and add to database.
      *
      * @param  \Illuminate\Http\Request $request
@@ -19,8 +26,6 @@ class DocumentsController extends Controller
      */
     public function store(Request $request, $id) 
     {
-        $storage = 'storage/documents/';
-
         $org = Org::findOrFail($id);
         
         // create filenames
@@ -30,12 +35,12 @@ class DocumentsController extends Controller
         $unique_name = time() . $name;
         
         // move file
-        $file->move($storage, $unique_name);
+        $file->move($baseDir, $unique_name);
 
         $org->documents()->create([
             'name' => $name, 
             'description' => $request->description,
-            'path' => '/' . $storage . $unique_name
+            'path' => '/' . $baseDir . $unique_name
         ]);
         
         return redirect("/orgs/{$org->id}");

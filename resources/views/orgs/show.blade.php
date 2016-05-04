@@ -2,7 +2,10 @@
 
 @section('content')
 	
-	<h1>{!! $org->name !!}</h1><a href="/orgs/{{ $org->id }}/delete" class="btn btn-xs btn-danger">Delete</a>
+	<h1>{!! $org->name !!}</h1>
+	@if(Auth::id() == $org->user_id) 
+		<a href="/orgs/{{ $org->id }}/delete" class="btn btn-xs btn-danger">Delete</a>
+	@endif
 
 	<img src="{{ $org->logo }}" alt="{{ $org->name . " - Logo" }}" class="logo" />
 
@@ -43,7 +46,12 @@
 		Documents:
 		<ul>
 			@foreach($org->documents as $document)
-				<li><a href="/document/{{ $document->id }}">{{ $document->name }} | {{ $document->description }}</a><a href="/document/{{ $document->id }}/delete" class="btn btn-xs btn-danger">Delete</a></li>
+				<li>
+					<a href="/document/{{ $document->id }}">{{ $document->name }} | {{ $document->description }}</a>
+					@if(Auth::id() == $org->user_id) 
+						<a href="/document/{{ $document->id }}/delete" class="btn btn-xs btn-danger">Delete</a>
+					@endif
+				</li>
 			@endforeach
 		</ul>
 
@@ -61,13 +69,15 @@
 			@endforeach
 		</ul>
 	</p>
+	@if(Auth::id() == $org->user_id) 
 
-	@include('documents.show')
+		@include('documents.show')
 
-	@include('links.show')
-	
-	@include('contacts.show')
-	
-	<a href="{{ $org->id }}/edit">EDIT</a> | <a href="{{ $org->id }}">DELETE</a>
+		@include('links.show')
+		
+		@include('contacts.show')
+
+		<a href="{{ $org->id }}/edit">EDIT</a> | <a href="{{ $org->id }}">DELETE</a>
+	@endif
 	
 @stop

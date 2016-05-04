@@ -12,13 +12,17 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
-    mix.sass('app.scss')
-       .scripts([
-       		'libs/jquery-2.2.3.min.js',
-       		'libs/select2.min.js',
-       		'libs/dropzone.js'
-       	], './public/js/libs.js')
+    mix.sass([
+    		'app.scss'
+    	], './public/css/app.css')
        .styles([
        		'libs/select2.min.css'
-       	], './public/css/libs.css');
+       	], './public/css/libs.css')
+       .scripts([
+       		'libs/jquery-2.2.3.min.js',
+       		'libs/bootstrap.min.js',
+       		'libs/select2.min.js',
+       		'libs/dropzone.js'
+       	], './public/js/libs.js');
+
 });

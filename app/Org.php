@@ -26,6 +26,16 @@ class Org extends Model
         return $query->where(compact('name'));
 	}
 
+    /**
+     * Get the user associated with the given org.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
 	/**
 	 * Get the technologies associated with the given org.
 	 *

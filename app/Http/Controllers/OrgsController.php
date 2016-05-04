@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Http\Requests\OrgRequest;
 use App\Http\Requests\OrgUpdateRequest;
+use App\Http\Controllers\Traits\AuthorizesUsers;
 
 use App\Org;
 use App\Technology;
@@ -14,6 +16,12 @@ use App\Tag;
 
 class OrgsController extends Controller
 {
+    use AuthorizesUsers; 
+
+    public function __construct()
+    {
+        //$this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -47,7 +55,7 @@ class OrgsController extends Controller
      */
     public function store(OrgRequest $request)
     {
-        //dd($request);
+        //dd($request->user());
         $org = Org::create($request->all());
 
         $this->syncCategories($request, $org);
@@ -80,6 +88,11 @@ class OrgsController extends Controller
      */
     public function edit($id)
     {
+        if(! $this->isUserLegit($id)) 
+        {
+            return $this->unauthorized();
+        }
+
         $org = Org::findOrFail($id);
 
         $categories = $this->getCategories();
@@ -96,6 +109,11 @@ class OrgsController extends Controller
      */
     public function update(OrgUpdateRequest $request, $id)
     {
+        if(! $this->isUserLegit($id)) 
+        {
+            return $this->unauthorized();
+        }
+
         $org = Org::findOrFail($id);
 
         $org->update($request->all());
@@ -104,8 +122,8 @@ class OrgsController extends Controller
 
         if($request->file('logo') != null)
             $this->moveLogo($request, $org);
-
-        return redirect("/orgs/{$org->id}");
+        
+        return redirect("/orgs/{$org->id}");  
     }
 
     /**
@@ -116,6 +134,11 @@ class OrgsController extends Controller
      */
     public function destroy($id)
     {
+        if(! $this->isUserLegit($id)) 
+        {
+            return $this->unauthorized();
+        }
+
         Org::destroy($id);
         return redirect("/orgs");
     }
@@ -158,11 +181,13 @@ class OrgsController extends Controller
 
         // check to see if tag list is empty
         $tag_list = $request->input('tag_list');       
-        if(!empty($tag_list)) {
+        if(! empty($tag_list)) 
+        {
             // check for new tags
             $tag_list = $this->checkForNewTags($tag_list);
         }
-        else {
+        else 
+        {
             // change null to empty array
             $tag_list = [];
         }
@@ -215,5 +240,4 @@ class OrgsController extends Controller
             'tags' => Tag::orderBy('count')->lists('name', 'id')->all()
         ];
     }
-    
 }

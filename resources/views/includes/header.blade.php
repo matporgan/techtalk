@@ -8,31 +8,32 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Tech Talk</a>
+            <a class="navbar-brand" href="/">Tech Talk</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Home</a></li>
-                <li><a href="/orgs">Organisations</a></li>
-                <li><a href="/orgs/create">Add</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li class="dropdown-header">Nav header</li>
-                        <li><a href="#">Separated link</a></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
+                <li {{ Request::is('/') ? 'class=active' : null }}><a href="/">Home</a></li>
+                <li {{ Request::is('orgs') ? 'class=active' : null }}><a href="/orgs">Organisations</a></li>
+                {{Request::is('/orgs')}}
+                <li {{ Request::is('orgs/create') ? 'class=active' : null }}><a href="/orgs/create">Add</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="../navbar/">Default</a></li>
-                <li class="active"><a href="./">Static top <span class="sr-only">(current)</span></a></li>
-                <li><a href="../navbar-fixed-top/">Fixed top</a></li>
+                @if(Auth::check())
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">My Organisations</a></li>
+                            <li><a href="#">My Discussions</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/logout">Logout</a></li>
+                        </ul>
+                    </li>
+                @else
+                    <li {{ Request::is('login') ? 'class=active' : null }}><a href="/login">Login</a></li>
+                    <li {{ Request::is('register') ? 'class=active' : null }}><a href="/register">Register</a></li>
+                @endif
             </ul>
         </div><!--/.nav-collapse -->
     </div>
 </nav>
+
