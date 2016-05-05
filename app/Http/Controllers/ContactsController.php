@@ -5,15 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests\ContactRequest;
-use App\Http\Controllers\Traits\AuthorizesUsers;
+
+use Gate;
 
 use App\Contact;
 use App\Org;
 
 class ContactsController extends Controller
 {
-    use AuthorizesUsers; 
-
     /**
      * Add contact to database.
      *
@@ -23,12 +22,10 @@ class ContactsController extends Controller
      */
     public function store(ContactRequest $request, $id) 
     {
-        if(! $this->isUserLegit($id)) 
-        {
-            return $this->unauthorized();
-        }
-        
         $org = Org::findOrFail($id);
+
+        // authorization
+        if (Gate::denies('update-org', $org)) { abort(403); }
 
         // create DB entry
         $org->contacts()->create([
@@ -45,11 +42,11 @@ class ContactsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($org_id, $contact_id) {
-        if(! $this->isUserLegit($org_id)) 
-        {
-            return $this->unauthorized();
-        }
+    public function destroy($id, $contact_id) {
+        $org = Org::findOrFail($id);
+        
+        // authorization
+        if (Gate::denies('update-org', $org)) { abort(403); }
         
     	Contact::destroy($contact_id);
     	return back();

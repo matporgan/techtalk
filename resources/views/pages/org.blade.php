@@ -3,9 +3,9 @@
 @section('content')
 	
 	<h1>{!! $org->name !!}</h1>
-	@if(Auth::id() == $org->user_id) 
+	@can('update-org', $org)
 		<a href="/orgs/{{ $org->id }}/delete" class="btn btn-xs btn-danger">Delete</a>
-	@endif
+	@endcan
 
 	<img src="{{ $org->logo }}" alt="{{ $org->name . " - Logo" }}" class="logo" />
 
@@ -26,16 +26,16 @@
 		<ul>
 			@foreach($org->industries as $industry)
 				<li><a href="/industry/{{ $industry->id }}">{{ $industry->name }}</a></li>
+				<ul>
+					@foreach($org->domains as $domain)
+						@if($domain->industry_id == $industry->id)
+							<li><a href="/domain/{{ $domain->id }}">{{ $domain->name }}</a></li>
+						@endif
+					@endforeach
+				</ul>
 			@endforeach
 		</ul>
-
-		Domains:
-		<ul>
-			@foreach($org->domains as $domain)
-				<li><a href="/domain/{{ $domain->id }}">{{ $domain->name }}</a></li>
-			@endforeach
-		</ul>
-
+		
 		Tags:
 		<ul>
 			@foreach($org->tags as $tag)
@@ -48,9 +48,9 @@
 			@foreach($org->documents as $document)
 				<li>
 					<a href="{{ $org->id }}/document/{{ $document->id }}">{{ $document->name }} | {{ $document->description }}</a>
-					@if(Auth::id() == $org->user_id) 
+					@can('update-org', $org)
 						<a href="{{ $org->id }}/document/{{ $document->id }}/delete" class="btn btn-xs btn-danger">Delete</a>
-					@endif
+					@endcan
 				</li>
 			@endforeach
 		</ul>
@@ -59,9 +59,9 @@
 		<ul>
 			@foreach($org->links as $link)
 				<li><a href="{{ $link->url }}">{{ $link->url }} | {{ $link->description }}</a>
-				@if(Auth::id() == $org->user_id) 
+				@can('update-org', $org)
 					<a href="{{ $org->id }}/link/{{ $link->id }}/delete" class="btn btn-xs btn-danger">Delete</a></li>
-				@endif
+				@endcan
 			@endforeach
 		</ul>
 
@@ -69,22 +69,23 @@
 		<ul>
 			@foreach($org->contacts as $contact)
 				<li><a href="mailto:{{ $contact->email }}">{{ $contact->name }}</a>
-				@if(Auth::id() == $org->user_id) 
+				@can('update-org', $org)
 					<a href="{{ $org->id }}/contact/{{ $contact->id }}/delete" class="btn btn-xs btn-danger">Delete</a></li>
-				@endif
+				@endcan
 			@endforeach
 		</ul>
 	</p>
 		
-	@if(Auth::id() == $org->user_id)
+	@can('update-org', $org)
 		@include('documents.show')
 
 		@include('links.show')
 		
 		@include('contacts.show')
-		
-	@endif
 	
 	<a href="{{ $org->id }}/edit">EDIT</a> | <a href="{{ $org->id }}">DELETE</a>
+		
+	@endcan
+	
 
 @stop

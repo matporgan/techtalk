@@ -5,15 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Traits\AuthorizesUsers;
+
+use Gate;
 
 use App\Document;
 use App\Org;
 
 class DocumentsController extends Controller
 {
-    use AuthorizesUsers; 
-
     /**
      * The base directory, where documents are stored.
      *
@@ -29,12 +28,10 @@ class DocumentsController extends Controller
      */
     public function store(Request $request, $id) 
     {
-        if(! $this->isUserLegit($id)) 
-        {
-            return $this->unauthorized();
-        }
-        
         $org = Org::findOrFail($id);
+        
+        // authorization
+        if (Gate::denies('update-org', $org)) { abort(403); }
         
         // create filenames
         $file = $request->file('upload');
@@ -60,11 +57,12 @@ class DocumentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($org_id, $document_id) {
-        if(! $this->isUserLegit($org_id)) 
-        {
-            return $this->unauthorized();
-        }
+    public function destroy($id, $document_id) 
+    {
+        $org = Org::findOrFail($id);
+        
+        // authorization
+        if (Gate::denies('update-org', $org)) { abort(403); }
         
     	Document::destroy($document_id);
     	return back();

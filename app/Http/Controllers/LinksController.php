@@ -5,15 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Traits\AuthorizesUsers;
+
+use Gate;
 
 use App\Link;
 use App\Org;
 
 class LinksController extends Controller
 {
-    use AuthorizesUsers; 
-
     /**
      * Add link to database.
      *
@@ -23,12 +22,10 @@ class LinksController extends Controller
      */
     public function store(Request $request, $id) 
     {
-        if(! $this->isUserLegit($id)) 
-        {
-            return $this->unauthorized();
-        }
-        
         $org = Org::findOrFail($id);
+
+        // authorization
+        if (Gate::denies('update-org', $org)) { abort(403); }
 
         // create DB entry
         $org->links()->create([
@@ -45,11 +42,11 @@ class LinksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($org_id, $link_id) {
-        if(! $this->isUserLegit($org_id)) 
-        {
-            return $this->unauthorized();
-        }
+    public function destroy($id, $link_id) {
+        $org = Org::findOrFail($id);
+        
+        // authorization
+        if (Gate::denies('update-org', $org)) { abort(403); }
         
     	Link::destroy($link_id);
     	return back();

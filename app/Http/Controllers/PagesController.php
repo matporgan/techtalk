@@ -31,7 +31,7 @@ class PagesController extends Controller
         
         $org_list = Org::whereIn('id', $org_ids)->get();
         
-        return view('categories.technology', compact('org_list'));
+        return view('pages.category', compact('technology','org_list'));
     }
 
     /**
@@ -51,7 +51,7 @@ class PagesController extends Controller
         
         $org_list = Org::whereIn('id', $org_ids)->get();
         
-        return view('categories.industry', compact('org_list'));
+        return view('pages.category', compact('org_list'));
     }
     
     /**
@@ -71,6 +71,26 @@ class PagesController extends Controller
         
         $org_list = Org::whereIn('id', $org_ids)->get();
         
-        return view('categories.domain', compact('org_list'));
+        return view('pages.category', compact('org_list'));
+    }
+    
+    /**
+     * Display the specified tag.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function tag($id)
+    {
+        $tag = Tag::findOrFail($id);
+        
+        foreach($tag->orgs as $org)
+        {
+            $org_ids[] = $org->pivot->org_id;
+        }
+
+        $org_list = Org::whereIn('id', $org_ids)->get();
+        
+        return view('pages.category', compact('org_list'));
     }
 }

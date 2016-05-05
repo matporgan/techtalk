@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests\OrgRequest;
 use App\Http\Requests\OrgUpdateRequest;
-use App\Http\Controllers\Traits\AuthorizesUsers;
+
+use Gate;
 
 use App\Org;
 use App\Technology;
@@ -16,12 +17,6 @@ use App\Tag;
 
 class OrgsController extends Controller
 {
-    use AuthorizesUsers; 
-
-    public function __construct()
-    {
-        //$this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -31,7 +26,7 @@ class OrgsController extends Controller
     {
         $orgs = Org::all();
 
-        return view('orgs.index', compact('orgs'));
+        return view('pages.orgs', compact('orgs'));
     }
 
     /**
@@ -77,7 +72,7 @@ class OrgsController extends Controller
     {
         $org = Org::findOrFail($id);
         
-        return view('orgs.show', compact('org'));
+        return view('pages.org', compact('org'));
     }
 
     /**
@@ -88,13 +83,11 @@ class OrgsController extends Controller
      */
     public function edit($id)
     {
-        // if(! $this->isUserLegit($id)) 
-        // {
-        //     return $this->unauthorized();
-        // }
-
         $org = Org::findOrFail($id);
-
+        
+        // authorization
+        if (Gate::denies('update-org', $org)) { abort(403); }
+        
         $categories = $this->getCategories();
         
         return view('orgs.edit', compact('org', 'categories'));
@@ -109,13 +102,11 @@ class OrgsController extends Controller
      */
     public function update(OrgUpdateRequest $request, $id)
     {
-        // if(! $this->isUserLegit($id)) 
-        // {
-        //     return $this->unauthorized();
-        // }
-
         $org = Org::findOrFail($id);
-
+        
+        // authorization
+        if (Gate::denies('update-org', $org)) { abort(403); }
+        
         $org->update($request->all());
 
         $this->syncCategories($request, $org);
@@ -134,12 +125,12 @@ class OrgsController extends Controller
      */
     public function destroy($id)
     {
-        if(! $this->isUserLegit($id)) 
-        {
-            return $this->unauthorized();
-        }
+        $org = Org::findOrFail($id);
+        
+        // authorization
+        if (Gate::denies('update-org', $org)) { abort(403); }
 
-        Org::destroy($id);
+        $org->delete();
         return redirect("/orgs");
     }
 
