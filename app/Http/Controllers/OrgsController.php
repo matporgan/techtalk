@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests\OrgRequest;
 use App\Http\Requests\OrgUpdateRequest;
 
+use Auth;
 use Gate;
 
 use App\Org;
+use App\User;
 use App\Technology;
 use App\Industry;
 use App\Domain;
@@ -50,14 +51,15 @@ class OrgsController extends Controller
      */
     public function store(OrgRequest $request)
     {
-        //dd($request->user());
         $org = Org::create($request->all());
+
+        $org->users()->attach(Auth::user()->id); 
 
         $this->syncCategories($request, $org);
 
         $this->moveLogo($request, $org);
 
-        // flash()->success('Success!', 'Your organisation has been created.');
+        $request->session()->flash('success', 'Your organisation has been created.');
 
         return redirect("/orgs/{$org->id}");
     }
@@ -86,7 +88,7 @@ class OrgsController extends Controller
         $org = Org::findOrFail($id);
         
         // authorization
-        if (Gate::denies('update-org', $org)) { abort(403); }
+        if (Gate::denies('update-org', $org)) abort(403);
         
         $categories = $this->getCategories();
         
@@ -105,7 +107,7 @@ class OrgsController extends Controller
         $org = Org::findOrFail($id);
         
         // authorization
-        if (Gate::denies('update-org', $org)) { abort(403); }
+        if (Gate::denies('update-org', $org)) abort(403);
         
         $org->update($request->all());
 
@@ -128,10 +130,37 @@ class OrgsController extends Controller
         $org = Org::findOrFail($id);
         
         // authorization
-        if (Gate::denies('update-org', $org)) { abort(403); }
+        if (Gate::denies('update-org', $org)) abort(403);
 
         $org->delete();
         return redirect("/orgs");
+    }
+
+    /**
+     * Add a contributor for the given org.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function adduser(Request $request, $id)
+    {
+        //dd($request);
+        $org = Org::findOrFail($id);
+        
+        // authorization
+        if (Gate::denies('update-org', $org)) abort(403);
+
+        $user = User::where('email', $request->email)->first();
+        if ($user !== null)
+        {
+            $org->users()->attach($user->id);
+        }
+        else
+        {
+            $request->session()->flash('failure', 'That email does not match any users in our records.');
+        }
+
+        return redirect("/orgs/{$org->id}");
     }
 
     /**

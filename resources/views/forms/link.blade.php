@@ -1,4 +1,4 @@
-@include('links._form-js')
+@include('forms.js-lightbox')
 
 <div id="link_form" class="lightbox" style="display:none;">
 	{!! Form::open(['method' => 'POST', 'action' => ['LinksController@store', $org->id]]) !!}

@@ -27,13 +27,23 @@ class Org extends Model
 	}
 
     /**
-     * Get the user associated with the given org.
+     * Get the users associated with the given org.
      *
      * @return \Illuminate\Database\Eloquent\Relations\belongsTo
      */
-    public function user()
+    public function users()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsToMany('App\User', 'org_user', 'org_id', 'user_id')->withTimestamps();
+    }
+
+    /**
+     * Get a list of user ids associated with the current org.
+     *
+     * @return array 
+     */
+    public function getUserListAttribute()
+    {
+        return $this->users->lists('id')->all();
     }
 
 	/**
@@ -47,7 +57,7 @@ class Org extends Model
     }
 
     /**
-     * Get a list of technology ids associated with the current organisation.
+     * Get a list of technology ids associated with the current org.
      *
      * @return array 
      */
@@ -67,7 +77,7 @@ class Org extends Model
     }
 
     /**
-     * Get a list of technology ids associated with the current organisation.
+     * Get a list of technology ids associated with the current org.
      *
      * @return array 
      */
@@ -87,7 +97,7 @@ class Org extends Model
     }
 
     /**
-     * Get a list of domain ids associated with the current organisation.
+     * Get a list of domain ids associated with the current org.
      *
      * @return array 
      */
@@ -107,7 +117,7 @@ class Org extends Model
     }
 
     /**
-     * Get a list of tag ids associated with the current organisation.
+     * Get a list of tag ids associated with the current org.
      *
      * @return array 
      */

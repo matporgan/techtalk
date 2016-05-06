@@ -52,6 +52,19 @@ class DocumentsController extends Controller
     }
 
     /**
+     * Downloads a given document.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function download($id, $document_id) 
+    { 
+        $document = Document::findOrFail($document_id);
+
+        return view('downloads.document', compact('document'));
+    }
+
+    /**
      * Destroy the document.
      *
      * @param  int  $id

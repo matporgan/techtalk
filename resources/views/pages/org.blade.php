@@ -3,6 +3,17 @@
 @section('content')
 	
 	<h1>{!! $org->name !!}</h1>
+
+	@if(Session::has('success'))
+	    <div class="alert alert-success">
+	        <p>{{ Session::get('success') }}</p>
+	    </div>
+	@elseif(Session::has('failure'))
+	    <div class="alert alert-danger">
+	        <p>{{ Session::get('failure') }}</p>
+	    </div>
+	@endif
+
 	@can('update-org', $org)
 		<a href="/orgs/{{ $org->id }}/delete" class="btn btn-xs btn-danger">Delete</a>
 	@endcan
@@ -77,14 +88,28 @@
 	</p>
 		
 	@can('update-org', $org)
-		@include('documents.show')
 
-		@include('links.show')
+		<div class="row">
+			<a class="fancybox btn btn-primary" href="#document_form">+ Add Document</a>
+		</div>
+		@include('forms.document')
+
+		<div class="row">
+			<a class="fancybox btn btn-primary" href="#link_form">+ Add Link</a>
+		</div>
+		@include('forms.link')
 		
-		@include('contacts.show')
+		<div class="row">
+			<a class="fancybox btn btn-primary" href="#contact_form">+ Add Contact</a>
+		</div>
+		@include('forms.contact')
+
+		<div class="row">
+			<a class="fancybox btn btn-primary" href="#contributor_form">+ Add Contributor</a>
+		</div>
+		@include('forms.contributor')
 	
-	<a href="{{ $org->id }}/edit">EDIT</a> | <a href="{{ $org->id }}">DELETE</a>
-		
+		<a href="{{ $org->id }}/edit">EDIT</a> | <a href="{{ $org->id }}">DELETE</a><br><br>
 	@endcan
 	
 

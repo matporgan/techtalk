@@ -19,6 +19,7 @@ Route::auth();
 
 Route::resource('orgs', 'OrgsController');
 Route::get('orgs/{id}/delete', 'OrgsController@destroy');
+Route::post('orgs/{id}/adduser', 'OrgsController@adduser');
 
 Route::post('orgs/{id}/documents', 'DocumentsController@store');
 Route::get('orgs/{id}/document/{document_id}/delete', 'DocumentsController@destroy');

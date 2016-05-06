@@ -1,3 +1,5 @@
+@include('forms.js-lightbox')
+
 <div id="document_form" class="lightbox" style="display:none;">
 	{!! Form::open(['method' => 'POST', 'action' => ['DocumentsController@store', $org->id], 'files' => true]) !!}
 		<h2>Add Document</h2>
@@ -22,4 +24,4 @@
 	{!! Form::close() !!}
 </div>
 
-@include('documents._form-js')
+@include('forms.js-document')

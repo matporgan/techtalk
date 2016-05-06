@@ -28,10 +28,12 @@ class PagesController extends Controller
         {
             $org_ids[] = $org->pivot->org_id;
         }
+        // return 404 if no ids found
+        if (empty($org_ids)) return abort(404);
         
         $org_list = Org::whereIn('id', $org_ids)->get();
         
-        return view('pages.category', compact('technology','org_list'));
+        return view('pages.technology', compact('technology','org_list'));
     }
 
     /**
@@ -48,10 +50,12 @@ class PagesController extends Controller
         {
             $org_ids[] = $org->pivot->org_id;
         }
+        // return 404 if no ids found
+        if (empty($org_ids)) return abort(404);
         
         $org_list = Org::whereIn('id', $org_ids)->get();
         
-        return view('pages.category', compact('org_list'));
+        return view('pages.industry', compact('industry','org_list'));
     }
     
     /**
@@ -64,14 +68,22 @@ class PagesController extends Controller
     {
         $domain = Domain::findOrFail($id);
         
-        foreach($domain->orgs as $org)
+        // get domains with same alias
+        $domains = Domain::where('alias', $domain->alias)->get();
+
+        foreach($domains as $domain)
         {
-            $org_ids[] = $org->pivot->org_id;
+            foreach($domain->orgs as $org)
+            {
+                $org_ids[] = $org->pivot->org_id;
+            }  
         }
-        
+        // return 404 if no ids found
+        if (empty($org_ids)) return abort(404);
+
         $org_list = Org::whereIn('id', $org_ids)->get();
         
-        return view('pages.category', compact('org_list'));
+        return view('pages.domain', compact('domain','org_list'));
     }
     
     /**
@@ -88,9 +100,11 @@ class PagesController extends Controller
         {
             $org_ids[] = $org->pivot->org_id;
         }
+        // return 404 if no ids found
+        if (empty($org_ids)) return abort(404);
 
         $org_list = Org::whereIn('id', $org_ids)->get();
         
-        return view('pages.category', compact('org_list'));
+        return view('pages.tag', compact('tag','org_list'));
     }
 }

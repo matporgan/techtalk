@@ -32,8 +32,15 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
         
+        // $gate->define('update-org', function ($user, $org) {
+        //     return $user->id ===  $org->user_id;
+        // });
+
         $gate->define('update-org', function ($user, $org) {
-            return $user->id === $org->user_id;
+            foreach ($user->orgs as $user_org)
+            {
+                if ($user_org->pivot->org_id == $org->id) return true;
+            }
         });
     }
 }

@@ -8,11 +8,4 @@
 	    }
 	    $('#filename').val(filename.replace(/\.[^/.]+$/, ""));
 	});
-
-	// lightbox js
-	$(document).ready(function() {
-		$(".fancybox").fancybox({
-			padding: 0
-		});
-	});
 </script>

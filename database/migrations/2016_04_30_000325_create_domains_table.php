@@ -17,7 +17,8 @@ class CreateDomainsTable extends Migration
             $table->integer('industry_id')->unsigned()->index();
             $table->foreign('industry_id')->references('id')->on('industries')->onDelete('cascade');            
             $table->string('name');
-            $table->string('position');
+            $table->integer('position');
+            $table->string('alias');
             $table->timestamps();
         });
 
@@ -32,39 +33,39 @@ class CreateDomainsTable extends Migration
 
         // Predefined fields
         $feilds = array(
-            [1, 1, 'Exploration & Production'],
-            [1, 2, 'Refining & Processing'],
-            [1, 3, 'Distribution'],
-            [1, 4, 'Marketing'],
+            [1,  1, 'Planning', 'Exploration & Production'],
+            [1,  2, 'Development', 'Refining & Processing'],
+            [1,  3, 'Distribution','Distribution'],
+            [1,  4, 'Retail', 'Marketing'],
 
-            [2, 1, 'Resources'],
-            [2, 2, 'Generation'],
-            [2, 3, 'Distribution'],
-            [2, 4, 'Retail'],
+            [2,  5, 'Planning', 'Resources'],
+            [2,  6, 'Development', 'Generation'],
+            [2,  7, 'Distribution', 'Distribution'],
+            [2,  8, 'Retail', 'Retail'],
 
-            [3, 1, 'Planning'],
-            [3, 2, 'Construction'],
+            [3,  9, 'Planning', 'Planning'],
+            [3, 10, 'Development', 'Construction'],
 
-            [4, 2, 'Manufacturing'],
-            [4, 3, 'Distribution & Logistics'],
+            [4, 11, 'Development', 'Manufacturing'],
+            [4, 12, 'Distribution', 'Distribution & Logistics'],
 
-            [5, 2, 'Manufacturing'],
-            [5, 3, 'Distribution'],
-            [5, 4, 'Retail'],
+            [5, 13, 'Development', 'Manufacturing'],
+            [5, 14, 'Distribution', 'Distribution'],
+            [5, 15, 'Retail', 'Retail'],
 
-            [6, 2, 'Manufacturing'],
-            [6, 3, 'Distribution & Logistics'],
-            [6, 4, 'Retail'],
+            [6, 16, 'Development', 'Manufacturing'],
+            [6, 17, 'Distribution', 'Distribution & Logistics'],
+            [6, 18, 'Retail', 'Retail'],
 
-            [7, 2, 'Development'],
-            [7, 3, 'Distribution'],
-            [7, 4, 'Retail'],
+            [7, 19, 'Development', 'Development'],
+            [7, 20, 'Distribution', 'Distribution'],
+            [7, 21, 'Retail', 'Retail'],
 
-            [8, 2, 'Manufacturing'],
-            [8, 3, 'Distribution'],
-            [8, 4, 'Retail & Patient Services'],
+            [8, 22, 'Development', 'Manufacturing'],
+            [8, 23, 'Distribution', 'Distribution'],
+            [8, 24, 'Retail', 'Retail & Patient Services'],
 
-            [9, 5, 'Other']
+            [9, 25, 'Other', 'Other']
         );
 
         // Prepopulate table with fields
@@ -73,7 +74,8 @@ class CreateDomainsTable extends Migration
             DB::table('domains')->insert([
                 'industry_id' => $field[0],
                 'position' => $field[1],
-                'name' => $field[2]
+                'alias' => $field[2],
+                'name' => $field[3]
             ]); 
         }
     }

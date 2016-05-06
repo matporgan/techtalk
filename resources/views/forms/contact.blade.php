@@ -1,4 +1,4 @@
-@include('contacts._form-js')
+@include('forms.js-lightbox')
 
 <div id="contact_form" class="lightbox" style="display:none;">
 	{!! Form::open(['method' => 'POST', 'action' => ['ContactsController@store', $org->id]]) !!}

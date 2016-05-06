@@ -27,13 +27,13 @@ class User extends Authenticatable
     /**
      * Get the orgs associated with the given user.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function orgs()
     {
-        return $this->hasMany('App\Org');
+        return $this->belongsToMany('App\Org', 'org_user', 'user_id', 'org_id')->withTimestamps();
     }
-    
+
     /**
      * Check to see if user is an admin.
      *
