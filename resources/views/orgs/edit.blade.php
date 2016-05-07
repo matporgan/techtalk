@@ -2,10 +2,10 @@
 
 @section('content')
 	
-<h1>Edit: {{ $org->name }}</h1>
+<h1 class="center">Edit: {{ $org->name }}</h1>
 
 <div class="row">
-	{!! Form::model($org, ['method' => 'PATCH', 'action' => ['OrgsController@update', $org->id], 'files' => true, 'class' => 'col-md-12']) !!}
+	{!! Form::model($org, ['method' => 'PATCH', 'action' => ['OrgsController@update', $org->id], 'files' => true, 'class' => 'col s12 m8 l6 offset-m2 offset-l3']) !!}
 	    @include('forms.org', ['type' => 'edit', 'submitText' => 'Update Organisation'])
 	{!! Form::close() !!}
 </div>

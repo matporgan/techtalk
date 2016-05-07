@@ -53,7 +53,9 @@ class OrgsController extends Controller
      */
     public function store(OrgRequest $request)
     {
-        dd($request);
+        // explode tags from string
+        //$request->merge(array('tag_list' => explode(",", $request->tag_list[0])));
+
         // create database entry
         $org = Org::create($request->all()); // org model
         $org->users()->attach(Auth::user()->id); // add user
@@ -95,7 +97,7 @@ class OrgsController extends Controller
         
         $categories = $this->getCategories();
         $selections = $this->getSelections($org);
-        
+
         return view('orgs.edit', compact('org', 'categories', 'selections'));
     }
 
@@ -112,15 +114,18 @@ class OrgsController extends Controller
         
         // authorization
         if (Gate::denies('update-org', $org)) abort(403);
-        
-        $org->update($request->all());
 
+        // explode tags from string
+        //$request->merge(array('tag_list' => explode(",", $request->tag_list[0])));
+        
+        // update database entry
+        $org->update($request->all());
         $this->syncCategories($request, $org);
 
         if($request->file('logo') != null)
             $this->moveLogo($request, $org);
         
-        return redirect("/orgs/{$org->id}");  
+        return redirect("/orgs/{$org->id}");
     }
 
     /**
@@ -275,7 +280,7 @@ class OrgsController extends Controller
             'technologies' => $org->technologies->lists('id')->all(),
             'industries' => $org->industries->lists('id')->all(),
             'domains' => $org->domains->lists('id')->all(),
-            'tags' => $org->tags->lists('id')->all()
+            'tags' => implode(',', $org->tags->lists('name')->all())
         ];
     }
     

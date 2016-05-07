@@ -14,16 +14,19 @@ var elixir = require('laravel-elixir');
 elixir(function(mix) {
     mix.sass([
     		'materialize.scss',
-    		'app.scss'
+    		'app.scss',
     	], './public/css/app.css')
        .styles([
-       		'libs/select2.min.css'
+       		'libs/select2.css',
+          'libs/materialize-tags.min.css',
        	], './public/css/libs.css')
        .scripts([
        		'libs/jquery-2.2.3.min.js',
        		'libs/materialize.min.js',
        		'libs/select2.min.js',
-       		'libs/dropzone.js'
+       		'libs/dropzone.js',
+          'libs/materialize-tags.min.js',
+          'libs/typeahead.bundle.js',
        	], './public/js/libs.js');
 
 });

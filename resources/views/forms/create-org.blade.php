@@ -4,33 +4,28 @@
 
 	<div class="input-field">
 		{!! Form::text('name', null, ['class' => 'validate']) !!}
-		{!! Form::label('name', 'Name:', ['class' => 'active']) !!}
+		{!! Form::label('name', 'Name*', ['class' => 'active']) !!}
 	</div>
 
 	<div class="input-field">
 		{!! Form::text('website', null, ['class' => 'validate']) !!}
-		{!! Form::label('website', 'Website:', ['class' => 'active']) !!}
+		{!! Form::label('website', 'Website*', ['class' => 'active']) !!}
 	</div>
 	
 	<div class="input-field">
 		{!! Form::textarea('short_desc', null, ['class' => 'materialize-textarea', 'length' => '160']) !!}
-		{!! Form::label('short_desc', 'Short Description:', ['class' => 'active']) !!}
+		{!! Form::label('short_desc', 'Short Description*', ['class' => 'active']) !!}
 	</div>
 
 	<div class="input-field">
 		{!! Form::textarea('long_desc', null, ['class' => 'materialize-textarea']) !!}
-		{!! Form::label('long_desc', 'Long Description:', ['class' => 'active']) !!}
+		{!! Form::label('long_desc', 'Long Description', ['class' => 'active']) !!}
 	</div>
 
-	<div class="valign-wrapper" id="cur_logo">
-		<a class="btn valign" id="edit_logo">Change Logo<i class="material-icons left">clear</i></a>
-		<img style="margin-top: 1rem;" src="{{ $org->logo }}" alt="{{ $org->name . " - Logo" }}" class="logo valign" />
-	</div>
-
-	<div class="file-field input-field" id="new_logo" style="display:none;">
+	<div class="file-field input-field">
 		<div class="btn">
 			<i class="material-icons left">attach_file</i>
-			<span>Logo</span>
+			<span>Logo*</span>
 			<input type="file" name="logo">
 		</div>
 		<div class="file-path-wrapper">
@@ -42,18 +37,7 @@
 <div class="row">
 	<h4 class="center">Categorization</h4><br />
 
-	<!--<div class="input-field">-->
-	<!--	{!! Form::label('tag_list', 'Tags:') !!}-->
-	<!--	{!! Form::select('tag_list[]', $categories['tags'], null, ['class' => 'tag_list', 'multiple']) !!}-->
-	<!--</div>-->
-
-<!-- 		<div class="input-field">
-		<input name="tag_list[]" value="{{ $selections['tags'] }}" type="text" data-role="materialtags" />
-		{!! Form::label('tag_list', 'Tags') !!}
-		<p style="margin:0;">(seperate by pressing enter)</p>
-	</div>  -->
-
-<!-- 		<div class="input-field">
+	<!-- <div class="input-field">
 		{!! Form::label('tag_list', 'Tags') !!}
 		{!! Form::select('tag_list[]', $categories['tags'], null, ['class' => 'tag_list', 'multiple']) !!}
 	</div> -->
@@ -61,29 +45,35 @@
 	<div class="input-field">
 		<!--{!! Form::select('technology_list[]', $categories['technologies'], null, ['multiple', 'placeholder' => 'Choose your options']) !!}-->
 		<select name="technology_list[]" multiple>
-			<option value="" disabled selected>Select relevant technologies...</option>
+			<option value="" disabled selected>Select...</option>
 			@foreach($categories['technologies'] as $id => $technology)
-				<option value="{{ $id }}" {{ in_array($id, $selections['technologies']) ? 'selected' : '' }}>{{ $technology }}</option>
+				<option value="{{ $id }}">{{ $technology }}</option>
 			@endforeach
 		</select>
-		{!! Form::label('technology_list', 'Technologies:') !!}<br />
+		{!! Form::label('technology_list', 'Technologies*') !!}<br />
 	</div>
 	
 	<div class="input-field">
 		<!--{!! Form::select('industry_list[]', $categories['industries'], null, ['multiple', 'placeholder' => 'Choose your options']) !!}-->
 		<select name="industry_list[]" id="industry_list" multiple>
-			<option value="" disabled selected>Select relevant industries...</option>
+			<option value="" disabled selected>Select...</option>
 			@foreach($categories['industries'] as $id => $industry)
-				<option value="{{ $id }}" {{ in_array($id, $selections['industries']) ? 'selected' : '' }}>{{ $industry }}</option>
+				<option value="{{ $id }}">{{ $industry }}</option>
 			@endforeach
 		</select>
-		{!! Form::label('industry_list', 'Industries:') !!}<br />
+		{!! Form::label('industry_list', 'Industries*') !!}<br />
 	</div>
-
+	
 	@for ($i = 1; $i <= count($categories['industries']); $i++)
-		<div class="input-field form-indent" id="{{ 'domain_list_'.$i }}">
-			{!! Form::select('domain_list[]', $categories['domains'][$i], null, ['id' => 'domain_list_sel_'.$i, 'multiple', 'placeholder' => 'Choose your options']) !!}
-			{!! Form::label('domain_list_'.$i, $categories['industries'][$i].' Domains:') !!}<br />
+		<div class="input-field" id="{{ 'domain_list_'.$i }}">
+			<!--{!! Form::select('domain_list[]', $categories['domains'], null, ['multiple', 'placeholder' => 'Choose your options']) !!}-->
+			<select name="domain_list[]" id="{{ 'domain_list_sel_'.$i }}" multiple>
+				<option value="" disabled selected style="color:#aaa">Select...</option>
+				@foreach($categories['domains'][$i] as $id => $domain)
+					<option value="{{ $id }}">{{ $domain }}</option>
+				@endforeach
+			</select>
+			{!! Form::label('domain_list_'.$i, $categories['industries'][$i].' Domains*') !!}<br />
 		</div>
 	@endfor
 </div>
@@ -94,50 +84,20 @@
 
 	<div class="input-field col s12 m6">
 		{!! Form::select('partner_status', [0 => 'No Partnership',1 => 'In Development',2 => 'Active Partner',3 => 'Past Partner'], null) !!}
-		{!! Form::label('partner_status', 'Partner Status:') !!}<br />
+		{!! Form::label('partner_status', 'Partner Status*') !!}<br />
 	</div>
 
 	<div class="input-field col s12 m6">
 		{!! Form::select('in_talks', [0 => 'No', 1 => 'Yes'], null) !!}
-		{!! Form::label('in_talks', 'In Talks:') !!}<br />
+		{!! Form::label('in_talks', 'In Talks*') !!}<br />
 	</div>
 </div>
 
 <div class="row center">
-	<button class="btn-large waves-effect waves-light" type="submit" name="action">Update Organisation
-	    <i class="material-icons left">sync</i>
+	<button class="btn-large waves-effect waves-light" type="submit" name="action">Add Organisation
+	    <i class="material-icons left">add</i>
   	</button>
 </div>
-<!--<div class="col-md-6">-->
-<!--	<div class="input-field">-->
-<!--		{!! Form::label('tag_list', 'Tags:') !!}-->
-<!--		{!! Form::select('tag_list[]', $categories['tags'], null, ['class' => 'form-control tag_list', 'multiple']) !!}-->
-<!--	</div>-->
-
-<!--	<div class="input-field">-->
-<!--		{!! Form::label('technology_list', 'Technologies:') !!}-->
-<!--		{!! Form::select('technology_list[]', $categories['technologies'], null, ['class' => 'form-control technology_list', 'multiple']) !!}-->
-<!--	</div>-->
-
-<!--	<div class="input-field">-->
-<!--		{!! Form::label('industry_list', 'Industries:') !!}-->
-<!--		{!! Form::select('industry_list[]', $categories['industries'], null, ['class' => 'form-control industry_list', 'multiple']) !!}-->
-<!--	</div>-->
-
-<!--	@for ($i = 1; $i <= count($categories['industries']); $i++)-->
-<!--		<div class="input-field form-indent" id="{{ 'domain_list_'.$i }}">-->
-<!--			{!! Form::label('domain_list_'.$i, $categories['industries'][$i].' Domains:') !!}-->
-<!--			{!! Form::select('domain_list[]', $categories['domains'][$i], null, ['id' => 'domain_list_sel_'.$i, 'class' => 'form-control domain_list', 'multiple']) !!}-->
-<!--		</div>-->
-<!--	@endfor-->
-<!--</div>-->
-<!-- <div class="row">
-	<div class="col s12"><hr></div>
-		<div class="input-field center">
-			{!! Form::submit($submitText, ['class' => 'btn waves-effect waves-light']) !!}
-		</div>
-	</div>
-</div> -->
 
 <script type="text/javascript">
 // edit org logo
@@ -154,6 +114,7 @@ $("a#edit_logo").click(function(){
 	$('.industry_list').select2({ placeholder: 'Select all applicable' });
 	$('.domain_list').select2({ placeholder: 'Select all applicable' });
 	*/
+	// create select2 box
 	$('.tag_list').select2({ 
 		placeholder: 'Select all applicable, or add your own', 
 		tags: true,

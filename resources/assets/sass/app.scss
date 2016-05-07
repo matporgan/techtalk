@@ -29,6 +29,30 @@ main {
 /* Logo Style
 -------------------------------------------------- */
 .logo {
-	height: 50px;
+	height: 100px;
 	width: auto;
+}
+
+/* Materialize Changes
+-------------------------------------------------- */
+.dropdown-content {
+	top: 65px !important;
+}
+.dropdown-content.select-dropdown {
+	top: 3.1rem !important;
+}
+
+
+/* Form Styles
+-------------------------------------------------- */
+#cur_logo {
+	margin-bottom: 15px;
+}
+#cur_logo a {
+	height: 3rem;
+	line-height: 3rem;
+	margin: 1rem 15px 0 0;
+}
+#cur_logo img {
+	height: 3rem;
 }
