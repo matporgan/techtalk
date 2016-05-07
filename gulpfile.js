@@ -13,6 +13,7 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
     mix.sass([
+    		'materialize.scss',
     		'app.scss'
     	], './public/css/app.css')
        .styles([
@@ -20,7 +21,7 @@ elixir(function(mix) {
        	], './public/css/libs.css')
        .scripts([
        		'libs/jquery-2.2.3.min.js',
-       		'libs/bootstrap.min.js',
+       		'libs/materialize.min.js',
        		'libs/select2.min.js',
        		'libs/dropzone.js'
        	], './public/js/libs.js');

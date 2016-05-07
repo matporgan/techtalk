@@ -39,7 +39,9 @@ class OrgsController extends Controller
     {
         $categories = $this->getCategories();
 
-        //dd($categories['domains'][0]['attributes']['industry_id']);
+        // redirect if not logged in
+        if (! Auth::check()) return redirect('register');
+        
         return view('orgs.create', compact('categories'));
     }
 
@@ -51,16 +53,17 @@ class OrgsController extends Controller
      */
     public function store(OrgRequest $request)
     {
-        $org = Org::create($request->all());
-
-        $org->users()->attach(Auth::user()->id); 
-
-        $this->syncCategories($request, $org);
-
+        dd($request);
+        // create database entry
+        $org = Org::create($request->all()); // org model
+        $org->users()->attach(Auth::user()->id); // add user
+        $this->syncCategories($request, $org); // add categories
+        
+        // move logo to storage
         $this->moveLogo($request, $org);
 
+        // flash and redirect
         $request->session()->flash('success', 'Your organisation has been created.');
-
         return redirect("/orgs/{$org->id}");
     }
 
@@ -91,8 +94,9 @@ class OrgsController extends Controller
         if (Gate::denies('update-org', $org)) abort(403);
         
         $categories = $this->getCategories();
+        $selections = $this->getSelections($org);
         
-        return view('orgs.edit', compact('org', 'categories'));
+        return view('orgs.edit', compact('org', 'categories', 'selections'));
     }
 
     /**
@@ -239,16 +243,14 @@ class OrgsController extends Controller
     /**
      * Get a 2D array of all the categories in the database.
      * 
-     * @return  OrgRequest  array
+     * @return array
      */
     private function getCategories()
     {   
-        // get number of industries
-        $industries = Industry::lists('name', 'id')->all();
-        $industriesCount = count($industries);
-
         // create array for each of the industry domains
-        for ($i=1; $i<=$industriesCount; $i++)
+        $industries = Industry::lists('name', 'id')->all();
+
+        for ($i=1; $i<=count($industries); $i++)
         {
             $domains[$i] = Domain::all()->where('industry_id', $i)->lists('name', 'id');
         }
@@ -260,4 +262,23 @@ class OrgsController extends Controller
             'tags' => Tag::orderBy('count')->lists('name', 'id')->all()
         ];
     }
+    
+    /**
+     * Get a 2D array of all the selections of each of the categories.
+     * 
+     * @param  Org $org
+     * @return array
+     */
+    private function getSelections(Org $org)
+    {   
+        return [
+            'technologies' => $org->technologies->lists('id')->all(),
+            'industries' => $org->industries->lists('id')->all(),
+            'domains' => $org->domains->lists('id')->all(),
+            'tags' => $org->tags->lists('id')->all()
+        ];
+    }
+    
+    
+        
 }

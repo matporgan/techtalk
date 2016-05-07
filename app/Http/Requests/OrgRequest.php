@@ -24,15 +24,13 @@ class OrgRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required',
-            'short_desc' => 'required',
-            //'long_desc' => 'required',
-            'logo' => 'required|image',
-            'website' => 'required',
-            //'tag_list' => 'required',
-            'technology_list' => 'required',
-            'industry_list' => 'required',
-            'domain_list' => 'required'
+            //'name' => 'required',
+            //'short_desc' => 'required',
+            //'logo' => 'required|image',
+            //'website' => 'required',
+            //'technology_list' => 'required',
+            //'industry_list' => 'required',
+            //'domain_list' => 'required'
         ];
     }
 }
