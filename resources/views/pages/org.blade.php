@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-	
+	@include('errors.flash')
 	<h1>{!! $org->name !!}</h1>
 
 	@if(Session::has('success'))
@@ -111,6 +111,4 @@
 	
 		<a href="{{ $org->id }}/edit">EDIT</a> | <a href="{{ $org->id }}">DELETE</a><br><br>
 	@endcan
-	
-
 @stop

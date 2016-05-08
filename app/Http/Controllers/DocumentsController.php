@@ -30,6 +30,12 @@ class DocumentsController extends Controller
     {
         $org = Org::findOrFail($id);
         
+        $this->validate($request, [
+            'file' => 'required',
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+        
         // authorization
         if (Gate::denies('update-org', $org)) { abort(403); }
         

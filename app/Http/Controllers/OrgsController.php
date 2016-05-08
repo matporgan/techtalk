@@ -42,7 +42,7 @@ class OrgsController extends Controller
         // redirect if not logged in
         if (! Auth::check()) return redirect('register');
         
-        return view('orgs.create', compact('categories'));
+        return view('pages.org-create', compact('categories'));
     }
 
     /**

@@ -6350,4 +6350,14 @@ main {
 #cur_logo img {
   height: 3rem; }
 
+.input-field div.error {
+  position: relative;
+  top: -1rem;
+  font-size: 0.8rem;
+  color: #ef5350; }
+
+.file-field div.error {
+  left: -2rem;
+  text-transform: initial; }
+
 /*# sourceMappingURL=app.css.map */
