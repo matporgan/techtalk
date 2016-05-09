@@ -2,46 +2,46 @@
 
 <!-- Main Content -->
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
 
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/email') }}">
-                        {!! csrf_field() !!}
+<h1 class="center">Reset Password</h1><br />
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">E-Mail Address</label>
+<div class="row">
+    <form class="col s12 m8 l6 offset-m2 offset-l3" id="reset-password" role="form" method="POST" action="{{ url('/password/email') }}">
 
-                            <div class="col-md-6">
-                                <input type="email" class="form-control" name="email" value="{{ old('email') }}">
+        {!! csrf_field() !!}
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+        <div class="input-field">
+            {!! Form::label('email', 'Email', ['class' => 'active']) !!}
+            {!! Form::text('email', null, ['id' => 'email']) !!}
+        </div><br />
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-envelope"></i>Send Password Reset Link
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+        <div class="row center">
+            <button class="btn-large waves-effect waves-light" type="submit" name="action">
+                Send<i class="material-icons left">send</i>
+            </button>
         </div>
-    </div>
+
+    </form>
 </div>
+
+<script type="text/javascript">
+    $("#reset-password").validate({
+        rules: {
+            email: {
+                required: true,
+                email: true
+            },
+        },
+        errorElement : 'div',
+        errorPlacement: function(error, element) {
+            var placement = $(element).data('error');
+            if (placement) {
+                $(placement).append(error)
+            } else {
+                error.insertAfter(element);
+            }
+        }
+    });
+</script>
+
 @endsection

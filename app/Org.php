@@ -33,7 +33,7 @@ class Org extends Model
      */
     public function users()
     {
-        return $this->belongsToMany('App\User', 'org_user', 'org_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany('App\User', 'org_user', 'org_id', 'user_id')->withPivot('org_role')->withTimestamps();
     }
 
     /**

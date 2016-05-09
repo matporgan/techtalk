@@ -19,17 +19,20 @@ Route::auth();
 
 Route::resource('orgs', 'OrgsController');
 Route::get('orgs/{id}/delete', 'OrgsController@destroy');
-Route::post('orgs/{id}/adduser', 'OrgsController@adduser');
+Route::post('orgs/{id}/adduser', 'OrgsController@addUser');
 
-Route::post('orgs/{id}/documents', 'DocumentsController@store');
+Route::post('orgs/{id}/document', 'DocumentsController@store');
 Route::get('orgs/{id}/document/{document_id}/delete', 'DocumentsController@destroy');
 Route::get('orgs/{id}/document/{document_id}', 'DocumentsController@download');
 
-Route::post('orgs/{id}/links', 'LinksController@store');
+Route::post('orgs/{id}/link', 'LinksController@store');
 Route::get('orgs/{id}/link/{link_id}/delete', 'LinksController@destroy');
 
-Route::post('orgs/{id}/contacts', 'ContactsController@store');
-Route::get('orgs/{id}/contact/{contact_id}/delete', 'ContactsController@destroy');
+Route::post('orgs/{id}/contact', 'ContactsController@store');
+Route::get('orgs/{id}/contact/{user_id}/delete', 'ContactsController@destroy');
+
+Route::post('orgs/{id}/contributor', 'ContributorsController@store');
+Route::get('orgs/{id}/contributor/{user_id}/delete', 'ContributorsController@destroy');
 
 Route::get('technology/{technology_id}', 'PagesController@technology');
 Route::get('industry/{industry_id}', 'PagesController@industry');

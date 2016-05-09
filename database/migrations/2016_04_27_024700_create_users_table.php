@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('role');
+            $table->string('role')->default('contributor');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->foreign('org_id')->references('id')->on('orgs')->onDelete('cascade');
             $table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('org_role');
             $table->timestamps();
         });
     }

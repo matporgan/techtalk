@@ -1,8 +1,11 @@
 <?php
 	$file_name = $document->name;
-	$file_url = "http://$_SERVER[HTTP_HOST]" . $document->path;
+	$file_url = public_path() . $document->path;
 
-	header('Content-Type: application/octet-stream');
-	header("Content-Transfer-Encoding: Binary"); 
-	header("Content-disposition: attachment; filename=\"".$file_name."\""); 
+	$headers = array(
+		"Content-Type: application/octet-stream",
+		"Content-Disposition: attachment; filename=\"".$file_name."\""
+	);
+
+	return Response::download($file_url, $file_name, $headers);
 ?>

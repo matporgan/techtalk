@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use Gate;
+use Response;
 
 use App\Document;
 use App\Org;
@@ -18,7 +19,7 @@ class DocumentsController extends Controller
      *
      * @var string
      */
-    protected $baseDir = 'storage/documents';
+    protected $baseDir = 'storage/documents/';
 
     /**
      * Move document to storage location and add to database.
@@ -40,7 +41,7 @@ class DocumentsController extends Controller
         if (Gate::denies('update-org', $org)) { abort(403); }
         
         // create filenames
-        $file = $request->file('upload');
+        $file = $request->file('file');
         $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
         $name = $request->name . '.' . $ext;
         $unique_name = time() . $name;
@@ -54,7 +55,7 @@ class DocumentsController extends Controller
             'path' => '/' . $this->baseDir . $unique_name
         ]);
         
-        return redirect("/orgs/{$org->id}");
+        return back();
     }
 
     /**
@@ -67,7 +68,12 @@ class DocumentsController extends Controller
     { 
         $document = Document::findOrFail($document_id);
 
-        return view('downloads.document', compact('document'));
+        //PDF file is stored under project/public/download/info.pdf
+        $file= public_path() . $document->path;
+        $headers = array(
+              "Content-Type: application/octet-stream",
+            );
+        return Response::download($file, $document->name, $headers);
     }
 
     /**
@@ -84,6 +90,7 @@ class DocumentsController extends Controller
         if (Gate::denies('update-org', $org)) { abort(403); }
         
     	Document::destroy($document_id);
+        
     	return back();
     }
 }

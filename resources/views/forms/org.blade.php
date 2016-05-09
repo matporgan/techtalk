@@ -1,14 +1,13 @@
-@include('errors.flash')
 <div class="row">
 	<h4 class="center">General Information</h4><br />
 
 	<div class="input-field">
-		{!! Form::text('name', null, ['class' => 'validate']) !!}
-		{!! Form::label('name', 'Name*', ['class' => 'active']) !!}
+		{!! Form::text('name', null) !!}
+		{!! Form::label('name', 'Name*', ['id' => 'name', 'class' => 'active']) !!}
 	</div>
 
 	<div class="input-field">
-		{!! Form::text('website', null, ['class' => 'validate']) !!}
+		{!! Form::text('website', null) !!}
 		{!! Form::label('website', 'Website*', ['class' => 'active']) !!}
 	</div>
 	
@@ -22,6 +21,13 @@
 		{!! Form::label('long_desc', 'Long Description', ['class' => 'active']) !!}
 	</div>
 
+	<div class="input-field">
+		<input name="tag_list" id="tag_list" class="typeahead" type="text" value="" data-role="materialtags"/>
+		{!! Form::label('tag_list', 'Tags') !!}
+		<span class="subtitle">(seperate with tab)</span>
+		<br /><br />
+	</div>
+
 	@if($type == 'create')
 		<div class="file-field input-field">
 			<div class="btn">
@@ -30,7 +36,7 @@
 				<input type="file" name="logo">
 			</div>
 			<div class="file-path-wrapper">
-				<input class="file-path validate" type="text">
+				<input class="file-path" type="text">
 			</div>
 		</div><br />
 	@elseif($type == 'edit')
@@ -46,7 +52,7 @@
 				<input type="file" name="logo">
 			</div>
 			<div class="file-path-wrapper">
-				<input class="file-path validate" type="text">
+				<input class="file-path" type="text">
 			</div>
 		</div><br />
 	@endif
@@ -55,37 +61,38 @@
 <div class="row">
 	<h4 class="center">Categorization</h4><br />
 
-	<!-- <div class="input-field">
-		{!! Form::label('tag_list', 'Tags') !!}
-		{!! Form::select('tag_list[]', $categories['tags'], null, ['class' => 'tag_list', 'multiple']) !!}
-	</div> -->
-
 	<div class="input-field">
-		<!--{!! Form::select('technology_list[]', $categories['technologies'], null, ['multiple', 'placeholder' => 'Choose your options']) !!}-->
-		<select name="technology_list[]" multiple>
+		<select name="technology_list[]" id="technology_list" multiple>
 			<option value="" disabled selected>Select technologies...</option>
 			@foreach($categories['technologies'] as $id => $technology)
 				<option value="{{ $id }}" @if($type == 'edit') {{ in_array($id, $selections['technologies']) ? 'selected' : '' }} @endif>{{ $technology }}</option>
 			@endforeach
 		</select>
-		{!! Form::label('technology_list', 'Technologies*') !!}<br />
+		{!! Form::label('technology_list', 'Technologies*') !!}
+		<div id="technology-error" class="custom-error" style="display:none;">This field is required.</div><br />
 	</div>
 	
 	<div class="input-field">
-		<!--{!! Form::select('industry_list[]', $categories['industries'], null, ['multiple', 'placeholder' => 'Choose your options']) !!}-->
 		<select name="industry_list[]" id="industry_list" multiple>
 			<option value="" disabled selected>Select industries...</option>
 			@foreach($categories['industries'] as $id => $industry)
 				<option value="{{ $id }}" @if($type == 'edit') {{ in_array($id, $selections['industries']) ? 'selected' : '' }}@endif>{{ $industry }}</option>
 			@endforeach
 		</select>
-		{!! Form::label('industry_list', 'Industries*') !!}<br />
+		{!! Form::label('industry_list', 'Industries*') !!}
+		<div id="industry-error" class="custom-error" style="display:none;">This field is required.</div><br />
 	</div>
 
 	@for ($i = 1; $i <= count($categories['industries']); $i++)
-		<div class="input-field form-indent" id="{{ 'domain_list_'.$i }}">
-			{!! Form::select('domain_list[]', $categories['domains'][$i], null, ['id' => 'domain_list_sel_'.$i, 'multiple', 'placeholder' => 'Choose your options']) !!}
-			{!! Form::label('domain_list_'.$i, $categories['industries'][$i].' Domains*') !!}<br />
+		<div class="input-field" id="domain-{{ $i }}">
+			<select name="domain_list[]" id="domain_list_{{ $i }}" multiple>
+				<option value="" disabled selected>Select domains...</option>
+				@foreach($categories['domains'][$i] as $id => $domain)
+					<option value="{{ $id }}" @if($type == 'edit') {{ in_array($id, $selections['domains']) ? 'selected' : '' }}@endif>{{ $domain }}</option>
+				@endforeach
+			</select>
+			{!! Form::label('domain_list_'.$i, $categories['industries'][$i].' Domains*') !!}
+			<div id="domain-error-{{ $i }}" class="custom-error" style="display:none;">This field is required.</div><br />
 		</div>
 	@endfor
 </div>
@@ -116,6 +123,41 @@
 </div>
 
 <script type="text/javascript">
+// materialize-tags script
+
+var substringMatcher = function(strs) {
+	return function findMatches(q, cb) {
+	var matches, substringRegex;
+
+	// an array that will be populated with substring matches
+	matches = [];
+
+	// regex used to determine if a string contains the substring `q`
+	substrRegex = new RegExp(q, 'i');
+
+	// iterate through the pool of strings and for any string that
+	// contains the substring `q`, add it to the `matches` array
+	$.each(strs, function(i, str) {
+		if (substrRegex.test(str)) {
+			matches.push(str);
+		}
+	});
+	cb(matches);
+  };
+};
+
+var tags = {!! json_encode($categories['tags']) !!};
+
+$('#tag_list').materialtags({
+	typeaheadjs: {
+		name: 'tags',
+  		source: substringMatcher(tags)
+  	}
+});
+
+</script>
+
+<script type="text/javascript">
 	$(".org-create").validate({
 		rules: {
 			name: "required",
@@ -128,7 +170,7 @@
 				required: true,
 				extension: "jpg|jpeg|png|gif"
 			},
-			technology_list: "required",
+			test: "required",
 			industry_list: "required",
 			domain_list: "required",
 		},
@@ -147,9 +189,48 @@
 			}
         }
 	});
-</script>
 
-<script type="text/javascript">
+
+	function validateForm() {
+		var result = true;
+	    if ($('#technology_list').val() == "") {
+	        document.getElementById("technology-error").style.display='block';
+	        result = false;
+	    }
+	    if ($('#industry_list').val() == "") {
+	        document.getElementById("industry-error").style.display='block';
+	        result = false;
+	    }
+		for(var i = 1; i <= industryCount; i++) {
+			if($('#industry_list').val().indexOf(i.toString()) >= 0) {
+				if ($('#domain_list_'+i).val() == null) {
+					document.getElementById("domain-error-"+i).style.display='block';
+			        result = false;
+			    }
+			}
+		}
+	    return result;
+	}
+
+	function updateValidation() {
+		if ($('#technology_list').val() != "") {
+			alert('tech-hide');
+			document.getElementById("technology-error").style.display='none';
+		}
+		if ($('#industry_list').val() != "") {
+			alert('ind-hide');
+			document.getElementById("industry-error").style.display='none';
+		}
+	    @for($i = 1; $i <= count($categories['industries']); $i++)
+		    if ($('#domain_list_{{ $i }}').val() != "") {
+		    	alert('dom{{ $i }}-hide');
+		        document.getElementById("domain-error-{{ $i }}").style.display='none';
+		    } 
+		@endfor
+	}
+
+
+
 	// edit org logo
 	$("a#edit_logo").click(function(){
 		document.getElementById("new_logo").style.display='block';
@@ -173,8 +254,23 @@
 
 	// update domains whenever industries are changed
     industry.change(function() {
+		if ($('#industry_list').val() != "") {
+			document.getElementById("industry-error").style.display='none';
+		}
         updateDomains();
     }); 
+    $('#technology_list').change(function() {
+		if ($('#technology_list').val() != "") {
+			document.getElementById("technology-error").style.display='none';
+		}
+    });
+    @for($i = 1; $i <= count($categories['industries']); $i++)
+	    $('#domain_list_{{ $i }}').change(function() {
+		    if ($('#domain_list_{{ $i }}').val() != "") {
+		        document.getElementById("domain-error-{{ $i }}").style.display='none';
+		    } 
+	    }); 
+	@endfor
 
     function updateDomains() {
     	var selection = industry.val();
@@ -182,15 +278,15 @@
 	    for(var i = 1; i <= industryCount; i++) {
 	    	if(selection.indexOf(i.toString()) >= 0) {
 	    		// if domain is selected
-	    		document.getElementById("domain_list_"+i).style.display='block';
+	    		document.getElementById("domain-"+i).style.display='block';
 	    	}
 	    	else {
 	    		// if domain is not selected/deselected
-	    		var domain = document.getElementById("domain_list_sel_"+i).options;
+	    		var domain = document.getElementById("domain_list_"+i).options;
 			    for(var j = 0; j < domain.length; j++){
 			    	domain[j].selected = false;
 			    }
-	    		document.getElementById("domain_list_"+i).style.display='none';
+	    		document.getElementById("domain-"+i).style.display='none';
 	    	}
 	    }
     }

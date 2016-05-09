@@ -1,24 +1,22 @@
 @extends('layout')
 
 @section('content')
-	@include('errors.flash')
-	<h1>{!! $org->name !!}</h1>
+	@include('includes.flash')
 
-	@if(Session::has('success'))
-	    <div class="alert alert-success">
-	        <p>{{ Session::get('success') }}</p>
-	    </div>
-	@elseif(Session::has('failure'))
-	    <div class="alert alert-danger">
-	        <p>{{ Session::get('failure') }}</p>
-	    </div>
-	@endif
+	<h1>{!! $org->name !!}</h1>
 
 	@can('update-org', $org)
 		<a href="/orgs/{{ $org->id }}/delete" class="btn btn-xs btn-danger">Delete</a>
 	@endcan
 
 	<img src="{{ $org->logo }}" alt="{{ $org->name . " - Logo" }}" class="logo" />
+
+	Owner: 
+	@foreach($org->users as $user)
+		@if($user->pivot->org_role == 'owner')
+			<a href="mailto:{{ $user->email }}" target="_top">{{ $user->name }}</a>
+		@endif
+	@endforeach
 
 	<p>
 		<br/>
@@ -79,10 +77,22 @@
 		Contacts:
 		<ul>
 			@foreach($org->contacts as $contact)
-				<li><a href="mailto:{{ $contact->email }}">{{ $contact->name }}</a>
+				<li><a href="mailto:{{ $contact->email }}" target="_top">{{ $contact->name }}</a>
 				@can('update-org', $org)
 					<a href="{{ $org->id }}/contact/{{ $contact->id }}/delete" class="btn btn-xs btn-danger">Delete</a></li>
 				@endcan
+			@endforeach
+		</ul>
+
+		Contributors: 
+		<ul>
+			@foreach($org->users as $user)
+				@if($user->pivot->org_role == 'contributor')
+					<li><a href="mailto:{{ $user->email }}" target="_top">{{ $user->name }}</a>
+					@can('update-org', $org)
+						<a href="{{ $org->id }}/contributor/{{ $user->id }}/delete" class="btn btn-xs btn-danger">Delete</a></li>
+					@endcan
+				@endif
 			@endforeach
 		</ul>
 	</p>
@@ -90,22 +100,22 @@
 	@can('update-org', $org)
 
 		<div class="row">
-			<a class="fancybox btn btn-primary" href="#document_form">+ Add Document</a>
+			<a class="fancybox btn btn-primary" href="#document-lightbox">+ Add Document</a>
 		</div>
 		@include('forms.document')
 
 		<div class="row">
-			<a class="fancybox btn btn-primary" href="#link_form">+ Add Link</a>
+			<a class="fancybox btn btn-primary" href="#link-lightbox">+ Add Link</a>
 		</div>
 		@include('forms.link')
 		
 		<div class="row">
-			<a class="fancybox btn btn-primary" href="#contact_form">+ Add Contact</a>
+			<a class="fancybox btn btn-primary" href="#contact-lightbox">+ Add Contact</a>
 		</div>
 		@include('forms.contact')
 
 		<div class="row">
-			<a class="fancybox btn btn-primary" href="#contributor_form">+ Add Contributor</a>
+			<a class="fancybox btn btn-primary" href="#contributor-lightbox">+ Add Contributor</a>
 		</div>
 		@include('forms.contributor')
 	

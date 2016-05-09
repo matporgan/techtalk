@@ -7,6 +7,30 @@
 // Google Color Palette defined: http://www.google.com/design/spec/style/color.html
 
 
+$advisian-blue: (
+  "base":       #00ade6,
+  "lighten-4":  #cdeff9,
+  "lighten-3":  #9bdff4,
+  "lighten-2":  #6bceee,
+  "lighten-1":  #3dbfe9,
+);
+
+$advisian-charcoal: (
+  "base":       #162934,
+  "lighten-4":  #d1d4d6,
+  "lighten-3":  #a2a9ae,
+  "lighten-2":  #747f85,
+  "lighten-1":  #45545c,
+);
+
+$advisian-gold: (
+  "base":       #a38f68,
+  "lighten-4":  #ede9e0,
+  "lighten-3":  #dbd3c3,
+  "lighten-2":  #c8bca4,
+  "lighten-1":  #b6a687,
+);
+
 $materialize-red: (
   "base":       #e51c23,
   "lighten-5":  #fdeaeb,
@@ -338,6 +362,9 @@ $shades: (
 );
 
 $colors: (
+  "advisian-blue": $advisian-blue,
+  "advisian-charcoal": $advisian-charcoal,
+  "advisian-gold": $advisian-gold,
   "materialize-red": $materialize-red,
   "red": $red,
   "pink": $pink,

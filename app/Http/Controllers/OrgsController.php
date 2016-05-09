@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\OrgRequest;
-use App\Http\Requests\OrgUpdateRequest;
 
 use Auth;
 use Gate;
@@ -25,7 +23,7 @@ class OrgsController extends Controller
      */
     public function index()
     {
-        $orgs = Org::all();
+        $orgs = Org::orderBy('id', 'desc')->get();
 
         return view('pages.orgs', compact('orgs'));
     }
@@ -41,7 +39,7 @@ class OrgsController extends Controller
 
         // redirect if not logged in
         if (! Auth::check()) return redirect('register');
-        
+
         return view('pages.org-create', compact('categories'));
     }
 
@@ -51,21 +49,21 @@ class OrgsController extends Controller
      * @param  OrgRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(OrgRequest $request)
+    public function store(Request $request)
     {
         // explode tags from string
-        //$request->merge(array('tag_list' => explode(",", $request->tag_list[0])));
+        $request->merge(array('tag_list' => explode(",", $request->tag_list)));
 
         // create database entry
         $org = Org::create($request->all()); // org model
-        $org->users()->attach(Auth::user()->id); // add user
+        $org->users()->attach(Auth::user()->id, ['org_role' => 'owner']); // add user
         $this->syncCategories($request, $org); // add categories
         
         // move logo to storage
         $this->moveLogo($request, $org);
 
         // flash and redirect
-        $request->session()->flash('success', 'Your organisation has been created.');
+        $request->session()->flash('success', 'Organisation successfully created!');
         return redirect("/orgs/{$org->id}");
     }
 
@@ -78,8 +76,9 @@ class OrgsController extends Controller
     public function show($id)
     {
         $org = Org::findOrFail($id);
+        $users = User::lists('email')->all();
         
-        return view('pages.org', compact('org'));
+        return view('pages.org', compact('org', 'users'));
     }
 
     /**
@@ -98,7 +97,7 @@ class OrgsController extends Controller
         $categories = $this->getCategories();
         $selections = $this->getSelections($org);
 
-        return view('orgs.edit', compact('org', 'categories', 'selections'));
+        return view('pages.org-edit', compact('org', 'categories', 'selections'));
     }
 
     /**
@@ -108,7 +107,7 @@ class OrgsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(OrgUpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $org = Org::findOrFail($id);
         
@@ -143,33 +142,6 @@ class OrgsController extends Controller
 
         $org->delete();
         return redirect("/orgs");
-    }
-
-    /**
-     * Add a contributor for the given org.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function adduser(Request $request, $id)
-    {
-        //dd($request);
-        $org = Org::findOrFail($id);
-        
-        // authorization
-        if (Gate::denies('update-org', $org)) abort(403);
-
-        $user = User::where('email', $request->email)->first();
-        if ($user !== null)
-        {
-            $org->users()->attach($user->id);
-        }
-        else
-        {
-            $request->session()->flash('failure', 'That email does not match any users in our records.');
-        }
-
-        return redirect("/orgs/{$org->id}");
     }
 
     /**
@@ -209,17 +181,11 @@ class OrgsController extends Controller
         $org->domains()->sync($request->input('domain_list'));
 
         // check to see if tag list is empty
-        $tag_list = $request->input('tag_list');       
-        if(! empty($tag_list)) 
-        {
-            // check for new tags
-            $tag_list = $this->checkForNewTags($tag_list);
-        }
-        else 
-        {
-            // change null to empty array
-            $tag_list = [];
-        }
+        $tag_list = $request->tag_list; 
+
+        // check for new tags or change to empty array
+        $tag_list = ($tag_list[0]=="" ? [] : $this->checkForNewTags($tag_list));
+
         $org->tags()->sync($tag_list);
     }
 
@@ -229,20 +195,26 @@ class OrgsController extends Controller
      * @param  array  $tags_id
      * @return  array
      */
-    private function checkForNewTags(array $tags_id)
+    private function checkForNewTags($tag_list)
     {
-        $allDBTags = Tag::lists("id")->toArray(); // get all the tags in the db
+        $all_tags = Tag::lists("name")->toArray(); // get all the tags in the db
 
-        $newTagsList = array_diff($tags_id, $allDBTags);
-        $syncTagsList = array_diff($tags_id, $newTagsList);
+        $new_tags = array_diff($tag_list, $all_tags);
+        $old_tags = array_diff($tag_list, $new_tags);
 
-        foreach ($newTagsList as $newTag)
+        foreach ($old_tags as $old_tag)
+        {
+            $sync_tags[] = Tag::where('name', $old_tag)->first()->id;
+        }
+
+        foreach ($new_tags as $new_tag)
         {
             // create a new tag
-            $newTagModel = Tag::create(["name" => $newTag]);
-            $syncTagsList[] = $newTagModel->id;
+            $new_tag_model = Tag::create(["name" => $new_tag]);
+            $sync_tags[] = $new_tag_model->id;
         }
-        return $syncTagsList;
+
+        return $sync_tags;
     }
 
     /**

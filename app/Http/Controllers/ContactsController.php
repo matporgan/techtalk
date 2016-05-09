@@ -33,7 +33,7 @@ class ContactsController extends Controller
             'email' => $request->email
         ]);
         
-        return redirect("/orgs/{$org->id}");
+        return back();
     }
 
     /**
@@ -49,6 +49,7 @@ class ContactsController extends Controller
         if (Gate::denies('update-org', $org)) { abort(403); }
         
     	Contact::destroy($contact_id);
+        
     	return back();
     }
 }

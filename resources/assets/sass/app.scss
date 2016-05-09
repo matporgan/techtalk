@@ -1,3 +1,6 @@
+/* Fonts
+-------------------------------------------------- */
+
 @font-face {
     font-family: "Source Sans Pro";
     src: url("/fonts/source-sans-pro/SourceSansPro-Regular.ttf") format("truetype");
@@ -5,6 +8,17 @@
 
 html {
 	font-family: 'Source Sans Pro', 'Times New Roman';
+}
+
+
+/* General Styles
+-------------------------------------------------- */
+.subtitle {
+	position: relative;
+	top: -10px;
+	font-style: italic;
+	font-size: small;
+	color: #aaa;
 }
 
 
@@ -42,6 +56,34 @@ main {
 	top: 3.1rem !important;
 }
 
+.toast-success {
+	background-color: #66bb6a;
+	color: #fff; 
+}
+
+.toast-failure {
+	background-color: #ef5350;
+	color: #fff; 
+}
+
+.card .card-image {
+	width: 100%;
+	height: 100px;
+	padding: 20px;
+}
+
+.card .card-image img {
+	width: auto !important;
+	max-height: 100px;
+	max-width: 100%;
+	margin: 0 auto;
+}
+
+.card .card-content {
+	color: #45545c;
+	height: 128px;
+}
+
 
 /* Form Styles
 -------------------------------------------------- */
@@ -56,7 +98,7 @@ main {
 #cur_logo img {
 	height: 3rem;
 }
-.input-field div.error {
+.input-field div.error, .input-field div.custom-error {
 	position: relative;
 	top: -1rem;
 	font-size: 0.8rem;
@@ -65,4 +107,39 @@ main {
 .file-field div.error {
 	left: -2rem;
 	text-transform: initial;
+	letter-spacing: 0;
+}
+
+/* Materialize Tags Style
+-------------------------------------------------- */
+.materialize-tags {
+	padding: 0 !important;
+}
+
+.materialize-tags .tt-menu {
+	background-color: #fff;
+	margin: 3px 0 0 0;
+	min-width: 120px; 
+	max-height: 650px;
+	top: 102%;
+    -webkit-box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    -moz-box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+.materialize-tags .tt-menu .tt-suggestion {
+    clear: both;
+    font-size: 16px;
+    color: #26a69a;
+    display: block;
+    line-height: 22px;
+    padding: 14px 16px;
+    cursor: pointer;
+    min-height: 50px;
+    line-height: 1.5rem;
+    width: 100%;
+    text-align: left;
+    text-transform: lowercase;
+}
+.materialize-tags .tt-menu .tt-suggestion:hover {
+    background-color: #eee;
 }

@@ -35,7 +35,7 @@ class LinksController extends Controller
             'description' => $request->description
         ]);
         
-        return redirect("/orgs/{$org->id}");
+        return back();
     }
 
     /**
@@ -51,6 +51,7 @@ class LinksController extends Controller
         if (Gate::denies('update-org', $org)) { abort(403); }
         
     	Link::destroy($link_id);
+        
     	return back();
     }
 

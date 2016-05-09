@@ -1,18 +1,13 @@
 @include('forms.js-lightbox')
 
-<div id="document_form" class="lightbox" style="display:none;">
-	{!! Form::open(['method' => 'POST', 'action' => ['DocumentsController@store', $org->id], 'files' => true, 'class' => 'doc_form']) !!}
+<div id="document-lightbox" class="lightbox" style="display:none;">
+	{!! Form::open(['method' => 'POST', 'action' => ['DocumentsController@store', $org->id], 'files' => true, 'id' => 'document-form']) !!}
 		<h2 class="center">Add Document</h2><br />
-		
-		<!--<div class="input-field">-->
-		<!--	{!! Form::label('upload', 'Upload:') !!}-->
-		<!--	{!! Form::file('upload', ['id' => 'upload']) !!}-->
-		<!--</div>-->
-		
+
 		<div class="file-field input-field">
 			<div class="btn">
 				<i class="material-icons left">attach_file</i>
-				<span>File*</span>
+				<span>Upload*</span>
 				<input type="file" name="file">
 			</div>
 			<div class="file-path-wrapper">
@@ -21,14 +16,14 @@
 		</div>
 		
 		<div class="input-field">
-			{!! Form::text('name', null, ['validate', 'required']) !!}
-			{!! Form::label('name', 'Name*', ['class' => 'active']) !!}
+			{!! Form::text('name', null) !!}
+			{!! Form::label('name', 'Name*') !!}
 		</div>
 		
 		<div class="input-field">
-			{!! Form::textarea('description', null, ['required', 'class' => 'materialize-textarea']) !!}
-			{!! Form::label('description', 'Description*', ['class' => 'active']) !!}
-		</div>
+			{!! Form::textarea('description', null, ['class' => 'materialize-textarea']) !!}
+			{!! Form::label('description', 'Description*') !!}
+		</div><br />
 		
 		<div class="row center">
 			<button class="btn-large waves-effect waves-light" type="submit" name="action">
@@ -39,14 +34,11 @@
 </div>
 
 <script type="text/javascript">
-	$(".doc_form").validate({
+	$("#document-form").validate({
 		rules: {
-			name: {
-				required: true
-			},
-			description: {
-				required: true
-			}
+			file: "required",
+			name: "required",
+			description: "required",
 		},
         errorElement : 'div',
         errorPlacement: function(error, element) {

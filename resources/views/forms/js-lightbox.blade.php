@@ -5,6 +5,7 @@
 			width: 450,
 			autoSize: false,
 			autoHeight: true,
+			closeBtn: false,
 			callbackOnShow:function(){
 				$("#document_form > .doc_form").validate();
 			}

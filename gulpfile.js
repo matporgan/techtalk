@@ -19,14 +19,16 @@ elixir(function(mix) {
        .styles([
        		'libs/select2.css',
           'libs/materialize-tags.min.css',
+          'libs/jquery.fancybox.css',
        	], './public/css/libs.css')
        .scripts([
        		'libs/jquery-2.2.3.min.js',
        		'libs/materialize.min.js',
        		'libs/select2.min.js',
        		'libs/dropzone.js',
-          'libs/materialize-tags.min.js',
+          'libs/materialize-tags.js',
           'libs/typeahead.bundle.js',
+          'libs/jquery.fancybox.js',
        	], './public/js/libs.js');
 
 });

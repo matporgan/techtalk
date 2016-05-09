@@ -9,7 +9,7 @@
             <a href="/" class="brand-logo center">Tech Talk</a>
             <ul class="right hide-on-med-and-down">
                 @if(Auth::check())
-                    <li><a href="#!" class="dropdown-button" data-activates="user-dropdown">{{ Auth::user()->name }}<i class="material-icons right">arrow_drop_down</i></a></li>
+                    <li><a href="#!" class="dropdown-button" data-activates="user-dropdown" style="min-width: 160px">{{ Auth::user()->name }}<i class="material-icons right">arrow_drop_down</i></a></li>
                     <ul id="user-dropdown" class="dropdown-content">
                         <li><a href="#">My Organisations</a></li>
                         <li><a href="#">My Discussions</a></li>
