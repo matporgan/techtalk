@@ -27,6 +27,7 @@
 
 <main>
 	<div class="container">
+		@include('includes.flash')
 		@yield('content')
 	</div>
 </main>

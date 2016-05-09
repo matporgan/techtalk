@@ -21,6 +21,10 @@ html {
 	color: #aaa;
 }
 
+.admin-btns {
+	margin: 3rem 0 0 0;
+}
+
 
 /* Sticky footer
 -------------------------------------------------- */
@@ -43,8 +47,9 @@ main {
 /* Logo Style
 -------------------------------------------------- */
 .logo {
-	height: 100px;
-	width: auto;
+	height: 64px;
+	width: auto; 
+	max-width: 240px;
 }
 
 /* Materialize Changes
@@ -84,6 +89,9 @@ main {
 	height: 128px;
 }
 
+.chip {
+	margin-top: 5px;
+}
 
 /* Form Styles
 -------------------------------------------------- */
