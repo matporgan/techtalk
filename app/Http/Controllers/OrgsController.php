@@ -51,8 +51,8 @@ class OrgsController extends Controller
      */
     public function store(Request $request)
     {
-        // explode tags from string
-        $request->merge(array('tag_list' => explode(",", $request->tag_list)));
+        // make tag string lowercase and explode. conversion: "tag 1, TAG 2, Tag 3" => ["tag1", "tag 2", "tag 3"]
+        $request->merge(array('tag_list' => explode(",", strtolower($request->tag_list))));
 
         // create database entry
         $org = Org::create($request->all()); // org model
@@ -180,11 +180,8 @@ class OrgsController extends Controller
         $org->industries()->sync($request->input('industry_list'));
         $org->domains()->sync($request->input('domain_list'));
 
-        // check to see if tag list is empty
-        $tag_list = $request->tag_list; 
-
-        // check for new tags or change to empty array
-        $tag_list = ($tag_list[0]=="" ? [] : $this->checkForNewTags($tag_list));
+        // check for new tags (or change to empty array if tags empty)
+        $tag_list = ($request->tag_list[0]=="" ? [] : $this->checkForNewTags($request->tag_list));
 
         $org->tags()->sync($tag_list);
     }

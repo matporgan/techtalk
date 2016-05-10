@@ -12,5 +12,6 @@ class OrgTableSeeder extends Seeder
     public function run()
     {
 		factory(App\Org::class, 10)->create();
+		factory(App\User::class, 10)->create();
     }
 }

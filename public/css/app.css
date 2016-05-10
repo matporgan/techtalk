@@ -3341,24 +3341,24 @@ h1 {
   margin: 2.1rem 0 1.68rem 0; }
 
 h2 {
-  font-size: 3.56rem;
+  font-size: 2.3rem;
   line-height: 110%;
-  margin: 1.78rem 0 1.424rem 0; }
+  margin: 1.15rem 0 0.92rem 0; }
 
 h3 {
-  font-size: 2.92rem;
+  font-size: 1.6rem;
   line-height: 110%;
-  margin: 1.46rem 0 1.168rem 0; }
+  margin: 0.8rem 0 0.64rem 0; }
 
 h4 {
-  font-size: 2.28rem;
+  font-size: 1.2rem;
   line-height: 110%;
-  margin: 1.14rem 0 0.912rem 0; }
+  margin: 0.6rem 0 0.48rem 0; }
 
 h5 {
-  font-size: 1.64rem;
+  font-size: 1rem;
   line-height: 110%;
-  margin: 0.82rem 0 0.656rem 0; }
+  margin: 0.5rem 0 0.4rem 0; }
 
 h6 {
   font-size: 1rem;
@@ -6405,6 +6405,9 @@ html {
 .admin-btns {
   margin: 3rem 0 0 0; }
 
+.btn {
+  margin-right: 5px; }
+
 /* Sticky footer
 -------------------------------------------------- */
 body {
@@ -6449,9 +6452,34 @@ main {
   background-color: #ef5350;
   color: #fff; }
 
+.grid {
+  margin: 0 auto; }
+
+@media only screen and (min-width: 992px) {
+  .grid-sizer,
+  .grid-item {
+    width: 24%;
+    margin: 0 0 12px 0; }
+  .grid-gutter-sizer {
+    width: 4%; } }
+
+@media only screen and (max-width: 992px) {
+  .grid-sizer,
+  .grid-item {
+    width: 32%;
+    margin: 0 0 12px 0; }
+  .grid-gutter-sizer {
+    width: 4%; } }
+
+@media only screen and (max-width: 600px) {
+  .grid-sizer,
+  .grid-item {
+    width: 100%;
+    margin: 0 0 12px 0; } }
+
 .card .card-image {
   width: 100%;
-  height: 100px;
+  height: 100%;
   padding: 20px; }
 
 .card .card-image img {
@@ -6461,8 +6489,7 @@ main {
   margin: 0 auto; }
 
 .card .card-content {
-  color: #45545c;
-  height: 128px; }
+  color: #45545c; }
 
 .chip {
   margin-top: 5px; }

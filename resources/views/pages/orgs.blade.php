@@ -12,7 +12,7 @@
 
 <div class="row valign-wrapper">
 	<div class="valign col s12 m4">
-		<a href="#!" class="" id="filters-link">Filter Results<i class="material-icons" id="filters-icon">add</i></a>
+		<a href="#!" class="waves-effect waves-teal btn-flat" id="filters-link"><i class="material-icons right" id="filters-icon">add</i>Filter Results</a>
 	</div>
 	<div class="valign col s12 m8">
 		<div class="input-field col m8">
@@ -62,11 +62,12 @@
 	</div>
 </div>
 
-<div class="row">
-	@foreach ($orgs as $org)
-			<div class="col s12 m4">
+<div class="row grid">
+	<div class="grid-sizer">
+		<div class="grid-gutter-sizer">
+			@foreach ($orgs as $org)
 				<a href="/orgs/{{ $org->id }}">
-					<div class="card">
+					<div class="card grid-item">
 						<div class="card-image">
 							<img src="{{ $org->logo }}">
 						</div>
@@ -76,8 +77,9 @@
 						</div>
 					</div>
 				</a>
-			</div>
-	@endforeach
+			@endforeach
+		</div>
+	</div>
 </div>
 
 <script type="text/javascript">
@@ -90,6 +92,17 @@
 			$('#filters').css('display', 'block');
 			document.querySelector('#filters-icon').innerHTML = 'remove';
 		}
+	});
+
+	var $grid = $('.grid').masonry({
+		percentPosition: true,
+		columnWidth: '.grid-sizer',
+		itemSelector: '.grid-item',
+		gutter: '.grid-gutter-sizer',
+	});
+
+	$grid.imagesLoaded().progress( function() {
+		$grid.masonry('layout');
 	});
 </script>
 

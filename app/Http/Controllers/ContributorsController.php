@@ -36,7 +36,7 @@ class ContributorsController extends Controller
                 $org_ids[] = $user_org->pivot->org_id;
             
             if(!is_null($org_ids) && !in_array($org->id, $org_ids))
-                $org->users()->attach($user->id, ['org_role' => 'contributor']);
+                $org->users()->attach($user->id);
         }
         else
         {

@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
             $table->foreign('org_id')->references('id')->on('orgs')->onDelete('cascade');
             $table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('org_role');
+            $table->string('org_role')->default('contributor');
             $table->timestamps();
         });
     }
