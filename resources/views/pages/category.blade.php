@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h1>Domain: {{ $domain->alias }}</h1>
+<h1>{{ $type }}: {{ $category->name }}</h1>
 
 @include('snippets.org-grid')
 

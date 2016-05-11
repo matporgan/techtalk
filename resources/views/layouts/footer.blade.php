@@ -23,12 +23,12 @@
 </footer>
 
 <script type="text/javascript">
-$(document).ready(function(){
-	// materialize js
-    $('.button-collapse').sideNav();
-    $('select').material_select();
-    $('.collapsible').collapsible({
-		accordion: false
+	$(document).ready(function(){
+		// materialize js
+	    $('.button-collapse').sideNav();
+	    $('select').material_select();
+	    $('.collapsible').collapsible({
+			accordion: false
+		});
 	});
-}) ;
-</script>    
+</script>

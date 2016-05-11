@@ -188,3 +188,30 @@ main {
 .materialize-tags .tt-menu .tt-suggestion:hover {
     background-color: #eee;
 }
+ 
+#page {
+    display: none;
+}
+
+#loading {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+}
+
+#loading .row {
+	margin-top: 30vh;
+}
+
+#loading .logo {
+	margin: 0 auto 20px auto;
+	width: 150px;
+	height: 150px;
+	background: #eee;
+}
+
