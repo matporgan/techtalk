@@ -124,6 +124,10 @@
 				</ul>
 			</div>
 		</div>
+
+		<div class="card-panel" style="padding: 10px 40px 5px 40px;">
+			@include('org.comments')
+		</div>
 	</div>
 
 	<div class="col s12 m4 l3" style="padding-left: 30px;">

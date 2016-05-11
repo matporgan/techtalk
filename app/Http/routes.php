@@ -38,3 +38,5 @@ Route::get('technology/{technology_id}', 'PagesController@technology');
 Route::get('industry/{industry_id}', 'PagesController@industry');
 Route::get('domain/{domain_id}', 'PagesController@domain');
 Route::get('tag/{tag_id}', 'PagesController@tag');
+
+Route::post('orgs/{id}/comment/{parent_id}', 'CommentsController@store');

@@ -29,6 +29,7 @@ elixir(function(mix) {
           'libs/materialize-tags.js',
           'libs/typeahead.bundle.js',
           'libs/jquery.fancybox.js',
+          'libs/moment.js',
        	], './public/js/libs.js');
 
 });

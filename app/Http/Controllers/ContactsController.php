@@ -20,7 +20,7 @@ class ContactsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function store(ContactRequest $request, $id) 
+    public function store(Request $request, $id) 
     {
         $org = Org::findOrFail($id);
 

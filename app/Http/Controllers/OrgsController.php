@@ -181,7 +181,7 @@ class OrgsController extends Controller
         $org->domains()->sync($request->input('domain_list'));
 
         // check for new tags (or change to empty array if tags empty)
-        $tag_list = ($request->tag_list[0]=="" ? [] : $this->checkForNewTags($request->tag_list));
+        $tag_list = ($request->tag_list == "" ? [] : $this->checkForNewTags($request->tag_list));
 
         $org->tags()->sync($tag_list);
     }

@@ -155,4 +155,14 @@ class Org extends Model
     {
         return $this->hasMany('App\Contact');
     }
+
+    /**
+     * Get the comments associated with the given org.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
 }

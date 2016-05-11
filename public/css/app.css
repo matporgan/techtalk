@@ -6424,6 +6424,14 @@ main {
   -ms-flex: 1 0 auto;
   flex: 1 0 auto; }
 
+/* Comment Styles
+-------------------------------------------------- */
+.comment-author .author-name {
+  font-size: large; }
+
+.comment-author .author-date {
+  color: #aaa; }
+
 /* Lightbox styles
 -------------------------------------------------- */
 .lightbox {
