@@ -22,7 +22,7 @@
 	</div>
 
 	<div class="input-field">
-		<input name="tag_list" id="tag_list" class="typeahead" type="text" value="" data-role="materialtags"/>
+		<input name="tag_list" id="tag_list" class="typeahead" type="text" value="@if($type == 'edit') {{ $selections['tags'] }} @endif" data-role="materialtags"/>
 		{!! Form::label('tag_list', 'Tags') !!}
 		<span class="subtitle">(seperate with tab)</span>
 		<br /><br />

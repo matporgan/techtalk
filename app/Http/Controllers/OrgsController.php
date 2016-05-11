@@ -53,7 +53,7 @@ class OrgsController extends Controller
     {
         // make tag string lowercase and explode. conversion: "tag 1, TAG 2, Tag 3" => ["tag1", "tag 2", "tag 3"]
         $request->merge(array('tag_list' => explode(",", strtolower($request->tag_list))));
-
+        
         // create database entry
         $org = Org::create($request->all()); // org model
         $org->users()->attach(Auth::user()->id, ['org_role' => 'owner']); // add user
@@ -114,8 +114,8 @@ class OrgsController extends Controller
         // authorization
         if (Gate::denies('update-org', $org)) abort(403);
 
-        // explode tags from string
-        //$request->merge(array('tag_list' => explode(",", $request->tag_list[0])));
+        // make tag string lowercase and explode. conversion: "tag 1, TAG 2, Tag 3" => ["tag1", "tag 2", "tag 3"]
+        $request->merge(array('tag_list' => explode(",", strtolower($request->tag_list))));
         
         // update database entry
         $org->update($request->all());
@@ -195,18 +195,21 @@ class OrgsController extends Controller
     private function checkForNewTags($tag_list)
     {
         $all_tags = Tag::lists("name")->toArray(); // get all the tags in the db
-
+        
+        // determine which tags are new
         $new_tags = array_diff($tag_list, $all_tags);
+        // determine which tags are already in the DB
         $old_tags = array_diff($tag_list, $new_tags);
 
         foreach ($old_tags as $old_tag)
         {
+            // get id of existing tags
             $sync_tags[] = Tag::where('name', $old_tag)->first()->id;
         }
 
         foreach ($new_tags as $new_tag)
         {
-            // create a new tag
+            // create new tags
             $new_tag_model = Tag::create(["name" => $new_tag]);
             $sync_tags[] = $new_tag_model->id;
         }
@@ -233,7 +236,7 @@ class OrgsController extends Controller
             'technologies' => Technology::lists('name', 'id')->all(),
             'industries' => $industries,
             'domains' => $domains,
-            'tags' => Tag::orderBy('count')->lists('name', 'id')->all()
+            'tags' => Tag::lists('name', 'id')->all()
         ];
     }
     

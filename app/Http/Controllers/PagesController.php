@@ -22,19 +22,22 @@ class PagesController extends Controller
      */
     public function technology($id)
     {
-        $technology = Technology::findOrFail($id);
+        $category = Technology::findOrFail($id);
+        $type = 'Technology';
         
-        foreach($technology->orgs as $org)
+        foreach($category->orgs as $org)
         {
             $org_ids[] = $org->pivot->org_id;
         }
         // return 404 if no ids found
         if (empty($org_ids)) return abort(404);
         
-        $org_list = Org::whereIn('id', $org_ids)->get();
+        $orgs = Org::whereIn('id', $org_ids)->get();
         
-        return view('pages.technology', compact('technology','org_list'));
+        return view('pages.category', compact('category', 'type', 'orgs'));
     }
+    
+    
 
     /**
      * Display the specified industry.
@@ -44,18 +47,19 @@ class PagesController extends Controller
      */
     public function industry($id)
     {
-        $industry = Industry::findOrFail($id);
+        $category = Industry::findOrFail($id);
+        $type = 'Industry';
         
-        foreach($industry->orgs as $org)
+        foreach($category->orgs as $org)
         {
             $org_ids[] = $org->pivot->org_id;
         }
         // return 404 if no ids found
         if (empty($org_ids)) return abort(404);
         
-        $org_list = Org::whereIn('id', $org_ids)->get();
+        $orgs = Org::whereIn('id', $org_ids)->get();
         
-        return view('pages.industry', compact('industry','org_list'));
+        return view('pages.category', compact('category', 'type', 'orgs'));
     }
     
     /**
@@ -66,14 +70,15 @@ class PagesController extends Controller
      */
     public function domain($id)
     {
-        $domain = Domain::findOrFail($id);
+        $category = Domain::findOrFail($id);
+        $type = 'Domain';
         
         // get domains with same alias
-        $domains = Domain::where('alias', $domain->alias)->get();
+        $domains = Domain::where('alias', $category->alias)->get();
 
         foreach($domains as $domain)
         {
-            foreach($domain->orgs as $org)
+            foreach($category->orgs as $org)
             {
                 $org_ids[] = $org->pivot->org_id;
             }  
@@ -81,9 +86,9 @@ class PagesController extends Controller
         // return 404 if no ids found
         if (empty($org_ids)) return abort(404);
 
-        $org_list = Org::whereIn('id', $org_ids)->get();
+        $orgs = Org::whereIn('id', $org_ids)->get();
         
-        return view('pages.domain', compact('domain','org_list'));
+        return view('pages.category', compact('category', 'type', 'orgs'));
     }
     
     /**
@@ -94,17 +99,18 @@ class PagesController extends Controller
      */
     public function tag($id)
     {
-        $tag = Tag::findOrFail($id);
+        $category = Tag::findOrFail($id);
+        $type = 'Tag';
         
-        foreach($tag->orgs as $org)
+        foreach($category->orgs as $org)
         {
             $org_ids[] = $org->pivot->org_id;
         }
         // return 404 if no ids found
         if (empty($org_ids)) return abort(404);
 
-        $org_list = Org::whereIn('id', $org_ids)->get();
+        $orgs = Org::whereIn('id', $org_ids)->get();
         
-        return view('pages.tag', compact('tag','org_list'));
+        return view('pages.category', compact('category', 'type', 'orgs'));
     }
 }

@@ -13,22 +13,13 @@
 			<div class="row">
 				<div class="col">
 					<h1>{!! $org->name !!}</h1>
-					Entry by: 
-				@foreach($org->users as $user)
-					@if($user->pivot->org_role == 'owner')
-						<a href="mailto:{{ $user->email }}" class="white-text">{{ $user->name }}</a>
-					@endif
-				@endforeach
+					Created by 
+					@foreach($org->users as $user)
+						@if($user->pivot->org_role == 'owner')
+							<a href="mailto:{{ $user->email }}" class="white-text">{{ $user->name }}</a>
+						@endif
+					@endforeach
 				</div>
-				<div class="col right">
-					<div class="admin-btns">
-						@can('update-org', $org)
-							<a href="{{ $org->id }}/edit" class="btn green"><i class="material-icons">edit</i></a>
-							<a href="{{ $org->id }}/delete" class="btn red"><i class="material-icons">close</i></a>
-						@endcan
-					</div>
-				</div>
-				
 			</div>
 		</div>
 		<div class="card-panel" style="padding: 10px 40px 5px 40px;">
@@ -130,7 +121,14 @@
 		</div>
 	</div>
 
-	<div class="col s12 m4 l3" style="padding-left: 30px;">
+	<div class="col s12 m4 l3" style="padding: 8px 0 0 30px;">
+		<div class="row">
+				@can('update-org', $org)
+					<a href="{{ $org->id }}/edit" class="btn green"><i class="material-icons">edit</i></a>
+					<a href="{{ $org->id }}/delete" class="btn red"><i class="material-icons">close</i></a>
+				@endcan
+		</div>
+		
 		<div class="row">
 			<img src="{{ $org->logo }}" alt="{{ $org->name . " - Logo" }}" class="logo" />
 		</div>
@@ -188,9 +186,15 @@
 				@endif
 			@endforeach
 		</div>
-
+		
 		<div class="row">
-			<h3>Contributors</h3>
+			@if($org->users->count() == 1)
+				@can('update-org', $org)
+					<h3>Contributors</h3>
+				@endcan	
+			@else
+				<h3>Contributors</h3>
+			@endif
 			@foreach($org->users as $user)
 				@if($user->pivot->org_role == 'contributor')
 					<a href="mailto:{{ $user->email }}" target="_top">{{ $user->name }}</a>
