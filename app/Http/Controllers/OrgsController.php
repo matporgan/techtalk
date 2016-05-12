@@ -75,10 +75,11 @@ class OrgsController extends Controller
      */
     public function show($id)
     {
-        $org = Org::findOrFail($id);
+        $org = Org::with('comments')->findOrFail($id);
         $users = User::lists('email')->all();
-        
-        return view('pages.org', compact('org', 'users'));
+        $comments = $this->getOrderedComments($org);
+
+        return view('pages.org', compact('org', 'users', 'comments'));
     }
 
     /**
@@ -124,7 +125,7 @@ class OrgsController extends Controller
         if($request->file('logo') != null)
             $this->moveLogo($request, $org);
         
-        return redirect("/orgs/{$org->id}");
+        return back();
     }
 
     /**
@@ -256,6 +257,131 @@ class OrgsController extends Controller
         ];
     }
     
-    
+    /**
+     * Gets an array of comment collections in the correct display order.
+     *
+     * @param  Org $org
+     * @return array $comments
+     */
+    public function getOrderedComments(Org $org)
+    {  
+        $comment_parent_ids = $org->comments->lists('parent_id', 'id')->all();
+
+        // check to ensure comments exist
+        if(empty($comment_parent_ids))
+            return null;
+        
+        // get id and parent_id arrays and order them
+        $comment_ids = array_keys($comment_parent_ids);
+        $parent_ids = array_values($comment_parent_ids);
+        $ordered_ids = $this->getOrderedParentChildList($comment_ids, $parent_ids);
+        
+        // get collections based off $ordered_ids
+        static $comment;
+        for($i=0; $i<count($org->comments); $i++)
+        {
+            if($i > 0)
+            { 
+                $previous = $comment; 
+                $comment = $org->comments->where('id', $ordered_ids[$i][0])->first();
+                $comment->setLevel($ordered_ids[$i][1]);
+                $comment->setParentName($previous->user->name);
+            }
+            else
+            {
+                $comment = $org->comments->where('id', $ordered_ids[$i][0])->first();
+                $comment->setLevel($ordered_ids[$i][1]);
+            }
+            $comments[] = $comment;
+        }
+        
+        return $comments;
+    }
+
+    /**
+     * Orders an array of ids based on an array of parent ids. 
+     * Also adds a 'level' attribute to each id for css indenting.
+     * E.g. [ID]   [PID]     [ID,Level]
+     *      [ 1]   [  -]     [  1,0   ]
+     *      [ 2]   [  -]     [  3,1   ]
+     *      [ 3]   [  1]     [  5,2   ]
+     *      [ 4] & [  1]  => [  4,1   ]
+     *      [ 5]   [  3]     [  8,2   ]
+     *      [ 6]   [  1]     [  9,2   ]
+     *      [ 7]   [  2]     [  6,1   ]
+     *      [ 8]   [  4]     [  2,0   ]
+     *      [ 9]   [  4]     [  7,1   ]
+     * 
+     * @param  array $ids
+     * @param  array $parent_ids
+     * @param  array $ordered_ids = null
+     * @param  int $position = 0
+     * @return array $ordered_ids
+     */
+    public function getOrderedParentChildList($ids, $parent_ids, $ordered_ids = array(null), $position = 0)
+    {
+        static $level = 0; // indent level of id
+
+        if(! empty($ids)) // if ids remain
+        {
+            // place $id at $position into ordered array
+            $id = $ids[$position];
+            $ordered_ids[] = [$id, $level];
+            
+            // remove ids from lists
+            unset($ids[$position]);
+            $ids = array_values($ids);
+            unset($parent_ids[$position]);
+            $parent_ids = array_values($parent_ids);
+
+            // check if id has children
+            $children = array_keys($parent_ids, $id);
+
+            if(! empty($children)) // children found
+            {
+                // increase indent level
+                $level++; 
+
+                // get ids of children
+                foreach($children as $child)
+                {
+                    $child_ids[] = $ids[$child];
+                }
+
+                foreach($child_ids as $child_id)
+                {
+                    // get next child's position
+                    $next_pos = array_search($child_id, $ids);
+
+                    // call getOrderedParentChildList on that child
+                    $results = $this->getOrderedParentChildList($ids, $parent_ids, $ordered_ids, $next_pos); // 6
+                    
+                    // put results back into arrays
+                    $ids = $results[0];
+                    $parent_ids = $results[1];
+                    $ordered_ids = $results[2];
+                }
+
+                // no more children; reduce indent
+                $level--;
+            }
+
+            if($level != 0) 
+            {
+                // pass arrays back to parent
+                return [$ids, $parent_ids, $ordered_ids];
+            }
+            else 
+            {
+                // move on to next root id
+                return $this->getOrderedParentChildList($ids, $parent_ids, $ordered_ids);
+            }
+        }
+        else // no more ids
+        {
+            array_shift($ordered_ids); // remove first null element
+            return $ordered_ids;
+        }
+    }    
         
 }

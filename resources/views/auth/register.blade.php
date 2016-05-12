@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h1 class="center">Login</h1><br />
+<h1 class="center">Register</h1><br />
 
 <div class="row">
     <form class="col s12 m8 l6 offset-m2 offset-l3" id="register" role="form" method="POST" action="{{ url('/register') }}">
@@ -30,7 +30,7 @@
 
         <div class="row center">
             <button class="btn-large waves-effect waves-light" type="submit" name="action">
-                Register<i class="material-icons left">star</i>
+                Register<i class="material-icons right">send</i>
             </button>
         </div>
     </form>

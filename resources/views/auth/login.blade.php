@@ -27,7 +27,7 @@
         <div class="row center">
             <button class="btn-large waves-effect waves-light" type="submit" name="action">
                 Login<i class="material-icons left">lock_open</i>
-            </button>
+            </button>            
         </div>
         
         <div class="row center">

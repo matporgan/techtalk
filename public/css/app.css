@@ -6405,8 +6405,11 @@ html {
 .admin-btns {
   margin: 3rem 0 0 0; }
 
-.btn {
-  margin-right: 5px; }
+.btn-group a, button {
+  margin-right: 10px; }
+
+.btn-group a, button :last-child {
+  margin-right: 0; }
 
 /* Sticky footer
 -------------------------------------------------- */
@@ -6426,10 +6429,25 @@ main {
 
 /* Comment Styles
 -------------------------------------------------- */
-.comment-author .author-name {
+.comment-overlay {
+  width: 100%;
+  height: 180px;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.7);
+  position: relative; }
+
+.comment-overlay .btn-group {
+  z-index: 11;
+  position: relative;
+  top: -60%; }
+
+.comment-header {
+  margin-bottom: 10px; }
+
+.comment-header .author-name {
   font-size: large; }
 
-.comment-author .author-date {
+.comment-header .author-date, .reply-details {
   color: #aaa; }
 
 /* Lightbox styles

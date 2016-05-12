@@ -27,19 +27,30 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies($gate);
         
         $gate->before(function ($user, $ability) {
-            if ($user->isAdmin()) {
-                return true;
-            }
+            // overwrite all gates
         });
-        
-        // $gate->define('update-org', function ($user, $org) {
-        //     return $user->id ===  $org->user_id;
-        // });
 
         $gate->define('update-org', function ($user, $org) {
             foreach ($user->orgs as $user_org)
             {
-                if ($user_org->pivot->org_id == $org->id) return true;
+                if ($user->isAdmin()) 
+                {
+                    return true;
+                }
+                elseif ($user_org->pivot->org_id == $org->id) 
+                {
+                    return true;
+                }
+            }
+        });
+
+        $gate->define('update-comment', function ($user, $comment) {
+            foreach ($user->comments as $user_comment)
+            {
+                if ($user_comment->id == $comment->id) 
+                {
+                    return true;
+                }
             }
         });
     }

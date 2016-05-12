@@ -117,12 +117,16 @@
 		</div>
 
 		<div class="card-panel" style="padding: 10px 40px 5px 40px;">
+			<div class="row">
+				<h2>Description</h2>
+			</div>
+
 			@include('org.comments')
 		</div>
 	</div>
 
 	<div class="col s12 m4 l3" style="padding: 8px 0 0 30px;">
-		<div class="row">
+		<div class="row btn-group">
 				@can('update-org', $org)
 					<a href="{{ $org->id }}/edit" class="btn green"><i class="material-icons">edit</i></a>
 					<a href="{{ $org->id }}/delete" class="btn red"><i class="material-icons">close</i></a>

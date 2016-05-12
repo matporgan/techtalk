@@ -16,7 +16,6 @@
 	
 	<script type="text/javascript" src="/js/app.js"></script>
 	<script type="text/javascript" src="/js/libs.js"></script>
-	<script type="text/javascript" src="/js/prettydate.js"></script>
 	<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.js"></script>
 	<script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>

@@ -40,3 +40,5 @@ Route::get('domain/{domain_id}', 'PagesController@domain');
 Route::get('tag/{tag_id}', 'PagesController@tag');
 
 Route::post('orgs/{id}/comment/{parent_id}', 'CommentsController@store');
+Route::post('comment/{comment_id}/update', 'CommentsController@update');
+Route::get('comment/{comment_id}/delete', 'CommentsController@destroy');

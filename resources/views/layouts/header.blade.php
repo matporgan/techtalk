@@ -17,8 +17,8 @@
                         <li><a href="/logout">Logout</a></li>
                     </ul>
                 @else
-                    <li {{ Request::is('login') ? 'class=active' : null }}><a href="/login">Login</a></li>
                     <li {{ Request::is('register') ? 'class=active' : null }}><a href="/register">Register</a></li>
+                    <li {{ Request::is('login') ? 'class=active' : null }}><a href="/login">Login</a></li>
                 @endif
             </ul>
             <a href="#" class="right button-collapse" data-activates="nav-mobile"><i class="material-icons">menu</i></a>
@@ -33,8 +33,8 @@
                     <li class="divider"></li>
                     <li><a href="/logout">Logout</a></li>
                 @else
-                    <li {{ Request::is('login') ? 'class=active' : null }}><a href="/login">Login</a></li>
                     <li {{ Request::is('register') ? 'class=active' : null }}><a href="/register">Register</a></li>
+                    <li {{ Request::is('login') ? 'class=active' : null }}><a href="/login">Login</a></li>
                 @endif
             </ul>
         </div>

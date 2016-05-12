@@ -17,6 +17,29 @@ class Comment extends Model
         'org_id'
     ];
 
+    protected $level;
+
+    protected $parentName;
+
+    public function setLevel($level)
+    {
+        $this->level = $level;
+    }
+
+    public function getLevel()
+    {
+        return $this->level;
+    }
+    public function setParentName($name)
+    {
+        $this->parentName = $name;
+    }
+
+    public function getParentName()
+    {
+        return $this->parentName;
+    }
+
     /**
      * Get the org associated with the given comment.
      *
@@ -44,7 +67,7 @@ class Comment extends Model
      */
     public function parent()
     {
-        return $this->belongsTo('App\Comment', 'parent_id');
+        return $this->belongsTo('App\Comment');
     }
 
     /**
@@ -54,6 +77,6 @@ class Comment extends Model
      */
     public function children()
     {
-        return $this->hasMany('App\Comment', 'parent_id');
+        return $this->hasMany('App\Comment');
     }
 }
