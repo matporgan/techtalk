@@ -26,22 +26,6 @@ class CreateTagsTable extends Migration
             $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
             $table->timestamps();
         });
-
-        // Predefined fields
-        $feilds = array(
-            ['tag1', 2],
-            ['tag2', 5],
-            ['tag3', 1]
-        );
-
-        // Prepopulate table with fields
-        foreach($feilds as $field)
-        {
-            DB::table('tags')->insert([
-                'name' => $field[0],
-                'count' => $field[1],
-            ]);   
-        }
     }
 
     /**

@@ -157,12 +157,12 @@ class Org extends Model
     }
 
     /**
-     * Get the comments associated with the given org.
+     * Get the discussion associated with the given org.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function comments()
+    public function discussion()
     {
-        return $this->hasMany('App\Comment');
+        return $this->hasOne('App\Discussion');
     }
 }

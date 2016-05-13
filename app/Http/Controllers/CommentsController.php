@@ -10,8 +10,6 @@ use Auth;
 use Gate;
 
 use App\Comment;
-use App\User;
-use App\Org;
 
 class CommentsController extends Controller
 {
@@ -19,10 +17,11 @@ class CommentsController extends Controller
      * Add comment to database.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $discussion_id
+     * @param  int  $discussion_id
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $org_id, $parent_id) 
+    public function store(Request $request, $discussion_id, $parent_id) 
     {
         // authenticate and retrieve user
     	if(($user = Auth::user()) == null) { abort(403); }
@@ -33,7 +32,7 @@ class CommentsController extends Controller
         // create DB entry
         $comment = new Comment;
         $comment->body = $request->body;
-       	$comment->org()->associate($org_id);
+       	$comment->discussion()->associate($discussion_id);
        	$comment->user()->associate($user);
         $comment->parent()->associate($parent_id);
        	$comment->save();
@@ -77,4 +76,6 @@ class CommentsController extends Controller
 
         return back();
     }
+
+
 }

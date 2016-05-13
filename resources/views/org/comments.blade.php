@@ -1,5 +1,6 @@
 <div class="row comment-box-wrapper">
-	@include('forms.comment')
+
+	@include('org.forms.comment')
 
 	@unless(Auth::check())
 		<div class="comment-overlay center">	
@@ -9,12 +10,17 @@
 			</div>
 	  	</div>
 	@endunless
+
 </div>
 
 @unless($comments == null)
+
 	@foreach($comments as $comment)
+
 		<div class="row">
+
 			<div class="col s12 m{{ 12 - ($comment->getLevel() >= 3 ? 3 : $comment->getLevel()) }} offset-m{{ ($comment->getLevel() >= 3 ? 3 : $comment->getLevel()) }}">
+
 				<div class="comment-header">
 					<span class="author-name">{{ $comment->user->name }} | </span>
 					<span class="author-date" id="time-{{ $comment->id }}">{{ $comment->created_at.' UTC' }}</span>@if($comment->created_at != $comment->updated_at)*@endif
@@ -25,14 +31,17 @@
 						@endif
 					</div>
 				</div>
+
 				<div class="comment-body" id="comment-body-{{ $comment->id }}">
+
 					<div class="comment-text">
 						{{ $comment->body }}
 					</div>
+
 					<div class="comment-actions">
 						@can('update-comment', $comment)
 							@if($comment->body != "(Comment Deleted)")
-								<a id="edit-{{ $comment->id }}" href="#!">Edit</a> | <a href="/comment/{{ $comment->id }}/delete" class="red-text">Delete</a>
+								<a id="reply-{{ $comment->id }}" href="#!">Reply</a> | <a id="edit-{{ $comment->id }}" href="#!">Edit</a> | <a href="/comment/{{ $comment->id }}/delete" class="red-text">Delete</a>
 							@endif
 						@else 
 							@if(Auth::check())
@@ -48,36 +57,35 @@
 					@can('update-comment', $comment)
 						<div id="edit-form-{{ $comment->id }}" style="display:none;">
 							<div>
-								@include('forms.comment-edit', ['parent_id' => $comment->id])
-							</div>
-						</div>
-					@else
-						<div id="reply-form-{{ $comment->id }}" style="display:none;">
-							<div class="col s11 offset-s1">
-								@include('forms.comment-reply', ['parent_id' => $comment->id])
+								@include('org.forms.comment-edit', ['parent_id' => $comment->id])
 							</div>
 						</div>
 					@endcan
+					<div id="reply-form-{{ $comment->id }}" style="display:none;">
+						<div class="col s11 offset-s1">
+							@include('org.forms.comment-reply', ['parent_id' => $comment->id])
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
+
+			</div> <!-- END col -->
+
+		</div> <!-- END row -->
 
 		<script type="text/javascript">
 			$(document).ready(function(){
 			    $("#edit-{{ $comment->id }}").click(function(){
 			        $("#edit-form-{{ $comment->id }}").slideToggle();
 			        $("#comment-body-{{ $comment->id }}").slideToggle();
-			        $("#edit-{{ $comment->id }}").toggleClass("advisian-gold-text");
 			    });
 			    $("#cancel-edit-{{ $comment->id }}").click(function(){
 			        $("#edit-form-{{ $comment->id }}").slideToggle();
 			        $("#comment-body-{{ $comment->id }}").slideToggle();
-			        $("#edit-{{ $comment->id }}").toggleClass("advisian-gold-text");
 			    });
 			    $("#reply-{{ $comment->id }}").click(function(){
 			        $("#reply-form-{{ $comment->id }}").slideToggle();
 			        $("#textarea-{{ $comment->id }}").focus();
-			        $("#reply-{{ $comment->id }}").toggleClass("advisian-gold-text");
+			        $("#reply-{{ $comment->id }}").toggleClass("grey-text");
 			    });
 			});
 
@@ -95,52 +103,5 @@
 		</script>
 
 	@endforeach
+
 @endunless
-
-<!-- Form Validation -->
-<script type="text/javascript">
-	$("#comment-form").validate({
-		rules: {
-			body: "required",
-		},
-        errorElement : 'div',
-        errorPlacement: function(error, element) {
-          var placement = $(element).data('error');
-          if (placement) {
-            $(placement).append(error)
-          } else {
-            error.insertAfter(element);
-          }
-        }
-	});
-
-	$("#comment-edit-form").validate({
-		rules: {
-			body: "required",
-		},
-        errorElement : 'div',
-        errorPlacement: function(error, element) {
-          var placement = $(element).data('error');
-          if (placement) {
-            $(placement).append(error)
-          } else {
-            error.insertAfter(element);
-          }
-        }
-	});
-
-	$("#comment-reply-form").validate({
-		rules: {
-			body: "required",
-		},
-        errorElement : 'div',
-        errorPlacement: function(error, element) {
-          var placement = $(element).data('error');
-          if (placement) {
-            $(placement).append(error)
-          } else {
-            error.insertAfter(element);
-          }
-        }
-	});
-</script>

@@ -4,7 +4,7 @@
             <ul class="hide-on-med-and-down">
                 <li {{ Request::is('/') ? 'class=active' : null }}><a href="/">Home</a></li>
                 <li {{ Request::is('orgs') ? 'class=active' : null }}><a href="/orgs">Organisations</a></li>
-                <li {{ Request::is('orgs/create') ? 'class=active' : null }}><a href="/orgs/create">Add</a></li>
+                <li {{ Request::is('discussions') ? 'class=active' : null }}><a href="/discussions">Discussions</a></li>
             </ul>
             <a href="/" class="brand-logo center">Tech Talk</a>
             <ul class="right hide-on-med-and-down">

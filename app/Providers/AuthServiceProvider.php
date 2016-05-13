@@ -27,7 +27,10 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies($gate);
         
         $gate->before(function ($user, $ability) {
-            // overwrite all gates
+            if ($user->isSuperAdmin()) 
+            {
+                return true;
+            }
         });
 
         $gate->define('update-org', function ($user, $org) {

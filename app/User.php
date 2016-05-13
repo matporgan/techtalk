@@ -35,6 +35,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the discussions associated with the given user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function discussions()
+    {
+        return $this->hasMany('App\Discussion');
+    }
+
+    /**
      * Get the comments associated with the given user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -52,5 +62,15 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return $this->role == 'admin';
+    }
+
+    /**
+     * Check to see if user is a super admin.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
+    public function isSuperAdmin()
+    {
+        return $this->role == 'superadmin';
     }
 }

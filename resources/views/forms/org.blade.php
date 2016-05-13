@@ -2,23 +2,23 @@
 	<h4 class="center">General Information</h4><br />
 
 	<div class="input-field">
-		{!! Form::text('name', null) !!}
 		{!! Form::label('name', 'Name*', ['id' => 'name', 'class' => 'active']) !!}
+		{!! Form::text('name', null, ['autofocus']) !!}
 	</div>
 
 	<div class="input-field">
-		{!! Form::text('website', null) !!}
 		{!! Form::label('website', 'Website*', ['class' => 'active']) !!}
+		{!! Form::text('website', null) !!}
 	</div>
 	
 	<div class="input-field">
-		{!! Form::textarea('short_desc', null, ['class' => 'materialize-textarea', 'length' => '160']) !!}
 		{!! Form::label('short_desc', 'Short Description*', ['class' => 'active']) !!}
+		{!! Form::textarea('short_desc', null, ['class' => 'materialize-textarea', 'length' => '160']) !!}
 	</div>
 
 	<div class="input-field">
-		{!! Form::textarea('long_desc', null, ['class' => 'materialize-textarea']) !!}
 		{!! Form::label('long_desc', 'Long Description', ['class' => 'active']) !!}
+		{!! Form::textarea('long_desc', null, ['class' => 'materialize-textarea']) !!}
 	</div>
 
 	<div class="input-field">

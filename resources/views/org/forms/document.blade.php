@@ -1,7 +1,7 @@
-@include('forms.js-lightbox')
-
 <div id="document-lightbox" class="lightbox" style="display:none;">
+
 	{!! Form::open(['method' => 'POST', 'action' => ['DocumentsController@store', $org->id], 'files' => true, 'id' => 'document-form']) !!}
+
 		<h2 class="center">Add Document</h2><br />
 
 		<div class="file-field input-field">
@@ -26,28 +26,11 @@
 		</div><br />
 		
 		<div class="row center">
-			<button class="btn-large waves-effect waves-light" type="submit" name="action">
-			    Add Document<i class="material-icons left">add</i>
+			<button class="btn waves-effect waves-light" type="submit" name="action">
+			    Add Document
 		  	</button>
 		</div>
-	{!! Form::close() !!}
-</div>
 
-<script type="text/javascript">
-	$("#document-form").validate({
-		rules: {
-			file: "required",
-			name: "required",
-			description: "required",
-		},
-        errorElement : 'div',
-        errorPlacement: function(error, element) {
-          var placement = $(element).data('error');
-          if (placement) {
-            $(placement).append(error)
-          } else {
-            error.insertAfter(element);
-          }
-        }
-	});
-</script>
+	{!! Form::close() !!}
+
+</div>

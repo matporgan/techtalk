@@ -41,13 +41,13 @@ class Comment extends Model
     }
 
     /**
-     * Get the org associated with the given comment.
+     * Get the discussion associated with the given comment.
      *
      * @return \Illuminate\Database\Eloquent\Relations\belongsTo
      */
-    public function org()
+    public function discussion()
     {
-    	return $this->belongsTo('App\Org');
+    	return $this->belongsTo('App\Discussion');
     }
 
     /**
@@ -68,15 +68,5 @@ class Comment extends Model
     public function parent()
     {
         return $this->belongsTo('App\Comment');
-    }
-
-    /**
-     * Get the children associated with the given comment.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\hasMany
-     */
-    public function children()
-    {
-        return $this->hasMany('App\Comment');
     }
 }

@@ -1,7 +1,7 @@
-{!! Form::open(['method' => 'POST', 'action' => ['CommentsController@store', $org->id, 0], 'class' => 'col s12', 'id' => 'comment-form']) !!}
+{!! Form::open(['method' => 'POST', 'action' => ['CommentsController@store', $discussion->id, 0], 'class' => 'col s12', 'id' => 'comment-form']) !!}
     <div class="input-field">
 		{!! Form::textarea('body', null, ['class' => 'materialize-textarea']) !!}
-		{!! Form::label('body', 'Add Comment', ['class' => 'active']) !!}
+		{!! Form::label('body', $comment_prompt, ['class' => 'active']) !!}
 	</div>
 
 	<div class="row right">

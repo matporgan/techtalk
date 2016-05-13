@@ -1,6 +1,10 @@
+@charset "UTF-8";
+
+@import "components/color";
+@import "components/variables";
+
 /* Fonts
 -------------------------------------------------- */
-
 @font-face {
     font-family: "Source Sans Pro";
     src: url("/fonts/source-sans-pro/SourceSansPro-Regular.ttf") format("truetype");
@@ -28,8 +32,13 @@ html {
 .btn-group a, button {
 	margin-right: 10px; 
 }
+
 .btn-group a, button :last-child {
 	margin-right: 0; 
+}
+
+.btn-h1 {
+	//display: inline-block;
 }
 
 /* Sticky footer
@@ -105,6 +114,11 @@ main {
 	color: #fff; 
 }
 
+.org-grid {
+	border-top: 1px solid #d0d0d0;
+	border-bottom: 1px solid #d0d0d0;
+}
+
 .grid {
 	margin: 0 auto;
 }
@@ -166,24 +180,45 @@ main {
 #cur_logo {
 	margin-bottom: 15px;
 }
+
 #cur_logo a {
 	height: 3rem;
 	line-height: 3rem;
 	margin: 1rem 15px 0 0;
 }
+
 #cur_logo img {
 	height: 3rem;
 }
+
 .input-field div.error, .input-field div.custom-error {
 	position: relative;
 	top: -1rem;
 	font-size: 0.8rem;
 	color: #ef5350;
 }
+
 .file-field div.error {
 	left: -2rem;
 	text-transform: initial;
 	letter-spacing: 0;
+}
+
+/* Discussion Board Styles
+-------------------------------------------------- */
+.discussion-board td span {
+	color: color('advisian-gold', 'base');
+}
+
+.discussion-board td:last-child {
+	color: color('advisian-gold', 'base');
+	width: 70px;
+}
+
+.discussion-board a {
+	font-size: $h2-fontsize;
+	line-height: 110%;
+	margin: ($h2-fontsize / 2) 0 ($h2-fontsize / 2.5) 0;
 }
 
 /* Materialize Tags Style
@@ -219,14 +254,10 @@ main {
 .materialize-tags .tt-menu .tt-suggestion:hover {
     background-color: #eee;
 }
- 
-#page {
-    display: none;
-}
 
 #loading {
     display: block;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     z-index: 100;

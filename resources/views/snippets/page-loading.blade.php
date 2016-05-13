@@ -31,9 +31,7 @@
 	}
 	
 	onReady(function () {
-	    show('page', true);
-	    show('loading', false);
-	    
+	    $('#loading').fadeToggle();
 	    // reload masonry if present
 	    grid.masonry('layout');
 	});

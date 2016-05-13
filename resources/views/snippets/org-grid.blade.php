@@ -1,4 +1,4 @@
-<div class="row grid">
+<div class="grid">
 	<div class="grid-sizer">
 		<div class="grid-gutter-sizer">
 			@foreach ($orgs as $org)
