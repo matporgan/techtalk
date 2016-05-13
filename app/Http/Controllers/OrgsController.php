@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Auth;
 use Gate;
+use Session;
 
 use App\Org;
 use App\User;
@@ -18,15 +19,20 @@ use App\Discussion;
 class OrgsController extends Controller
 {
     /**
+     * How many orgs will fit in one view
+     */
+    protected $pagination = 16;
+    
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $orgs = Org::orderBy('id', 'desc')->get();
+        $orgs = Org::orderBy('id', 'desc')->paginate($this->pagination);
 
-        return view('pages.orgs', compact('orgs'));
+        return view('orgs.index', compact('orgs'));
     }
 
     /**
@@ -41,7 +47,7 @@ class OrgsController extends Controller
         // redirect if not logged in
         if (! Auth::check()) return redirect('register');
 
-        return view('pages.org-create', compact('categories'));
+        return view('orgs.create', compact('categories'));
     }
 
     /**
@@ -72,7 +78,7 @@ class OrgsController extends Controller
         $this->moveLogo($request, $org);
 
         // flash and redirect
-        $request->session()->flash('success', 'Organisation successfully created!');
+        Session::flash('success', 'Successfully created!');
         return redirect("/orgs/{$org->id}");
     }
 
@@ -88,8 +94,8 @@ class OrgsController extends Controller
         $users = User::lists('email')->all();
         $discussion = $org->discussion;
         $comments = getOrderedComments($discussion);
-
-        return view('pages.org', compact('org', 'users', 'discussion', 'comments'));
+        
+        return view('orgs.show', compact('org', 'users', 'discussion', 'comments'));
     }
 
     /**
@@ -108,7 +114,7 @@ class OrgsController extends Controller
         $categories = $this->getCategories();
         $selections = $this->getSelections($org);
 
-        return view('pages.org-edit', compact('org', 'categories', 'selections'));
+        return view('orgs.edit', compact('org', 'categories', 'selections'));
     }
 
     /**

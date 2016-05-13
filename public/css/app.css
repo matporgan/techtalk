@@ -8258,12 +8258,16 @@ main {
 .dropdown-content.select-dropdown {
   top: 3.1rem !important; }
 
+#toast-container {
+  top: 15%; }
+
 .toast-success {
-  background-color: #66bb6a;
-  color: #fff; }
+  background: #d50965;
+  color: #fff;
+  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15); }
 
 .toast-failure {
-  background-color: #ef5350;
+  background: #00ade6;
   color: #fff; }
 
 .org-grid {
@@ -8276,10 +8280,10 @@ main {
 @media only screen and (min-width: 992px) {
   .grid-sizer,
   .grid-item {
-    width: 24%;
+    width: 23.5%;
     margin: 0 0 12px 0; }
   .grid-gutter-sizer {
-    width: 4%; } }
+    width: 2%; } }
 
 @media only screen and (max-width: 992px) {
   .grid-sizer,
@@ -8287,7 +8291,7 @@ main {
     width: 32%;
     margin: 0 0 12px 0; }
   .grid-gutter-sizer {
-    width: 4%; } }
+    width: 2%; } }
 
 @media only screen and (max-width: 600px) {
   .grid-sizer,
@@ -8311,6 +8315,9 @@ main {
 
 .chip {
   margin-top: 5px; }
+
+.pagination li {
+  cursor: default; }
 
 /* Form Styles
 -------------------------------------------------- */

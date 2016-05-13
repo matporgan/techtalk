@@ -81,7 +81,7 @@ class DiscussionsController extends Controller
             krsort($discussions);
         }
 
-        return view('pages.discussions', compact('discussions'));
+        return view('discussions.index', compact('discussions'));
     }
 
     /**
@@ -96,6 +96,6 @@ class DiscussionsController extends Controller
 
         $comments = getOrderedComments($discussion);
 
-        return view('pages.discussion', compact('discussion', 'comments'));
+        return view('discussions.show', compact('discussion', 'comments'));
     }
 }

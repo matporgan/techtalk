@@ -1,6 +1,6 @@
 <div class="row comment-box-wrapper">
 
-	@include('org.forms.comment')
+	@include('comments.forms.create')
 
 	@unless(Auth::check())
 		<div class="comment-overlay center">	
@@ -57,13 +57,13 @@
 					@can('update-comment', $comment)
 						<div id="edit-form-{{ $comment->id }}" style="display:none;">
 							<div>
-								@include('org.forms.comment-edit', ['parent_id' => $comment->id])
+								@include('comment.forms.edit', ['parent_id' => $comment->id])
 							</div>
 						</div>
 					@endcan
 					<div id="reply-form-{{ $comment->id }}" style="display:none;">
 						<div class="col s11 offset-s1">
-							@include('org.forms.comment-reply', ['parent_id' => $comment->id])
+							@include('comment.forms.reply', ['parent_id' => $comment->id])
 						</div>
 					</div>
 				</div>

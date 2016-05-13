@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('content')
 	
@@ -6,7 +6,7 @@
 
 <div class="row">
 	{!! Form::model($org, ['method' => 'PATCH', 'action' => ['OrgsController@update', $org->id], 'files' => true, 'class' => 'col s12 m8 l6 offset-m2 offset-l3']) !!}
-	    @include('forms.org', ['type' => 'edit', 'submitText' => 'Update Organisation'])
+	    @include('orgs.forms.create-edit', ['type' => 'edit', 'submitText' => 'Update Organisation'])
 	{!! Form::close() !!}
 </div>
 

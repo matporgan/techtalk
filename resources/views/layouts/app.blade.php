@@ -27,6 +27,7 @@
 <body>
 	
 	@include('snippets.page-loading')
+	
 	@include('snippets.flash')
 			
 	@include('layouts.header')
@@ -38,6 +39,8 @@
 	</main>
 	
 	@include('layouts.footer')
+	
+	@include('layouts._js')
 
 </div>
 

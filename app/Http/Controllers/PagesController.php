@@ -34,7 +34,7 @@ class PagesController extends Controller
         
         $orgs = Org::whereIn('id', $org_ids)->get();
         
-        return view('pages.category', compact('category', 'type', 'orgs'));
+        return view('orgs.category', compact('category', 'type', 'orgs'));
     }
     
     
@@ -59,7 +59,7 @@ class PagesController extends Controller
         
         $orgs = Org::whereIn('id', $org_ids)->get();
         
-        return view('pages.category', compact('category', 'type', 'orgs'));
+        return view('orgs.category', compact('category', 'type', 'orgs'));
     }
     
     /**
@@ -78,7 +78,7 @@ class PagesController extends Controller
 
         foreach($domains as $domain)
         {
-            foreach($category->orgs as $org)
+            foreach($domain->orgs as $org)
             {
                 $org_ids[] = $org->pivot->org_id;
             }  
@@ -88,7 +88,7 @@ class PagesController extends Controller
 
         $orgs = Org::whereIn('id', $org_ids)->get();
         
-        return view('pages.category', compact('category', 'type', 'orgs'));
+        return view('orgs.category', compact('category', 'type', 'orgs'));
     }
     
     /**
@@ -111,6 +111,6 @@ class PagesController extends Controller
 
         $orgs = Org::whereIn('id', $org_ids)->get();
         
-        return view('pages.category', compact('category', 'type', 'orgs'));
+        return view('orgs.category', compact('category', 'type', 'orgs'));
     }
 }

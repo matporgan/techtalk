@@ -104,13 +104,19 @@ main {
 	top: 3.1rem !important;
 }
 
+#toast-container {
+	top: 15%;
+	//right: 15%;
+}
+
 .toast-success {
-	background-color: #66bb6a;
-	color: #fff; 
+	background: #d50965;
+	color: #fff;
+	box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 }
 
 .toast-failure {
-	background-color: #ef5350;
+	background: color('advisian-blue', 'base');
 	color: #fff; 
 }
 
@@ -126,12 +132,12 @@ main {
 @media only screen and (min-width: 992px) {
 	.grid-sizer,
 	.grid-item {
-		width: 24%;
+		width: 23.5%;
 		margin: 0 0 12px 0;
 	}
 
 	.grid-gutter-sizer {
-		width: 4%;
+		width: 2%; 
 	}
 }
 @media only screen and (max-width: 992px) {
@@ -142,7 +148,7 @@ main {
 	}
 
 	.grid-gutter-sizer {
-		width: 4%;
+		width: 2%;
 	}
 }
 @media only screen and (max-width: 600px) {
@@ -173,6 +179,10 @@ main {
 
 .chip {
 	margin-top: 5px;
+}
+
+.pagination li {
+	cursor: default;
 }
 
 /* Form Styles

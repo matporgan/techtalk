@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('content')
 
@@ -28,11 +28,11 @@
 			</div>
 		</div>
 
-		<div class="row">
-			<table class="discussion-board bordered">
-				<thead><tr></tr></thead>
-				<tbody>
-					@if(! is_null($discussions))
+		<div class="row center">
+			@if(! is_null($discussions))
+				<table class="discussion-board bordered">
+					<thead><tr></tr></thead>
+					<tbody>
 						@foreach($discussions as $discussion)
 							<tr><td>
 								<div>
@@ -83,11 +83,11 @@
 								commentTime.text(prettyDate);
 							</script>
 						@endforeach
-					@else
-						<tr><td><h2>No Discussions...</h2></td></tr>
-					@endif
-				</tbody>
-			</table>
+					</tbody>
+				</table>
+			@else
+				<h2>No Discussions...</h2>
+			@endif
 		</div>
 
 	</div>

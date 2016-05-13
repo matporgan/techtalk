@@ -1,6 +1,12 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('content')
+
+@if($discussion->org_id != null)
+	<script type="text/javascript">
+	    window.location = "/orgs/{{ $discussion->org_id }}#discussion";//here double curly bracket
+	</script>
+@endif
 
 <div class="row">
 	<h1 class="center">{{ $discussion->type }}</h1>
@@ -23,7 +29,7 @@
 			</div>
 		</div>
 
-		@include('org.comments', ['comment_prompt' => 'Reply to '.$discussion->user->name])
+		@include('comments._index', ['comment_prompt' => 'Reply to '.$discussion->user->name])
 
 	</div>
 
