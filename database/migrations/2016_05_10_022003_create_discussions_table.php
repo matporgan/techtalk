@@ -17,6 +17,7 @@ class CreateDiscussionsTable extends Migration
             $table->string('name');
             $table->string('type');
             $table->text('prompt');
+            $table->string('updated')->nullable()->default(null);
             $table->integer('user_id')->unsigned()->nullable()->default(null);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('org_id')->unsigned()->nullable()->default(null);

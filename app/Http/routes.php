@@ -38,6 +38,8 @@ Route::get('technology/{technology_id}', 'PagesController@technology');
 Route::get('industry/{industry_id}', 'PagesController@industry');
 Route::get('domain/{domain_id}', 'PagesController@domain');
 Route::get('tag/{tag_id}', 'PagesController@tag');
+Route::get('user/{user_id}/orgs', 'PagesController@userOrgs');
+Route::get('user/{user_id}/discussions', 'PagesController@userDiscussions');
 
 Route::get('discussions/create', 'DiscussionsController@create');
 Route::post('discussions', 'DiscussionsController@store');

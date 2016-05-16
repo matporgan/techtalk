@@ -1,5 +1,5 @@
 <div class="row">
-	<h4 class="center">General Information</h4><br />
+	<h2 class="center">General Information</h2><br />
 
 	<div class="input-field">
 		{!! Form::label('name', 'Name*', ['id' => 'name', 'class' => 'active']) !!}
@@ -59,7 +59,7 @@
 </div>
 
 <div class="row">
-	<h4 class="center">Categorization</h4><br />
+	<h2 class="center">Categorization</h2><br />
 
 	<div class="input-field">
 		<select name="technology_list[]" id="technology_list" multiple>
@@ -97,20 +97,22 @@
 	@endfor
 </div>
 
-<div class="row">
-	<h4 class="center">Restricted Information</h4>
-	<p class="center">(only admin users will see this information)</p><br />
+@if(Auth::user()->isAdmin())
+	<div class="row">
+		<h2 class="center">Restricted Information</h2>
+		<p class="center">(only admin users will see this information)</p><br />
 
-	<div class="input-field col s12 m6">
-		{!! Form::select('partner_status', [0 => 'No Partnership',1 => 'In Development',2 => 'Active Partner',3 => 'Past Partner'], null) !!}
-		{!! Form::label('partner_status', 'Partner Status*') !!}<br />
-	</div>
+		<div class="input-field col s12 m6">
+			{!! Form::select('partner_status', [0=>'', 1=>'No Partnership', 2=>'In Development', 3=>'Active Partner', 4=>'Past Partner'], null) !!}
+			{!! Form::label('partner_status', 'Partner Status*') !!}<br />
+		</div>
 
-	<div class="input-field col s12 m6">
-		{!! Form::select('in_talks', [0 => 'No', 1 => 'Yes'], null) !!}
-		{!! Form::label('in_talks', 'In Talks*') !!}<br />
+		<div class="input-field col s12 m6">
+			{!! Form::select('in_talks', [0=>'', 1=>'No', 2=>'Yes'], null) !!}
+			{!! Form::label('in_talks', 'In Talks*') !!}<br />
+		</div>
 	</div>
-</div>
+@endif
 
 <div class="row center">
 	<button class="btn-large waves-effect waves-light" type="submit" name="action">

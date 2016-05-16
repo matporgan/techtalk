@@ -57,13 +57,13 @@
 					@can('update-comment', $comment)
 						<div id="edit-form-{{ $comment->id }}" style="display:none;">
 							<div>
-								@include('comment.forms.edit', ['parent_id' => $comment->id])
+								@include('comments.forms.edit', ['parent_id' => $comment->id])
 							</div>
 						</div>
 					@endcan
 					<div id="reply-form-{{ $comment->id }}" style="display:none;">
 						<div class="col s11 offset-s1">
-							@include('comment.forms.reply', ['parent_id' => $comment->id])
+							@include('comments.forms.reply', ['parent_id' => $comment->id])
 						</div>
 					</div>
 				</div>
@@ -92,11 +92,14 @@
 			var commentTime = $('#time-{{ $comment->id }}');
 
 			// convert to local time string
-			var dateObject = new Date(commentTime.text())
-			var localeDate = dateObject.toLocaleString(); 
+			var localTime = moment.utc(commentTime.text()).local();
 
 			// make pretty
-			var prettyDate = moment(localeDate).fromNow();
+			var prettyDate = localTime.fromNow();
+
+			console.log(commentTime);
+			console.log(localTime);
+			console.log(prettyDate);
 
 			// replace time text
 			commentTime.text(prettyDate);

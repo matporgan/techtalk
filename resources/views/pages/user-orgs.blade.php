@@ -7,12 +7,10 @@
 	<div class="col s12">
 
 		<div class="row header-btn-wrapper">
-			<h1 class="center">Organisations</h1>
-			<div class="header-btn">
-				<a class="btn-large right waves-effect waves-light" href="orgs/create">
-					<i class="material-icons left">add</i>Add
-			  	</a>
-			</div>
+			<h1 class="center">My Organisations</h1>
+			<a class="btn-large right waves-effect waves-light" href="orgs/create">
+				<i class="material-icons left">add</i>Add
+		  	</a>
 		</div>
 
 		<div class="row">

@@ -31,6 +31,22 @@ $advisian-gold: (
   "lighten-1":  #b6a687,
 );
 
+$advisian-pink: (
+  "base":       #d50965,
+  "lighten-4":  #f6cfe0,
+  "lighten-3":  #ec9ec1,
+  "lighten-2":  #e46da3,
+  "lighten-1":  #db3e84,
+);
+
+$advisian-royal-blue: (
+  "base":       #005f83,
+  "lighten-4":  #cddfe6,
+  "lighten-3":  #9abfcc,
+  "lighten-2":  #689fb4,
+  "lighten-1":  #0b6081,
+);
+
 $materialize-red: (
   "base":       #e51c23,
   "lighten-5":  #fdeaeb,
@@ -365,6 +381,8 @@ $colors: (
   "advisian-blue": $advisian-blue,
   "advisian-charcoal": $advisian-charcoal,
   "advisian-gold": $advisian-gold,
+  "advisian-pink": $advisian-pink,
+  "advisian-royal-blue": $advisian-royal-blue,
   "materialize-red": $materialize-red,
   "red": $red,
   "pink": $pink,

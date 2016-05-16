@@ -2,10 +2,11 @@
 	<div class="row">
 		<div class="col s4 offset-s4 center">
 			<div class="logo">
-				This will be a logo.
+				<img src="/img/Loading.png" alt="Loading" />
 			</div>
+
 			<div class="preloader-wrapper big active">
-				<div class="spinner-layer spinner-blue-only">
+				<div class="spinner-layer">
 					<div class="circle-clipper left">
 						<div class="circle"></div>
 					</div><div class="gap-patch">

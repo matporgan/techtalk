@@ -37,6 +37,10 @@ class CommentsController extends Controller
         $comment->parent()->associate($parent_id);
        	$comment->save();
 
+        // update timestamp
+        $comment->discussion->updated = time();
+        $comment->discussion->save();
+
         return back();
     }
 

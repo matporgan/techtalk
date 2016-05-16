@@ -7,7 +7,7 @@
 	<div class="col s12">
 
 		<div class="row header-btn-wrapper">
-			<h1 class="center">Discussions</h1>
+			<h1 class="center">My Discussions</h1>
 			<a class="btn-large right waves-effect waves-light" href="discussions/create">
 				<i class="material-icons left">add</i>Add
 		  	</a>

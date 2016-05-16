@@ -7,7 +7,7 @@
 	<div class="col s12 m8 l9">
 		
 		@include('orgs._description')
-
+		
 		@include('orgs._attachments')
 
 		<div class="card-panel" style="padding: 10px 40px 5px 40px;">

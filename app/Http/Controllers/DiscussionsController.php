@@ -6,12 +6,30 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use DB;
 use Auth;
 
 use App\Discussion;
 
 class DiscussionsController extends Controller
+
 {
+	/**
+     * Display a listing of the discussions.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        // sort discussions by last update
+        $discussions = Discussion::with('comments')
+            ->where('updated', '!=', 'NULL')
+            ->orderBy('updated', 'desc')
+            ->paginate(15);
+
+        return view('discussions.index', compact('discussions'));
+    }
+
     /**
      * Show the form for creating a new discussion.
      *
@@ -43,45 +61,10 @@ class DiscussionsController extends Controller
 
         $discussion = Discussion::create($request->all());
         $discussion->user()->associate(Auth::user());
+        $discussion->updated = time(); // change update time
         $discussion->save();
 
         return redirect("/discussions/{$discussion->id}");
-    }
-
-	/**
-     * Display a listing of the discussions.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $all_discussions = Discussion::with('comments')->get();
-
-        
-        // get every discussion that has comments
-        $discussions = null;
-        foreach($all_discussions as $discussion)
-        {
-            if($discussion->comments->first() != null)
-            {
-                $latest_comment = $discussion->comments()->orderBy('id', 'desc')->first();
-                $timestamp = $latest_comment->created_at->timestamp;
-                $discussions[$timestamp] = $discussion;
-            }     
-            elseif($discussion->type != 'Organisation')
-            {
-                $timestamp = $discussion->created_at->timestamp;
-                $discussions[$timestamp] = $discussion;
-            }            
-        }
-
-        if(! is_null($discussions))
-        {
-            // reverse array so newest are first
-            krsort($discussions);
-        }
-
-        return view('discussions.index', compact('discussions'));
     }
 
     /**

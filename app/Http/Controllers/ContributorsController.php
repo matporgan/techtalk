@@ -8,6 +8,7 @@ use App\Http\Requests;
 
 use Gate;
 use Response;
+use Session;
 
 use App\Org;
 use App\User;
@@ -40,7 +41,7 @@ class ContributorsController extends Controller
         }
         else
         {
-            $request->session()->flash('failure', 'That email does not match any users in our records.');
+            Session::flash('failure', 'ERROR: That email does not match any users in our records.');
         }
 
     	return back();

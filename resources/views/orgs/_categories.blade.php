@@ -1,11 +1,4 @@
-<div class="row btn-group">
-		@can('update-org', $org)
-			<a href="{{ $org->id }}/edit" class="btn green"><i class="material-icons">edit</i></a>
-			<a href="{{ $org->id }}/delete" class="btn red"><i class="material-icons">close</i></a>
-		@endcan
-</div>
-
-<div class="row">
+<div class="row" style="margin-top:20px;">
 	<img src="{{ $org->logo }}" alt="{{ $org->name . " - Logo" }}" class="logo" />
 </div>
 

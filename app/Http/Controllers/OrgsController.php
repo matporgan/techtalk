@@ -19,18 +19,13 @@ use App\Discussion;
 class OrgsController extends Controller
 {
     /**
-     * How many orgs will fit in one view
-     */
-    protected $pagination = 16;
-    
-    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $orgs = Org::orderBy('id', 'desc')->paginate($this->pagination);
+        $orgs = Org::orderBy('id', 'desc')->paginate(12);
 
         return view('orgs.index', compact('orgs'));
     }
@@ -91,7 +86,7 @@ class OrgsController extends Controller
     public function show($id)
     {
         $org = Org::with('discussion')->findOrFail($id);
-        $users = User::lists('email')->all();
+        //$users = User::lists('email')->all();
         $discussion = $org->discussion;
         $comments = getOrderedComments($discussion);
         

@@ -6,14 +6,22 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use Auth;
+
 use App\Org;
 use App\Technology;
 use App\Industry;
 use App\Domain;
 use App\Tag;
+use App\User;
 
 class PagesController extends Controller
 {
+    /**
+     * Number of results per page
+     */
+    protected $paginate = 12;
+
     /**
      * Display the specified technology.
      *
@@ -24,17 +32,9 @@ class PagesController extends Controller
     {
         $category = Technology::findOrFail($id);
         $type = 'Technology';
+        $orgs = $category->orgs()->paginate($this->paginate);
         
-        foreach($category->orgs as $org)
-        {
-            $org_ids[] = $org->pivot->org_id;
-        }
-        // return 404 if no ids found
-        if (empty($org_ids)) return abort(404);
-        
-        $orgs = Org::whereIn('id', $org_ids)->get();
-        
-        return view('orgs.category', compact('category', 'type', 'orgs'));
+        return view('pages.category', compact('category', 'type', 'orgs'));
     }
     
     
@@ -49,17 +49,9 @@ class PagesController extends Controller
     {
         $category = Industry::findOrFail($id);
         $type = 'Industry';
+        $orgs = $category->orgs()->paginate($this->paginate);
         
-        foreach($category->orgs as $org)
-        {
-            $org_ids[] = $org->pivot->org_id;
-        }
-        // return 404 if no ids found
-        if (empty($org_ids)) return abort(404);
-        
-        $orgs = Org::whereIn('id', $org_ids)->get();
-        
-        return view('orgs.category', compact('category', 'type', 'orgs'));
+        return view('pages.category', compact('category', 'type', 'orgs'));
     }
     
     /**
@@ -86,9 +78,9 @@ class PagesController extends Controller
         // return 404 if no ids found
         if (empty($org_ids)) return abort(404);
 
-        $orgs = Org::whereIn('id', $org_ids)->get();
+        $orgs = Org::whereIn('id', $org_ids)->paginate($this->paginate);
         
-        return view('orgs.category', compact('category', 'type', 'orgs'));
+        return view('pages.category', compact('category', 'type', 'orgs'));
     }
     
     /**
@@ -101,16 +93,40 @@ class PagesController extends Controller
     {
         $category = Tag::findOrFail($id);
         $type = 'Tag';
+        $orgs = $category->orgs()->paginate($this->paginate);
         
-        foreach($category->orgs as $org)
-        {
-            $org_ids[] = $org->pivot->org_id;
-        }
-        // return 404 if no ids found
-        if (empty($org_ids)) return abort(404);
+        return view('pages.category', compact('category', 'type', 'orgs'));
+    }
+    
+    /**
+     * Display orgs associated with a given user.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function userOrgs($id)
+    {
+        if(Auth::user()->id != $id) abort(403);
 
-        $orgs = Org::whereIn('id', $org_ids)->get();
+        $user = User::findOrFail($id);
+        $orgs = $user->orgs()->paginate($this->paginate);
         
-        return view('orgs.category', compact('category', 'type', 'orgs'));
+        return view('pages.user-orgs', compact('orgs'));
+    }
+
+    /**
+     * Display discussions associated with a given user.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function userDiscussions($id)
+    {
+        if(Auth::user()->id != $id) abort(403);
+
+        $user = User::findOrFail($id);
+        $discussions = $user->discussions()->paginate($this->paginate);
+        
+        return view('pages.user-discussions', compact('discussions'));
     }
 }

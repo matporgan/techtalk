@@ -33,24 +33,48 @@ html {
 	margin-right: 10px; 
 }
 
-.btn-group a, button :last-child {
-	margin-right: 0; 
+// .btn-group a, button :last-child {
+// 	margin-right: 0; 
+// }
+
+.header-btn-wrapper {
+	position: relative;
 }
 
-.btn-h1 {
-	//display: inline-block;
+.header-btn-wrapper .header-btn {
+	position: absolute;
+	top: 10px; 
+	right: 0;
 }
 
-/* Sticky footer
+/* Footer
 -------------------------------------------------- */
 body {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
 	display: flex;
 	min-height: 100vh;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
 	flex-direction: column;
-}
+};
 
 main {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1 0 auto;
+	-ms-flex: 1 0 auto;
 	flex: 1 0 auto;
+}
+
+.page-footer img {
+	height: 60px;
+}
+
+footer.page-footer .footer-copyright {
+	background: color('advisian-blue', 'base'); 
 }
 
 /* Comment Styles
@@ -66,7 +90,7 @@ main {
 .comment-overlay .btn-group {
 	z-index: 11;
 	position: relative;
-	top: -60%;
+	top: -65%;
 }
 
 .comment-header {
@@ -110,14 +134,15 @@ main {
 }
 
 .toast-success {
-	background: #d50965;
+	background: color('advisian-blue', 'base'); 
 	color: #fff;
 	box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 }
 
 .toast-failure {
-	background: color('advisian-blue', 'base');
+	background: color('advisian-pink', 'base');
 	color: #fff; 
+	box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 }
 
 .org-grid {
@@ -282,8 +307,7 @@ main {
 
 #loading .logo {
 	margin: 0 auto 20px auto;
-	width: 150px;
-	height: 150px;
-	background: #eee;
+	width: auto;
+	height: 80px;
 }
 
