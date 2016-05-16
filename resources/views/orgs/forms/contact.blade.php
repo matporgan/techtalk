@@ -5,12 +5,12 @@
 		<h2 class="center">Add Contact</h2><br />
 
 		<div class="input-field">
-			{!! Form::label('name', 'Name:') !!}
+			{!! Form::label('name', 'Name:', ['class' => 'active']) !!}
 			{!! Form::text('name', null) !!}
 		</div>
 		
 		<div class="input-field">
-			{!! Form::label('email', 'Email:') !!}
+			{!! Form::label('email', 'Email:', ['class' => 'active']) !!}
 			{!! Form::text('email', null) !!}
 		</div><br />
 		

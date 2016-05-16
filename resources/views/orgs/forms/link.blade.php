@@ -10,8 +10,8 @@
 		</div>
 		
 		<div class="input-field">
-			{!! Form::textarea('description', null, ['class' => 'materialize-textarea']) !!}
 			{!! Form::label('description', 'Description*', ['class' => 'active']) !!}
+			{!! Form::textarea('description', null, ['class' => 'materialize-textarea']) !!}
 		</div><br />
 		
 		<div class="row center">

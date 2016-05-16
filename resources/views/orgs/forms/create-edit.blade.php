@@ -18,7 +18,7 @@
 
 	<div class="input-field">
 		{!! Form::label('long_desc', 'Long Description', ['class' => 'active']) !!}
-		{!! Form::textarea('long_desc', null, ['class' => 'materialize-textarea', 'id' => 'editor']) !!}
+		{!! Form::textarea('long_desc', null, ['class' => 'materialize-textarea']) !!}
 	</div>
 
 	<div class="input-field">
@@ -27,22 +27,6 @@
 		<span class="subtitle">(seperate with tab)</span>
 		<br /><br />
 	</div>
-
-	<!-- Create the toolbar container -->
-	<div id="toolbar">
-	<button class="ql-bold">Bold</button>
-	<button class="ql-italic">Italic</button>
-	</div>
-
-
-	<!-- Include the Quill library -->
-	<script src="//cdn.quilljs.com/0.20.1/quill.js"></script>
-
-	<!-- Initialize Quill editor -->
-	<script>
-	var quill = new Quill('#editor');
-	quill.addModule('toolbar', { container: '#toolbar' });
-	</script>
 
 	@if($type == 'create')
 		<div class="file-field input-field">

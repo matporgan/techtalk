@@ -16,13 +16,13 @@
 		</div>
 		
 		<div class="input-field">
-			{!! Form::text('name', null) !!}
 			{!! Form::label('name', 'Name*') !!}
+			{!! Form::text('name', null) !!}
 		</div>
 		
 		<div class="input-field">
-			{!! Form::textarea('description', null, ['class' => 'materialize-textarea']) !!}
 			{!! Form::label('description', 'Description*') !!}
+			{!! Form::textarea('description', null, ['class' => 'materialize-textarea']) !!}
 		</div><br />
 		
 		<div class="row center">
