@@ -37,10 +37,10 @@ class OrgsController extends Controller
      */
     public function create()
     {
-        $categories = $this->getCategories();
-
         // redirect if not logged in
         if (! Auth::check()) return redirect('register');
+
+        $categories = $this->getCategories();
 
         return view('orgs.create', compact('categories'));
     }
@@ -243,7 +243,7 @@ class OrgsController extends Controller
 
         for ($i=1; $i<=count($industries); $i++)
         {
-            $domains[$i] = Domain::all()->where('industry_id', $i)->lists('name', 'id');
+            $domains[$i] = Domain::where('industry_id', $i)->lists('name', 'id')->all();
         }
 
         return [

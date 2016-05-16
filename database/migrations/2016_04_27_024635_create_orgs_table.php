@@ -19,8 +19,8 @@ class CreateOrgsTable extends Migration
             $table->text('short_desc', 160);
             $table->text('long_desc');
             $table->string('website');
-            $table->boolean('in_talks');
-            $table->string('partner_status');
+            $table->boolean('in_talks')->nullable();
+            $table->string('partner_status')->nullable();
             $table->timestamps();
         });
     }
