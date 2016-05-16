@@ -136,7 +136,9 @@ class OrgsController extends Controller
         if($request->file('logo') != null)
             $this->moveLogo($request, $org);
         
-        return back();
+        // flash and redirect
+        Session::flash('success', 'Successfully updated!');
+        return redirect("/orgs/{$org->id}");
     }
 
     /**

@@ -85,7 +85,11 @@
 			    $("#reply-{{ $comment->id }}").click(function(){
 			        $("#reply-form-{{ $comment->id }}").slideToggle();
 			        $("#textarea-{{ $comment->id }}").focus();
-			        $("#reply-{{ $comment->id }}").toggleClass("grey-text");
+			        $("#reply-{{ $comment->id }}").toggleClass("advisian-charcoal-text");
+			    });
+			    $("#cancel-reply-{{ $comment->id }}").click(function(){
+			        $("#reply-form-{{ $comment->id }}").slideToggle();
+			        $("#reply-{{ $comment->id }}").toggleClass("advisian-charcoal-text");
 			    });
 			});
 
@@ -96,10 +100,6 @@
 
 			// make pretty
 			var prettyDate = localTime.fromNow();
-
-			console.log(commentTime);
-			console.log(localTime);
-			console.log(prettyDate);
 
 			// replace time text
 			commentTime.text(prettyDate);

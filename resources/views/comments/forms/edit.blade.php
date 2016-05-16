@@ -1,7 +1,7 @@
 {!! Form::open(['method' => 'POST', 'action' => ['CommentsController@update', $comment->id], 'class' => 'col s12', 'id' => 'comment-edit-form']) !!}
     <div class="input-field">
-		{!! Form::textarea('body', $comment->body, ['class' => 'materialize-textarea', 'id' => 'textarea-'.$comment->id]) !!}
 		{!! Form::label('body', "Edit Comment", ['class' => 'active']) !!}
+		{!! Form::textarea('body', $comment->body, ['class' => 'materialize-textarea', 'id' => 'textarea-'.$comment->id]) !!}
 	</div>
 
 	<div class="row btn-group">

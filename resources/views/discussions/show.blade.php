@@ -17,7 +17,7 @@
 	<div class="col s12 m10 l8 offset-m1 offset-l2">
 
 		<div class="row">
-			<div class="col">
+			<div class="col s12">
 				<div class="card-panel advisian-blue white-text">
 					<h2>{{ $discussion->name }}</h2>
 					<p>{!! $discussion->prompt !!}</p>
@@ -39,11 +39,10 @@
 	var commentTime = $('#discussion-time');
 
 	// convert to local time string
-	var dateObject = new Date(commentTime.text())
-	var localeDate = dateObject.toLocaleString(); 
+	var localTime = moment.utc(commentTime.text()).local();
 
 	// make pretty
-	var prettyDate = moment(localeDate).fromNow();
+	var prettyDate = localTime.fromNow();
 
 	// replace time text
 	commentTime.text(prettyDate);

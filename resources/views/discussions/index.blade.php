@@ -70,11 +70,10 @@
 								var commentTime = $('#time-{{ $discussion->id }}');
 
 								// convert to local time string
-								var dateObject = new Date(commentTime.text())
-								var localeDate = dateObject.toLocaleString(); 
+								var localTime = moment.utc(commentTime.text()).local();
 
 								// make pretty
-								var prettyDate = moment(localeDate).fromNow();
+								var prettyDate = localTime.fromNow();
 
 								// replace time text
 								commentTime.text(prettyDate);

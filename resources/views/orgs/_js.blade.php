@@ -137,4 +137,13 @@
             }
         });
     });
+
+
+    /** DELETE Confirmation **/
+    function deleteConfirmation() {
+        var r = confirm("Are you sure you wish to delete {{ $org->name }}?");
+        if (r == true) {
+            window.location = "/orgs/{{ $org->id }}/delete"
+        }
+    }
 </script>
