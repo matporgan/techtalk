@@ -32,25 +32,27 @@
 @endif
 		
 <div class="row center">
-	<ul class="pagination">
-		@if($orgs->lastPage() == 1)
-			<li class="disabled"><i class="material-icons">chevron_left</i></li>
-			<li class="active"><a href="{{ $orgs->currentPage() }}">1</a></li>
-			<li class="disabled"><i class="material-icons">chevron_right</i></li>
-		@else
-			<li class=@if($orgs->currentPage() == 1)"disabled"@endif>
-				<a href="{{ $orgs->previousPageUrl() }}"><i class="material-icons">chevron_left</i></a>
-			</li>
-			@for($i = 1; $i <= $orgs->lastPage(); $i++)
-				<li class=@if($orgs->currentPage() == $i)"active"@else"waves-effect"@endif>
-					<a href="{{ $orgs->url($i) }}">{{ $i }}</a>
+	@if($orgs->lastPage() != 1)
+		<ul class="pagination">
+			@if($orgs->lastPage() == 1)
+				<li class="disabled"><i class="material-icons">chevron_left</i></li>
+				<li class="active"><a href="{{ $orgs->currentPage() }}">1</a></li>
+				<li class="disabled"><i class="material-icons">chevron_right</i></li>
+			@else
+				<li class=@if($orgs->currentPage() == 1)"disabled"@endif>
+					<a href="{{ $orgs->previousPageUrl() }}"><i class="material-icons">chevron_left</i></a>
 				</li>
-			@endfor
-			<li class=@if($orgs->currentPage() == $orgs->lastPage())"disabled"@endif>
-				<a href="{{ $orgs->nextPageUrl() }}"><i class="material-icons">chevron_right</i></a>
-			</li>
-		@endif
-	</ul>
+				@for($i = 1; $i <= $orgs->lastPage(); $i++)
+					<li class=@if($orgs->currentPage() == $i)"active"@else"waves-effect"@endif>
+						<a href="{{ $orgs->url($i) }}">{{ $i }}</a>
+					</li>
+				@endfor
+				<li class=@if($orgs->currentPage() == $orgs->lastPage())"disabled"@endif>
+					<a href="{{ $orgs->nextPageUrl() }}"><i class="material-icons">chevron_right</i></a>
+				</li>
+			@endif
+		</ul>
+	@endif
 </div>
 
 <script type="text/javascript">

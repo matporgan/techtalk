@@ -50,31 +50,23 @@ html {
 /* Footer
 -------------------------------------------------- */
 body {
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
-	min-height: 100vh;
-	-webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	-webkit-flex-direction: column;
-	-ms-flex-direction: column;
 	flex-direction: column;
+	height: 100vh;
 };
 
+header,
+footer {
+	flex-shrink: 0;
+}
+
 main {
-	-webkit-box-flex: 1;
-	-webkit-flex: 1 0 auto;
-	-ms-flex: 1 0 auto;
 	flex: 1 0 auto;
 }
 
-.page-footer img {
-	height: 60px;
-}
-
-footer.page-footer .footer-copyright {
-	background: color('advisian-blue', 'base'); 
+footer.page-footer {
+	padding: 0;
+	background: color('advisian-blue', 'base');
 }
 
 /* Comment Styles

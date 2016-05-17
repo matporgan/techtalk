@@ -18,7 +18,7 @@
 				<div class="col s12 m8 l6 offset-m2 offset-l3">
 					<div class="input-field">
 						<i class="material-icons prefix">search</i>
-						<input id="search" type="search" required>
+						<input id="search" type="search" disabled required>
 						<label for="search"></label>
 					</div>
 				</div>
@@ -85,27 +85,29 @@
 				<h2>No Discussions...</h2>
 			@endif
 
-			<div class="row center">
-				<ul class="pagination">
-					@if($discussions->lastPage() == 1)
-						<li class="disabled"><i class="material-icons">chevron_left</i></li>
-						<li class="active"><a href="{{ $discussions->currentPage() }}">1</a></li>
-						<li class="disabled"><i class="material-icons">chevron_right</i></li>
-					@else
-						<li class=@if($discussions->currentPage() == 1)"disabled"@endif>
-							<a href="{{ $discussions->previousPageUrl() }}"><i class="material-icons">chevron_left</i></a>
-						</li>
-						@for($i = 1; $i <= $discussions->lastPage(); $i++)
-							<li class=@if($discussions->currentPage() == $i)"active"@else"waves-effect"@endif>
-								<a href="{{ $discussions->url($i) }}">{{ $i }}</a>
+			@if($discussions->lastPage() != 1)
+				<div class="row center">
+					<ul class="pagination">
+						@if($discussions->lastPage() == 1)
+							<li class="disabled"><i class="material-icons">chevron_left</i></li>
+							<li class="active"><a href="{{ $discussions->currentPage() }}">1</a></li>
+							<li class="disabled"><i class="material-icons">chevron_right</i></li>
+						@else
+							<li class=@if($discussions->currentPage() == 1)"disabled"@endif>
+								<a href="{{ $discussions->previousPageUrl() }}"><i class="material-icons">chevron_left</i></a>
 							</li>
-						@endfor
-						<li class=@if($discussions->currentPage() == $discussions->lastPage())"disabled"@endif>
-							<a href="{{ $discussions->nextPageUrl() }}"><i class="material-icons">chevron_right</i></a>
-						</li>
-					@endif
-				</ul>
-			</div>
+							@for($i = 1; $i <= $discussions->lastPage(); $i++)
+								<li class=@if($discussions->currentPage() == $i)"active"@else"waves-effect"@endif>
+									<a href="{{ $discussions->url($i) }}">{{ $i }}</a>
+								</li>
+							@endfor
+							<li class=@if($discussions->currentPage() == $discussions->lastPage())"disabled"@endif>
+								<a href="{{ $discussions->nextPageUrl() }}"><i class="material-icons">chevron_right</i></a>
+							</li>
+						@endif
+					</ul>
+				</div>
+			@endif
 
 		</div>
 

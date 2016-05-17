@@ -9,6 +9,7 @@
             <a href="/" class="brand-logo center valign-wrapper"><img class="valign" src="/img/TechTalkLogo.png" alt="Logo" /></a>
             <ul class="right hide-on-med-and-down">
                 @if(Auth::check())
+                    <li><a href="mailto:patrick.morgan@advisian.com?Subject=Tech%20Talk" target="_top">Bugs/Suggestions</a></li>
                     <li><a href="#!" class="dropdown-button" data-activates="user-dropdown" style="min-width: 160px">{{ Auth::user()->name }}<i class="material-icons right">arrow_drop_down</i></a></li>
                     <ul id="user-dropdown" class="dropdown-content">
                         <li><a href="/user/{{ Auth::user()->id }}/orgs">My Organisations</a></li>
@@ -17,7 +18,7 @@
                         <li><a href="/logout">Logout</a></li>
                     </ul>
                 @else
-                    <li {{ Request::is('register') ? 'class=active' : null }}><a href="mailto:patrick.morgan@advisian.com?Subject=Tech%20Talk%20Bug" target="_top">Report Bug</a></li>
+                    <li><a href="mailto:patrick.morgan@advisian.com?Subject=Tech%20Talk" target="_top">Bugs/Suggestions</a></li>
                     <li {{ Request::is('register') ? 'class=active' : null }}><a href="/register">Register</a></li>
                     <li {{ Request::is('login') ? 'class=active' : null }}><a href="/login">Login</a></li>
                 @endif

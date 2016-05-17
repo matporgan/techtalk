@@ -20,7 +20,7 @@
 				<div class="col s12 m8 l6 offset-m2 offset-l3">
 					<div class="input-field">
 						<i class="material-icons prefix">search</i>
-						<input id="search" type="search" required>
+						<input id="search" type="search" disabled required>
 						<label for="search"></label>
 					</div>
 				</div>

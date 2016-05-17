@@ -8330,20 +8330,24 @@ body {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  min-height: 100vh;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
-  flex-direction: column; }
+  flex-direction: column;
+  height: 100vh; }
+
+header,
+footer {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0; }
 
 main {
   -webkit-flex: 1 0 auto;
   -ms-flex: 1 0 auto;
   flex: 1 0 auto; }
 
-.page-footer img {
-  height: 60px; }
-
-footer.page-footer .footer-copyright {
+footer.page-footer {
+  padding: 0;
   background: #00ade6; }
 
 /* Comment Styles
