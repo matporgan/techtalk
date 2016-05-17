@@ -63,7 +63,8 @@ class DiscussionsController extends Controller
         $discussion->user()->associate(Auth::user());
         $discussion->updated = time(); // change update time
         $discussion->save();
-
+        
+        Session::flash('success', 'Discussion successfully created!');
         return redirect("/discussions/{$discussion->id}");
     }
 

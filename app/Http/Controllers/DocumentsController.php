@@ -55,6 +55,7 @@ class DocumentsController extends Controller
             'path' => '/' . $this->baseDir . $unique_name
         ]);
         
+        Session::flash('success', 'Document successfully added!');
         return back();
     }
 

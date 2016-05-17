@@ -51,7 +51,7 @@
 	<h3>Creator</h3>
 	@foreach($org->users as $user)
 		@if($user->pivot->org_role == 'owner')
-			<a href="mailto:{{ $user->email }}" target="_top">{{ $user->name }}</a>
+			<a href="mailto:{{ $user->email }}" target="_top">{{ $user->getNameAndCity() }}</a>
 		@endif
 	@endforeach
 </div>
@@ -66,7 +66,7 @@
 	@endif
 	@foreach($org->users as $user)
 		@if($user->pivot->org_role == 'contributor')
-			<a href="mailto:{{ $user->email }}" target="_top">{{ $user->name }}</a>
+			<a href="mailto:{{ $user->email }}" target="_top">{{ $user->getNameAndCity() }}</a>
 			@can('update-org', $org)
 				 | <a href="{{ $org->id }}/contributor/{{ $user->id }}/delete" class="red-text">Delete</a><br />
 			@endcan

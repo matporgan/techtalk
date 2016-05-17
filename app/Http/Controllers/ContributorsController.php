@@ -43,7 +43,8 @@ class ContributorsController extends Controller
         {
             Session::flash('failure', 'ERROR: That email does not match any users in our records.');
         }
-
+        
+        Session::flash('success', 'Contributor successfully added!');
     	return back();
     }
 

@@ -12,7 +12,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password'
+        'first_name', 
+        'last_name',
+        'city',
+        'email', 
+        'password'
     ];
 
     /**
@@ -23,6 +27,46 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token'
     ];
+    
+    /**
+     * Get users fullname
+     * 
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->first_name . " " . $this->last_name;
+    }
+    
+    /**
+     * Get users fullname and city
+     * 
+     * @return string
+     */
+    public function getNameAndCity()
+    {
+        return $this->first_name . " " . $this->last_name . " (" . $this->city . ")";
+    }
+    
+    /**
+     * Check to see if user is an admin.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
+    public function isAdmin()
+    {
+        return ($this->role == 'admin' || $this->isSuperAdmin());
+    }
+
+    /**
+     * Check to see if user is a super admin.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
+    public function isSuperAdmin()
+    {
+        return $this->role == 'superadmin';
+    }
 
     /**
      * Get the orgs associated with the given user.
@@ -54,23 +98,4 @@ class User extends Authenticatable
         return $this->hasMany('App\Comment');
     }
 
-    /**
-     * Check to see if user is an admin.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
-     */
-    public function isAdmin()
-    {
-        return ($this->role == 'admin' || $this->isSuperAdmin());
-    }
-
-    /**
-     * Check to see if user is a super admin.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
-     */
-    public function isSuperAdmin()
-    {
-        return $this->role == 'superadmin';
-    }
 }

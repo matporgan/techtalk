@@ -35,6 +35,7 @@ class LinksController extends Controller
             'description' => $request->description
         ]);
         
+        Session::flash('success', 'Link successfully added!');
         return back();
     }
 

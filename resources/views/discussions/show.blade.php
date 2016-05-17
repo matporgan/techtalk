@@ -23,13 +23,13 @@
 					<p>{!! $discussion->prompt !!}</p>
 					<div>
 						Created <span id="discussion-time" class="advisian-charcoal-text">{{ $discussion->created_at.' UTC' }}</span>
-						by <span class="advisian-charcoal-text">{{ $discussion->user->name }}</span> 
+						by <span class="advisian-charcoal-text">{{ $discussion->user->getNameAndCity() }}</span> 
 					</div>
 				</div>
 			</div>
 		</div>
 
-		@include('comments._index', ['comment_prompt' => 'Reply to '.$discussion->user->name])
+		@include('comments._index', ['comment_prompt' => 'Reply to '.$discussion->user->getNameAndCity()])
 
 	</div>
 

@@ -9,8 +9,18 @@
         {!! csrf_field() !!}
 
         <div class="input-field">
-            {!! Form::label('name', 'Name', ['class' => 'active']) !!}
-            {!! Form::text('name', null, ['id' => 'name']) !!}
+            {!! Form::label('first_name', 'First Name', ['class' => 'active']) !!}
+            {!! Form::text('first_name', null, ['id' => 'first_name']) !!}
+        </div>
+        
+        <div class="input-field">
+            {!! Form::label('last_name', 'Last Name', ['class' => 'active']) !!}
+            {!! Form::text('last_name', null, ['id' => 'last_name']) !!}
+        </div>
+        
+        <div class="input-field">
+            {!! Form::label('city', 'City', ['class' => 'active']) !!}
+            {!! Form::text('city', null, ['id' => 'city']) !!}
         </div>
 
         <div class="input-field">
@@ -39,7 +49,9 @@
 <script type="text/javascript">
     $("#register").validate({
         rules: {
-            name: "required",
+            first_name: "required",
+            last_name: "required",
+            city: "required",
             email: {
                 required: true,
                 email: true

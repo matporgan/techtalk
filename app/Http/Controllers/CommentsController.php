@@ -41,6 +41,7 @@ class CommentsController extends Controller
         $comment->discussion->updated = time();
         $comment->discussion->save();
 
+        Session::flash('success', 'Comment successfully added!');
         return back();
     }
 

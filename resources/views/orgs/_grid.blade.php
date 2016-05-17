@@ -32,7 +32,7 @@
 @endif
 		
 <div class="row center">
-	@if($orgs->lastPage() != 1)
+	@if($orgs->lastPage() > 1)
 		<ul class="pagination">
 			@if($orgs->lastPage() == 1)
 				<li class="disabled"><i class="material-icons">chevron_left</i></li>

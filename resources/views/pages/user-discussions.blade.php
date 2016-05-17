@@ -54,10 +54,10 @@
 									<div>
 										@if($discussion->comments()->count() == 0)
 											Created <span id="time-{{ $discussion->id }}">{{ $discussion->created_at.' UTC' }}</span>
-											by <span>{{ $discussion->user->name }}</span>
+											by <span>{{ $discussion->user->getNameAndCity() }}</span>
 										@else
 											Updated <span id="time-{{ $discussion->id }}">{{ $discussion->comments()->orderBy('id', 'desc')->first()->created_at.' UTC' }}</span>
-											by <span>{{ $discussion->comments()->orderBy('id', 'desc')->first()->user->name }}</span>
+											by <span>{{ $discussion->comments()->orderBy('id', 'desc')->first()->user->getNameAndCity() }}</span>
 										@endif
 									</div>
 								</div>

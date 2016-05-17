@@ -5,7 +5,7 @@
 			Created by 
 			@foreach($org->users as $user)
 				@if($user->pivot->org_role == 'owner')
-					<a href="mailto:{{ $user->email }}" class="white-text">{{ $user->name }}</a>
+					<a href="mailto:{{ $user->email }}" class="white-text">{{ $user->getNameAndCity() }}</a>
 				@endif
 			@endforeach
 		</div>

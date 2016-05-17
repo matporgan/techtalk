@@ -8,9 +8,11 @@
 
 		<div class="row header-btn-wrapper">
 			<h1 class="center">Discussions</h1>
-			<a class="btn-large right waves-effect waves-light" href="discussions/create">
-				<i class="material-icons left">add</i>Add
-		  	</a>
+			<div class="header-btn">
+				<a class="btn-large right waves-effect waves-light" href="discussions/create">
+					<i class="material-icons left">add</i>Add
+			  	</a>
+			</div>
 		</div>
 
 		<div class="row">
@@ -54,10 +56,10 @@
 									<div>
 										@if($discussion->comments()->count() == 0)
 											Created <span id="time-{{ $discussion->id }}">{{ $discussion->created_at.' UTC' }}</span>
-											by <span>{{ $discussion->user->name }}</span>
+											by <span>{{ $discussion->user->getNameAndCity() }}</span>
 										@else
 											Updated <span id="time-{{ $discussion->id }}">{{ $discussion->comments()->orderBy('id', 'desc')->first()->created_at.' UTC' }}</span>
-											by <span>{{ $discussion->comments()->orderBy('id', 'desc')->first()->user->name }}</span>
+											by <span>{{ $discussion->comments()->orderBy('id', 'desc')->first()->user->getNameAndCity() }}</span>
 										@endif
 									</div>
 								</div>
@@ -85,7 +87,7 @@
 				<h2>No Discussions...</h2>
 			@endif
 
-			@if($discussions->lastPage() != 1)
+			@if($discussions->lastPage() > 1)
 				<div class="row center">
 					<ul class="pagination">
 						@if($discussions->lastPage() == 1)

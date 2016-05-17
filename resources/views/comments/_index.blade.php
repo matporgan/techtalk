@@ -22,7 +22,7 @@
 			<div class="col s12 m{{ 12 - ($comment->getLevel() >= 3 ? 3 : $comment->getLevel()) }} offset-m{{ ($comment->getLevel() >= 3 ? 3 : $comment->getLevel()) }}">
 
 				<div class="comment-header">
-					<span class="author-name">{{ $comment->user->name }} | </span>
+					<span class="author-name">{{ $comment->user->getNameAndCity() }} | </span>
 					<span class="author-date" id="time-{{ $comment->id }}">{{ $comment->created_at.' UTC' }}</span>@if($comment->created_at != $comment->updated_at)*@endif
 					<div class="reply-details">
 						@if($comment->getLevel() > 0)

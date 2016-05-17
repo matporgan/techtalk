@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use Validator;
+use Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -48,8 +49,18 @@ class AuthController extends Controller
      */
     protected function validator(array $data)
     {
+        $validator = Validator::make($data, [
+            'email' => 'unique:users',
+        ]);
+        
+        if ($validator->fails()) {
+            Session::flash('failure', 'ERROR: Email already in use.');
+        }
+        
         return Validator::make($data, [
-            'name' => 'required|max:255',
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'city' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
@@ -63,8 +74,12 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+        Session::flash('success', 'Registration successful!');
+        
         return User::create([
-            'name' => $data['name'],
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'city' => $data['city'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'role' => 'contributor',

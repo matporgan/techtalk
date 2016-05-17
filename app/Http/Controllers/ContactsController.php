@@ -33,6 +33,7 @@ class ContactsController extends Controller
             'email' => $request->email
         ]);
         
+        Session::flash('success', 'Contact successfully added!');
         return back();
     }
 
