@@ -38,13 +38,14 @@ class ContributorsController extends Controller
             
             if(!is_null($org_ids) && !in_array($org->id, $org_ids))
                 $org->users()->attach($user->id);
+            
+            Session::flash('success', 'Contributor successfully added!');
         }
         else
         {
             Session::flash('failure', 'ERROR: That email does not match any users in our records.');
         }
         
-        Session::flash('success', 'Contributor successfully added!');
     	return back();
     }
 

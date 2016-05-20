@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use Gate;
+use Session;
 
 use App\Link;
 use App\Org;

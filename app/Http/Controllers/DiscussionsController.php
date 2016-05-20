@@ -8,6 +8,7 @@ use App\Http\Requests;
 
 use DB;
 use Auth;
+use Session;
 
 use App\Discussion;
 

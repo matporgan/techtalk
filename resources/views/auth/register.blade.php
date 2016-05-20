@@ -19,8 +19,8 @@
         </div>
         
         <div class="input-field">
-            {!! Form::label('city', 'City', ['class' => 'active']) !!}
-            {!! Form::text('city', null, ['id' => 'city']) !!}
+            {!! Form::label('office_city', 'Office Location (City)', ['class' => 'active']) !!}
+            {!! Form::text('office_city', null, ['id' => 'office_city']) !!}
         </div>
 
         <div class="input-field">
@@ -51,7 +51,7 @@
         rules: {
             first_name: "required",
             last_name: "required",
-            city: "required",
+            office_city: "required",
             email: {
                 required: true,
                 email: true

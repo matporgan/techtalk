@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ContactRequest;
 
 use Gate;
+use Session;
 
 use App\Contact;
 use App\Org;

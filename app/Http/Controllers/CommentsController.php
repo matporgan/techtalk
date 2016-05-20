@@ -8,6 +8,7 @@ use App\Http\Requests;
 
 use Auth;
 use Gate;
+use Session;
 
 use App\Comment;
 

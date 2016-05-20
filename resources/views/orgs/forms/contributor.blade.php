@@ -8,7 +8,7 @@
 			{!! Form::label('email', 'Email:') !!}
 			{!! Form::text('email', null, ['class' => 'form-control']) !!}
 		</div>
-		<p><i>Note: The user should have already registered with the above email.</i></p><br />
+		<p><i>Note: The contributor must have registered with the above email</i></p><br />
 
 		
 		<div class="row center">

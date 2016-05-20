@@ -8,6 +8,7 @@ use App\Http\Requests;
 
 use Gate;
 use Response;
+use Session;
 
 use App\Document;
 use App\Org;

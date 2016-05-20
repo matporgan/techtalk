@@ -14,7 +14,7 @@ class User extends Authenticatable
     protected $fillable = [
         'first_name', 
         'last_name',
-        'city',
+        'office_city',
         'email', 
         'password'
     ];
@@ -45,7 +45,7 @@ class User extends Authenticatable
      */
     public function getNameAndCity()
     {
-        return $this->first_name . " " . $this->last_name . " (" . $this->city . ")";
+        return $this->first_name . " " . $this->last_name . " (" . $this->office_city . ")";
     }
     
     /**

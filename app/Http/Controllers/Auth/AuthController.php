@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use Validator;
 use Session;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -56,11 +57,11 @@ class AuthController extends Controller
         if ($validator->fails()) {
             Session::flash('failure', 'ERROR: Email already in use.');
         }
-        
+
         return Validator::make($data, [
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
-            'city' => 'required|max:255',
+            'office_city' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
@@ -79,7 +80,7 @@ class AuthController extends Controller
         return User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
-            'city' => $data['city'],
+            'office_city' => $data['office_city'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'role' => 'contributor',

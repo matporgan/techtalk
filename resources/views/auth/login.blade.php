@@ -19,6 +19,10 @@
             {!! Form::password('password', null, ['id' => 'password']) !!}
         </div>
 
+        <div class="right">
+            <span class="subtitle"><a href="/password/reset">Forgot your password?</a></span>
+        </div>
+
         <div class="input-field">
             <input type="checkbox" name="remember" id="remember" />
             <label for="remember">Remember Me</label>
@@ -29,9 +33,9 @@
                 Login<i class="material-icons left">lock_open</i>
             </button>            
         </div>
-        
-        <div class="row center">
-            <span class="subtitle"><a href="/password/reset">Forgot your password?</a></span>
+
+        <div class="center">
+            <h4><a href="/register">Register</a></h4>
         </div>
 
     </form>

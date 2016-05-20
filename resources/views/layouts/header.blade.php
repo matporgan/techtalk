@@ -23,11 +23,11 @@
                     <li {{ Request::is('login') ? 'class=active' : null }}><a href="/login">Login</a></li>
                 @endif
             </ul>
-            <a href="#" class="right button-collapse" data-activates="nav-mobile"><i class="material-icons">menu</i></a>
+            <a href="#" class="button-collapse" data-activates="nav-mobile"><i class="material-icons">menu</i></a>
             <ul class="side-nav" id="nav-mobile">
                 <li {{ Request::is('/') ? 'class=active' : null }}><a href="/">Home</a></li>
                 <li {{ Request::is('orgs') ? 'class=active' : null }}><a href="/orgs">Organisations</a></li>
-                <li {{ Request::is('orgs/create') ? 'class=active' : null }}><a href="/orgs/create">Add</a></li>
+                <li {{ Request::is('discussions') ? 'class=active' : null }}><a href="/discussions">Discussions</a></li>
                 <li class="divider"></li>
                 @if(Auth::check())
                     <li><a href="/user/{{ Auth::user()->id }}/orgs">My Organisations</a></li>
