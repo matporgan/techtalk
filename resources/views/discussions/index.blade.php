@@ -6,30 +6,28 @@
 
 	<div class="col s12">
 
-		<div class="row header-btn-wrapper">
-			<h1 class="center">Discussions</h1>
-			<div class="header-btn">
-				<a class="btn-large right waves-effect waves-light" href="discussions/create">
-					<i class="material-icons left">add</i>Add
-			  	</a>
-			</div>
-		</div>
-
 		<div class="row">
+			<h1 class="center">Discussions</h1>
+		</div>
+		
+		<div class="row">
+			<div class="col s12 m6 offset-m3">
 			<form>
-				<div class="col s12 m8 l6 offset-m2 offset-l3">
-					<div class="input-field">
-						<i class="material-icons prefix">search</i>
-						<input id="search" type="search" disabled required>
-						<label for="search"></label>
-					</div>
+				<div class="input-field">
+					<input id="search" type="search">
+					<label for="search"><i class="material-icons prefix">search</i></label>
 				</div>
 			</form>
+			</div>
+			
+			<div class="col s12 m3" style="margin-top:30px;">
+				<a class="btn right waves-effect waves-light" href="discussions/create">Add</a>
+			</div>
 		</div>
-
+		
 		<div class="row center">
 			@if(! is_null($discussions))
-				<table class="discussion-board bordered">
+				<table class="discussion-board highlight">
 					<thead><tr></tr></thead>
 					<tbody>
 						@foreach($discussions as $discussion)

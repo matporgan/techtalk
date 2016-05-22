@@ -2,10 +2,17 @@
 <script type="text/javascript">
 
     /** Attachments Form Validation **/
-
+    
+    $.validator.addMethod('filesize', function (value, element, param) {
+        return this.optional(element) || (element.files[0].size / 1000000 <= param);
+    }, 'File size must be less than {0} MB.');
+    
     $("#document-form").validate({
         rules: {
-            file: "required",
+            file: {
+                required: true,
+                filesize: 20,
+            },
             name: "required",
             description: "required",
         },
@@ -13,7 +20,7 @@
         errorPlacement: function(error, element) {
           var placement = $(element).data('error');
           if (placement) {
-            $(placement).append(error)
+            $(placement).append(error);
           } else {
             error.insertAfter(element);
           }
@@ -29,7 +36,7 @@
         errorPlacement: function(error, element) {
             var placement = $(element).data('error');
             if (placement) {
-                $(placement).append(error)
+                $(placement).append(error);
             } else {
                 error.insertAfter(element);
             }
@@ -48,7 +55,7 @@
         errorPlacement: function(error, element) {
             var placement = $(element).data('error');
             if (placement) {
-                $(placement).append(error)
+                $(placement).append(error);
             } else {
                 error.insertAfter(element);
             }
@@ -68,7 +75,7 @@
         errorPlacement: function(error, element) {
             var placement = $(element).data('error');
             if (placement) {
-                $(placement).append(error)
+                $(placement).append(error);
             } else {
                 error.insertAfter(element);
             }
@@ -85,7 +92,7 @@
         errorPlacement: function(error, element) {
             var placement = $(element).data('error');
             if (placement) {
-                $(placement).append(error)
+                $(placement).append(error);
             } else {
                 error.insertAfter(element);
             }
@@ -100,7 +107,7 @@
         errorPlacement: function(error, element) {
             var placement = $(element).data('error');
             if (placement) {
-                $(placement).append(error)
+                $(placement).append(error);
             } else {
                 error.insertAfter(element);
             }
@@ -115,7 +122,7 @@
         errorPlacement: function(error, element) {
             var placement = $(element).data('error');
             if (placement) {
-                $(placement).append(error)
+                $(placement).append(error);
             } else {
                 error.insertAfter(element);
             }
@@ -140,10 +147,11 @@
 
 
     /** DELETE Confirmation **/
+    
     function deleteConfirmation() {
         var r = confirm("Are you sure you wish to delete {{ $org->name }}?");
         if (r == true) {
-            window.location = "/orgs/{{ $org->id }}/delete"
+            window.location = "/orgs/{{ $org->id }}/delete";
         }
     }
 </script>

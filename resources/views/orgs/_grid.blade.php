@@ -9,13 +9,13 @@
 				
 				@foreach ($orgs as $org)
 					<a href="/orgs/{{ $org->id }}">
-						<div class="card grid-item">
+						<div class="card grid-item hoverable">
 							<div class="card-image">
 								<img src="{{ $org->logo }}">
 							</div>
 							<div class="card-content">
-								<p><b>{{ $org->name }}</b></p>
-								<p>{{ $org->short_desc }}</p>
+								<div class="org-name">{{ $org->name }}</div>
+								<div class="org-desc">{{ $org->short_desc }}</div>
 							</div>
 						</div>
 					</a>

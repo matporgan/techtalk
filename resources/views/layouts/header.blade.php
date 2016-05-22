@@ -19,7 +19,6 @@
                     </ul>
                 @else
                     <li><a href="mailto:patrick.morgan@advisian.com?Subject=Tech%20Talk" target="_top">Bugs/Suggestions</a></li>
-                    <li {{ Request::is('register') ? 'class=active' : null }}><a href="/register">Register</a></li>
                     <li {{ Request::is('login') ? 'class=active' : null }}><a href="/login">Login</a></li>
                 @endif
             </ul>
@@ -35,7 +34,6 @@
                     <li class="divider"></li>
                     <li><a href="/logout">Logout</a></li>
                 @else
-                    <li {{ Request::is('register') ? 'class=active' : null }}><a href="/register">Register</a></li>
                     <li {{ Request::is('login') ? 'class=active' : null }}><a href="/login">Login</a></li>
                 @endif
             </ul>

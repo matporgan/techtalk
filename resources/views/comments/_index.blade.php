@@ -47,7 +47,7 @@
 							@if(Auth::check())
 								<a id="reply-{{ $comment->id }}" href="#!">Reply</a>
 							@else
-								<a href="/register">Reply</a>
+								<a href="/login">Reply</a>
 							@endif
 						@endcan
 					</div>

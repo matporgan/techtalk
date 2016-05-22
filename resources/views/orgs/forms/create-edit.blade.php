@@ -160,6 +160,10 @@ $('#tag_list').materialtags({
 </script>
 
 <script type="text/javascript">
+	$.validator.addMethod('filesize', function (value, element, param) {
+        return this.optional(element) || (element.files[0].size / 1000000 <= param);
+    }, 'File size must be less than {0} MB.');
+
 	$(".org-create").validate({
 		rules: {
 			name: "required",
@@ -170,7 +174,8 @@ $('#tag_list').materialtags({
 			},
 			logo: {
 				required: true,
-				extension: "jpg|jpeg|png|gif"
+				extension: "jpg|jpeg|png|gif",
+				filesize: 2,
 			},
 			test: "required",
 			industry_list: "required",

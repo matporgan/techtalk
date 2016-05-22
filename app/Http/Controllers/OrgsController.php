@@ -38,7 +38,7 @@ class OrgsController extends Controller
     public function create()
     {
         // redirect if not logged in
-        if (! Auth::check()) return redirect('register');
+        if (! Auth::check()) return redirect('login');
 
         $categories = $this->getCategories();
 

@@ -39,7 +39,7 @@ class DiscussionsController extends Controller
     public function create()
     {
         // redirect if not logged in
-        if (! Auth::check()) return redirect('register');
+        if (! Auth::check()) return redirect('login');
 
         return view('discussions.create');
     }
