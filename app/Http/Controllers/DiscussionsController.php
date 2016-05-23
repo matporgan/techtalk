@@ -28,7 +28,7 @@ class DiscussionsController extends Controller
             ->orderBy('updated', 'desc')
             ->paginate(15);
 
-        return view('discussions.index', compact('discussions'));
+        return view('pages.discussions', compact('discussions'));
     }
 
     /**
@@ -81,6 +81,6 @@ class DiscussionsController extends Controller
 
         $comments = getOrderedComments($discussion);
 
-        return view('discussions.show', compact('discussion', 'comments'));
+        return view('pages.discussion', compact('discussion', 'comments'));
     }
 }

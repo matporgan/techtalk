@@ -36,6 +36,16 @@ class PagesController extends Controller
         $discussions = Discussion::all();
         $comments = Comment::all();
         
+        $categories = [
+            'technologies' => [
+                'emerging' => Technology::where('subcategory', 'Emerging')->get(),
+                'stable' => Technology::where('subcategory', 'Stable')->get(),
+                'accelerating' => Technology::where('subcategory', 'Accelerating')->get(),
+            ],
+            'industries' => Industry::all(),
+            'domains' => Domain::all()->groupBy('industry_id')->chunk(3),
+        ];
+        
         $latest_orgs = $orgs->sortByDesc('id')->take(4);
         
         $top_contributors = $users->sortBy(function ($user, $key) {
@@ -57,7 +67,7 @@ class PagesController extends Controller
             'Users' => $users->count(),
         ];
         
-        return view('pages.home', compact('latest_orgs', 'top_contributors', 'top_commentors', 'stats'));
+        return view('pages.home', compact('latest_orgs', 'top_contributors', 'top_commentors', 'stats', 'categories'));
     }
     
     /**

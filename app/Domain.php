@@ -21,7 +21,7 @@ class Domain extends Model
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-    public function domains()
+    public function industry()
     {
     	return $this->belongsTo('App\Industry');
     }

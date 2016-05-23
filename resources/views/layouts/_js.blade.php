@@ -5,6 +5,7 @@
 	    $('.collapsible').collapsible({
 			accordion: false
 		});
+		$('.modal-trigger').leanModal();
 	});
 	
 	function onReady(callback) {

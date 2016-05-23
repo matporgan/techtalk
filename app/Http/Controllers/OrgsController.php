@@ -27,7 +27,7 @@ class OrgsController extends Controller
     {
         $orgs = Org::orderBy('id', 'desc')->paginate(12);
 
-        return view('orgs.index', compact('orgs'));
+        return view('pages.orgs', compact('orgs'));
     }
 
     /**
@@ -90,7 +90,7 @@ class OrgsController extends Controller
         $discussion = $org->discussion;
         $comments = getOrderedComments($discussion);
         
-        return view('orgs.show', compact('org', 'users', 'discussion', 'comments'));
+        return view('pages.org', compact('org', 'users', 'discussion', 'comments'));
     }
 
     /**

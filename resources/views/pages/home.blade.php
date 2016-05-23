@@ -2,31 +2,15 @@
 
 @section('content')
 
-<div class="row" hidden>
-    <div style="width:100%; height:380px; margin-top: 30px; border:2px solid #00ade3;">@include('snippets.cube')</div>
-</div>
-
-<div class="row" hidden>
-	<div class="col s3">
-		<h2>Technologies</h2>
-	</div>
-	<div class="col s3">
-		<h3>Emerging</h3>
-		<p>
-			Technology 1<br />
-			Technology 2<br />
-		</p>
-	</div>
-</div>
-
-<div class="row">
-    <div style="width:100%; height:380px; margin-top: 30px; border:2px solid #00ade3;">Graphic to go here</div>
+<div id="thecube-wrapper" class="row" style="width:100%; height:380px; margin-top:30px; ">
+	
+	@include('snippets.cube')
+	
 </div>
 
 <div class="row"> 
-    
 	<div class="col s12">
-	    <h2>Latest Organisations</h2>
+		<h2>Latest Organisations</h2>
 	</div>
 	
 	@foreach ($latest_orgs as $org)
@@ -91,7 +75,163 @@
 	    	</tbody>
         </table>
 	</div>
-
 </div>
+
+<div id="cube-technologies" class="modal bottom-sheet">
+	<a id="close-cube-technologies" class="alink">
+		<i class="material-icons right icon-close">close</i>
+	</a>
+	<div class="modal-content container">
+		<h2>Technologies</h2>
+		<table>
+			<tr>
+				<td>
+					<h3>Emerging</h3>
+					<ul>
+						@foreach($categories['technologies']['emerging'] as $technology)
+							<li>
+								@if($technology->orgs()->first() != null)
+									<a href="/technology/{{ $technology->id }}">
+										{{ $technology->name }}
+									</a>
+								@else
+									{{ $technology->name }}
+								@endif
+							</li>
+						@endforeach
+					</ul>
+				</td>
+				<td>
+					<h3>Stable</h3>
+					<ul>
+						@foreach($categories['technologies']['stable'] as $technology)
+							<li>
+								@if($technology->orgs()->first() != null)
+									<a href="/technology/{{ $technology->id }}">
+										{{ $technology->name }}
+									</a>
+								@else
+									{{ $technology->name }}
+								@endif
+							</li>
+						@endforeach
+					</ul>
+				</td>
+				<td>
+					<h3>Accelerating</h3>
+					<ul>
+						@foreach($categories['technologies']['accelerating'] as $technology)
+							<li>
+								@if($technology->orgs()->first() != null)
+									<a href="/technology/{{ $technology->id }}">
+										{{ $technology->name }}
+									</a>
+								@else
+									{{ $technology->name }}
+								@endif
+							</li>
+						@endforeach
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<div id="cube-industries" class="modal bottom-sheet">
+	<a id="close-cube-industries" class="alink">
+		<i class="material-icons right icon-close">close</i>
+	</a>
+	<div class="modal-content container">
+		<h2>Industries</h2>
+		<table>
+			<tr>
+				<td>
+					<ul>
+						@foreach($categories['industries'] as $industry)
+							<li>
+								@if($industry->orgs()->first() != null)
+									<a href="/industry/{{ $industry->id }}">
+										{{ $industry->name }}
+									</a>
+								@else
+									{{ $industry->name }}
+								@endif
+							</li>
+						@endforeach
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<div id="cube-domains" class="modal bottom-sheet">
+	<a id="close-cube-domains" class="alink">
+		<i class="material-icons right icon-close">close</i>
+	</a>
+	<div class="modal-content container">
+		<h2>Domains</h2>
+		<table>
+			<tr>
+				@foreach($categories['domains'] as $chunk)
+				<td>
+					@foreach($chunk as $domains)
+						<h3>{{ $domains->first()->industry->name }}</h3>
+						<ul>
+							@foreach($domains as $domain)
+								<li>
+									@if($domain->orgs()->first() != null)
+										<a href="/domain/{{ $domain->id }}">
+											{{ $domain->name }}
+										</a>
+									@else
+										{{ $domain->name }}
+									@endif
+								</li>
+							@endforeach
+						</ul>
+					@endforeach
+				</td>
+				@endforeach
+			</tr>
+		</table>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$('#close-cube-technologies').click(function() {
+		$('#cube-technologies').closeModal();	
+	});
+	
+	$('#close-cube-industries').click(function() {
+		$('#cube-industries').closeModal();	
+	});
+	
+	$('#close-cube-domains').click(function() {
+		$('#cube-domains').closeModal();	
+	});
+
+    // $('#technology').click(function() {
+    //     $('#technology-content').slideToggle();
+    //     //$('#thecube-wrapper').slideToggle();
+    //     $('#cube-padding').slideToggle();
+    // });
+    // $('#technology-back').click(function() {
+    //     $('#technology-content').slideToggle();
+    //     //$('#thecube-wrapper').slideToggle();
+    //     $('#cube-padding').slideToggle();
+    // });
+    
+    // $('#industry').click(function() {
+    //     $('#industry-content').slideToggle();
+    //     $('#thecube-wrapper').slideToggle();
+    // });
+    // $('#industry-back').click(function() {
+    //     $('#industry-content').slideToggle();
+    //     $('#thecube-wrapper').slideToggle();
+    // });
+    
+</script>
 
 @stop

@@ -46,10 +46,6 @@ html {
 	margin-right: 10px; 
 }
 
-// .btn-group a, button :last-child {
-// 	margin-right: 0; 
-// }
-
 .header-btn-wrapper {
 	position: relative;
 }
@@ -182,6 +178,7 @@ footer.page-footer {
 /* Organisation grid
 -------------------------------------------------- */
 .org-grid {
+	overflow: hidden;
 	border-top: 1px solid #d0d0d0;
 }
 
@@ -275,67 +272,8 @@ footer.page-footer {
 	letter-spacing: 0;
 }
 
-/* Home Page Styles
+/* Loading Screen Style
 -------------------------------------------------- */
-.stats td {
-	padding: 13px 10px;	
-}
-.stats td:last-child {
-	color: color('advisian-gold', 'base');
-	width: 40px;	
-}
-
-/* Discussion Board Styles
--------------------------------------------------- */
-.discussion-board td span {
-	color: color('advisian-gold', 'base');
-}
-
-.discussion-board td:last-child {
-	color: color('advisian-gold', 'base');
-	width: 70px;
-}
-
-.discussion-board a {
-	font-size: $h2-fontsize;
-	line-height: 110%;
-	margin: ($h2-fontsize / 2) 0 ($h2-fontsize / 2.5) 0;
-}
-
-/* Materialize Tags Style
--------------------------------------------------- */
-.materialize-tags {
-	padding: 0 !important;
-}
-
-.materialize-tags .tt-menu {
-	background-color: #fff;
-	margin: 3px 0 0 0;
-	min-width: 120px; 
-	max-height: 650px;
-	top: 102%;
-    -webkit-box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-    -moz-box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-    box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-}
-.materialize-tags .tt-menu .tt-suggestion {
-    clear: both;
-    font-size: 16px;
-    color: #26a69a;
-    display: block;
-    line-height: 22px;
-    padding: 14px 16px;
-    cursor: pointer;
-    min-height: 50px;
-    line-height: 1.5rem;
-    width: 100%;
-    text-align: left;
-    text-transform: lowercase;
-}
-.materialize-tags .tt-menu .tt-suggestion:hover {
-    background-color: #eee;
-}
-
 #loading {
     display: block;
     position: fixed;
@@ -357,3 +295,98 @@ footer.page-footer {
 	height: 80px;
 }
 
+/* Home Page Styles
+-------------------------------------------------- */
+.stats td {
+	padding: 13px 10px;	
+}
+.stats td:last-child {
+	color: color('advisian-gold', 'base');
+	width: 40px;	
+}
+
+#thecube-wrapper {
+	position: relative;
+}
+
+#technology-content {
+	position: absolute;
+	top: -30px;
+	background: rgba(255,255,255,0.8);
+}
+
+#cube-padding {
+	display: none;
+	height: 100px; 
+}
+
+.modal.bottom-sheet {
+	max-height: 100%;
+}
+
+.icon-close {
+	margin: 10px 10px 0 0;	
+}
+
+.modal-content td {
+	width: 33.33%;
+	vertical-align: top;
+}
+
+
+/* Discussion Board Styles
+-------------------------------------------------- */
+.discussion-board .discussion-icon {
+	font-size: 2.5rem;
+}
+
+.discussion-board .discussion-name {
+	font-size: 2rem;
+}
+
+.discussion-date, .discussion-user {
+	display: inline-block;
+	color: color('advisian-gold', 'base');
+}
+
+.discussion-board td:last-child {
+	color: color('advisian-gold', 'base');
+	width: 70px;
+	font-size: 2rem;
+}
+
+/* Materialize Tags Style
+-------------------------------------------------- */
+.materialize-tags {
+	padding: 0 !important;
+}
+
+.materialize-tags .tt-menu {
+	background-color: #fff;
+	margin: 3px 0 0 0;
+	min-width: 120px; 
+	max-height: 650px;
+	top: 102%;
+    -webkit-box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    -moz-box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.materialize-tags .tt-menu .tt-suggestion {
+    clear: both;
+    font-size: 16px;
+    color: #26a69a;
+    display: block;
+    line-height: 22px;
+    padding: 14px 16px;
+    cursor: pointer;
+    min-height: 50px;
+    line-height: 1.5rem;
+    width: 100%;
+    text-align: left;
+    text-transform: lowercase;
+}
+
+.materialize-tags .tt-menu .tt-suggestion:hover {
+    background-color: #eee;
+}
