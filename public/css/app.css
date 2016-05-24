@@ -3301,7 +3301,8 @@ nav {
         margin-left: 15px;
         margin-right: 15px; }
       nav ul a:hover {
-        background-color: #00ade6; }
+        background-color: #00ade6;
+        color: #fff; }
     nav ul.left {
       float: left; }
   nav .input-field {
@@ -8333,7 +8334,7 @@ html {
   top: 10px;
   right: 0; }
 
-/* Footer
+/* Layout Styles
 -------------------------------------------------- */
 body {
   display: -webkit-flex;
@@ -8358,6 +8359,9 @@ main {
 footer.page-footer {
   padding: 0;
   background: #00ade6; }
+
+nav .nav-wrapper {
+  z-index: 1; }
 
 /* Comment Styles
 -------------------------------------------------- */
@@ -8582,6 +8586,12 @@ footer.page-footer {
   color: #a38f68;
   width: 70px;
   font-size: 2rem; }
+
+/* Org Page Style
+-------------------------------------------------- */
+.modal-form {
+  max-height: 100%;
+  width: 40%; }
 
 /* Materialize Tags Style
 -------------------------------------------------- */

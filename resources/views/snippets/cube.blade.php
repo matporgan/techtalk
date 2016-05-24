@@ -20,15 +20,6 @@
 
 <style type="text/css">
 
-#thecube-wrapper img {
-  position: absolute;
-  top: 144px;
-  left: 50%;
-  margin-left: -152px;
-  width: 414px;
-  z-index: -1;
-}
-
 #thecube {
   perspective: 800px;
   position: relative;

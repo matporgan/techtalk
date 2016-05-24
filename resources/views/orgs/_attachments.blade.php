@@ -4,7 +4,8 @@
 			<div class="row">
 				<h2>Documents
 					@can('update-org', $org)
-						<a class="fancybox btn-floating btn waves-effect waves-light right" href="#document-lightbox"><i class="material-icons">add</i></a>
+						<a class="btn-floating btn waves-effect waves-light right modal-trigger" href="#document-modal"><i class="material-icons">add</i></a>
+						
 					@endcan
 				</h2>
 				<ul class="collapsible" data-collapsible="accordion">

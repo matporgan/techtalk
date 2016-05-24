@@ -56,7 +56,7 @@ html {
 	right: 0;
 }
 
-/* Footer
+/* Layout Styles
 -------------------------------------------------- */
 body {
 	display: flex;
@@ -76,6 +76,10 @@ main {
 footer.page-footer {
 	padding: 0;
 	background: color('advisian-blue', 'base');
+}
+
+nav .nav-wrapper {
+	z-index: 1; 
 }
 
 /* Comment Styles
@@ -353,6 +357,13 @@ footer.page-footer {
 	color: color('advisian-gold', 'base');
 	width: 70px;
 	font-size: 2rem;
+}
+
+/* Org Page Style
+-------------------------------------------------- */
+.modal-form {
+	max-height: 100%;
+	width: 40%;
 }
 
 /* Materialize Tags Style
