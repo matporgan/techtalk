@@ -12,22 +12,32 @@
             </div></a>
             <div class="face shadow"></div>
             <div class="face shadow2"></div>
+            <div class="face shadow3"></div>
+            <div class="face shadow4"></div>
         </div>
     </div>
 </div>
 
-
-
 <style type="text/css">
+
+#thecube-wrapper img {
+  position: absolute;
+  top: 144px;
+  left: 50%;
+  margin-left: -152px;
+  width: 414px;
+  z-index: -1;
+}
 
 #thecube {
   perspective: 800px;
   position: relative;
-  overflow: hidden;
+  overflow: inherit;
   width: 100%;
   height: 100%;
   background: transparent;
   font-size: 100%;
+
 }
 .face {
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4);
@@ -54,7 +64,7 @@
   height: 0;
   transform-origin: 50%;
 }
-.face:hover {
+.lt:hover, .ft:hover, .tp:hover {
     background: #00ade3 !important;
     color: #fff;
 }
@@ -118,10 +128,16 @@
   transform: rotateX(-90deg) translateY(-50%);
 }
 [class*="cuboid"] .shadow {
-  transform: rotateX(-270deg) rotateZ(27deg) translateY(-101%) translateX(-5%) skewX(5deg);
+  transform: rotateX(-270deg) rotateZ(12deg) translateY(-107%) translateX(-14%) skewX(5deg);
 }
 [class*="cuboid"] .shadow2 {
-  transform: rotateX(-270deg) rotateZ(0deg) translateY(-232%) translateX(33%) skewX(4deg);
+  transform: rotateX(-270deg) translateY(-50%);
+}
+[class*="cuboid"] .shadow3 {
+  transform: translateZ(7.45em);
+}
+[class*="cuboid"] .shadow4 {
+  transform: translateZ(7.55em) translateX(15em) rotateY(90deg);
 }
 [class*="cuboid"] .lt {
   left: 100%;
@@ -133,6 +149,12 @@
   top: 100%;
 }
 [class*="cuboid"] .shadow2 {
+  top: 100%;
+}
+[class*="cuboid"] .shadow3 {
+  top: 100%;
+}
+[class*="cuboid"] .shadow4 {
   top: 100%;
 }
 /* .cub-1 styles */
@@ -157,17 +179,21 @@
   width:15em;
   height:15em;
 }
-.cub-1 .shadow, .cub-1 .shadow2 {
-  box-shadow: 0 0 20px #ddd;
-  background: #ddd!important;
+.shadow {
+    height:10em;
+    width: 15em;
+    box-shadow: 44px -74px 163px #333;
 }
-.cub-1 .shadow {
-    height:18em;
-    width: 16em;
+.shadow2 {
+    height:15em;
+    width: 15em;
+    box-shadow: 0 0 150px #111;
 }
-.cub-1 .shadow2 {
-    height:7em;
-    width: 16em;
+.shadow3, .shadow4 {
+    height:15em;
+    width: 15em;
+    box-shadow: none;
+    background: linear-gradient(to top, rgba(0,0,0,0), #ddd);
 }
 .cub-1 .face {
   background-color:#FFFFFF;

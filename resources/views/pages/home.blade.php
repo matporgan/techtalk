@@ -2,10 +2,12 @@
 
 @section('content')
 
-<div id="thecube-wrapper" class="row" style="width:100%; height:380px; margin-top:30px; ">
-	
-	@include('snippets.cube')
-	
+<div class="row">
+	<div class="col s12">
+		<div id="thecube-wrapper" style="width:100%; height:380px; margin-top:30px; ">
+			@include('snippets.cube')
+		</div>
+	</div>
 </div>
 
 <div class="row"> 
