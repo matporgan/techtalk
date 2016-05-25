@@ -10,7 +10,7 @@
 	</div>
 </div>
 
-<div class="row"> 
+<div class="row" style="position: relative; z-index: 10;"> 
 	<div class="col s12">
 		<h2>Latest Organisations</h2>
 	</div>

@@ -30,6 +30,7 @@ class Comment extends Model
     {
         return $this->level;
     }
+    
     public function setParentName($name)
     {
         $this->parentName = $name;

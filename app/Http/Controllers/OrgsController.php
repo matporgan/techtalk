@@ -55,7 +55,8 @@ class OrgsController extends Controller
     {
         // make tag string lowercase and explode. conversion: "tag 1, TAG 2, Tag 3" => ["tag1", "tag 2", "tag 3"]
         $request->merge(array('tag_list' => explode(",", strtolower($request->tag_list))));
-        
+        $request->merge(array('website' => addHttp($request->website)));
+
         $user = Auth::user();
 
         // create database entry

@@ -3,6 +3,19 @@
 use App\Discussion;
 
 /**
+ * Add http if not already present.
+ *
+ * @param  string $url
+ * @return string
+ */
+function addhttp($url) {
+    if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
+        $url = "http://" . $url;
+    }
+    return $url;
+}
+
+/**
  * Gets an array of comment collections in the correct display order.
  *
  * @param  Discussion $discussion
@@ -31,7 +44,7 @@ function getOrderedComments(Discussion $discussion)
             $previous = $comment; 
             $comment = $discussion->comments->where('id', $ordered_ids[$i][0])->first();
             $comment->setLevel($ordered_ids[$i][1]);
-            $comment->setParentName($previous->user->name);
+            $comment->setParentName($previous->user->getNameAndCity());
         }
         else
         {

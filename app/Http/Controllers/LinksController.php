@@ -28,7 +28,7 @@ class LinksController extends Controller
         // authorization
         if (Gate::denies('update-org', $org)) { abort(403); }
 
-        $url = $this->addHttp($request->url);
+        $url = addHttp($request->url);
 
         // create DB entry
         $org->links()->create([
@@ -78,18 +78,5 @@ class LinksController extends Controller
     	Link::destroy($link_id);
         
     	return back();
-    }
-
-    /**
-     * Add http if not already present.
-     *
-     * @param  string $url
-     * @return string
-     */
-    private function addhttp($url) {
-        if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
-            $url = "http://" . $url;
-        }
-        return $url;
     }
 }

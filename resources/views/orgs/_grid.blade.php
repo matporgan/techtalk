@@ -1,6 +1,6 @@
-@if($orgs->count() != 0)
+<div class="row org-grid">
+	@if($orgs->count() != 0)
 
-	<div class="row org-grid">
 		<div class="col s12">
 			<div class="grid">
 				
@@ -23,13 +23,14 @@
 				
 			</div>
 		</div>
-	</div>
-	
-@else
 
-	<h2>No Orgs...</h2>
 	
-@endif
+	@else
+		<div class="center">
+			<h2>You have no organisations...</h2>
+		</div>
+	@endif
+</div>
 		
 <div class="row center">
 	@if($orgs->lastPage() > 1)
