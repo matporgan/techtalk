@@ -12,7 +12,8 @@ class Document extends Model
 	 * @var array
 	 */
     protected $fillable = [
-    	'name', 
+    	'name',
+        'ext',
     	'description', 
     	'path'
     ];

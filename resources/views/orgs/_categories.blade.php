@@ -73,6 +73,6 @@
 		@endif
 	@endforeach
 	@can('update-org', $org)
-		<a class="fancybox btn" href="#contributor-lightbox" style="margin-top: 10px;"><i class="material-icons left">add</i>Add</a>
+		<a class="btn modal-trigger" href="#contributor-modal" style="margin-top: 10px;">Add</a>
 	@endcan
 </div>

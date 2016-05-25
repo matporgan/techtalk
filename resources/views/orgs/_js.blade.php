@@ -49,7 +49,8 @@
             email: {
                 required: true,
                 email: true
-            }
+            },
+            relationship: "required",
         },
         errorElement : 'div',
         errorPlacement: function(error, element) {
@@ -149,6 +150,13 @@
     /** DELETE Confirmation **/
     
     function deleteConfirmation() {
+        var r = confirm("Are you sure you wish to delete {{ $org->name }}?");
+        if (r == true) {
+            window.location = "/orgs/{{ $org->id }}/delete";
+        }
+    }
+
+    function deleteAttachment() {
         var r = confirm("Are you sure you wish to delete {{ $org->name }}?");
         if (r == true) {
             window.location = "/orgs/{{ $org->id }}/delete";

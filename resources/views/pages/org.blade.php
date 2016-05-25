@@ -10,7 +10,7 @@
 		
 		@include('orgs._attachments')
 
-		<div class="card-panel" style="padding: 10px 40px 5px 40px;">
+		<div class="card-panel org-body">
 			<div class="row">
 				<h2 id="discussion">Discussion</h2>
 			</div>
@@ -19,7 +19,7 @@
 
 	</div>
 
-	<div class="col s12 m4 l3" style="padding: 8px 0 0 30px;">
+	<div class="col s12 m4 l3 org-categories">
 		
 		@include('orgs._categories')
 
@@ -29,11 +29,32 @@
 	
 @can('update-org', $org)
 
-	@include('orgs.forms.document')
+	<div id="document-modal" class="modal modal-form">
+	    <div class="modal-content">
+	    	<h2 class="center">Add Document</h2><br />
+			{!! Form::open(['method' => 'POST', 'action' => ['DocumentsController@store', $org->id], 'files' => true, 'id' => 'document-form']) !!}
+				@include('orgs.forms.document', ['type' => 'create', 'submitText' => 'Add Document'])
+			{!! Form::close() !!}
+		</div>
+	</div>
 
-	@include('orgs.forms.link')
+	<div id="link-modal" class="modal modal-form">
+	    <div class="modal-content">
+	    	<h2 class="center">Add Link</h2><br />
+			{!! Form::open(['method' => 'POST', 'action' => ['LinksController@store', $org->id], 'id' => 'link-form']) !!}
+				@include('orgs.forms.link', ['submitText' => 'Add Link'])
+			{!! Form::close() !!}
+		</div>
+	</div>
 
-	@include('orgs.forms.contact')
+	<div id="contact-modal" class="modal modal-form">
+	    <div class="modal-content">
+	    	<h2 class="center">Add Internal Contact</h2><br />
+			{!! Form::open(['method' => 'POST', 'action' => ['ContactsController@store', $org->id], 'id' => 'contact-form']) !!}
+				@include('orgs.forms.contact', ['submitText' => 'Add Contact'])
+			{!! Form::close() !!}
+		</div>
+	</div>
 
 	@include('orgs.forms.contributor')
 

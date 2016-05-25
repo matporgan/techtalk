@@ -8323,6 +8323,9 @@ html {
 .admin-btns {
   margin: 3rem 0 0 0; }
 
+.btn.margin-right {
+  margin-right: 10px; }
+
 .btn-group a, button {
   margin-right: 10px; }
 
@@ -8563,8 +8566,17 @@ nav .nav-wrapper {
 .modal.bottom-sheet {
   max-height: 100%; }
 
-.icon-close {
-  margin: 10px 10px 0 0; }
+.modal.bottom-sheet .modal-close {
+  margin-left: -20px;
+  position: relative;
+  left: 50%; }
+
+.modal.bottom-sheet .modal-close i {
+  margin-top: 10px;
+  font-size: 40px; }
+
+.modal.bottom-sheet .modal-content {
+  padding-top: 0; }
 
 .modal-content td {
   width: 33.33%;
@@ -8589,9 +8601,22 @@ nav .nav-wrapper {
 
 /* Org Page Style
 -------------------------------------------------- */
+.card-panel.org-header {
+  padding: 0px 30px 5px 30px; }
+
+.card-panel.org-body {
+  padding: 10px 40px 5px 40px; }
+
+.org-categories {
+  padding: 8px 0 0 30px !important; }
+
 .modal-form {
   max-height: 100%;
   width: 40%; }
+
+.modal-confirm {
+  max-height: 100%;
+  width: 30%; }
 
 /* Materialize Tags Style
 -------------------------------------------------- */

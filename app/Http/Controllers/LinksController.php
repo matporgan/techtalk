@@ -41,6 +41,29 @@ class LinksController extends Controller
     }
 
     /**
+     * Update the specified link.
+     *
+     * @param  Request $request
+     * @param  int  $id
+     * @param  int  $link_id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id, $link_id)
+    {
+        // authorization
+        $org = Org::findOrFail($id);
+        if (Gate::denies('update-org', $org)) abort(403);
+
+        // update database entry
+        $link = Link::findOrFail($link_id);
+        $link->update($request->all());
+
+        // flash and redirect
+        Session::flash('success', 'Successfully updated!');
+        return redirect("/orgs/{$org->id}");
+    }
+
+    /**
      * Destroy the link.
      *
      * @param  int  $id

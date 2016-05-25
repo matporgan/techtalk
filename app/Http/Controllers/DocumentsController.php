@@ -9,6 +9,7 @@ use App\Http\Requests;
 use Gate;
 use Response;
 use Session;
+use File;
 
 use App\Document;
 use App\Org;
@@ -31,27 +32,22 @@ class DocumentsController extends Controller
     public function store(Request $request, $id) 
     {
         $org = Org::findOrFail($id);
-        
-        $this->validate($request, [
-            'file' => 'required',
-            'name' => 'required',
-            'description' => 'required',
-        ]);
-        
+                
         // authorization
         if (Gate::denies('update-org', $org)) { abort(403); }
         
         // create filenames
         $file = $request->file('file');
         $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
-        $name = $request->name . '.' . $ext;
-        $unique_name = time() . $name;
+        $full_name = $request->name . '.' . $ext;
+        $unique_name = time() . $full_name;
         
         // move file
         $file->move($this->baseDir, $unique_name);
 
         $org->documents()->create([
-            'name' => $name, 
+            'name' => $request->name, 
+            'ext' => $ext,
             'description' => $request->description,
             'path' => '/' . $this->baseDir . $unique_name
         ]);
@@ -61,21 +57,26 @@ class DocumentsController extends Controller
     }
 
     /**
-     * Downloads a given document.
+     * Update the specified document.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  Request $request
+     * @param  int  $id
+     * @param  int  $link_id
      * @return \Illuminate\Http\Response
      */
-    public function download($id, $document_id) 
-    { 
-        $document = Document::findOrFail($document_id);
+    public function update(Request $request, $id, $document_id)
+    {
+        // authorization
+        $org = Org::findOrFail($id);
+        if (Gate::denies('update-org', $org)) abort(403);
 
-        //PDF file is stored under project/public/download/info.pdf
-        $file= public_path() . $document->path;
-        $headers = array(
-              "Content-Type: application/octet-stream",
-            );
-        return Response::download($file, $document->name, $headers);
+        // update database entry
+        $document = Document::findOrFail($document_id);
+        $document->update($request->all());
+
+        // flash and redirect
+        Session::flash('success', 'Successfully updated!');
+        return redirect("/orgs/{$org->id}");
     }
 
     /**
@@ -91,8 +92,33 @@ class DocumentsController extends Controller
         // authorization
         if (Gate::denies('update-org', $org)) { abort(403); }
         
+        $document = Document::findOrFail($document_id);
+
+        // delete document
+        $file = public_path() . $document->path;
+        File::delete($file);
+
+        // remove from database
     	Document::destroy($document_id);
         
     	return back();
+    } 
+
+    /**
+     * Downloads a given document.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function download($id, $document_id) 
+    { 
+        $document = Document::findOrFail($document_id);
+
+        //PDF file is stored under project/public/download/info.pdf
+        $file = public_path() . $document->path;
+        $headers = array(
+              "Content-Type: application/octet-stream",
+            );
+        return Response::download($file, $document->name . '.' . $document->ext, $headers);
     }
 }

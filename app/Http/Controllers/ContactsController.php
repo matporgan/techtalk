@@ -29,13 +29,33 @@ class ContactsController extends Controller
         if (Gate::denies('update-org', $org)) { abort(403); }
 
         // create DB entry
-        $org->contacts()->create([
-            'name' => $request->name,
-            'email' => $request->email
-        ]);
+        $org->contacts()->create($request->all());
         
         Session::flash('success', 'Contact successfully added!');
         return back();
+    }
+
+    /**
+     * Update the specified contact.
+     *
+     * @param  Request $request
+     * @param  int  $id
+     * @param  int  $contact_id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id, $contact_id)
+    {
+        // authorization
+        $org = Org::findOrFail($id);
+        if (Gate::denies('update-org', $org)) abort(403);
+
+        // update database entry
+        $contact = Contact::findOrFail($contact_id);
+        $contact->update($request->all());
+
+        // flash and redirect
+        Session::flash('success', 'Successfully updated!');
+        return redirect("/orgs/{$org->id}");
     }
 
     /**

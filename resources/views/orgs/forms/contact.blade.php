@@ -1,25 +1,20 @@
-<div id="contact-lightbox" class="lightbox" style="display:none;">
+<div class="input-field">
+	{!! Form::label('name', 'Name*', ['class' => 'active']) !!}
+	{!! Form::text('name', null) !!}
+</div>
 
-	{!! Form::open(['method' => 'POST', 'action' => ['ContactsController@store', $org->id], 'id' => 'contact-form']) !!}
+<div class="input-field">
+	{!! Form::label('email', 'Email*', ['class' => 'active']) !!}
+	{!! Form::text('email', null) !!}
+</div><br />
 
-		<h2 class="center">Add Contact</h2><br />
+<div class="input-field">
+	{!! Form::label('relationship', 'Relationship to Organisation*') !!}
+	{!! Form::textarea('relationship', null, ['class' => 'materialize-textarea']) !!}
+</div><br />
 
-		<div class="input-field">
-			{!! Form::label('name', 'Name:', ['class' => 'active']) !!}
-			{!! Form::text('name', null) !!}
-		</div>
-		
-		<div class="input-field">
-			{!! Form::label('email', 'Email:', ['class' => 'active']) !!}
-			{!! Form::text('email', null) !!}
-		</div><br />
-		
-		<div class="row center">
-			<button class="btn-large waves-effect waves-light" type="submit" name="action">
-			    Add Contact
-		  	</button>
-		</div>
-
-	{!! Form::close() !!}
-
+<div class="row center">
+	<button class="btn waves-effect waves-light" type="submit" name="action">
+	    {{ $submitText }}
+  	</button>
 </div>

@@ -1,4 +1,4 @@
-<div class="card-panel advisian-blue white-text" style="padding: 0px 40px 5px 30px;">
+<div class="card-panel org-header advisian-blue white-text">
 	<div class="row header-btn-wrapper">
 		<div class="col">
 			<h1>{!! $org->name !!}</h1>
@@ -19,7 +19,7 @@
 		</div>
 	</div>
 </div>
-<div class="card-panel" style="padding: 10px 40px 5px 40px;">
+<div class="card-panel org-body">
 	<div class="row">
 		<h2>Description</h2>
 

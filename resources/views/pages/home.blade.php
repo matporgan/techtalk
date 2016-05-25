@@ -29,8 +29,10 @@
 			</a>
 		</div>
 	@endforeach
+</div>
 
-	<div class="col s12 m4">
+<div class="row"> 
+	<div class="col s12 m4 l4">
 	    <h2>Stats</h2>
 	    <table class="stats striped z-depth-1">
 	    	<tbody>
@@ -44,7 +46,7 @@
 	    </table>
 	</div>
 	
-	<div class="col s12 m4">
+	<div class="col s12 m4 l4">
 	    <h2>Top Contributors</h2>
     	<table class="stats striped z-depth-1">
 	    	<tbody>
@@ -61,7 +63,7 @@
         </table>
 	</div>
 	
-	<div class="col s12 m4">
+	<div class="col s12 m4 l4">
 	    <h2>Top Commentors</h2>
         <table class="stats striped z-depth-1">
 	    	<tbody>
@@ -80,9 +82,8 @@
 </div>
 
 <div id="cube-technologies" class="modal bottom-sheet">
-	<a id="close-cube-technologies" class="alink">
-		<i class="material-icons right icon-close">close</i>
-	</a>
+	<a class="alink modal-close"><i class="material-icons icon-close">keyboard_arrow_down</i></a>
+
 	<div class="modal-content container">
 		<h2>Technologies</h2>
 		<table>
@@ -141,37 +142,29 @@
 </div>
 
 <div id="cube-industries" class="modal bottom-sheet">
-	<a id="close-cube-industries" class="alink">
-		<i class="material-icons right icon-close">close</i>
-	</a>
+	<a class="alink modal-close"><i class="material-icons icon-close">keyboard_arrow_down</i></a>
+
 	<div class="modal-content container">
 		<h2>Industries</h2>
-		<table>
-			<tr>
-				<td>
-					<ul>
-						@foreach($categories['industries'] as $industry)
-							<li>
-								@if($industry->orgs()->first() != null)
-									<a href="/industry/{{ $industry->id }}">
-										{{ $industry->name }}
-									</a>
-								@else
-									{{ $industry->name }}
-								@endif
-							</li>
-						@endforeach
-					</ul>
-				</td>
-			</tr>
-		</table>
+		<ul>
+			@foreach($categories['industries'] as $industry)
+				<li>
+					@if($industry->orgs()->first() != null)
+						<a href="/industry/{{ $industry->id }}">
+							{{ $industry->name }}
+						</a>
+					@else
+						{{ $industry->name }}
+					@endif
+				</li>
+			@endforeach
+		</ul>
 	</div>
 </div>
 
 <div id="cube-domains" class="modal bottom-sheet">
-	<a id="close-cube-domains" class="alink">
-		<i class="material-icons right icon-close">close</i>
-	</a>
+	<a class="alink modal-close"><i class="material-icons icon-close">keyboard_arrow_down</i></a>
+
 	<div class="modal-content container">
 		<h2>Domains</h2>
 		<table>
@@ -212,28 +205,7 @@
 	
 	$('#close-cube-domains').click(function() {
 		$('#cube-domains').closeModal();	
-	});
-
-    // $('#technology').click(function() {
-    //     $('#technology-content').slideToggle();
-    //     //$('#thecube-wrapper').slideToggle();
-    //     $('#cube-padding').slideToggle();
-    // });
-    // $('#technology-back').click(function() {
-    //     $('#technology-content').slideToggle();
-    //     //$('#thecube-wrapper').slideToggle();
-    //     $('#cube-padding').slideToggle();
-    // });
-    
-    // $('#industry').click(function() {
-    //     $('#industry-content').slideToggle();
-    //     $('#thecube-wrapper').slideToggle();
-    // });
-    // $('#industry-back').click(function() {
-    //     $('#industry-content').slideToggle();
-    //     $('#thecube-wrapper').slideToggle();
-    // });
-    
+	});    
 </script>
 
 @stop

@@ -20,14 +20,17 @@ Route::get('orgs/{id}/delete', 'OrgsController@destroy');
 Route::post('orgs/{id}/adduser', 'OrgsController@addUser');
 
 Route::post('orgs/{id}/document', 'DocumentsController@store');
+Route::patch('orgs/{id}/document/{document_id}/update', 'DocumentsController@update');
 Route::get('orgs/{id}/document/{document_id}/delete', 'DocumentsController@destroy');
 Route::get('orgs/{id}/document/{document_id}', 'DocumentsController@download');
 
 Route::post('orgs/{id}/link', 'LinksController@store');
+Route::patch('orgs/{id}/link/{link_id}/update', 'LinksController@update');
 Route::get('orgs/{id}/link/{link_id}/delete', 'LinksController@destroy');
 
 Route::post('orgs/{id}/contact', 'ContactsController@store');
-Route::get('orgs/{id}/contact/{user_id}/delete', 'ContactsController@destroy');
+Route::patch('orgs/{id}/contact/{contact_id}/update', 'ContactsController@update');
+Route::get('orgs/{id}/contact/{contact_id}/delete', 'ContactsController@destroy');
 
 Route::post('orgs/{id}/contributor', 'ContributorsController@store');
 Route::get('orgs/{id}/contributor/{user_id}/delete', 'ContributorsController@destroy');
