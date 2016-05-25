@@ -50,3 +50,5 @@ Route::get('discussions/{discussion_id}', 'DiscussionsController@show');
 Route::post('discussions/{discussion_id}/comment/{parent_id}', 'CommentsController@store');
 Route::post('comment/{comment_id}/update', 'CommentsController@update');
 Route::get('comment/{comment_id}/delete', 'CommentsController@destroy');
+
+Route::post('search', 'SearchController@search');

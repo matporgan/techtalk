@@ -50,7 +50,6 @@
                 required: true,
                 email: true
             },
-            relationship: "required",
         },
         errorElement : 'div',
         errorPlacement: function(error, element) {
