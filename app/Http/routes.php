@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'PagesController@home');
+Route::get('/home1', 'PagesController@home1');
 
 Route::auth();
 

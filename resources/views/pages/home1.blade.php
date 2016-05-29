@@ -1,28 +1,41 @@
 @extends('layouts.app')
 
 @section('content')
+
+<div class="row" style="height: 90vh">
+	<div class="row">
+		<div class="col s12">
+			<div class="center" style="font-size: 30px; margin-top: 20px">
+				<h1 class="center">Tech Talk</h1>
+				A place to 
+				<br /><a href="#!" class="btn-large">find</a>, <a href="#!" class="btn-large">discuss</a> and <a href="#!" class="btn-large">contribute</a>
+				<br />information about the tech world.
+			</div>
+		</div>
+	</div>
+</div>
 	
 <div class="row">
 	<div class="row">
 		<div class="col s12">
-			<div id="thecube-wrapper" style="width:100%; height:360px; margin-top:30px;">
+			<div id="thecube-wrapper" style="width:100%; height:360px;">
 				@include('snippets.cube')
 			</div>
 		</div>
 	</div>
 	
-	<!--<div class="row">-->
-	<!--	<div class="col s12 m6 offset-m3">-->
-	<!--		<div id="search-box" class="input-field search-box">-->
-	<!--			<input name="search" id="search" type="search" @if(isset($query))value="{{ $query }}"@endif>-->
-	<!--			<label for="search" class="active"><i class="material-icons prefix">search</i></label>-->
-	<!--		</div>-->
+	<div class="row">
+		<div class="col s12 m6 offset-m3">
+			<div id="search-box" class="input-field search-box">
+				<input name="search" id="search" type="search" @if(isset($query))value="{{ $query }}"@endif>
+				<label for="search" class="active"><i class="material-icons prefix">search</i></label>
+			</div>
 	
-	<!--		<button id="search-btn" class="btn waves-effect waves-light z-depth-2" type="submit" name="action" style="display: none;">-->
-	<!--			Search-->
-	<!--		</button>-->
-	<!--	</div>-->
-	<!--</div>-->
+			<button id="search-btn" class="btn waves-effect waves-light z-depth-2" type="submit" name="action" style="display: none;">
+				Search
+			</button>
+		</div>
+	</div>
 </div>
 
 <div class="row" style="position: relative; z-index: 10;"> 

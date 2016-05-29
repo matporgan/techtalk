@@ -71,6 +71,52 @@ class PagesController extends Controller
     }
     
     /**
+     * Home page controller
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function home1()
+    {
+        $orgs = Org::all();
+        $users = User::all();
+        $discussions = Discussion::all();
+        $comments = Comment::all();
+        
+        $categories = [
+            'technologies' => [
+                'emerging' => Technology::where('subcategory', 'Emerging')->get(),
+                'stable' => Technology::where('subcategory', 'Stable')->get(),
+                'accelerating' => Technology::where('subcategory', 'Accelerating')->get(),
+            ],
+            'industries' => Industry::all(),
+            'domains' => Domain::all()->groupBy('industry_id')->chunk(3),
+        ];
+        
+        $latest_orgs = $orgs->sortByDesc('id')->take(4);
+        
+        $top_contributors = $users->sortBy(function ($user, $key) {
+            $org_count = $user->orgs()->count();
+            $user['org_count'] = $org_count;
+            return -$org_count; // reversed
+        })->take(5);
+        
+        $top_commentors = $users->sortBy(function ($user, $key) {
+            $comment_count = $user->comments()->count();
+            $user['comment_count'] = $comment_count;
+            return -$comment_count; // reversed
+        })->take(5);
+        
+        $stats = [
+            'Organisations' => $orgs->count(),
+            'Discussions' => $discussions->count(),
+            'Comments' => $comments->count(),
+            'Users' => $users->count(),
+        ];
+        
+        return view('pages.home1', compact('latest_orgs', 'top_contributors', 'top_commentors', 'stats', 'categories'));
+    }
+    
+    /**
      * Display the specified technology.
      *
      * @param  int  $id
