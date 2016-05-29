@@ -21,6 +21,7 @@ class CreateOrgsTable extends Migration
             $table->string('website');
             $table->boolean('in_talks')->nullable();
             $table->string('partner_status')->nullable();
+            $table->string('lucene_search')->default('jerome');
             $table->timestamps();
         });
     }

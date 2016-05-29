@@ -26,14 +26,14 @@
 
 	
 	@else
-		<div class="center">
-			<h2>You have no organisations...</h2>
+		<div class="center" style="margin-top: 50px;">
+			<h2>Nothing Found.</h2>
 		</div>
 	@endif
 </div>
-		
-<div class="row center">
-	@if($orgs->lastPage() > 1)
+	
+@if($orgs->lastPage() > 1)	
+	<div class="row center">
 		<ul class="pagination">
 			@if($orgs->lastPage() == 1)
 				<li class="disabled"><i class="material-icons">chevron_left</i></li>
@@ -53,8 +53,8 @@
 				</li>
 			@endif
 		</ul>
-	@endif
-</div>
+	</div>
+@endif
 
 <script type="text/javascript">
 	var grid = $('.grid').masonry({

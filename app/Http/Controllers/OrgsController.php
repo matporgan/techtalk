@@ -26,8 +26,10 @@ class OrgsController extends Controller
     public function index()
     {
         $orgs = Org::orderBy('id', 'desc')->paginate(12);
+        
+        $categories = $this->getCategories();
 
-        return view('pages.orgs', compact('orgs'));
+        return view('pages.orgs', compact('orgs', 'categories'));
     }
 
     /**
