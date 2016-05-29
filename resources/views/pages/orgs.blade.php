@@ -67,7 +67,7 @@
 								{!! Form::label('domain_list', 'Domains') !!}
 							</div>
 							
-							@if(Auth::user()->isAdmin())
+							@if(Auth::check() && Auth::user()->isAdmin())
 								<br /><h3 class="center">Restricted</h3><br />
 								
 								<div class="input-field">
