@@ -60,7 +60,7 @@
 	@endif
 </div>
 
-@if($discussions->lastPage() > 1)
+@if(method_exists($discussions, 'lastPage') && $discussions->lastPage() > 1)
 	<div class="row center">
 		<ul class="pagination">
 			@if($discussions->lastPage() == 1)

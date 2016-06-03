@@ -6,6 +6,8 @@
 			accordion: false
 		});
 		$('.modal-trigger').leanModal();
+		$('.scrollspy').scrollSpy();
+		$('.tooltipped').tooltip({delay: 50});
 	});
 	
 	function onReady(callback) {
@@ -20,7 +22,6 @@
 	
 	onReady(function () {
 	    $('#loading').fadeToggle();
-	    // reload masonry if present
-	    grid.masonry('layout');
+	    grid.masonry('layout'); // reload masonry if present
 	});
 </script>

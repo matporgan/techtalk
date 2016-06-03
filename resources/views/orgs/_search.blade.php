@@ -2,7 +2,7 @@
 	<div class="col s12 m6 offset-m3">
 		{!! Form::open(['method' => 'POST', 'action' => ['SearchController@search'], 'id' => 'search-form']) !!}
 			<div style="height: 40px;">
-				<div id="search-box" class="input-field search-box">
+				<div id="search-box" class="input-field">
 					<input name="search" id="search" type="search" @if(isset($query))value="{{ $query }}"@endif>
 					<label for="search" class="active"><i class="material-icons prefix">search</i></label>
 				</div>
@@ -75,11 +75,33 @@
 						</div>
 					@endif
 					
-					<br /><a id="clear-btn" class="btn waves-effect waves-light right">
-				    	<i class="material-icons icon left">close</i>Clear
-					</a>
+					<br />
+					<a id="clear-btn" class="btn waves-effect waves-light right">Clear</a>
 				</div>
 			</div>
 		{!! Form::close() !!}
 	</div>
 </div>
+
+<script type="text/javascript">
+	$('#search').focus(function() {
+		$('#search-box').addClass('z-depth-2');
+		$('#search-box').addClass('search-box');
+		$('#search-btn').show();
+		$('#search-filter').openModal({complete: function() { 
+		 	$('#search-box').removeClass('z-depth-2');
+		 	$('#search-box').removeClass('search-box');
+			$('#search-btn').hide();
+			$('#filter-btn').hide();
+		}});
+	});
+	
+	$('#clear-btn').click(function() {
+		$('#technology_list').val("");
+		$('#industry_list').val("");
+		$('#domain_list').val("");
+		$('#partner_status').val("");
+		$('#in_talks').val("");
+	    $('select').material_select();
+  	});
+</script>

@@ -2,6 +2,8 @@
 
 @section('content')
 
+<div class="container">
+
 <div class="row">
 
 	<div class="col s12">
@@ -35,6 +37,8 @@
 	</div> <!-- END col -->
 
 </div> <!-- END row -->
+
+</div>
 
 <script type="text/javascript">
 	$('#list-toggle').click( function() {

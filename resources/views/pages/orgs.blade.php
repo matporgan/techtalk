@@ -2,6 +2,8 @@
 
 @section('content')
 
+<div class="container">
+
 <div class="row">
 
 	<div class="col s12">
@@ -29,6 +31,8 @@
 
 </div> <!-- END row -->
 
+</div>
+
 <script type="text/javascript">
 	/* grid-list toggle */
 	$('#list-toggle').click(function() {
@@ -44,30 +48,6 @@
 		$('.grid').removeClass('list');
 		grid.masonry('layout');
 	});
-	
-	/* search functions */
-	$('#search').focus(function() {
-		// $('.search-menu').sideNav('show');
-		$('#search-box').addClass('z-depth-2');
-		$('#search-btn').show();
-		// $('#filter-btn').show();
-		// $('#materialize-lean-overlay-4').show();
-		$('#search-filter').openModal({complete: function() { 
-		 	$('#search-box').removeClass('z-depth-2');
-			$('#search-btn').hide();
-			$('#filter-btn').hide();
-			// $('#materialize-lean-overlay-4').hide();
-		}});
-	});
-	
-	$('#clear-btn').click(function() {
-		$('#technology_list').val("");
-		$('#industry_list').val("");
-		$('#domain_list').val("");
-		$('#partner_status').val("");
-		$('#in_talks').val("");
-	    $('select').material_select();
-  	});
 </script>
 
 @stop

@@ -32,7 +32,7 @@
 	@endif
 </div>
 	
-@if($orgs->lastPage() > 1)	
+@if(method_exists($orgs, 'lastPage') && $orgs->lastPage() > 1)	
 	<div class="row center">
 		<ul class="pagination">
 			@if($orgs->lastPage() == 1)

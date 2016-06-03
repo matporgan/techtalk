@@ -92,8 +92,6 @@ class PagesController extends Controller
             'domains' => Domain::all()->groupBy('industry_id')->chunk(3),
         ];
         
-        $latest_orgs = $orgs->sortByDesc('id')->take(4);
-        
         $top_contributors = $users->sortBy(function ($user, $key) {
             $org_count = $user->orgs()->count();
             $user['org_count'] = $org_count;
@@ -113,7 +111,11 @@ class PagesController extends Controller
             'Users' => $users->count(),
         ];
         
-        return view('pages.home1', compact('latest_orgs', 'top_contributors', 'top_commentors', 'stats', 'categories'));
+        $orgs = $orgs->sortByDesc('id')->take(4);
+        $discussions = $discussions->sortByDesc('id')->take(4);
+        
+        return view('pages.home1', compact('orgs', 'discussions', 
+            'top_contributors', 'top_commentors', 'stats', 'categories'));
     }
     
     /**

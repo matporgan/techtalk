@@ -34,9 +34,7 @@
 	@include('layouts.header')
 	
 	<main id="page">
-		<div class="container">
-			@yield('content')
-		</div>
+		@yield('content')
 	</main>
 	
 	@include('layouts.footer')

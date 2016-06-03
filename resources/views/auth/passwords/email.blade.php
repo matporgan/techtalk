@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
-<!-- Main Content -->
 @section('content')
+
+<div class="container">
 
 <h1 class="center">Reset Password</h1><br />
 
@@ -22,6 +23,8 @@
         </div>
 
     </form>
+</div>
+
 </div>
 
 <script type="text/javascript">

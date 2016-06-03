@@ -8300,7 +8300,212 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   src: url("/fonts/source-sans-pro/SourceSansPro-Regular.ttf") format("truetype"); }
 
 html {
-  font-family: 'Source Sans Pro', 'Times New Roman'; }
+  font-family: "Source Sans Pro", Verdana, Geneva, sans-serif; }
+
+h1 {
+  font-family: "Lucida Console", Monaco, monospace;
+  color: #162934; }
+  h1 span {
+    color: #00ade6; }
+
+.code {
+  font-family: "Lucida Console", Monaco, monospace; }
+
+/*------------------------------------------------ */
+/* LAYOUT STYLES
+/*------------------------------------------------ */
+/* Navigation Bar
+-------------------------------------------------- */
+nav.home {
+  background: #00ade6; }
+
+nav .nav-wrapper {
+  z-index: 1; }
+
+/* Loading Screen
+-------------------------------------------------- */
+#loading {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
+  background-color: white; }
+  #loading #loading-logo {
+    font-size: 2.5rem;
+    margin: 30vh auto 20px auto;
+    width: auto;
+    height: 80px; }
+
+/* Site Logo
+-------------------------------------------------- */
+.site-logo {
+  color: #fff;
+  font-family: "Lucida Console", Monaco, monospace; }
+  .site-logo span {
+    color: #162934; }
+  .site-logo.alt span {
+    color: #00ade6; }
+  .site-logo.alt2 {
+    color: #162934; }
+    .site-logo.alt2 span {
+      color: #00ade6; }
+  .site-logo #typed {
+    color: #fff; }
+
+.typed-cursor {
+  opacity: 1;
+  -webkit-animation: blink 1s infinite;
+  animation: blink 1s infinite;
+  position: relative;
+  bottom: 8px;
+  color: #fff !important; }
+
+@keyframes blink {
+  0% {
+    opacity: 1; }
+  50% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@-webkit-keyframes blink {
+  0% {
+    opacity: 1; }
+  50% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+/*------------------------------------------------ */
+/* HOME PAGE STYLES
+/*------------------------------------------------ */
+/* General
+-------------------------------------------------- */
+.section {
+  position: relative;
+  min-height: calc(100vh - 40px);
+  padding-bottom: 40px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
+  .section.last {
+    box-shadow: none; }
+
+/* Landing
+-------------------------------------------------- */
+.section#landing {
+  min-height: 90vh;
+  padding-bottom: 0;
+  background: #00ade6;
+  color: #fff;
+  position: relative;
+  z-index: 2; }
+  .section#landing .landing-header {
+    color: #fff !important;
+    font-size: 90px;
+    font-family: "Lucida Console", Monaco, monospace;
+    margin-bottom: 60px; }
+    .section#landing .landing-header .bracket {
+      color: #162934; }
+  .section#landing .content {
+    font-size: 30px;
+    line-height: 200%;
+    width: 100%;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); }
+    .section#landing .content .btn-large {
+      margin: 0 .5rem;
+      background: #fff;
+      color: #00ade6; }
+    .section#landing .content i {
+      font-size: 2rem; }
+  .section#landing .section-down {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    -webkit-transform: translate(-50%, 0);
+    transform: translate(-50%, 0); }
+    .section#landing .section-down i {
+      font-size: 3rem !important; }
+
+/* #find
+-------------------------------------------------- */
+.section#find {
+  overflow: hidden; }
+  .section#find h2 {
+    font-family: "Lucida Console", Monaco, monospace; }
+  .section#find .content {
+    font-family: "Lucida Console", Monaco, monospace;
+    position: relative;
+    left: 0;
+    height: 200px;
+    font-size: 50px;
+    line-height: 50px; }
+    .section#find .content i {
+      position: absolute;
+      font-size: 40px;
+      color: #00ade6; }
+      .section#find .content i.browse-icon {
+        top: 5px;
+        left: -45px; }
+      .section#find .content i.search-icon {
+        top: 145px;
+        left: 145px; }
+  .section#find .search-box {
+    background: none; }
+    .section#find .search-box :focus {
+      background: none; }
+  .section#find .org-desc {
+    display: none; }
+
+/* #discuss
+-------------------------------------------------- */
+.section#discuss h2 {
+  font-family: "Lucida Console", Monaco, monospace; }
+
+#thecube-wrapper {
+  position: relative;
+  width: 100%;
+  height: 380px; }
+
+#technology-content {
+  position: absolute;
+  top: -30px;
+  background: rgba(255, 255, 255, 0.8); }
+
+#cube-padding {
+  display: none;
+  height: 100px; }
+
+.modal.bottom-sheet {
+  max-height: 100%; }
+
+.modal.bottom-sheet .modal-close {
+  margin-left: -20px;
+  position: relative;
+  left: 50%; }
+
+.modal.bottom-sheet .modal-close i {
+  margin-top: 10px;
+  font-size: 40px; }
+
+.modal.bottom-sheet .modal-content {
+  padding-top: 0; }
+
+.modal-content td {
+  width: 33.33%;
+  vertical-align: top; }
+
+.stats td {
+  padding: 13px 10px; }
+
+.stats td:last-child {
+  color: #a38f68;
+  width: 40px; }
 
 /* General Styles
 -------------------------------------------------- */
@@ -8363,9 +8568,6 @@ footer.page-footer {
   padding: 0;
   background: #00ade6; }
 
-nav .nav-wrapper {
-  z-index: 1; }
-
 /* Comment Styles
 -------------------------------------------------- */
 .comment-overlay {
@@ -8397,6 +8599,7 @@ nav .nav-wrapper {
 /* Logo Style
 -------------------------------------------------- */
 .logo {
+  font-size: 40px;
   height: 64px;
   width: auto;
   max-width: 240px; }
@@ -8456,8 +8659,7 @@ nav .nav-wrapper {
 /* Organisation grid
 -------------------------------------------------- */
 .org-grid {
-  overflow: hidden;
-  border-top: 1px solid #d0d0d0; }
+  overflow: hidden; }
 
 .grid {
   margin: 0 auto; }
@@ -8530,71 +8732,8 @@ nav .nav-wrapper {
   text-transform: initial;
   letter-spacing: 0; }
 
-/* Loading Screen Style
--------------------------------------------------- */
-#loading {
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  width: 100vw;
-  height: 100vh;
-  background-color: white; }
-
-#loading .row {
-  margin-top: 30vh; }
-
-#loading .logo {
-  margin: 0 auto 20px auto;
-  width: auto;
-  height: 80px; }
-
-/* Home Page Styles
--------------------------------------------------- */
-.stats td {
-  padding: 13px 10px; }
-
-.stats td:last-child {
-  color: #a38f68;
-  width: 40px; }
-
-#thecube-wrapper {
-  position: relative; }
-
-#technology-content {
-  position: absolute;
-  top: -30px;
-  background: rgba(255, 255, 255, 0.8); }
-
-#cube-padding {
-  display: none;
-  height: 100px; }
-
-.modal.bottom-sheet {
-  max-height: 100%; }
-
-.modal.bottom-sheet .modal-close {
-  margin-left: -20px;
-  position: relative;
-  left: 50%; }
-
-.modal.bottom-sheet .modal-close i {
-  margin-top: 10px;
-  font-size: 40px; }
-
-.modal.bottom-sheet .modal-content {
-  padding-top: 0; }
-
-.modal-content td {
-  width: 33.33%;
-  vertical-align: top; }
-
 /* Discussion Board Styles
 -------------------------------------------------- */
-.discussion-board {
-  border-top: 1px solid #d0d0d0; }
-
 .discussion-board .discussion-icon {
   font-size: 2.5rem; }
 
@@ -8619,9 +8758,11 @@ nav .nav-wrapper {
 
 #search-btn {
   position: relative;
-  top: -57px;
-  left: calc(100% + 10px);
-  z-index: 1009; }
+  z-index: 1009;
+  top: -61px;
+  left: calc(100% + 5px);
+  height: 46px;
+  border-radius: 0 2px 2px 0; }
 
 #filter-btn {
   position: relative;

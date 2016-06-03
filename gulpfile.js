@@ -22,14 +22,15 @@ elixir(function(mix) {
           'libs/jquery.fancybox.css',
        	], './public/css/libs.css')
        .scripts([
-       		'libs/jquery-2.2.3.min.js',
-       		'libs/materialize.min.js',
-       		'libs/select2.min.js',
-       		'libs/dropzone.js',
-          'libs/materialize-tags.js',
-          'libs/typeahead.bundle.js',
-          'libs/jquery.fancybox.js',
-          'libs/moment.js',
+            'libs/jquery-2.2.3.min.js',
+            'libs/materialize.min.js',
+            'libs/select2.min.js',
+            'libs/dropzone.js',
+            'libs/materialize-tags.js',
+            'libs/typeahead.bundle.js',
+            'libs/jquery.fancybox.js',
+            'libs/moment.js',
+            'libs/typed.js',
        	], './public/js/libs.js')
        	.scripts([
        		'helpers.js',

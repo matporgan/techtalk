@@ -2,6 +2,8 @@
 
 @section('content')
 
+<div class="container">
+
 @if($discussion->org_id != null)
 	<script type="text/javascript">
 	    window.location = "/orgs/{{ $discussion->org_id }}#discussion";//here double curly bracket
@@ -32,6 +34,8 @@
 		@include('comments._index', ['comment_prompt' => 'Reply to '.$discussion->user->getNameAndCity()])
 
 	</div>
+
+</div>
 
 </div>
 

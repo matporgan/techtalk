@@ -2,6 +2,8 @@
 
 @section('content')
 
+<div class="container">
+
 <h1 class="center">Login</h1><br />
 
 <div class="row">
@@ -39,6 +41,8 @@
         </div>
 
     </form>
+</div>
+
 </div>
 
 <script type="text/javascript">
