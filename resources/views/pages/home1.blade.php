@@ -305,8 +305,8 @@
 	// typed.js logo
 	$(window).load(function() {
 		$("#typed").typed({
-			strings: ["tech ^500 talk"],
-			typeSpeed: 200
+			strings: ["tech ^300 talk"],
+			typeSpeed: 150
 		});
 	});
 	

@@ -1,5 +1,9 @@
 <?php
-    
+    $websiteText = 'techtalk.advisian.com';
+    $websiteURL = 'http://techtalk-matporgan.c9users.io/';
+    $headerText = 'New Comments!';
+    $notificationsText = 'Update notification preferences';
+    $notificationsURL = 'http://techtalk-matporgan.c9users.io/';
 ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml"><head>
@@ -161,9 +165,9 @@
                     <![endif]-->
                     <table class="container" style="border-spacing: 0;border-collapse: collapse;vertical-align: top;max-width: 600px;margin: 0 auto;text-align: inherit" cellpadding="0" cellspacing="0" align="center" width="100%" border="0"><tbody><tr style="vertical-align: top"><td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top" width="100%"><table class="block-grid" style="border-spacing: 0;border-collapse: collapse;vertical-align: top;width: 100%;max-width: 600px;color: #000000;background-color: transparent" cellpadding="0" cellspacing="0" width="100%" bgcolor="transparent"><tbody><tr style="vertical-align: top"><td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;text-align: center;font-size: 0"><!--[if (gte mso 9)|(IE)]><table width="100%" align="center" bgcolor="transparent" cellpadding="0" cellspacing="0" border="0"><tr><![endif]--><!--[if (gte mso 9)|(IE)]><td valign="top" width="600"><![endif]--><div class="col num12" style="display: inline-block;vertical-align: top;width: 100%"><table style="border-spacing: 0;border-collapse: collapse;vertical-align: top" cellpadding="0" cellspacing="0" align="center" width="100%" border="0"><tbody><tr style="vertical-align: top"><td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;background-color: transparent;padding-top: 5px;padding-right: 0px;padding-bottom: 5px;padding-left: 0px;border-top: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-left: 0px solid transparent"><table style="border-spacing: 0;border-collapse: collapse;vertical-align: top" cellpadding="0" cellspacing="0" width="100%">
   <tbody><tr style="vertical-align: top">
-    <td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;padding-top: 10px;padding-right: 10px;padding-bottom: 10px;padding-left: 10px">
+    <td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;padding-top: 25px;padding-right: 10px;padding-bottom: 10px;padding-left: 10px">
         <div style="color:#555555;line-height:120%;font-family:'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;">            
-        	<div style="font-size:12px;line-height:14px;color:#555555;font-family:'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;text-align:left;"><div class="txtTinyMce-wrapper" style="font-size:12px; line-height:14px;"><div class="txtTinyMce-wrapper" style="font-size: 12px; line-height: 14px;"><div class="txtTinyMce-wrapper" style="font-size: 12px; line-height: 14px; font-family: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;"><p style="margin: 0;font-size: 14px;line-height: 16px;text-align: center"><span style="font-size: 24px; line-height: 28px;"><span style="line-height: 28px; font-size: 24px;">&#65279;</span>New Comments!</span><br></p></div></div></div></div>
+        	<div style="font-size:12px;line-height:14px;color:#555555;font-family:'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;text-align:left;"><div class="txtTinyMce-wrapper" style="font-size:12px; line-height:14px;"><div class="txtTinyMce-wrapper" style="font-size: 12px; line-height: 14px;"><div class="txtTinyMce-wrapper" style="font-size: 12px; line-height: 14px; font-family: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;"><p style="margin: 0;font-size: 14px;line-height: 16px;text-align: center"><span style="font-size: 24px; line-height: 28px;"><span style="line-height: 28px; padding-top: 25px; font-size: 24px;">&#65279;</span>{{ $headerText }}</span><br></p></div></div></div></div>
         </div>
     </td>
   </tr>
@@ -178,6 +182,11 @@
                   </td>
                 </tr>
               </tbody></table>
+
+              
+@foreach($discussions as $discussion)
+
+
               <table style="border-spacing: 0;border-collapse: collapse;vertical-align: top;background-color: transparent" cellpadding="0" cellspacing="0" align="center" width="100%" border="0">
                 <tbody><tr style="vertical-align: top">
                   <td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top" width="100%">
@@ -211,11 +220,6 @@
                   </td>
                 </tr>
               </tbody></table>
-              
-              
-@foreach($discussions as $discussion)
-
-
               <table style="border-spacing: 0;border-collapse: collapse;vertical-align: top;background-color: transparent" cellpadding="0" cellspacing="0" align="center" width="100%" border="0">
                 <tbody><tr style="vertical-align: top">
                   <td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top" width="100%">
@@ -231,7 +235,7 @@
   <tbody><tr style="vertical-align: top">
     <td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;padding-top: 10px;padding-right: 10px;padding-bottom: 10px;padding-left: 10px">
         <div style="color:#555555;line-height:120%;font-family:'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;">            
-        	<div style="font-size:12px;line-height:14px;color:#555555;font-family:'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;text-align:left;"><div class="txtTinyMce-wrapper" style="font-size:12px; line-height:14px;"><div class="txtTinyMce-wrapper" style="font-size: 12px; line-height: 14px;"><div class="txtTinyMce-wrapper" style="font-size: 12px; line-height: 14px; font-family: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;"><p style="margin: 0;font-size: 14px;line-height: 16px"><span style="font-size: 20px; line-height: 24px;" mce-data-marked="1">{{ $discussion->name }}</span></p></div></div></div></div>
+        	<div style="font-size:12px;line-height:14px;color:#555555;font-family:'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;text-align:left;"><div class="txtTinyMce-wrapper" style="font-size:12px; line-height:14px;"><div class="txtTinyMce-wrapper" style="font-size: 12px; line-height: 14px;"><div class="txtTinyMce-wrapper" style="font-size: 12px; line-height: 14px; font-family: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;"><p style="margin: 0;font-size: 14px;line-height: 16px"><span style="font-size: 20px; line-height: 24px;" mce-data-marked="1">{{ $discussion->type . ': ' . $discussion->name }}</span></p></div></div></div></div>
         </div>
     </td>
   </tr>
@@ -295,39 +299,6 @@
   </tr>
 </tbody></table>
 </td></tr></tbody></table></div><!--[if (gte mso 9)|(IE)]></td><![endif]--><!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]--></td></tr></tbody></table></td></tr></tbody></table>
-                    <!--[if mso]>
-                    </td></tr></table>
-                    <![endif]-->
-                    <!--[if (IE)]>
-                    </td></tr></table>
-                    <![endif]-->
-                  </td>
-                </tr>
-              </tbody></table>
-              <table style="border-spacing: 0;border-collapse: collapse;vertical-align: top;background-color: transparent" cellpadding="0" cellspacing="0" align="center" width="100%" border="0">
-                <tbody><tr style="vertical-align: top">
-                  <td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top" width="100%">
-                    <!--[if gte mso 9]>
-                    <table id="outlookholder" border="0" cellspacing="0" cellpadding="0" align="center"><tr><td>
-                    <![endif]-->
-                    <!--[if (IE)]>
-                    <table width="600" align="center" cellpadding="0" cellspacing="0" border="0">
-                        <tr>
-                            <td>
-                    <![endif]-->
-                    <table class="container" style="border-spacing: 0;border-collapse: collapse;vertical-align: top;max-width: 600px;margin: 0 auto;text-align: inherit" cellpadding="0" cellspacing="0" align="center" width="100%" border="0"><tbody><tr style="vertical-align: top"><td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top" width="100%"><table class="block-grid" style="border-spacing: 0;border-collapse: collapse;vertical-align: top;width: 100%;max-width: 600px;color: #000000;background-color: transparent" cellpadding="0" cellspacing="0" width="100%" bgcolor="transparent"><tbody><tr style="vertical-align: top"><td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;text-align: center;font-size: 0"><!--[if (gte mso 9)|(IE)]><table width="100%" align="center" bgcolor="transparent" cellpadding="0" cellspacing="0" border="0"><tr><![endif]--><!--[if (gte mso 9)|(IE)]><td valign="top" width="600"><![endif]--><div class="col num12" style="display: inline-block;vertical-align: top;width: 100%"><table style="border-spacing: 0;border-collapse: collapse;vertical-align: top" cellpadding="0" cellspacing="0" align="center" width="100%" border="0"><tbody><tr style="vertical-align: top"><td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;background-color: transparent;padding-top: 5px;padding-right: 0px;padding-bottom: 5px;padding-left: 0px;border-top: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-left: 0px solid transparent"><table style="border-spacing: 0;border-collapse: collapse;vertical-align: top" align="center" width="100%" border="0" cellpadding="0" cellspacing="0">
-    <tbody><tr style="vertical-align: top">
-        <td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;padding-top: 10px;padding-right: 10px;padding-bottom: 10px;padding-left: 10px" align="center">
-            <div style="height: 1px;">
-                <table style="border-spacing: 0;border-collapse: collapse;vertical-align: top;border-top: 1px solid #BBBBBB;width: 100%" align="center" border="0" cellspacing="0">
-                    <tbody><tr style="vertical-align: top">
-                        <td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top" align="center"></td>
-                    </tr>
-                </tbody></table>
-            </div>
-        </td>
-    </tr>
-</tbody></table></td></tr></tbody></table></div><!--[if (gte mso 9)|(IE)]></td><![endif]--><!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]--></td></tr></tbody></table></td></tr></tbody></table>
                     <!--[if mso]>
                     </td></tr></table>
                     <![endif]-->

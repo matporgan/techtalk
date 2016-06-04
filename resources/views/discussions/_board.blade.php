@@ -8,17 +8,17 @@
 							<div>
 								@if($discussion->type == 'Organisation')
 									<i class="material-icons left discussion-icon">business</i>
-									<a href="orgs/{{ $discussion->org_id }}#discussion" class="collection-item discussion-name">
+									<a href="/orgs/{{ $discussion->org_id }}#discussion" class="collection-item discussion-name">
 										Organisation: {{ $discussion->name }}
 									</a>
 								@elseif($discussion->type == 'Discussion')
 									<i class="material-icons left discussion-icon">forum</i>
-									<a href="discussions/{{ $discussion->id }}" class="collection-item discussion-name">
+									<a href="/discussions/{{ $discussion->id }}" class="collection-item discussion-name">
 										Discussion: {{ $discussion->name }}
 									</a>
 								@elseif($discussion->type == 'Question')
 									<i class="material-icons left discussion-icon">live_help</i>
-									<a href="discussions/{{ $discussion->id }}" class="collection-item discussion-name">
+									<a href="/discussions/{{ $discussion->id }}" class="collection-item discussion-name">
 										Question: {{ $discussion->name }}
 									</a>
 								@endif

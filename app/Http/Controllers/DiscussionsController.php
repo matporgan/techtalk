@@ -13,7 +13,6 @@ use Session;
 use App\Discussion;
 
 class DiscussionsController extends Controller
-
 {
 	/**
      * Display a listing of the discussions.

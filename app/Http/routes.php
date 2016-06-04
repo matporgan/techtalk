@@ -54,4 +54,4 @@ Route::get('comment/{comment_id}/delete', 'CommentsController@destroy');
 
 Route::post('search', 'SearchController@search');
 
-Route::get('email', 'NotificationsController@sendEmail');
+Route::get('test', 'TestController@start');
