@@ -36,8 +36,8 @@ class Notifications
                 }
                 
                 // update database
-                // $user->last_notified = date('Y-m-d H:i:s', time());
-                // $user->save();
+                $user->last_notified = date('Y-m-d H:i:s', time());
+                $user->save();
             }
         }
     }
@@ -51,10 +51,19 @@ class Notifications
     private static function getNextNotification(User $user) {
         // convert frequency to usable format
         switch ($user->notify_frequency) {
-            case 'weekly':
+            case 'None':
+                $frequency = '+1000 years';
+                break;
+            case 'Instant':
                 $frequency = '+1 minute';
                 break;
-            case 'monthly':
+            case 'Daily':
+                $frequency = '+1 day';
+                break;
+            case 'Weekly':
+                $frequency = '+7 days';
+                break;
+            case 'Monthly':
                 $frequency = '+1 month';
                 break;
         }

@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('city');
             $table->string('email')->unique();
             $table->string('role')->default('contributor');
-            $table->string('notify_frequency')->default('weekly');
+            $table->string('notify_frequency')->default('Weekly');
             $table->timestamp('last_notified')->default('0000-00-00 00:00:00');
             $table->string('password');
             $table->rememberToken();

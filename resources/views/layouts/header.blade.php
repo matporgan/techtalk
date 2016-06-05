@@ -18,6 +18,7 @@
                         <li><a href="/discussions/12" target="_top">Feedback</a></li>
                         <li><a href="#!" class="dropdown-button" data-activates="user-dropdown" style="min-width: 160px">{{ Auth::user()->getName() }}<i class="material-icons right">arrow_drop_down</i></a></li>
                         <ul id="user-dropdown" class="dropdown-content">
+                            <li><a href="/account">Account</a></li>
                             <li><a href="/user/{{ Auth::user()->id }}/orgs">My Organisations</a></li>
                             <li><a href="/user/{{ Auth::user()->id }}/discussions">My Discussions</a></li>
                             <li class="divider"></li>
@@ -35,6 +36,7 @@
                     <li {{ Request::is('orgs/create') ? 'class=active' : null }}><a href="/orgs/create">Contribute</a></li>
                     <li class="divider"></li>
                     @if(Auth::check())
+                        <li><a href="/account">Account</a></li>
                         <li><a href="/user/{{ Auth::user()->id }}/orgs">My Organisations</a></li>
                         <li><a href="/user/{{ Auth::user()->id }}/discussions">My Discussions</a></li>
                         <li class="divider"></li>

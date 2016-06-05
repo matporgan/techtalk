@@ -43,6 +43,11 @@ Route::get('tag/{tag_id}', 'PagesController@tag');
 Route::get('user/{user_id}/orgs', 'PagesController@userOrgs');
 Route::get('user/{user_id}/discussions', 'PagesController@userDiscussions');
 
+// User preferences
+Route::get('account', 'PreferencesController@show');
+Route::post('account/notify', 'PreferencesController@updateNotify');
+Route::post('account/password', 'PreferencesController@updatePassword');
+
 Route::get('discussions/create', 'DiscussionsController@create');
 Route::post('discussions', 'DiscussionsController@store');
 Route::get('discussions', 'DiscussionsController@index');

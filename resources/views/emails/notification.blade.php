@@ -2,8 +2,8 @@
     $websiteText = 'techtalk.advisian.com';
     $websiteURL = 'http://techtalk-matporgan.c9users.io/';
     $headerText = 'New Comments!';
-    $notificationsText = 'Update notification preferences';
-    $notificationsURL = 'http://techtalk-matporgan.c9users.io/';
+    $notificationsText = 'Update preferences';
+    $notificationsURL = $websiteURL . 'account';
 ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml"><head>
@@ -244,7 +244,7 @@
   <tbody><tr style="vertical-align: top">
     <td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;padding-top: 10px;padding-right: 10px;padding-bottom: 10px;padding-left: 10px">
         <div style="color:#555555;line-height:120%;font-family:'Source Sans Pro', Tahoma, Verdana, Segoe, sans-serif;">            
-        	<div style="font-size:12px;line-height:14px;color:#555555;font-family:'Source Sans Pro', Tahoma, Verdana, Segoe, sans-serif;text-align:left;"><div class="txtTinyMce-wrapper" style="font-size:12px; line-height:14px;"><div class="txtTinyMce-wrapper" style="font-size: 12px; line-height: 14px;"><p style="margin: 0;font-size: 14px;line-height: 16px">{{ $discussion->newComments }} new comments.<br></p></div></div></div>
+        	<div style="font-size:12px;line-height:14px;color:#555555;font-family:'Source Sans Pro', Tahoma, Verdana, Segoe, sans-serif;text-align:left;"><div class="txtTinyMce-wrapper" style="font-size:12px; line-height:14px;"><div class="txtTinyMce-wrapper" style="font-size: 12px; line-height: 14px;"><p style="margin: 0;font-size: 14px;line-height: 16px">{{ $discussion->newComments }} @if($discussion->newComments == 1) new comment. @else new comments. @endif<br></p></div></div></div>
         </div>
     </td>
   </tr>
@@ -283,7 +283,7 @@
 
               <table style="border-spacing: 0;border-collapse: collapse;vertical-align: top;height: 42" width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tbody><tr style="vertical-align: top"><td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;border-radius: 2px;                   -webkit-border-radius: 2px;                   -moz-border-radius: 2px;                  color: #ffffff;                  background-color: #00ade6;                  padding-top: 5px;                   padding-right: 20px;                  padding-bottom: 5px;                  padding-left: 20px;                  font-family: 'Source Sans Pro', Tahoma, Verdana, Segoe, sans-serif;text-align: center" valign="middle"><!--<![endif]-->
-                  <a style="display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;background-color: #00ade6;color: #ffffff" href="{{ $websiteURL . '/discussions/' . $discussion->id }}" target="_blank">
+                  <a style="display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;background-color: #00ade6;color: #ffffff" href="{{ $websiteURL . 'discussions/' . $discussion->id }}" target="_blank">
                         <span style="font-family:'Source Sans Pro', Tahoma, Verdana, Segoe, sans-serif;font-size:16px;line-height:32px;">View</span>
                   </a>
                 <!--[if !mso]><!- - --></td></tr></tbody></table>
