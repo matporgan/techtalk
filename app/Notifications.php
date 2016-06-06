@@ -157,7 +157,7 @@ class Notifications
     private static function sendNotification(User $user, $discussions) {
         Mail::send('emails.notification', ['user' => $user, 'discussions' => $discussions], function ($m) use ($user) {
             $m->from('techtalk@advisian.com', 'Tech Talk');
-            $m->to($user->email, $user->name)->subject('Test Email!');
+            $m->to($user->email, $user->name)->subject('Tech Talk Notifications');
         });
     }
 }
