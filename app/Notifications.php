@@ -23,12 +23,13 @@ class Notifications
         
         foreach ($users as $user)
         {
+            
             if (time() > self::getNextNotification($user))
             {
                 // get discussions with activity
                 $discussions = self::getDiscussions($user);
                 $activeDiscussions = self::getActiveDiscussions($user, $discussions);
-                
+
                 // send notifications
                 if (! empty($activeDiscussions))
                 {

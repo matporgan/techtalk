@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use App\Notifications;
+use App\Discussion;
 use Beautymail;
 use Auth;
 use Mail;
@@ -17,9 +18,22 @@ class TestController extends Controller
     {
         $user = Auth::user();
 
+        $d1 = Discussion::where('id', 3)->first();
+        $d1->newComments = 2;
+
+        $discussions = array();
+        $discussions[] = $d1;
+
+        //dd($discussions);
+
         Mail::send('emails.test', ['user' => $user], function ($m) use ($user) {
             $m->from('techtalk@advisian.com', 'Tech Talk');
             $m->to($user->email, $user->name)->subject('Test Email abc!');
+        });
+
+        Mail::send('emails.notification', ['user' => $user, 'discussions' => $discussions], function ($m) use ($user) {
+            $m->from('techtalk@advisian.com', 'Tech Talk');
+            $m->to($user->email, $user->name)->subject('Tech Talk Notifications');
         });
     }
 }

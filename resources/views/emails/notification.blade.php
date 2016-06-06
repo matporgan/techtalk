@@ -1,6 +1,6 @@
 <?php
     $websiteText = 'techtalk.advisian.com';
-    $websiteURL = 'http://techtalk-matporgan.c9users.io/';
+    $websiteURL = 'http://sgazrttk01v.southeastasia.cloudapp.azure.com/';
     $headerText = 'New Comments!';
     $notificationsText = 'Update preferences';
     $notificationsURL = $websiteURL . 'account';
