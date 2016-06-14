@@ -135,7 +135,7 @@ nav {
 /* Landing
 -------------------------------------------------- */
 .section#landing {
-	min-height: 90vh;
+	min-height: calc(100vh - 64px);
 	padding-bottom: 0;
 	background: color('advisian-blue', 'base');
 	color: #fff;

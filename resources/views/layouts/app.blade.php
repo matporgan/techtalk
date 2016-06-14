@@ -7,6 +7,7 @@
 	
 	<title>Tech Talk</title>
 
+	<link rel='shortcut icon' type='image/x-icon' href='img/favicon.ico' />
 	<link rel="stylesheet" href="/css/app.css">
 	<link rel="stylesheet" href="/css/libs.css">
 	<link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">

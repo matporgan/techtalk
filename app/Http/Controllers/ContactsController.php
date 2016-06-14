@@ -23,12 +23,12 @@ class ContactsController extends Controller
      */
     public function store(Request $request, $id) 
     {
-        $org = Org::findOrFail($id);
-
         // authorization
+        $org = Org::findOrFail($id);
         if (Gate::denies('update-org', $org)) { abort(403); }
 
         // create DB entry
+        $request->merge(array('relationship' => trim($request->relationship)));
         $org->contacts()->create($request->all());
         
         Session::flash('success', 'Contact successfully added!');
@@ -50,6 +50,7 @@ class ContactsController extends Controller
         if (Gate::denies('update-org', $org)) abort(403);
 
         // update database entry
+        $request->merge(array('relationship' => trim($request->relationship)));
         $contact = Contact::findOrFail($contact_id);
         $contact->update($request->all());
 

@@ -23,5 +23,12 @@
 	onReady(function () {
 	    $('#loading').fadeToggle();
 	    grid.masonry('layout'); // reload masonry if present
+
+		// typed.js logo
+	    $("#typed").typed({
+			strings: ["tech ^300 talk"],
+			startDelay: 500,
+			typeSpeed: 150
+		});
 	});
 </script>

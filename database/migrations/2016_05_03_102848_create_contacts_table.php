@@ -18,6 +18,7 @@ class CreateContactsTable extends Migration
             $table->foreign('org_id')->references('id')->on('orgs')->onDelete('cascade');  
             $table->string('name');
             $table->string('email');
+            $table->text('relationship');
             $table->timestamps();
         });
     }

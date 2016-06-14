@@ -8395,7 +8395,7 @@ nav .nav-wrapper {
 /* Landing
 -------------------------------------------------- */
 .section#landing {
-  min-height: 90vh;
+  min-height: calc(100vh - 64px);
   padding-bottom: 0;
   background: #00ade6;
   color: #fff;

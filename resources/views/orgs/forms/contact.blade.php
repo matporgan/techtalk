@@ -9,8 +9,8 @@
 </div><br />
 
 <div class="input-field">
-	{!! Form::label('relationship', 'Relationship to Organisation*') !!}
-	{!! Form::textarea('relationship', null, ['class' => 'materialize-textarea']) !!}
+	{!! Form::label('relationship', 'Relationship') !!}
+	{!! Form::textarea('relationship', null, ['class' => 'materialize-textarea', 'placeholder' => "What is the contact's relationship to the organisation?"]) !!}
 </div><br />
 
 <div class="row center">

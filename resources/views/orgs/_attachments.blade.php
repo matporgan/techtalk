@@ -124,7 +124,9 @@
 							<div class="collapsible-header"><i class="material-icons">person</i>{{ $contact->name }}</div></a>
 							<div class="collapsible-body">
 								<p>
-									{!! nl2br($contact->relationship) !!}<br /><br />
+									@if($contact->relationship != "")
+										{!! nl2br($contact->relationship) !!}<br /><br />
+									@endif
 									<a class="btn" href="mailto:{{ $contact->email }}" target="_blank"><i class="material-icons left">email</i>Contact</a>
 									@can('update-org', $org)
 										<a class="btn red right modal-trigger" href="#delete-contact-{{ $contact->id }}"><i class="material-icons">close</i></a>

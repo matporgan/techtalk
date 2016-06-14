@@ -302,14 +302,6 @@
 		}
 	});
 	
-	// typed.js logo
-	$(window).load(function() {
-		$("#typed").typed({
-			strings: ["tech ^300 talk"],
-			typeSpeed: 150
-		});
-	});
-	
 	// close modals
 	$('#close-cube-technologies').click(function() {
 		$('#cube-technologies').closeModal();	
