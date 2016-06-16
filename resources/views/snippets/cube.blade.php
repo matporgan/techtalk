@@ -18,6 +18,135 @@
     </div>
 </div>
 
+<div id="cube-technologies" class="modal bottom-sheet">
+  <a class="alink modal-close"><i class="material-icons icon-close">keyboard_arrow_down</i></a>
+
+  <div class="modal-content container">
+    <h2>Technologies</h2>
+    <table>
+      <tr>
+        <td>
+          <h3>Emerging</h3>
+          <ul>
+            @foreach($categories['technologies']['emerging'] as $technology)
+              <li>
+                @if($technology->orgs()->first() != null)
+                  <a href="/technology/{{ $technology->id }}">
+                    {{ $technology->name }}
+                  </a>
+                @else
+                  {{ $technology->name }}
+                @endif
+              </li>
+            @endforeach
+          </ul>
+        </td>
+        <td>
+          <h3>Stable</h3>
+          <ul>
+            @foreach($categories['technologies']['stable'] as $technology)
+              <li>
+                @if($technology->orgs()->first() != null)
+                  <a href="/technology/{{ $technology->id }}">
+                    {{ $technology->name }}
+                  </a>
+                @else
+                  {{ $technology->name }}
+                @endif
+              </li>
+            @endforeach
+          </ul>
+        </td>
+        <td>
+          <h3>Accelerating</h3>
+          <ul>
+            @foreach($categories['technologies']['accelerating'] as $technology)
+              <li>
+                @if($technology->orgs()->first() != null)
+                  <a href="/technology/{{ $technology->id }}">
+                    {{ $technology->name }}
+                  </a>
+                @else
+                  {{ $technology->name }}
+                @endif
+              </li>
+            @endforeach
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div id="cube-industries" class="modal bottom-sheet">
+  <a class="alink modal-close"><i class="material-icons icon-close">keyboard_arrow_down</i></a>
+
+  <div class="modal-content container">
+    <h2>Industries</h2>
+    <ul>
+      @foreach($categories['industries'] as $industry)
+        <li>
+          @if($industry->orgs()->first() != null)
+            <a href="/industry/{{ $industry->id }}">
+              {{ $industry->name }}
+            </a>
+          @else
+            {{ $industry->name }}
+          @endif
+        </li>
+      @endforeach
+    </ul>
+  </div>
+</div>
+
+<div id="cube-domains" class="modal bottom-sheet">
+  <a class="alink modal-close"><i class="material-icons icon-close">keyboard_arrow_down</i></a>
+
+  <div class="modal-content container">
+    <h2>Domains</h2>
+    <table>
+      <tr>
+        @foreach($categories['domains'] as $chunk)
+        <td>
+          @foreach($chunk as $domains)
+            <h3>{{ $domains->first()->industry->name }}</h3>
+            <ul>
+              @foreach($domains as $domain)
+                <li>
+                  @if($domain->orgs()->first() != null)
+                    <a href="/domain/{{ $domain->id }}">
+                      {{ $domain->name }}
+                    </a>
+                  @else
+                    {{ $domain->name }}
+                  @endif
+                </li>
+              @endforeach
+            </ul>
+          @endforeach
+        </td>
+        @endforeach
+      </tr>
+    </table>
+  </div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+  $('#close-cube-technologies').click(function() {
+    $('#cube-technologies').closeModal(); 
+  });
+  
+  $('#close-cube-industries').click(function() {
+    $('#cube-industries').closeModal(); 
+  });
+  
+  $('#close-cube-domains').click(function() {
+    $('#cube-domains').closeModal();  
+  });    
+</script>
+
 <style type="text/css">
 
 #thecube {

@@ -700,7 +700,7 @@ if ($) {
       $body.width(oldWidth);
 
       var defaults = {
-        opacity: 0.5,
+        opacity: 0.8, 
         in_duration: 350,
         out_duration: 250,
         ready: undefined,

@@ -16,5 +16,15 @@ function show(id, value) {
 function showhide(id) {
 	var display = $(id).css('display');
 	$(id).css('display') == 'none' ? 'block' : 'none';
-} 
+}
+
+function onReady(callback) {
+    var intervalID = window.setInterval(checkReady, 1000);
+    function checkReady() {
+        if (document.getElementsByTagName('body')[0] !== undefined) {
+            window.clearInterval(intervalID);
+            callback.call(this);
+        }
+    }
+}
 //# sourceMappingURL=app.js.map

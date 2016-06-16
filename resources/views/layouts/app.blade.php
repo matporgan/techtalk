@@ -31,10 +31,10 @@
 	@include('snippets.page-loading')
 	
 	@include('snippets.flash')
-			
+
 	@include('layouts.header')
 	
-	<main id="page">
+	<main id="page" @if(Request::is('/')) class="home" @endif>
 		@yield('content')
 	</main>
 	

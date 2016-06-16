@@ -16,24 +16,25 @@ class TestController extends Controller
 {
     public function start()
     {
-        $user = Auth::user();
+        dd('test');
+        // $user = Auth::user();
 
-        $d1 = Discussion::where('id', 3)->first();
-        $d1->newComments = 2;
+        // $d1 = Discussion::where('id', 3)->first();
+        // $d1->newComments = 2;
 
-        $discussions = array();
-        $discussions[] = $d1;
+        // $discussions = array();
+        // $discussions[] = $d1;
 
-        //dd($discussions);
+        // //dd($discussions);
 
-        Mail::send('emails.test', ['user' => $user], function ($m) use ($user) {
-            $m->from('techtalk@advisian.com', 'Tech Talk');
-            $m->to($user->email, $user->name)->subject('Test Email abc!');
-        });
+        // Mail::send('emails.test', ['user' => $user], function ($m) use ($user) {
+        //     $m->from('techtalk@advisian.com', 'Tech Talk');
+        //     $m->to($user->email, $user->name)->subject('Test Email abc!');
+        // });
 
-        Mail::send('emails.notification', ['user' => $user, 'discussions' => $discussions], function ($m) use ($user) {
-            $m->from('techtalk@advisian.com', 'Tech Talk');
-            $m->to($user->email, $user->name)->subject('Tech Talk Notifications');
-        });
+        // Mail::send('emails.notification', ['user' => $user, 'discussions' => $discussions], function ($m) use ($user) {
+        //     $m->from('techtalk@advisian.com', 'Tech Talk');
+        //     $m->to($user->email, $user->name)->subject('Tech Talk Notifications');
+        // });
     }
 }

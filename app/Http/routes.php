@@ -14,6 +14,7 @@
 // Home
 Route::get('/', 'PagesController@home');
 Route::get('/home1', 'PagesController@home1');
+Route::get('/home2', 'PagesController@home2');
 
 // Authentication
 Route::auth();
@@ -60,8 +61,8 @@ Route::post('account/password', 'PreferencesController@updatePassword');
 // Discussions
 Route::get('discuss', 'DiscussionsController@index');
 Route::get('discussions', 'DiscussionsController@index');
-Route::get('discussions/{discussion_id}', 'DiscussionsController@show');
 Route::get('discussions/create', 'DiscussionsController@create');
+Route::get('discussions/{discussion_id}', 'DiscussionsController@show');
 Route::post('discussions', 'DiscussionsController@store');
 
 // Comments

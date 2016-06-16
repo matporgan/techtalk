@@ -23,7 +23,7 @@ elixir(function(mix) {
        	], './public/css/libs.css')
        .scripts([
             'libs/jquery-2.2.3.min.js',
-            'libs/materialize.min.js',
+            'libs/materialize.js',
             'libs/select2.min.js',
             'libs/dropzone.js',
             'libs/materialize-tags.js',

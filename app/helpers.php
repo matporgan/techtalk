@@ -16,6 +16,29 @@ function addhttp($url) {
 }
 
 /**
+ * Get a 2D array of all the categories in the database.
+ * 
+ * @return array
+ */
+function getCategories()
+{   
+    // create array for each of the industry domains
+    $industries = App\Industry::lists('name', 'id')->all();
+
+    for ($i=1; $i<=count($industries); $i++)
+    {
+        $domains[$i] = App\Domain::where('industry_id', $i)->lists('name', 'id')->all();
+    }
+
+    return [
+        'technologies' => App\Technology::lists('name', 'id')->all(),
+        'industries' => $industries,
+        'domains' => $domains,
+        'tags' => App\Tag::lists('name', 'id')->all()
+    ];
+}
+
+/**
  * Gets an array of comment collections in the correct display order.
  *
  * @param  Discussion $discussion

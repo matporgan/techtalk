@@ -1,6 +1,4 @@
 <div class="row">
-	<h2 class="center">General Information</h2><br />
-
 	<div class="input-field">
 		{!! Form::label('name', 'Name*', ['id' => 'name', 'class' => 'active']) !!}
 		{!! Form::text('name', null) !!}
@@ -19,13 +17,6 @@
 	<div class="input-field">
 		{!! Form::label('long_desc', 'Long Description', ['class' => 'active']) !!}
 		{!! Form::textarea('long_desc', null, ['class' => 'materialize-textarea']) !!}
-	</div>
-
-	<div class="input-field">
-		<input name="tag_list" id="tag_list" class="typeahead" type="text" value="@if($type == 'edit') {{ $selections['tags'] }} @endif" data-role="materialtags"/>
-		{!! Form::label('tag_list', 'Tags') !!}
-		<span class="subtitle">(seperate with tab)</span>
-		<br /><br />
 	</div>
 
 	@if($type == 'create')
@@ -59,8 +50,6 @@
 </div>
 
 <div class="row">
-	<h2 class="center">Categorization</h2><br />
-
 	<div class="input-field">
 		<select name="technology_list[]" id="technology_list" multiple>
 			<option value="" disabled selected>Select technologies...</option>
@@ -81,6 +70,13 @@
 		</select>
 		{!! Form::label('industry_list', 'Industries*') !!}
 		<div id="industry-error" class="custom-error" style="display:none;">This field is required.</div><br />
+	</div>
+
+	<div class="input-field">
+		<input name="tag_list" id="tag_list" class="typeahead" type="text" value="@if($type == 'edit') {{ $selections['tags'] }} @endif" data-role="materialtags"/>
+		{!! Form::label('tag_list', 'Applications') !!}
+		<span class="subtitle">(seperate with tab)</span>
+		<br /><br />
 	</div>
 
 	@for ($i = 1; $i <= count($categories['industries']); $i++)

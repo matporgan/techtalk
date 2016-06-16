@@ -24,58 +24,58 @@ class PagesController extends Controller
      */
     protected $paginate = 12;
     
-    /**
-     * Home page controller
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function home()
-    {
-        $orgs = Org::all();
-        $users = User::all();
-        $discussions = Discussion::all();
-        $comments = Comment::all();
+    // /**
+    //  * Home page controller
+    //  *
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function home()
+    // {
+    //     $orgs = Org::all();
+    //     $users = User::all();
+    //     $discussions = Discussion::all();
+    //     $comments = Comment::all();
         
-        $categories = [
-            'technologies' => [
-                'emerging' => Technology::where('subcategory', 'Emerging')->get(),
-                'stable' => Technology::where('subcategory', 'Stable')->get(),
-                'accelerating' => Technology::where('subcategory', 'Accelerating')->get(),
-            ],
-            'industries' => Industry::all(),
-            'domains' => Domain::all()->groupBy('industry_id')->chunk(3),
-        ];
+    //     $categories = [
+    //         'technologies' => [
+    //             'emerging' => Technology::where('subcategory', 'Emerging')->get(),
+    //             'stable' => Technology::where('subcategory', 'Stable')->get(),
+    //             'accelerating' => Technology::where('subcategory', 'Accelerating')->get(),
+    //         ],
+    //         'industries' => Industry::all(),
+    //         'domains' => Domain::all()->groupBy('industry_id')->chunk(3),
+    //     ];
         
-        $latest_orgs = $orgs->sortByDesc('id')->take(4);
+    //     $latest_orgs = $orgs->sortByDesc('id')->take(4);
         
-        $top_contributors = $users->sortBy(function ($user, $key) {
-            $org_count = $user->orgs()->count();
-            $user['org_count'] = $org_count;
-            return -$org_count; // reversed
-        })->take(5);
+    //     $top_contributors = $users->sortBy(function ($user, $key) {
+    //         $org_count = $user->orgs()->count();
+    //         $user['org_count'] = $org_count;
+    //         return -$org_count; // reversed
+    //     })->take(5);
         
-        $top_commentors = $users->sortBy(function ($user, $key) {
-            $comment_count = $user->comments()->count();
-            $user['comment_count'] = $comment_count;
-            return -$comment_count; // reversed
-        })->take(5);
+    //     $top_commentors = $users->sortBy(function ($user, $key) {
+    //         $comment_count = $user->comments()->count();
+    //         $user['comment_count'] = $comment_count;
+    //         return -$comment_count; // reversed
+    //     })->take(5);
         
-        $stats = [
-            'Organisations' => $orgs->count(),
-            'Discussions' => $discussions->count(),
-            'Comments' => $comments->count(),
-            'Users' => $users->count(),
-        ];
+    //     $stats = [
+    //         'Organisations' => $orgs->count(),
+    //         'Discussions' => $discussions->count(),
+    //         'Comments' => $comments->count(),
+    //         'Users' => $users->count(),
+    //     ];
         
-        return view('pages.home', compact('latest_orgs', 'top_contributors', 'top_commentors', 'stats', 'categories'));
-    }
+    //     return view('pages.home1', compact('orgs', 'discussions', 'latest_orgs', 'top_contributors', 'top_commentors', 'stats', 'categories'));
+    // }
     
     /**
      * Home page controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function home1()
+    public function home()
     {
         $orgs = Org::all();
         $users = User::all();
@@ -114,7 +114,7 @@ class PagesController extends Controller
         $orgs = $orgs->sortByDesc('id')->take(4);
         $discussions = $discussions->sortByDesc('id')->take(4);
         
-        return view('pages.home1', compact('orgs', 'discussions', 
+        return view('pages.home2', compact('orgs', 'discussions', 
             'top_contributors', 'top_commentors', 'stats', 'categories'));
     }
     

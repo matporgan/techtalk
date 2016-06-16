@@ -1,99 +1,125 @@
-<div class="row">
-	<div class="col s12 m6 offset-m3">
-		{!! Form::open(['method' => 'POST', 'action' => ['SearchController@search'], 'id' => 'search-form']) !!}
-			<div style="height: 40px;">
-				<div id="search-box" class="input-field">
-					<input name="search" id="search" type="search" @if(isset($query))value="{{ $query }}"@endif>
-					<label for="search" class="active"><i class="material-icons prefix">search</i></label>
+<div id="popup-search">
+	{!! Form::open(['method' => 'POST', 'action' => ['SearchController@search'], 'id' => 'popup-search-form']) !!}
+		<div id="search-box" class="input-field search-box">
+			<input name="search" id="search" type="search" placeholder="Artificial Intelligence, BrainChip, ..." @if(isset($query))value="{{ $query }}"@endif>
+			<label for="search"><i class="material-icons prefix">search</i></label>
+		</div>
+
+		<button type="submit" name="action" style="display: none;"></button>
+
+		<div id="search-filter" class="modal modal-left">
+			<div class="modal-content">
+				<h2 class="center">Filter</h2><br />
+				
+				<div class="input-field">
+					<select name="technology_list[]" id="technology_list" multiple>
+						<option value="" disabled selected>Select...</option>
+						@foreach($categories['technologies'] as $id => $technology)
+							<option value="{{ $technology }}">{{ $technology }}</option>
+						@endforeach
+					</select>
+					{!! Form::label('technology_list', 'Technologies') !!}
 				</div>
 				
-				<a id="filter-btn" class="btn waves-effect waves-light z-depth-2" style="display: none;">
-					<i class="material-icons icon">filter_list</i>
-				</a>
+				<div class="input-field">
+					<select name="industry_list[]" id="industry_list" multiple>
+						<option value="" disabled selected>Select...</option>
+						@foreach($categories['industries'] as $id => $industry)
+							<option value="{{ $industry }}">{{ $industry }}</option>
+						@endforeach
+					</select>
+					{!! Form::label('industry_list', 'Industries') !!}
+				</div>
 				
-				<button id="search-btn" class="btn waves-effect waves-light z-depth-2" type="submit" name="action" style="display: none;">
-					Search
-				</button>
-			</div>
+				<div class="input-field">
+					<select name="domain_list[]" id="domain_list" multiple>
+						<option value="" disabled selected>Select...</option>
+						<option>Planning</option>
+						<option>Development</option>
+						<option>Distribution</option>
+						<option>Retail</option>
+					</select>
+					{!! Form::label('domain_list', 'Domains') !!}
+				</div>
+				
+				@if(Auth::check() && Auth::user()->isAdmin())
+					<br /><h3 class="center">Restricted</h3><br />
+					
+					<div class="input-field">
+						{!! Form::select('partner_status', [
+							''=>'', 
+							'No Partnership'=>'No Partnership', 
+							'In Development'=>'In Development', 
+							'Active Partner'=>'Active Partner', 
+							'Past Partner'=>'Past Partner',
+						], null, ['id' => 'partner_status']) !!}
+						{!! Form::label('partner_status', 'Partner Status*') !!}
+					</div>
 			
-			<div id="search-filter" class="modal modal-left">
-				<div class="modal-content">
-					<h2 class="center">Filter</h2><br />
-					
 					<div class="input-field">
-						<select name="technology_list[]" id="technology_list" multiple>
-							<option value="" disabled selected>Select...</option>
-							@foreach($categories['technologies'] as $id => $technology)
-								<option value="{{ $technology }}">{{ $technology }}</option>
-							@endforeach
-						</select>
-						{!! Form::label('technology_list', 'Technologies') !!}
+						{!! Form::select('in_talks', [
+							''=>'', 
+							'No'=>'No', 
+							'Yes'=>'Yes'
+						], null, ['id' => 'in_talks']) !!}
+						{!! Form::label('in_talks', 'In Talks*') !!}
 					</div>
-					
-					<div class="input-field">
-						<select name="industry_list[]" id="industry_list" multiple>
-							<option value="" disabled selected>Select...</option>
-							@foreach($categories['industries'] as $id => $industry)
-								<option value="{{ $industry }}">{{ $industry }}</option>
-							@endforeach
-						</select>
-						{!! Form::label('industry_list', 'Industries') !!}
-					</div>
-					
-					<div class="input-field">
-						<select name="domain_list[]" id="domain_list" multiple>
-							<option value="" disabled selected>Select...</option>
-							<option>Planning</option>
-							<option>Development</option>
-							<option>Distribution</option>
-							<option>Retail</option>
-						</select>
-						{!! Form::label('domain_list', 'Domains') !!}
-					</div>
-					
-					@if(Auth::check() && Auth::user()->isAdmin())
-						<br /><h3 class="center">Restricted</h3><br />
-						
-						<div class="input-field">
-							{!! Form::select('partner_status', [
-								''=>'', 
-								'No Partnership'=>'No Partnership', 
-								'In Development'=>'In Development', 
-								'Active Partner'=>'Active Partner', 
-								'Past Partner'=>'Past Partner',
-							], null, ['id' => 'partner_status']) !!}
-							{!! Form::label('partner_status', 'Partner Status*') !!}
-						</div>
+				@endif
 				
-						<div class="input-field">
-							{!! Form::select('in_talks', [
-								''=>'', 
-								'No'=>'No', 
-								'Yes'=>'Yes'
-							], null, ['id' => 'in_talks']) !!}
-							{!! Form::label('in_talks', 'In Talks*') !!}
-						</div>
-					@endif
-					
-					<br />
-					<a id="clear-btn" class="btn waves-effect waves-light right">Clear</a>
-				</div>
+				<a id="clear-btn" class="btn waves-effect waves-light right">Clear</a>
 			</div>
-		{!! Form::close() !!}
-	</div>
+		</div>
+	{!! Form::close() !!}
+
+	<a id="browse-all" href="/find" class="search-subtitle alink">Browse All</a>
+	<a id="advanced-search" class="search-subtitle alink">Advanced Search</a>
 </div>
 
 <script type="text/javascript">
-	$('#search').focus(function() {
-		$('#search-box').addClass('z-depth-2');
-		$('#search-box').addClass('search-box');
-		$('#search-btn').show();
+	var parts = window.location.search.substr(1).split("&");
+	var $_GET = {};
+	for (var i = 0; i < parts.length; i++) {
+	    var temp = parts[i].split("=");
+	    $_GET[decodeURIComponent(temp[0])] = decodeURIComponent(temp[1]);
+	}
+
+	if ($_GET['s'] == 'basic')  {
+		basicSearch();
+	}
+	else if ($_GET['s'] == 'advanced') {
+		advancedSearch();
+	}
+
+	function basicSearch() {
 		$('#search-filter').openModal({complete: function() { 
-		 	$('#search-box').removeClass('z-depth-2');
-		 	$('#search-box').removeClass('search-box');
-			$('#search-btn').hide();
-			$('#filter-btn').hide();
+			$('.search-subtitle').removeClass('white-text');
+			$('#popup-search').css('z-index', 0);
+			$('#advanced-search').toggle();
+		 	// $('#search-box').hide();
+		 	// $('#advanced-search').hide();
+		 	// $('#browse-all').hide();
+		 	// $('#search-filter').hide();
 		}});
+		// $('#search-box').fadeIn();
+		// $('#advanced-search').fadeIn();
+		// $('#browse-all').fadeIn();
+		$('#search').focus();
+		$('.search-subtitle').addClass('white-text');
+		$('#advanced-search').toggle();
+		$('#popup-search').css('z-index', 1009);
+	}
+
+	function advancedSearch() {
+		basicSearch();
+		$('#search-filter').attr("style", "z-index: 1003; display: block !important; opacity: 1; transform: scaleX(1); top: 10%;");
+	}
+
+	$('#toggle-search').click(function() {
+		basicSearch();
+	});
+
+	$('#advanced-search').click(function() {
+		advancedSearch();
 	});
 	
 	$('#clear-btn').click(function() {

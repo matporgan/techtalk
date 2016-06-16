@@ -31,7 +31,7 @@ class SearchController extends Controller
         $fixed_query = str_replace('or', '', $fixed_query);
         $fixed_query = str_replace('xor', '', $fixed_query);
         $fixed_query = str_replace('not', '', $fixed_query);
-        
+
         // if query is empty, return all orgs (using lucene_search table column)
         if (trim($fixed_query) == "")
         {

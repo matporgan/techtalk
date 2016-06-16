@@ -57,6 +57,10 @@
 @endif
 
 <script type="text/javascript">
+	onReady(function () {
+	    grid.masonry('layout');
+	});
+
 	var grid = $('.grid').masonry({
 		percentPosition: true,
 		columnWidth: '.grid-sizer',

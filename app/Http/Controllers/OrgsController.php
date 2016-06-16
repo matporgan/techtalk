@@ -27,7 +27,7 @@ class OrgsController extends Controller
     {
         $orgs = Org::orderBy('id', 'desc')->paginate(12);
         
-        $categories = $this->getCategories();
+        $categories = getCategories();
 
         return view('pages.orgs', compact('orgs', 'categories'));
     }
@@ -42,7 +42,7 @@ class OrgsController extends Controller
         // redirect if not logged in
         if (Auth::guest()) return redirect()->guest('login');
         
-        $categories = $this->getCategories();
+        $categories = getCategories();
 
         return view('orgs.create', compact('categories'));
     }
@@ -109,7 +109,7 @@ class OrgsController extends Controller
         // authorization
         if (Gate::denies('update-org', $org)) abort(403);
         
-        $categories = $this->getCategories();
+        $categories = getCategories();
         $selections = $this->getSelections($org);
 
         return view('orgs.edit', compact('org', 'categories', 'selections'));
@@ -234,29 +234,6 @@ class OrgsController extends Controller
         }
 
         return $sync_tags;
-    }
-
-    /**
-     * Get a 2D array of all the categories in the database.
-     * 
-     * @return array
-     */
-    private function getCategories()
-    {   
-        // create array for each of the industry domains
-        $industries = Industry::lists('name', 'id')->all();
-
-        for ($i=1; $i<=count($industries); $i++)
-        {
-            $domains[$i] = Domain::where('industry_id', $i)->lists('name', 'id')->all();
-        }
-
-        return [
-            'technologies' => Technology::lists('name', 'id')->all(),
-            'industries' => $industries,
-            'domains' => $domains,
-            'tags' => Tag::lists('name', 'id')->all()
-        ];
     }
     
     /**
