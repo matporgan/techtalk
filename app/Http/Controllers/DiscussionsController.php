@@ -25,7 +25,7 @@ class DiscussionsController extends Controller
         $discussions = Discussion::with('comments')
             ->where('updated', '!=', 'NULL')
             ->orderBy('updated', 'desc')
-            ->paginate(15);
+            ->paginate(10);
 
         return view('pages.discussions', compact('discussions'));
     }

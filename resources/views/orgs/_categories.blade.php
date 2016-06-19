@@ -24,21 +24,18 @@
 	@endforeach
 </div>
 
-<div class="row">
+<!-- <div class="row">
 	<h3>Domains</h3>
 	@foreach($org->domains as $domain)
 		<a href="/domain/{{ $domain->id }}">
 			<div class="chip">{{ $domain->name }}</div>
 		</a>
-		<!--@if($domain->industry_id == $industry->id)-->
-		<!--	<li><a href="/domain/{{ $domain->id }}">{{ $domain->name }}</a></li>-->
-		<!--@endif-->
 	@endforeach
-</div>
+</div> -->
 
 @if(! $org->tags->isEmpty())
 	<div class="row">
-		<h3>Tags</h3>
+		<h3>Applications</h3>
 		@foreach($org->tags as $tag)
 			<a href="/tag/{{ $tag->id }}">
 				<div class="chip">{{ $tag->name }}</div>

@@ -1,0 +1,37 @@
+/*------------------------------------------------ */
+/* GENERAL
+/*------------------------------------------------ */
+
+// Fonts 
+
+@font-face {
+    font-family: "Source Sans Pro";
+    src: url("/fonts/source-sans-pro/SourceSansPro-Regular.ttf") format("truetype");
+}
+
+$font-main: "Source Sans Pro", Verdana, Geneva, sans-serif;
+$font-secondary: "Courier New", Courier, monospace;
+
+// Common Elements
+
+html {
+	font-family: $font-main;
+}
+
+// Typography
+
+h1 {
+	font-family: $font-secondary;
+	color: color('advisian-charcoal', 'base');
+	span {
+		color: color('advisian-blue', 'base');
+	}
+	&.title {
+		margin: 10vh 0 5vh 0;
+	}
+}
+
+h2 {
+	font-size: 3rem;
+	font-family: $font-secondary; 
+}

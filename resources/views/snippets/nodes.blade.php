@@ -1,4 +1,4 @@
-<canvas id="canvas"></canvas>
+<canvas id="nodes"></canvas>
 
 <script type="text/javascript">
     window.requestAnimFrame = function()
@@ -15,7 +15,7 @@
         );
     }();
 
-    var canvas = document.getElementById('canvas'); 
+    var canvas = document.getElementById('nodes'); 
     
     var context = canvas.getContext('2d');
     

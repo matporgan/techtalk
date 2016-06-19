@@ -81,6 +81,10 @@ class PagesController extends Controller
         $users = User::all();
         $discussions = Discussion::all();
         $comments = Comment::all();
+
+        $technologies = Technology::all();
+        $industries = Industry::all();
+        $tags = Tag::has('orgs')->get()->sortBy('name');
         
         $categories = [
             'technologies' => [
@@ -88,9 +92,12 @@ class PagesController extends Controller
                 'stable' => Technology::where('subcategory', 'Stable')->get(),
                 'accelerating' => Technology::where('subcategory', 'Accelerating')->get(),
             ],
-            'industries' => Industry::all(),
-            'domains' => Domain::all()->groupBy('industry_id')->chunk(3),
+            'industries' => $industries->chunk(ceil($industries->count() / 4)),
+            'tags' => $tags->chunk(ceil($tags->count() / 4)),
+            //'domains' => Domain::all()->groupBy('industry_id')->chunk(3),
         ];
+
+        //dd($categories['industries']);
         
         $top_contributors = $users->sortBy(function ($user, $key) {
             $org_count = $user->orgs()->count();
@@ -126,11 +133,13 @@ class PagesController extends Controller
      */
     public function technology($id)
     {
-        $category = Technology::findOrFail($id);
-        $type = 'Technology';
-        $orgs = $category->orgs()->paginate($this->paginate);
+        $technology = Technology::findOrFail($id);
         
-        return view('pages.category', compact('category', 'type', 'orgs'));
+        $orgs = $technology->orgs()->paginate($this->paginate);
+        $type = 'Technology';
+        $category = $technology->name;
+        
+        return view('pages.orgs', compact('category', 'type', 'orgs'));
     }
 
     /**
@@ -141,41 +150,43 @@ class PagesController extends Controller
      */
     public function industry($id)
     {
-        $category = Industry::findOrFail($id);
+        $industry = Industry::findOrFail($id);
+
+        $orgs = $industry->orgs()->paginate($this->paginate);
         $type = 'Industry';
-        $orgs = $category->orgs()->paginate($this->paginate);
+        $category = $industry->name;
         
-        return view('pages.category', compact('category', 'type', 'orgs'));
+        return view('pages.orgs', compact('category', 'type', 'orgs'));
     }
     
-    /**
-     * Display the specified domain.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function domain($id)
-    {
-        $category = Domain::findOrFail($id);
-        $type = 'Domain';
+    // /**
+    //  * Display the specified domain.
+    //  *
+    //  * @param  int  $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function domain($id)
+    // {
+    //     $category = Domain::findOrFail($id);
+    //     $type = 'Domain';
         
-        // get domains with same alias
-        $domains = Domain::where('alias', $category->alias)->get();
+    //     // get domains with same alias
+    //     $domains = Domain::where('alias', $category->alias)->get();
 
-        foreach($domains as $domain)
-        {
-            foreach($domain->orgs as $org)
-            {
-                $org_ids[] = $org->pivot->org_id;
-            }  
-        }
-        // return 404 if no ids found
-        if (empty($org_ids)) return abort(404);
+    //     foreach($domains as $domain)
+    //     {
+    //         foreach($domain->orgs as $org)
+    //         {
+    //             $org_ids[] = $org->pivot->org_id;
+    //         }  
+    //     }
+    //     // return 404 if no ids found
+    //     if (empty($org_ids)) return abort(404);
 
-        $orgs = Org::whereIn('id', $org_ids)->paginate($this->paginate);
+    //     $orgs = Org::whereIn('id', $org_ids)->paginate($this->paginate);
         
-        return view('pages.category', compact('category', 'type', 'orgs'));
-    }
+    //     return view('pages.category', compact('category', 'type', 'orgs'));
+    // }
     
     /**
      * Display the specified tag.
@@ -185,11 +196,13 @@ class PagesController extends Controller
      */
     public function tag($id)
     {
-        $category = Tag::findOrFail($id);
-        $type = 'Tag';
-        $orgs = $category->orgs()->paginate($this->paginate);
+        $tag = Tag::findOrFail($id);
+
+        $orgs = $tag->orgs()->paginate($this->paginate);
+        $type = 'Application';
+        $category = $tag->name;
         
-        return view('pages.category', compact('category', 'type', 'orgs'));
+        return view('pages.orgs', compact('category', 'type', 'orgs'));
     }
     
     /**
@@ -203,9 +216,12 @@ class PagesController extends Controller
         if(Auth::user()->id != $id) abort(403);
 
         $user = User::findOrFail($id);
+
         $orgs = $user->orgs()->paginate($this->paginate);
+        $type = 'User';
+        $category = $user->getNameAndCity();
         
-        return view('pages.user-orgs', compact('orgs'));
+        return view('pages.orgs', compact('category', 'type', 'orgs'));
     }
 
     /**
@@ -219,8 +235,11 @@ class PagesController extends Controller
         if(Auth::user()->id != $id) abort(403);
 
         $user = User::findOrFail($id);
+
         $discussions = $user->discussions()->paginate($this->paginate);
-        
-        return view('pages.user-discussions', compact('discussions'));
+        $type = 'User';
+        $category = $user->getNameAndCity();
+
+        return view('pages.discussions', compact('category', 'type', 'discussions'));
     }
 }

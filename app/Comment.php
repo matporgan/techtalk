@@ -4,8 +4,21 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+use Nqxcode\LuceneSearch\Model\SearchableInterface;
+use Nqxcode\LuceneSearch\Model\SearchTrait;
+
+class Comment extends Model implements SearchableInterface
 {
+    use SearchTrait;
+ 
+    /**
+     * Get id list for all searchable models.
+     */
+    public static function searchableIds()
+    {
+        return self::lists('id');
+    }
+    
 	/**
 	 * Fillable fields for a comment.
 	 *

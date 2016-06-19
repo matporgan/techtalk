@@ -1,7 +1,7 @@
 <div id="popup-search">
-	{!! Form::open(['method' => 'POST', 'action' => ['SearchController@search'], 'id' => 'popup-search-form']) !!}
-		<div id="search-box" class="input-field search-box">
-			<input name="search" id="search" type="search" placeholder="Artificial Intelligence, BrainChip, ..." @if(isset($query))value="{{ $query }}"@endif>
+	{!! Form::open(['method' => 'POST', 'action' => ['SearchController@' . $type], 'id' => 'popup-search-form']) !!}
+		<div id="search-box" class="input-field search-box card">
+			<input name="search" id="search" type="search" placeholder="@if($type=='discussions')Search discussions...@elseif($type=='orgs')Search...@endif" @if(isset($query))value="{{ $query }}"@endif>
 			<label for="search"><i class="material-icons prefix">search</i></label>
 		</div>
 
@@ -71,8 +71,10 @@
 		</div>
 	{!! Form::close() !!}
 
-	<a id="browse-all" href="/find" class="search-subtitle alink">Browse All</a>
-	<a id="advanced-search" class="search-subtitle alink">Advanced Search</a>
+	<a id="browse-all" href="@if($type=='discussions') /discuss @else /discover @endif" class="search-subtitle alink">Browse All</a>
+	@if ($type == 'orgs')
+		<a id="advanced-search" class="search-subtitle alink">Advanced Search</a>
+	@endif
 </div>
 
 <script type="text/javascript">
@@ -113,6 +115,13 @@
 		basicSearch();
 		$('#search-filter').attr("style", "z-index: 1003; display: block !important; opacity: 1; transform: scaleX(1); top: 10%;");
 	}
+
+	$('#search').focusin(function() {
+		$('.search-subtitle').addClass('advisian-blue-text');
+	});
+	$('#search').focusout(function() {
+		$('.search-subtitle').removeClass('advisian-blue-text');
+	});
 
 	$('#toggle-search').click(function() {
 		basicSearch();

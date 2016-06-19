@@ -1,0 +1,38 @@
+/*------------------------------------------------ */
+/* DISCUSSION
+/*------------------------------------------------ */
+
+.discussion-board {
+	.card-panel {
+		padding: 10px 20px;
+	}
+	a {
+		color: color('advisian-charcoal', 'base');
+	}
+	i {
+		font-size: 3rem;
+	    margin: 5px 10px 0 0;
+	}
+	.discussion {
+		display: inline-block;
+		.discussion-name {
+			font-size: 2rem;
+			line-height: 110%;
+			color: color('advisian-blue', 'base');
+		}
+		.discussion-details {
+			.discussion-user, .discussion-date {
+				display: inline-block;
+				color: color('advisian-gold', 'base');
+			}
+		}
+	}
+	.discussion-count {
+		color: color('advisian-gold', 'base');
+		width: 70px;
+		font-size: 2rem;
+		text-align: right;
+		margin-top: 5px;
+	}
+
+}

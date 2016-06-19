@@ -14,14 +14,14 @@
 		</h1>
 
 		<div class="landing-search">
-			{!! Form::open(['method' => 'POST', 'action' => ['SearchController@search'], 'id' => 'search-form']) !!}
+			{!! Form::open(['method' => 'POST', 'action' => ['SearchController@orgs'], 'id' => 'search-form']) !!}
 				<div id="home-search-box" class="input-field search-box">
 					<input name="search" id="home-search" type="search" placeholder="Artificial Intelligence, BrainChip, ...">
 					<label for="search"><i class="material-icons prefix">search</i></label>
 				</div>
 			{!! Form::close() !!}
 
-			<a href="find?s=advanced" class="alink">Advanced Search</a>
+			<a href="discover?s=advanced" class="alink">Advanced Search</a>
 		</div>
 
 		<div class="landing-browse">
@@ -30,7 +30,7 @@
 		</div>
 	</div>
 
-	<div id="down-2" class="section-down alink bounce animated">
+	<div id="down-2" class="landing-down alink bounce animated">
 		<i class="material-icons icon-large">keyboard_arrow_down</i>
 	</div>
 </div>
@@ -48,9 +48,7 @@
 		</div>
 
 		<div class="row">
-			<div id="thecube-wrapper">
-				@include('snippets.cube')
-			</div>
+			@include('snippets.cube')
 		</div>
 	</div>
 </div>
@@ -59,7 +57,7 @@
 	<div class="parallax"><img src="img/nodes.jpg"></div>
 </div>
 
-<div id="figures" class="section">
+<div id="activity" class="section">
 	<div class="container">
 		<div class="row" style="position: relative; z-index: 10; margin-bottom: 0;">
 			<div class="header-btn-wrapper">
@@ -70,36 +68,39 @@
 		<div class="row" style="position: relative; z-index: 10; margin-bottom: 0;">
 			<div class="header-btn-wrapper">
 				<h2>Newest Tech</h2>
-				<a href="/find" class="btn-large header-btn waves-effect waves-light right">View All</a>
+				<a href="/discover" class="btn-large header-btn waves-effect waves-light right"><i class="material-icons left">search</i>All</a>
 			</div>
 		</div>
 		
 		<div class="row">
 			@include('orgs._grid')
 		</div>
+
+		<div class="row" style="position: relative; z-index: 10; margin-bottom: 0;">
+			<div class="header-btn-wrapper">
+				<h2>Latest Discussion</h2>
+				<a href="/discuss" class="btn-large header-btn waves-effect waves-light right"><i class="material-icons left">forum</i>All</a>
+			</div>
+		</div>
+
+		<div class="row">
+			@include('discussions._board')
+		</div>
 	</div>
+</div>
 
-	<div class="divider"></div>
+<div class="parallax-container">
+	<div class="parallax"><img src="img/nodes.jpg"></div>
+</div>
 
+<div id="activity" class="section">
 	<div class="container">
 		<div class="row" style="position: relative; z-index: 10; margin-bottom: 0;">
 			<div class="header-btn-wrapper">
-				<h2>Hot Discussions</h2>
-				<a href="/discuss" class="btn-large header-btn waves-effect waves-light right">View All</a>
+				<h1><span>#</span>Numbers</h1>
 			</div>
 		</div>
-		
-		@include('discussions._board')
-	</div>
 
-	<div class="divider"></div>
-
-	<div class="container">
-		<div class="row" style="position: relative; z-index: 10; margin-bottom: 0;">
-			<div class="header-btn-wrapper">
-				<h2>Numbers</h2>
-			</div>
-		</div>
 		<div class="row"> 
 			<div class="col s12 m4 l4">
 			    <h3>Stats</h3>

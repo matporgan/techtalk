@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use Search;
+use URL;
 
 use App\Org;
+use App\Discussion;
 use App\Technology;
 use App\Industry;
 use App\Domain;
@@ -16,21 +18,35 @@ use App\Tag;
 
 class SearchController extends Controller
 {
+    // /**
+    //  * Implements laravel-lucene-search to find query results
+    //  * 
+    //  * @param  Request $request
+    //  * @return \Illuminate\Http\Response
+    //  */aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+    // public function search(Request $request)
+    // {
+    //     $url = URL::previous();
+    //     $origin = substr($url, strrpos($url, '/') + 1);
+
+    //     if($origin == 'discuss') {
+    //         return $this->searchDiscussions($request);
+    //     }
+    //     else{
+    //         return $this->searchOrgs($request);
+    //     }
+    // }
+
     /**
-     * 
+     * Implements laravel-lucene-search to find org query results
      * 
      * @param  Request $request
      * @return \Illuminate\Http\Response
      */
-    public function search(Request $request)
+    public function orgs(Request $request)
     {
-        $query = $request->search;
-        
         // laravel-lucene-search bug fixes
-        $fixed_query = str_replace('and', '', $query);
-        $fixed_query = str_replace('or', '', $fixed_query);
-        $fixed_query = str_replace('xor', '', $fixed_query);
-        $fixed_query = str_replace('not', '', $fixed_query);
+        $fixed_query = $this->luceneBugPatch($request);
 
         // if query is empty, return all orgs (using lucene_search table column)
         if (trim($fixed_query) == "")
@@ -40,7 +56,7 @@ class SearchController extends Controller
         
         // get search results and filter
         $result = Search::query($fixed_query, '*', ['phrase' => false, 'fuzzy' => 0.5]);
-        $result = $this->filterResults($request, $result);
+        $result = $this->filterOrgs($request, $result);
         
         // get orgs and their ids
         $orgs = $result->get();
@@ -54,8 +70,78 @@ class SearchController extends Controller
         $orgs = Org::whereIn('id', $ids)->paginate(12);
         
         // display results
+        $query = $request->search; // original query
         $categories = $this->getCategories();
         return view('pages.orgs', compact('orgs', 'query', 'categories'));
+    }
+
+    /**
+     * Implements laravel-lucene-search to find discussion query results
+     * 
+     * @param  Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function discussions(Request $request)
+    {
+        // laravel-lucene-search bug fixes
+        $fixed_query = $this->luceneBugPatch($request);
+
+        // if query is empty, return all discussions
+        if (trim($fixed_query) == "")
+        {
+            // sort discussions by last update
+            $discussions = Discussion::with('comments')
+                ->where('updated', '!=', 'NULL')
+                ->orderBy('updated', 'desc')
+                ->paginate(10);
+        }
+        else
+        {
+            // get search results and filter
+            $search = Search::query($fixed_query, '*', ['phrase' => false, 'fuzzy' => 0.5]);
+            
+            $results = $search->get(); 
+            $ids = null;
+            foreach ($results as $result) 
+            {
+                if (class_basename($result) === 'Discussion')
+                {
+                    $ids[] = $result->id;
+                }
+                elseif (class_basename($result) === 'Comment')
+                {
+                    $ids[] = $result->discussion->id;
+                }
+            }
+
+            // sort discussions by last update
+            $discussions = Discussion::with('comments')
+                ->where('updated', '!=', 'NULL')
+                ->whereIn('id', $ids)
+                ->orderBy('updated', 'desc')
+                ->paginate(10);
+        }
+
+        // display results
+        $query = $request->search; // original query
+        $categories = $this->getCategories();
+        return view('pages.discussions', compact('discussions', 'query', 'categories'));
+    }
+
+    /**
+     * Simple lucene-search bug patching.
+     * 
+     * @param  Result $result
+     * @param  Request $request
+     * @return Result $result
+     */
+    private function luceneBugPatch(Request $request) {
+        $fixed_query = str_replace('and', '', $request->search);
+        $fixed_query = str_replace('or', '', $fixed_query);
+        $fixed_query = str_replace('xor', '', $fixed_query);
+        $fixed_query = str_replace('not', '', $fixed_query);
+
+        return $fixed_query;
     }
     
     /**
@@ -65,7 +151,7 @@ class SearchController extends Controller
      * @param  Request $request
      * @return Result $result
      */
-    private function filterResults(Request $request, $result)
+    private function filterOrgs(Request $request, $result)
     {
         $technology_names = $request->technology_list;
         $industry_names = $request->industry_list;

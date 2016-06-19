@@ -1,66 +1,68 @@
+<div class="divider"></div>
+
 <div class="discussion-board">
 	@if($discussions->count() != 0)
-		<table class="highlight">
-			<tbody>
-				@foreach($discussions as $discussion)
-					<tr>
-						<td>
-							<div>
-								@if($discussion->type == 'Organisation')
-									<i class="material-icons left discussion-icon">business</i>
-									<a href="/orgs/{{ $discussion->org_id }}#discussion" class="collection-item discussion-name">
-										Organisation: {{ $discussion->name }}
-									</a>
-								@elseif($discussion->type == 'Discussion')
-									<i class="material-icons left discussion-icon">forum</i>
-									<a href="/discussions/{{ $discussion->id }}" class="collection-item discussion-name">
-										Discussion: {{ $discussion->name }}
-									</a>
-								@elseif($discussion->type == 'Question')
-									<i class="material-icons left discussion-icon">live_help</i>
-									<a href="/discussions/{{ $discussion->id }}" class="collection-item discussion-name">
-										Question: {{ $discussion->name }}
-									</a>
-								@endif
-							</div>
-							<div>
-								@if($discussion->comments()->count() == 0)
-									Created <div id="time-{{ $discussion->id }}" class="discussion-date">{{ $discussion->created_at.' UTC' }}</div>
-									by <div class="discussion-user">{{ $discussion->user->getNameAndCity() }}</div>
-								@else
-									Updated <div id="time-{{ $discussion->id }}" class="discussion-date">{{ $discussion->comments()->orderBy('id', 'desc')->first()->created_at.' UTC' }}</div>
-									by <div class="discussion-user">{{ $discussion->comments()->orderBy('id', 'desc')->first()->user->getNameAndCity() }}</div>
-								@endif
-							</div>
-						</td>
-						<td class="center">
-							{{ $discussion->comments()->count() }}
-						</td>
-					</tr>
+		@foreach($discussions as $discussion)
+			@if($discussion->type == 'Organisation')
+				<a href="/orgs/{{ $discussion->org_id }}#discussion">
+			@else
+				<a href="/discussions/{{ $discussion->id }}">
+			@endif
+				<div class="card-panel hoverable">
+					@if($discussion->type == 'Organisation')
+						<i class="material-icons left discussion-icon">business</i>
+					@elseif($discussion->type == 'Discussion')
+						<i class="material-icons left discussion-icon">forum</i>
+					@elseif($discussion->type == 'Question')
+						<i class="material-icons left discussion-icon">live_help</i>
+					@endif
+					<div class="discussion">
+						<div class="discussion-name">
+							@if($discussion->type == 'Organisation')
+								Organisation: {{ $discussion->name }}
+							@elseif($discussion->type == 'Discussion')
+								Discussion: {{ $discussion->name }}
+							@elseif($discussion->type == 'Question')
+								Question: {{ $discussion->name }}
+							@endif
+						</div>
+						<div class="discussion-details">
+							@if($discussion->comments()->count() == 0)
+								Created <div id="time-{{ $discussion->id }}" class="discussion-date">{{ $discussion->created_at.' UTC' }}</div>
+								by <div class="discussion-user">{{ $discussion->user->getNameAndCity() }}</div>
+							@else
+								Updated <div id="time-{{ $discussion->id }}" class="discussion-date">{{ $discussion->comments()->orderBy('id', 'desc')->first()->created_at.' UTC' }}</div>
+								by <div class="discussion-user">{{ $discussion->comments()->orderBy('id', 'desc')->first()->user->getNameAndCity() }}</div>
+							@endif
+						</div>
+					</div>
+					<div class="discussion-count right hide-on-small-only">
+						{{ $discussion->comments()->count() }}
+					</div>
+				</div>
+			</a>
+			<script type="text/javascript">
+				var commentTime = $('#time-{{ $discussion->id }}');
 
-					<script type="text/javascript">
-						var commentTime = $('#time-{{ $discussion->id }}');
+				// convert to local time string
+				var localTime = moment.utc(commentTime.text()).local();
 
-						// convert to local time string
-						var localTime = moment.utc(commentTime.text()).local();
+				// make pretty
+				var prettyDate = localTime.fromNow();
 
-						// make pretty
-						var prettyDate = localTime.fromNow();
-
-						// replace time text
-						commentTime.text(prettyDate);
-					</script>
-				@endforeach
-			</tbody>
-		</table>
+				// replace time text
+				commentTime.text(prettyDate);
+			</script>
+		@endforeach
 	@else
 		<div class="center">
-			<h2>You have no discussions...</h2>
+			<h2>Nothing Found.</h2>
 		</div>
 	@endif
 </div>
 
 @if(method_exists($discussions, 'lastPage') && $discussions->lastPage() > 1)
+	<div class="divider"></div>
 	<div class="row center">
 		<ul class="pagination">
 			@if($discussions->lastPage() == 1)

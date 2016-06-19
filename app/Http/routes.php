@@ -20,7 +20,7 @@ Route::get('/home2', 'PagesController@home2');
 Route::auth();
 
 // Organisations
-Route::get('find', 'OrgsController@index');
+Route::get('discover', 'OrgsController@index');
 Route::resource('orgs', 'OrgsController');
 Route::get('orgs/{id}/delete', 'OrgsController@destroy');
 Route::post('orgs/{id}/adduser', 'OrgsController@addUser');
@@ -60,7 +60,7 @@ Route::post('account/password', 'PreferencesController@updatePassword');
 
 // Discussions
 Route::get('discuss', 'DiscussionsController@index');
-Route::get('discussions', 'DiscussionsController@index');
+//Route::get('discussions', 'DiscussionsController@index');
 Route::get('discussions/create', 'DiscussionsController@create');
 Route::get('discussions/{discussion_id}', 'DiscussionsController@show');
 Route::post('discussions', 'DiscussionsController@store');
@@ -71,7 +71,8 @@ Route::post('comment/{comment_id}/update', 'CommentsController@update');
 Route::get('comment/{comment_id}/delete', 'CommentsController@destroy');
 
 // Search
-Route::post('search', 'SearchController@search');
+Route::post('discuss', 'SearchController@discussions');
+Route::post('discover', 'SearchController@orgs');
 
 // Test
 Route::get('test', 'TestController@start');

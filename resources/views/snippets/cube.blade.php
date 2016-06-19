@@ -1,136 +1,108 @@
-<div id="thecube">
-    <div class="scene">
-        <div class="shape cuboid-1 cub-1">
-            <a id="industry" class="modal-trigger" href="#cube-industries"><div class="face ft">
-               <div class="face-content">Industries</div>
-            </div></a>
-            <a id="domain" class="modal-trigger" href="#cube-domains"><div class="face lt">
-                <div class="face-content">Domains</div>
-            </div></a>
-            <a id="technology" class="modal-trigger" href="#cube-technologies"><div class="face tp">
-                <div class="face-content">Technologies</div>
-            </div></a>
-            <div class="face shadow"></div>
-            <div class="face shadow2"></div>
-            <div class="face shadow3"></div>
-            <div class="face shadow4"></div>
+<div id="thecube-wrapper">
+    <div id="thecube">
+        <div class="scene">
+            <div class="shape">
+                <a class="modal-trigger" href="#cube-industries"><div class="face left">
+                   <div class="face-content">Industries</div>
+                </div></a>
+                <a class="modal-trigger" href="#cube-domains"><div class="face right">
+                    <div class="face-content">Applications</div>
+                </div></a>
+                <a class="modal-trigger" href="#cube-technologies"><div class="face top">
+                    <div class="face-content">Technologies</div>
+                </div></a>
+                <div id="shadow1" class="face shadow"></div>
+                <div id="shadow2" class="face shadow"></div>
+                <div id="shadow3" class="face shadow"></div>
+                <div id="shadow4" class="face shadow"></div>
+            </div>
         </div>
     </div>
 </div>
 
 <div id="cube-technologies" class="modal bottom-sheet">
-  <a class="alink modal-close"><i class="material-icons icon-close">keyboard_arrow_down</i></a>
-
-  <div class="modal-content container">
-    <h2>Technologies</h2>
-    <table>
-      <tr>
-        <td>
-          <h3>Emerging</h3>
-          <ul>
-            @foreach($categories['technologies']['emerging'] as $technology)
-              <li>
-                @if($technology->orgs()->first() != null)
-                  <a href="/technology/{{ $technology->id }}">
-                    {{ $technology->name }}
-                  </a>
-                @else
-                  {{ $technology->name }}
-                @endif
-              </li>
-            @endforeach
-          </ul>
-        </td>
-        <td>
-          <h3>Stable</h3>
-          <ul>
-            @foreach($categories['technologies']['stable'] as $technology)
-              <li>
-                @if($technology->orgs()->first() != null)
-                  <a href="/technology/{{ $technology->id }}">
-                    {{ $technology->name }}
-                  </a>
-                @else
-                  {{ $technology->name }}
-                @endif
-              </li>
-            @endforeach
-          </ul>
-        </td>
-        <td>
-          <h3>Accelerating</h3>
-          <ul>
-            @foreach($categories['technologies']['accelerating'] as $technology)
-              <li>
-                @if($technology->orgs()->first() != null)
-                  <a href="/technology/{{ $technology->id }}">
-                    {{ $technology->name }}
-                  </a>
-                @else
-                  {{ $technology->name }}
-                @endif
-              </li>
-            @endforeach
-          </ul>
-        </td>
-      </tr>
-    </table>
-  </div>
+    <a class="alink modal-close"><i class="material-icons icon-close">keyboard_arrow_down</i></a>
+    <div class="modal-content container">
+        <h2>Technologies</h2>
+        <div class="row">
+            <div class="col s6 l4">
+                <h3>Emerging</h3>
+                @foreach($categories['technologies']['emerging'] as $technology)
+                    @if($technology->orgs()->first() != null)
+                        <a href="/technology/{{ $technology->id }}">
+                            {{ $technology->name }}
+                        </a>
+                    @else
+                        {{ $technology->name }}
+                    @endif <br />
+                @endforeach
+            </div>
+            <div class="col s12 l4">
+                <h3>Stable</h3>
+                @foreach($categories['technologies']['stable'] as $technology)
+                    @if($technology->orgs()->first() != null)
+                        <a href="/technology/{{ $technology->id }}">
+                            {{ $technology->name }}
+                        </a>
+                    @else
+                        {{ $technology->name }}
+                    @endif <br />
+                @endforeach
+            </div>
+            <div class="col s12 l4">
+                <h3>Accelerating</h3>
+                @foreach($categories['technologies']['accelerating'] as $technology)
+                    @if($technology->orgs()->first() != null)
+                        <a href="/technology/{{ $technology->id }}">
+                            {{ $technology->name }}
+                        </a>
+                    @else
+                        {{ $technology->name }}
+                    @endif <br />
+                @endforeach
+            </div>
+        </div>
+    </div>
 </div>
 
 <div id="cube-industries" class="modal bottom-sheet">
-  <a class="alink modal-close"><i class="material-icons icon-close">keyboard_arrow_down</i></a>
-
-  <div class="modal-content container">
-    <h2>Industries</h2>
-    <ul>
-      @foreach($categories['industries'] as $industry)
-        <li>
-          @if($industry->orgs()->first() != null)
-            <a href="/industry/{{ $industry->id }}">
-              {{ $industry->name }}
-            </a>
-          @else
-            {{ $industry->name }}
-          @endif
-        </li>
-      @endforeach
-    </ul>
-  </div>
+    <a class="alink modal-close"><i class="material-icons icon-close">keyboard_arrow_down</i></a>
+    <div class="modal-content container">
+        <h2>Industries</h2>
+        <div class="row">
+            @foreach($categories['industries'] as $industries)
+                <div class="col s12 l3">
+                    @foreach($industries as $industry)
+                        @if($industry->orgs()->first() != null)
+                            <a href="/industry/{{ $industry->id }}">
+                                {{ $industry->name }}
+                            </a>
+                        @else
+                            {{ $industry->name }}
+                        @endif<br />
+                    @endforeach
+                </div>
+            @endforeach
+        </div>
+    </div>
 </div>
 
 <div id="cube-domains" class="modal bottom-sheet">
-  <a class="alink modal-close"><i class="material-icons icon-close">keyboard_arrow_down</i></a>
-
-  <div class="modal-content container">
-    <h2>Domains</h2>
-    <table>
-      <tr>
-        @foreach($categories['domains'] as $chunk)
-        <td>
-          @foreach($chunk as $domains)
-            <h3>{{ $domains->first()->industry->name }}</h3>
-            <ul>
-              @foreach($domains as $domain)
-                <li>
-                  @if($domain->orgs()->first() != null)
-                    <a href="/domain/{{ $domain->id }}">
-                      {{ $domain->name }}
-                    </a>
-                  @else
-                    {{ $domain->name }}
-                  @endif
-                </li>
-              @endforeach
-            </ul>
-          @endforeach
-        </td>
-        @endforeach
-      </tr>
-    </table>
-  </div>
-</div>
-
+    <a class="alink modal-close"><i class="material-icons icon-close">keyboard_arrow_down</i></a>
+    <div class="modal-content container">
+        <h2>Applications</h2>
+        <div class="row">
+            @foreach($categories['tags'] as $tags)
+                <div class="col s6 l3">
+                    @foreach($tags as $tag)
+                        <a href="/tag/{{ $tag->id }}">
+                            {{ $tag->name }}
+                        </a><br />
+                    @endforeach
+                </div>
+             @endforeach
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript">
@@ -146,262 +118,3 @@
     $('#cube-domains').closeModal();  
   });    
 </script>
-
-<style type="text/css">
-
-#thecube {
-  perspective: 800px;
-  position: relative;
-  overflow: inherit;
-  width: 100%;
-  height: 100%;
-  background: transparent;
-  font-size: 100%;
-
-}
-.face {
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4);
-}
-.scene, .shape, .face, .face-wrapper, .cr {
-  position: absolute;
-  transform-style: preserve-3d;
-}
-.scene {
-  width: 80em;
-  height: 80em;
-  top: 50%;
-  left: 50%;
-  margin: -41em 0 0 -40em;
-  -webkit-transform:rotateX(-35deg) rotateY(-45deg); 
-  -moz-transform:rotateX(-35deg) rotateY(-45deg); 
-  -ms-transform:rotateX(-35deg) rotateY(-45deg); 
-  transform:rotateX(-35deg) rotateY(-45deg);
-}
-.shape {
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  transform-origin: 50%;
-}
-.lt:hover, .ft:hover, .tp:hover {
-    background: #00ade3 !important;
-    color: #fff;
-}
-.face, .face-wrapper {
-  overflow: hidden;
-  transform-origin: 0 0;
-  backface-visibility: hidden;
-  /* hidden by default, prevent blinking and other weird rendering glitchs */
-}
-.face {
-  background-size: 100% 100%!important;
-  background-position: center;
-}
-.face-wrapper .face {
-  left: 100%;
-  width: 100%;
-  height: 100%
-}
-.face-content {
-    position: relative;
-    top: 38%;
-    text-align: center;
-    font-size: 30px;
-}
-#technology .face-content {
-    -webkit-transform: rotateZ(-45deg);
-    -moz-transform: rotateZ(-45deg);
-    -ms-transform: rotateZ(-45deg);
-    transform: rotateZ(-45deg);
-}
-.photon-shader {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%
-}
-.side {
-  left: 50%;
-}
-.cr, .cr .side {
-  height: 100%;
-}
-[class*="cuboid"] .ft, [class*="cuboid"] .bk {
-  width: 100%;
-  height: 100%;
-}
-[class*="cuboid"] .bk {
-  left: 100%;
-}
-[class*="cuboid"] .rt {
-  transform: rotateY(-90deg) translateX(-50%);
-}
-[class*="cuboid"] .lt {
-  transform: rotateY(90deg) translateX(-50%);
-}
-[class*="cuboid"] .tp {
-  transform: rotateX(90deg) translateY(-50%);
-}
-[class*="cuboid"] .bm {
-  transform: rotateX(-90deg) translateY(-50%);
-}
-[class*="cuboid"] .shadow {
-  transform: rotateX(-270deg) rotateZ(12deg) translateY(-107%) translateX(-14%) skewX(5deg);
-}
-[class*="cuboid"] .shadow2 {
-  transform: rotateX(-270deg) translateY(-50%);
-}
-[class*="cuboid"] .shadow3 {
-  transform: translateZ(7.45em);
-}
-[class*="cuboid"] .shadow4 {
-  transform: translateZ(7.55em) translateX(15em) rotateY(90deg);
-}
-[class*="cuboid"] .lt {
-  left: 100%;
-}
-[class*="cuboid"] .bm {
-  top: 100%;
-}
-[class*="cuboid"] .shadow {
-  top: 100%;
-}
-[class*="cuboid"] .shadow2 {
-  top: 100%;
-}
-[class*="cuboid"] .shadow3 {
-  top: 100%;
-}
-[class*="cuboid"] .shadow4 {
-  top: 100%;
-}
-/* .cub-1 styles */
-.cub-1 {
-  transform:translate3D(0em, 0em, 0em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
-  opacity:1;
-  width:15em;
-  height:15em;
-  margin:-7.5em 0 0 -7.5em;
-}
-.cub-1 .ft {
-  transform:translateZ(7.5em);
-}
-.cub-1 .bk {
-  transform:translateZ(-7.5em) rotateY(180deg);
-}
-.cub-1 .rt, .cub-1 .lt {
-  width:15em;
-  height:15em;
-}
-.cub-1 .tp, .cub-1 .bm {
-  width:15em;
-  height:15em;
-}
-.shadow {
-    height:10em;
-    width: 15em;
-    box-shadow: 44px -74px 163px #333;
-}
-.shadow2 {
-    height:15em;
-    width: 15em;
-    box-shadow: 0 0 150px #111;
-}
-.shadow3, .shadow4 {
-    height:15em;
-    width: 15em;
-    box-shadow: none;
-    background: linear-gradient(to top, rgba(0,0,0,0), #ddd);
-}
-.cub-1 .face {
-  background-color:#FFFFFF;
-}
-
-.cub-1 .tp {
-    background: #eee;
-}
-.cub-1 .tp:hover {
-    background: #00ade3 !important;
-    color: #fff;
-}
-
-.cub-1 .lt {
-    background: #ddd;
-}
-.cub-1 .lt:hover {
-    background: #00ade3 !important;
-    color: #fff;
-}
-
-.cub-1 .ft {
-  width:15em;
-  margin-left:0em;
-}
-.cub-1 .bk {
-  width:15em;
-  margin-left:0em;
-}
-.cub-1 .rt, .cub-1 .lt {
-  width:15em;
-}
-.cub-1 .tp, .cub-1 .bm, .cub-1 .tp .photon-shader, .cub-1 .bm .photon-shader {
-  border-radius:0em;
-}
-.cub-1 .cr {
-  width:0em;
-  left:0em;
-}
-.cub-1 .cr-0 {
-  transform: translate3D(15em, 0, 7.5em);
-}
-.cub-1 .cr-1 {
-  transform: translate3D(15em, 0, -7.5em);
-}
-.cub-1 .cr-2 {
-  transform: translate3D(0, 0, -7.5em);
-}
-.cub-1 .cr-3 {
-  transform: translate3D(0, 0, 7.5em);
-}
-.cub-1 .cr-0 .s0 {
-  transform: rotateY(15deg) translate3D(-50%, 0, -0.025em);
-}
-.cub-1 .cr-0 .s1 {
-  transform: rotateY(45deg) translate3D(-50%, 0, -0.025em);
-}
-.cub-1 .cr-0 .s2 {
-  transform: rotateY(75deg) translate3D(-50%, 0, -0.025em);
-}
-.cub-1 .cr-1 .s0 {
-  transform: rotateY(105deg) translate3D(-50%, 0, -0.025em);
-}
-.cub-1 .cr-1 .s1 {
-  transform: rotateY(135deg) translate3D(-50%, 0, -0.025em);
-}
-.cub-1 .cr-1 .s2 {
-  transform: rotateY(165deg) translate3D(-50%, 0, -0.025em);
-}
-.cub-1 .cr-2 .s0 {
-  transform: rotateY(195deg) translate3D(-50%, 0, -0.025em);
-}
-.cub-1 .cr-2 .s1 {
-  transform: rotateY(225deg) translate3D(-50%, 0, -0.025em);
-}
-.cub-1 .cr-2 .s2 {
-  transform: rotateY(255deg) translate3D(-50%, 0, -0.025em);
-}
-.cub-1 .cr-3 .s0 {
-  transform: rotateY(285deg) translate3D(-50%, 0, -0.025em);
-}
-.cub-1 .cr-3 .s1 {
-  transform: rotateY(315deg) translate3D(-50%, 0, -0.025em);
-}
-.cub-1 .cr-3 .s2 {
-  transform: rotateY(345deg) translate3D(-50%, 0, -0.025em);
-}
-.cub-1 .side {
-  width:0.025em;
-}
-</style>

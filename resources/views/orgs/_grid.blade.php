@@ -1,3 +1,5 @@
+<div class="divider"></div>
+
 <div class="row org-grid">
 	@if($orgs->count() != 0)
 
@@ -41,15 +43,15 @@
 				<li class="disabled"><i class="material-icons">chevron_right</i></li>
 			@else
 				<li class=@if($orgs->currentPage() == 1)"disabled"@endif>
-					<a href="{{ $orgs->previousPageUrl() }}"><i class="material-icons">chevron_left</i></a>
+					<a href="{{ $orgs->previousPageUrl() }}" class="page"><i class="material-icons">chevron_left</i></a>
 				</li>
 				@for($i = 1; $i <= $orgs->lastPage(); $i++)
 					<li class=@if($orgs->currentPage() == $i)"active"@else"waves-effect"@endif>
-						<a href="{{ $orgs->url($i) }}">{{ $i }}</a>
+						<a href="{{ $orgs->url($i) }}" class="page">{{ $i }}</a>
 					</li>
 				@endfor
 				<li class=@if($orgs->currentPage() == $orgs->lastPage())"disabled"@endif>
-					<a href="{{ $orgs->nextPageUrl() }}"><i class="material-icons">chevron_right</i></a>
+					<a href="{{ $orgs->nextPageUrl() }}" class="page"><i class="material-icons">chevron_right</i></a>
 				</li>
 			@endif
 		</ul>

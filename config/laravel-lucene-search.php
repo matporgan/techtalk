@@ -38,6 +38,17 @@ return [
                     'lucene_search',
                 ]
             ],
+            App\Discussion::class => [
+            'fields' => [
+                    'name', 
+                    'prompt',
+                ]
+            ],
+            App\Comment::class => [
+            'fields' => [
+                    'body',
+                ]
+            ],
         ],
     ],
 
