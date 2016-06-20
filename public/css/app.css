@@ -8571,8 +8571,17 @@ footer.page-footer {
   position: absolute;
   width: calc(100vw - 20px);
   height: calc(100vh - 64px);
-  background-image: url("/img/landing-page.jpg");
+  background-position: center;
   background-size: cover; }
+  @media only screen and (min-width: 992px) {
+    #nodes {
+      background-image: url("/img/landing-lrg.jpg"); } }
+  @media only screen and (max-width: 992px) {
+    #nodes {
+      background-image: url("/img/landing-med.jpg"); } }
+  @media only screen and (max-width: 600px) {
+    #nodes {
+      background-image: url("/img/landing-sml.jpg"); } }
 
 .parallax-container {
   height: 150px; }
@@ -8612,6 +8621,16 @@ footer.page-footer {
       color: #162934;
       height: 1.8rem;
       line-height: 1.8rem; }
+    .section#landing .landing-header .beta {
+      display: none;
+      position: absolute;
+      right: 85px;
+      top: 35px;
+      -webkit-transform: rotateZ(30deg);
+      transform: rotateZ(30deg);
+      font-size: 20px;
+      font-weight: bold;
+      color: #d50965; }
   .section#landing .landing-search {
     position: relative;
     max-width: 600px;
@@ -8629,11 +8648,11 @@ footer.page-footer {
     position: absolute;
     bottom: 0;
     left: 50%;
-    margin-left: -45px; }
+    margin-left: -2.5rem; }
     .section#landing .landing-down i {
-      font-size: 6rem !important;
+      font-size: 5rem !important;
       color: #d50965;
-      text-shadow: 0 0 8px #d50965; }
+      text-shadow: 0 0 5px #d50965; }
     .section#landing .landing-down.bounce {
       -webkit-animation-name: bounce;
       animation-name: bounce; }

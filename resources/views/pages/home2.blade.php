@@ -10,6 +10,7 @@
 			<div class="site-logo">
 				<span>&lt;</span><span id="typed"></span><span>&gt;</span>
 			</div>
+			<div class="beta">BETA</div>
 			<div id="landing-subtitle">discover, discuss, connect</div>
 		</h1>
 
@@ -165,6 +166,7 @@
 			typeSpeed: 50,
 			callback: function() {
 				$('.typed-cursor').hide();
+				$('.beta').fadeIn();
 			}
 		});
 		$('#home-search').focus();
