@@ -35,7 +35,7 @@ h1 {
 
 h2 {
 	font-size: 3rem;
-	font-family: $font-secondary; 
+	font-family: $font-secondary;
 }
 
 .code {
@@ -56,7 +56,7 @@ h2 {
 			margin-left: 10px;
 		}
 	}
-	&.alt { 
+	&.alt {
 		span {
 			color: color('advisian-blue', 'base');
 		}
@@ -147,7 +147,7 @@ h2 {
 		background: none;
 		:focus {
 			background: none;
-		} 
+		}
 	}
 	.org-desc {
 		display: none;
@@ -183,7 +183,7 @@ h2 {
 
 // #cube-padding {
 // 	display: none;
-// 	height: 100px; 
+// 	height: 100px;
 // }
 
 /* #discuss
@@ -201,11 +201,11 @@ h2 {
 
 
 .stats td {
-	padding: 13px 10px;	
+	padding: 13px 10px;
 }
 .stats td:last-child {
 	color: color('advisian-gold', 'base');
-	width: 40px;	
+	width: 40px;
 }
 
 
@@ -241,7 +241,7 @@ h2 {
 }
 
 .btn-group a, button {
-	margin-right: 10px; 
+	margin-right: 10px;
 }
 
 .header-btn-wrapper {
@@ -250,7 +250,7 @@ h2 {
 
 .header-btn-wrapper .header-btn {
 	position: absolute;
-	bottom: 0; 
+	bottom: 0;
 	right: 0;
 }
 
@@ -301,7 +301,7 @@ footer.page-footer {
 }
 
 .comment-header .author-date, .reply-details {
-	color: #aaa; 
+	color: #aaa;
 }
 
 /* Lightbox styles
@@ -315,7 +315,7 @@ footer.page-footer {
 .logo {
 	font-size: 40px;
 	height: 64px;
-	width: auto; 
+	width: auto;
 	max-width: 240px;
 }
 
@@ -334,14 +334,14 @@ footer.page-footer {
 }
 
 .toast-success {
-	background: color('advisian-blue', 'base'); 
+	background: color('advisian-blue', 'base');
 	color: #fff;
 	box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 }
 
 .toast-failure {
 	background: color('advisian-pink', 'base');
-	color: #fff; 
+	color: #fff;
 	box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 }
 
@@ -402,7 +402,7 @@ footer.page-footer {
 	}
 
 	.grid-gutter-sizer {
-		width: 2%; 
+		width: 2%;
 	}
 }
 @media only screen and (max-width: 992px) {
@@ -542,7 +542,7 @@ footer.page-footer {
 .materialize-tags .tt-menu {
 	background-color: #fff;
 	margin: 3px 0 0 0;
-	min-width: 120px; 
+	min-width: 120px;
 	max-height: 650px;
 	top: 102%;
     -webkit-box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
@@ -553,7 +553,7 @@ footer.page-footer {
 .materialize-tags .tt-menu .tt-suggestion {
     clear: both;
     font-size: 16px;
-    color: #26a69a;
+    color: color('advisian-blue', 'base');
     display: block;
     line-height: 22px;
     padding: 14px 16px;
@@ -567,4 +567,8 @@ footer.page-footer {
 
 .materialize-tags .tt-menu .tt-suggestion:hover {
     background-color: #eee;
+}
+
+.select-placeholder {
+    color: $placeholder-text-color;
 }

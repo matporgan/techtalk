@@ -10,7 +10,7 @@
 		//$('.tooltipped').tooltip({delay: 50});
 		$('.parallax').parallax();
 	});
-	
+
 	onReady(function () {
 	    $('#loading').fadeToggle();
 	});

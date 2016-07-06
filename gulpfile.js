@@ -18,8 +18,8 @@ elixir(function(mix) {
     	], './public/css/app.css')
        .styles([
        		'libs/select2.css',
-          'libs/materialize-tags.min.css',
-          'libs/jquery.fancybox.css',
+            'libs/materialize-tags.css',
+            'libs/jquery.fancybox.css',
        	], './public/css/libs.css')
        .scripts([
             'libs/jquery-2.2.3.min.js',

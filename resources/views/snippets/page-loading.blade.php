@@ -7,7 +7,8 @@
 						<span>&lt;</span>tech talk<span>&gt;</span>
 					</div>
 				</div>
-				
+			</div>
+			<div class="col s12 m4 offset-m4 center">
 				<div class="progress">
 					<div class="indeterminate"></div>
 				</div>

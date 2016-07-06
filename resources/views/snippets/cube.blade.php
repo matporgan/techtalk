@@ -20,6 +20,12 @@
     </div>
 </div>
 
+<div id="fallback" class="center btn-group" style="display: none; margin: 50px 0">
+    <a class="modal-trigger btn-large" href="#cube-industries">Industries</a>
+    <a class="modal-trigger btn-large" href="#cube-technologies">Technologies</a>
+    <a class="modal-trigger btn-large" href="#cube-domains">Applications</a>
+</div>
+
 <div id="cube-technologies" class="modal bottom-sheet">
     <a class="alink modal-close"><i class="material-icons icon-close">keyboard_arrow_down</i></a>
     <div class="modal-content container">
@@ -107,14 +113,24 @@
 
 <script type="text/javascript">
   $('#close-cube-technologies').click(function() {
-    $('#cube-technologies').closeModal(); 
+    $('#cube-technologies').closeModal();
   });
-  
+
   $('#close-cube-industries').click(function() {
-    $('#cube-industries').closeModal(); 
+    $('#cube-industries').closeModal();
   });
-  
+
   $('#close-cube-domains').click(function() {
-    $('#cube-domains').closeModal();  
-  });    
+    $('#cube-domains').closeModal();
+  });
+
+  // IE browser support
+  $(document).ready( function() {
+      var isIE = /*@cc_on!@*/false || !!document.documentMode;
+      console.log(isIE);
+      if (isIE) {
+          $('#fallback').show();
+          $('#thecube-wrapper').hide();
+      }
+  });
 </script>

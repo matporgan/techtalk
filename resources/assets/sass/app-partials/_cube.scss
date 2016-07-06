@@ -3,7 +3,7 @@
 /*------------------------------------------------ */
 #thecube-wrapper {
 	position: relative;
-	width: 100%; 
+	width: 100%;
 	height: 380px;
 	margin-bottom: 40px;
 }
@@ -18,6 +18,9 @@
 	font-size: 100%;
 	.scene, .shape, .face {
 		position: absolute;
+		-webkit-transform-style: preserve-3d;
+	    -moz-transform-style: preserve-3d;
+	    -ms-transform-style: preserve-3d;
 		transform-style: preserve-3d;
 	}
 	.scene {
@@ -26,9 +29,9 @@
 	    top: 50%;
 	    left: 50%;
 	    margin: -41em 0 0 -40em;
-	    -webkit-transform:rotateX(-35deg) rotateY(-45deg); 
-	    -moz-transform:rotateX(-35deg) rotateY(-45deg); 
-	    -ms-transform:rotateX(-35deg) rotateY(-45deg); 
+	    -webkit-transform:rotateX(-35deg) rotateY(-45deg);
+	    -moz-transform:rotateX(-35deg) rotateY(-45deg);
+	    -ms-transform:rotateX(-35deg) rotateY(-45deg);
 	    transform:rotateX(-35deg) rotateY(-45deg);
 	    .shape {
 	    	top: 50%;
@@ -44,6 +47,9 @@
 			color: color('advisian-blue', 'base');
 			box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4);
 			overflow: hidden;
+			-webkit-transform-origin: 0 0;
+		    -moz-transform-origin: 0 0;
+		    -ms-transform-origin: 0 0;
 			transform-origin: 0 0;
 			backface-visibility: hidden;
 			.face-content {
@@ -64,7 +70,11 @@
 			}
 			&.left {
 				background: #fff;
-				transform:translateZ(7.5em);
+				-webkit-transform: translateZ(7.5em);
+				-moz-transform: translateZ(7.5em);
+				-ms-transform: translateZ(7.5em);
+				filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+				transform: translateZ(7.5em);
 				&:hover {
 					background: color('advisian-pink', 'base');
 			    	color: #fff;
@@ -72,6 +82,10 @@
 			}
 			&.right {
 				background: #ddd;
+				-webkit-transform: rotateY(90deg) translateX(-50%);
+				-moz-transform: rotateY(90deg) translateX(-50%);
+				-ms-transform: rotateY(90deg) translateX(-50%);
+				filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
 				transform: rotateY(90deg) translateX(-50%);
 				left: 100%;
 				&:hover {
@@ -81,6 +95,9 @@
 			}
 			&.top {
 				background: #eee;
+				-webkit-transform: rotateY(90deg) translateX(-50%);
+				-moz-transform: rotateY(90deg) translateX(-50%);
+				-ms-transform: rotateY(90deg) translateX(-50%);
 				transform: rotateX(90deg) translateY(-50%);
 				&:hover {
 					background: color('advisian-gold', 'base');
@@ -90,12 +107,18 @@
 			&.shadow {
 				top: 100%;
 				&#shadow1 {
+					-webkit-transform: rotateX(-270deg) rotateZ(12deg) translateY(-107%) translateX(-14%) skewX(5deg);
+					-moz-transform: rotateX(-270deg) rotateZ(12deg) translateY(-107%) translateX(-14%) skewX(5deg);
+					-ms-transform: rotateX(-270deg) rotateZ(12deg) translateY(-107%) translateX(-14%) skewX(5deg);
 					transform: rotateX(-270deg) rotateZ(12deg) translateY(-107%) translateX(-14%) skewX(5deg);
 					height:10em;
 				    width: 15em;
 				    box-shadow: 44px -74px 163px #333;
 				}
 				&#shadow2 {
+					-webkit-transform: rotateX(-270deg) translateY(-50%);
+					-moz-transform: rotateX(-270deg) translateY(-50%);
+					-ms-transform: rotateX(-270deg) translateY(-50%);
 					transform: rotateX(-270deg) translateY(-50%);
 					height:15em;
 				    width: 15em;
@@ -108,9 +131,15 @@
 				    background: linear-gradient(to top, rgba(0,0,0,0), #ddd);
 				}
 				&#shadow3 {
+					-webkit-transform: translateZ(7.45em);
+					-moz-transform: translateZ(7.45em);
+					-ms-transform: translateZ(7.45em);
 					transform: translateZ(7.45em);
 				}
 				&#shadow4 {
+					-webkit-transform: translateZ(7.55em) translateX(15em) rotateY(90deg);
+					-moz-transform: translateZ(7.55em) translateX(15em) rotateY(90deg);
+					-ms-transform: translateZ(7.55em) translateX(15em) rotateY(90deg);
 					transform: translateZ(7.55em) translateX(15em) rotateY(90deg);
 				}
 			}

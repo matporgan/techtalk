@@ -45,6 +45,17 @@
 	color: #fff;
 	position: relative;
 	z-index: 2;
+	background-position: center;
+	background-size: cover;
+	@media only screen and (min-width: 992px) {
+		background-image: url('/img/landing-lrg.jpg');
+	}
+	@media only screen and (max-width: 992px) {
+		background-image: url('/img/landing-med.jpg');
+	}
+	@media only screen and (max-width: 600px) {
+		background-image: url('/img/landing-sml.jpg');
+	}
 	.card {
 		font-size: 30px;
 		line-height: 200%;
@@ -113,7 +124,7 @@
 		i {
 			font-size: 5rem !important;
 			color: color('advisian-pink', 'base');
-			text-shadow: 0 0 5px color('advisian-pink', 'base');
+			// text-shadow: 0 0 5px color('advisian-pink', 'base');
 		}
 		&.bounce {
 			-webkit-animation-name: bounce;

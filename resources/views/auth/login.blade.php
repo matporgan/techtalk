@@ -4,7 +4,11 @@
 
 <div class="container">
 
-<h1 class="center">Login</h1><br />
+<div class="row">
+    <div class="col s12">
+		<h1 class="title center">Login</h1>
+	</div>
+</div>
 
 <div class="row">
     <form class="col s12 m8 l6 offset-m2 offset-l3" id="login" role="form" method="POST" action="{{ url('/login') }}">
@@ -33,7 +37,7 @@
         <div class="row center">
             <button class="btn-large waves-effect waves-light" type="submit" name="action">
                 Login<i class="material-icons left">lock_open</i>
-            </button>            
+            </button>
         </div>
 
         <div class="center">

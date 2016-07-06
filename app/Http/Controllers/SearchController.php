@@ -20,7 +20,7 @@ class SearchController extends Controller
 {
     // /**
     //  * Implements laravel-lucene-search to find query results
-    //  * 
+    //  *
     //  * @param  Request $request
     //  * @return \Illuminate\Http\Response
     //  */aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -39,7 +39,7 @@ class SearchController extends Controller
 
     /**
      * Implements laravel-lucene-search to find org query results
-     * 
+     *
      * @param  Request $request
      * @return \Illuminate\Http\Response
      */
@@ -53,22 +53,22 @@ class SearchController extends Controller
         {
             $fixed_query = 'jerome';
         }
-        
+
         // get search results and filter
         $result = Search::query($fixed_query, '*', ['phrase' => false, 'fuzzy' => 0.5]);
         $result = $this->filterOrgs($request, $result);
-        
+
         // get orgs and their ids
         $orgs = $result->get();
         $ids = null;
-        foreach ($orgs as $org) 
+        foreach ($orgs as $org)
         {
             $ids[] = $org->id;
         }
-        
+
         // re-get orgs and paginate
         $orgs = Org::whereIn('id', $ids)->paginate(12);
-        
+
         // display results
         $query = $request->search; // original query
         $categories = $this->getCategories();
@@ -77,7 +77,7 @@ class SearchController extends Controller
 
     /**
      * Implements laravel-lucene-search to find discussion query results
-     * 
+     *
      * @param  Request $request
      * @return \Illuminate\Http\Response
      */
@@ -99,10 +99,10 @@ class SearchController extends Controller
         {
             // get search results and filter
             $search = Search::query($fixed_query, '*', ['phrase' => false, 'fuzzy' => 0.5]);
-            
-            $results = $search->get(); 
+
+            $results = $search->get();
             $ids = null;
-            foreach ($results as $result) 
+            foreach ($results as $result)
             {
                 if (class_basename($result) === 'Discussion')
                 {
@@ -130,7 +130,7 @@ class SearchController extends Controller
 
     /**
      * Simple lucene-search bug patching.
-     * 
+     *
      * @param  Result $result
      * @param  Request $request
      * @return Result $result
@@ -143,10 +143,10 @@ class SearchController extends Controller
 
         return $fixed_query;
     }
-    
+
     /**
      * Filter the search results based on the request values.
-     * 
+     *
      * @param  Result $result
      * @param  Request $request
      * @return Result $result
@@ -155,10 +155,10 @@ class SearchController extends Controller
     {
         $technology_names = $request->technology_list;
         $industry_names = $request->industry_list;
-        $domain_names = $request->domain_list;
+        $tag_names = $request->tag_list;
         $partner_status = $request->partner_status;
         $in_talks = $request->in_talks;
-        
+
         // filter by technology
         if (! empty($technology_names))
         {
@@ -167,7 +167,7 @@ class SearchController extends Controller
                 $result = $result->where('technologies', $technology_name);
             }
         }
-        
+
         // filter by industry
         if (! empty($industry_names))
         {
@@ -176,38 +176,38 @@ class SearchController extends Controller
                 $result = $result->where('industries', $industry_name);
             }
         }
-        
+
         // filter by domain
-        if (! empty($domain_names))
+        if (! empty($tag_names))
         {
-            foreach($domain_names as $domain_name) 
+            foreach($tag_names as $tag_name)
             {
-                $result = $result->where('domains', $domain_name);
+                $result = $result->where('tags', $tag_name);
             }
         }
-        
+
         // filter by partner status
         if ($partner_status != '')
         {
             $result = $result->where('partner_status', $partner_status);
         }
-        
+
         // filter by in talks status
         if ($in_talks != '')
         {
             $result = $result->where('in_talks', $in_talks);
         }
-        
+
         return $result;
     }
-    
+
     /**
      * Get a 2D array of all the categories in the database.
-     * 
+     *
      * @return array
      */
     private function getCategories()
-    {   
+    {
         // create array for each of the industry domains
         $industries = Industry::lists('name', 'id')->all();
 

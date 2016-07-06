@@ -1,7 +1,7 @@
 <div id="popup-search">
 	{!! Form::open(['method' => 'POST', 'action' => ['SearchController@' . $type], 'id' => 'popup-search-form']) !!}
 		<div id="search-box" class="input-field search-box card">
-			<input name="search" id="search" type="search" placeholder="@if($type=='discussions')Search discussions...@elseif($type=='orgs')Search...@endif" @if(isset($query))value="{{ $query }}"@endif>
+			<input name="search" id="search" type="search" placeholder="@if($type=='discussions')Search discussions...@elseif($type=='orgs')Search organisations...@endif" @if(isset($query))value="{{ $query }}"@endif>
 			<label for="search"><i class="material-icons prefix">search</i></label>
 		</div>
 
@@ -10,7 +10,7 @@
 		<div id="search-filter" class="modal modal-left">
 			<div class="modal-content">
 				<h2 class="center">Filter</h2><br />
-				
+
 				<div class="input-field">
 					<select name="technology_list[]" id="technology_list" multiple>
 						<option value="" disabled selected>Select...</option>
@@ -20,7 +20,7 @@
 					</select>
 					{!! Form::label('technology_list', 'Technologies') !!}
 				</div>
-				
+
 				<div class="input-field">
 					<select name="industry_list[]" id="industry_list" multiple>
 						<option value="" disabled selected>Select...</option>
@@ -30,8 +30,18 @@
 					</select>
 					{!! Form::label('industry_list', 'Industries') !!}
 				</div>
-				
+
 				<div class="input-field">
+					<select name="tag_list[]" id="tag_list" multiple>
+						<option value="" disabled selected>Select...</option>
+						@foreach($categories['tags'] as $id => $tag)
+							<option value="{{ $tag }}">{{ $tag }}</option>
+						@endforeach
+					</select>
+					{!! Form::label('tag_list', 'Applications') !!}
+				</div>
+
+				{{-- <div class="input-field">
 					<select name="domain_list[]" id="domain_list" multiple>
 						<option value="" disabled selected>Select...</option>
 						<option>Planning</option>
@@ -40,32 +50,32 @@
 						<option>Retail</option>
 					</select>
 					{!! Form::label('domain_list', 'Domains') !!}
-				</div>
-				
+				</div> --}}
+
 				@if(Auth::check() && Auth::user()->isAdmin())
 					<br /><h3 class="center">Restricted</h3><br />
-					
+
 					<div class="input-field">
 						{!! Form::select('partner_status', [
-							''=>'', 
-							'No Partnership'=>'No Partnership', 
-							'In Development'=>'In Development', 
-							'Active Partner'=>'Active Partner', 
+							''=>'',
+							'No Partnership'=>'No Partnership',
+							'In Development'=>'In Development',
+							'Active Partner'=>'Active Partner',
 							'Past Partner'=>'Past Partner',
 						], null, ['id' => 'partner_status']) !!}
 						{!! Form::label('partner_status', 'Partner Status*') !!}
 					</div>
-			
+
 					<div class="input-field">
 						{!! Form::select('in_talks', [
-							''=>'', 
-							'No'=>'No', 
+							''=>'',
+							'No'=>'No',
 							'Yes'=>'Yes'
 						], null, ['id' => 'in_talks']) !!}
 						{!! Form::label('in_talks', 'In Talks*') !!}
 					</div>
 				@endif
-				
+
 				<a id="clear-btn" class="btn waves-effect waves-light right">Clear</a>
 			</div>
 		</div>
@@ -93,7 +103,7 @@
 	}
 
 	function basicSearch() {
-		$('#search-filter').openModal({complete: function() { 
+		$('#search-filter').openModal({complete: function() {
 			$('.search-subtitle').removeClass('white-text');
 			$('#popup-search').css('z-index', 0);
 			$('#advanced-search').toggle();
@@ -130,11 +140,11 @@
 	$('#advanced-search').click(function() {
 		advancedSearch();
 	});
-	
+
 	$('#clear-btn').click(function() {
 		$('#technology_list').val("");
 		$('#industry_list').val("");
-		$('#domain_list').val("");
+		$('#tag_list').val("");
 		$('#partner_status').val("");
 		$('#in_talks').val("");
 	    $('select').material_select();

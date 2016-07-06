@@ -27,12 +27,12 @@ return [
         'models' => [
             App\Org::class => [
                 'fields' => [
-                    'name', 
+                    'name',
                     'short_desc',
                     'long_desc',
                     'technologies',
                     'industries',
-                    'domains',
+                    'tags',
                     'partner_status',
                     'in_talks',
                     'lucene_search',
@@ -40,7 +40,7 @@ return [
             ],
             App\Discussion::class => [
             'fields' => [
-                    'name', 
+                    'name',
                     'prompt',
                 ]
             ],

@@ -6,7 +6,7 @@
 
 <div class="row">
 	<div class="col s12">
-		<h1 class="title center"><i class="material-icons icon-large">search</i>Discover</h1>
+		<h1 class="title center"><i class="material-icons">search</i>Discover</h1>
 	</div>
 
 	<div class="col s12 m8 l6 offset-m2 offset-l3">
@@ -54,13 +54,13 @@
 	var $_GET = getQuery();
 	if ($_GET['layout'] == 'list') {
 		listView();
-		$('.page').each(function() {     
+		$('.page').each(function() {
 			$(this).attr("href", $(this).attr("href") + '&layout=list');
 		});
 	}
 	else {
 		gridView();
-		$('.page').each(function() {     
+		$('.page').each(function() {
 			$(this).attr("href", $(this).attr("href") + '&layout=grid');
 		});
 	}
@@ -68,14 +68,14 @@
 	/* grid-list toggle */
 	$('#list-toggle').click(function() {
 		listView();
-		$('.page').each(function() {     
+		$('.page').each(function() {
 			$(this).attr("href", $(this).attr("href").replace('grid', 'list'));
 		});
 	});
-	
+
 	$('#grid-toggle').click(function() {
 		gridView();
-		$('.page').each(function() {     
+		$('.page').each(function() {
 			$(this).attr("href", $(this).attr("href").replace('list', 'grid'));
 		});
 	});

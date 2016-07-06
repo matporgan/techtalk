@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Gate;
 use Session;
+use Image;
 
 use App\Org;
 use App\User;
@@ -26,7 +27,7 @@ class OrgsController extends Controller
     public function index()
     {
         $orgs = Org::orderBy('id', 'desc')->paginate(12);
-        
+
         $categories = getCategories();
 
         return view('pages.orgs', compact('orgs', 'categories'));
@@ -41,10 +42,11 @@ class OrgsController extends Controller
     {
         // redirect if not logged in
         if (Auth::guest()) return redirect()->guest('login');
-        
+
+        $orgs = Org::lists('name')->all();
         $categories = getCategories();
 
-        return view('orgs.create', compact('categories'));
+        return view('orgs.create', compact('orgs', 'categories'));
     }
 
     /**
@@ -65,7 +67,7 @@ class OrgsController extends Controller
         $org = Org::create($request->all()); // org model
         $org->users()->attach($user->id, ['org_role' => 'owner']); // add user
         $this->syncCategories($request, $org); // add categories
-        
+
         // create discussion for org and link it
         $discussion = Discussion::create(['name' => $org->name, 'type' => 'Organisation']);
         $discussion->org()->associate($org);
@@ -92,7 +94,7 @@ class OrgsController extends Controller
         //$users = User::lists('email')->all();
         $discussion = $org->discussion;
         $comments = getOrderedComments($discussion);
-        
+
         return view('pages.org', compact('org', 'users', 'discussion', 'comments'));
     }
 
@@ -105,10 +107,10 @@ class OrgsController extends Controller
     public function edit($id)
     {
         $org = Org::findOrFail($id);
-        
+
         // authorization
         if (Gate::denies('update-org', $org)) abort(403);
-        
+
         $categories = getCategories();
         $selections = $this->getSelections($org);
 
@@ -125,20 +127,20 @@ class OrgsController extends Controller
     public function update(Request $request, $id)
     {
         $org = Org::findOrFail($id);
-        
+
         // authorization
         if (Gate::denies('update-org', $org)) abort(403);
 
         // make tag string lowercase and explode. conversion: "tag 1, TAG 2, Tag 3" => ["tag1", "tag 2", "tag 3"]
         $request->merge(array('tag_list' => explode(",", strtolower($request->tag_list))));
-        
+
         // update database entry
         $org->update($request->all());
         $this->syncCategories($request, $org);
 
         if($request->file('logo') != null)
             $this->moveLogo($request, $org);
-        
+
         // flash and redirect
         Session::flash('success', 'Successfully updated!');
         return redirect("/orgs/{$org->id}");
@@ -153,7 +155,7 @@ class OrgsController extends Controller
     public function destroy($id)
     {
         $org = Org::findOrFail($id);
-        
+
         // authorization
         if (Gate::denies('update-org', $org)) abort(403);
 
@@ -167,17 +169,21 @@ class OrgsController extends Controller
      * @param  OrgRequest  $request
      * @param  Org  $org
      */
-    public function moveLogo(Request $request, Org $org) 
+    public function moveLogo(Request $request, Org $org)
     {
         $storage = 'storage/logos/';
 
-        // create filenames
+        // open image file
         $file = $request->file('logo');
+        $logo = Image::make($file);
+
+        // get filename
         $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
         $name = 'logo_' . $org->id . '.' . $ext;
-        
-        // move file
-        $file->move($storage, $name);
+
+        // resize and save
+        $logo->heighten(100);
+        $logo->save($storage . $name);
 
         // update DB entry
         $org->logo = '/' . $storage . $name;
@@ -186,7 +192,7 @@ class OrgsController extends Controller
 
     /**
      * Sync up the lists of categories in the database.
-     * 
+     *
      * @param  OrgRequest  $request
      * @param  Org  $org
      */
@@ -195,14 +201,14 @@ class OrgsController extends Controller
         // sync categories
         $org->technologies()->sync($request->input('technology_list'));
         $org->industries()->sync($request->input('industry_list'));
-        $org->domains()->sync($request->input('domain_list'));
+        // $org->domains()->sync($request->input('domain_list'));
 
         // check for new tags if array not empty
         if($request->tag_list[0] != "")
         {
             $tag_list = $this->checkForNewTags($request->tag_list);
             $org->tags()->sync($tag_list);
-        }       
+        }
     }
 
     /**
@@ -214,7 +220,7 @@ class OrgsController extends Controller
     private function checkForNewTags($tag_list)
     {
         $all_tags = Tag::lists("name")->toArray(); // get all the tags in the db
-        
+
         // determine which tags are new
         $new_tags = array_diff($tag_list, $all_tags);
         // determine which tags are already in the DB
@@ -235,20 +241,20 @@ class OrgsController extends Controller
 
         return $sync_tags;
     }
-    
+
     /**
      * Get a 2D array of all the selections of each of the categories.
-     * 
+     *
      * @param  Org $org
      * @return array
      */
     private function getSelections(Org $org)
-    {   
+    {
         return [
             'technologies' => $org->technologies->lists('id')->all(),
             'industries' => $org->industries->lists('id')->all(),
-            'domains' => $org->domains->lists('id')->all(),
+            // 'domains' => $org->domains->lists('id')->all(),
             'tags' => implode(',', $org->tags->lists('name')->all())
         ];
-    }            
+    }
 }

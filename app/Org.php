@@ -10,7 +10,7 @@ use Nqxcode\LuceneSearch\Model\SearchTrait;
 class Org extends Model implements SearchableInterface
 {
     use SearchTrait;
- 
+
     /**
      * Get id list for all searchable models.
      */
@@ -18,7 +18,7 @@ class Org extends Model implements SearchableInterface
     {
         return self::lists('id');
     }
-    
+
 	/**
 	 * Fillable fields for an org.
 	 *
@@ -52,7 +52,7 @@ class Org extends Model implements SearchableInterface
     /**
      * Get a list of user ids associated with the current org.
      *
-     * @return array 
+     * @return array
      */
     public function getUserListAttribute()
     {
@@ -72,7 +72,7 @@ class Org extends Model implements SearchableInterface
     /**
      * Get a list of technology ids associated with the current org.
      *
-     * @return array 
+     * @return array
      */
     public function getTechnologyListAttribute()
     {
@@ -92,32 +92,32 @@ class Org extends Model implements SearchableInterface
     /**
      * Get a list of technology ids associated with the current org.
      *
-     * @return array 
+     * @return array
      */
     public function getIndustryListAttribute()
     {
     	return $this->industries->lists('id')->all();
     }
 
-    /**
-     * Get the domains associated with the given org.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function domains()
-    {
-        return $this->belongsToMany('App\Domain', 'org_domain', 'org_id', 'domain_id')->withTimestamps();
-    }
+    // /**
+    //  * Get the domains associated with the given org.
+    //  *
+    //  * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    //  */
+    // public function domains()
+    // {
+    //     return $this->belongsToMany('App\Domain', 'org_domain', 'org_id', 'domain_id')->withTimestamps();
+    // }
 
-    /**
-     * Get a list of domain ids associated with the current org.
-     *
-     * @return array 
-     */
-    public function getDomainListAttribute()
-    {
-        return $this->domains->lists('id')->all();
-    }
+    // /**
+    //  * Get a list of domain ids associated with the current org.
+    //  *
+    //  * @return array
+    //  */
+    // public function getDomainListAttribute()
+    // {
+    //     return $this->domains->lists('id')->all();
+    // }
 
 	/**
 	 * Get the tags associated with the given org.
@@ -132,7 +132,7 @@ class Org extends Model implements SearchableInterface
     /**
      * Get a list of tag ids associated with the current org.
      *
-     * @return array 
+     * @return array
      */
     public function getTagListAttribute()
     {
@@ -148,7 +148,7 @@ class Org extends Model implements SearchableInterface
     {
         return $this->hasMany('App\Document');
     }
-    
+
     /**
      * Get the links associated with the given org.
      *
@@ -158,7 +158,7 @@ class Org extends Model implements SearchableInterface
     {
         return $this->hasMany('App\Link');
     }
-    
+
     /**
      * Get the contacts associated with the given org.
      *

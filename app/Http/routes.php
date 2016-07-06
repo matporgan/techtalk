@@ -13,8 +13,6 @@
 
 // Home
 Route::get('/', 'PagesController@home');
-Route::get('/home1', 'PagesController@home1');
-Route::get('/home2', 'PagesController@home2');
 
 // Authentication
 Route::auth();
@@ -71,8 +69,9 @@ Route::post('comment/{comment_id}/update', 'CommentsController@update');
 Route::get('comment/{comment_id}/delete', 'CommentsController@destroy');
 
 // Search
-Route::post('discuss', 'SearchController@discussions');
-Route::post('discover', 'SearchController@orgs');
+Route::post('discuss/search', 'SearchController@discussions');
+Route::post('discover/search', 'SearchController@orgs');
+Route::get('discover/search', 'SearchController@continue');
 
 // Test
 Route::get('test', 'TestController@start');

@@ -4,10 +4,10 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
+
 	<title>Tech Talk</title>
 
-	<link rel='shortcut icon' type='image/x-icon' href='img/favicon.ico' />
+	<link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" />
 	<link rel="stylesheet" href="/css/app.css">
 	<link rel="stylesheet" href="/css/libs.css">
 	<link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
@@ -15,7 +15,7 @@
 
 	<!-- Add fancyBox main JS and CSS files -->
 <!-- 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen" /> -->
-	
+
 	<script type="text/javascript" src="/js/app.js"></script>
 	<script type="text/javascript" src="/js/libs.js"></script>
 	<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
@@ -27,19 +27,19 @@
 
 </head>
 <body>
-	
+
 	@include('snippets.page-loading')
-	
+
 	@include('snippets.flash')
 
 	@include('layouts.header')
-	
+
 	<main id="page" @if(Request::is('/')) class="home" @endif>
 		@yield('content')
 	</main>
-	
+
 	@include('layouts.footer')
-	
+
 	@include('layouts._js')
 
 </div>

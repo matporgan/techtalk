@@ -4,7 +4,11 @@
 
 <div class="container">
 
-<h1 class="center">Register</h1><br />
+<div class="row">
+    <div class="col s12">
+		<h1 class="title center">Register</h1>
+	</div>
+</div>
 
 <div class="row">
     <form class="col s12 m8 l6 offset-m2 offset-l3" id="register" role="form" method="POST" action="{{ url('/register') }}">
@@ -14,12 +18,12 @@
             {!! Form::label('first_name', 'First Name', ['class' => 'active']) !!}
             {!! Form::text('first_name', null, ['id' => 'first_name']) !!}
         </div>
-        
+
         <div class="input-field">
             {!! Form::label('last_name', 'Last Name', ['class' => 'active']) !!}
             {!! Form::text('last_name', null, ['id' => 'last_name']) !!}
         </div>
-        
+
         <div class="input-field">
             {!! Form::label('office_city', 'Office Location (City)', ['class' => 'active']) !!}
             {!! Form::text('office_city', null, ['id' => 'office_city']) !!}
@@ -72,7 +76,7 @@
         },
         messages: {
             password_confirmation: {
-                equalTo: "Passwords do not match." 
+                equalTo: "Passwords do not match."
             }
         },
         errorElement : 'div',

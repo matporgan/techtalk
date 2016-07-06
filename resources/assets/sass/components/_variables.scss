@@ -38,7 +38,7 @@ $primary-color-light: lighten($primary-color, 15%) !default;
 $primary-color-dark: darken($primary-color, 15%) !default;
 
 $secondary-color: color("advisian-blue", "base") !default;
-$success-color: color("advisian-gold", "base") !default;
+$success-color: color("advisian-blue", "base") !default;
 $error-color: color("red", "base") !default;
 $link-color: color("light-blue", "darken-1") !default;
 
@@ -155,7 +155,7 @@ $input-disabled-color: rgba(0,0,0, .26) !default;
 $input-disabled-solid-color: #BDBDBD !default;
 $input-disabled-border: 1px dotted $input-disabled-color !default;
 $input-invalid-border: 1px solid $input-error-color !default;
-$placeholder-text-color: lighten($input-border-color, 20%) !default;
+$placeholder-text-color: #ddd; // lighten($input-border-color, 20%) !default;
 
 // Radio Buttons
 $radio-fill-color: $secondary-color !default;

@@ -2,7 +2,7 @@
 /* GENERAL
 /*------------------------------------------------ */
 
-// Fonts 
+// Fonts
 
 @font-face {
     font-family: "Source Sans Pro";
@@ -29,9 +29,24 @@ h1 {
 	&.title {
 		margin: 10vh 0 5vh 0;
 	}
+    i {
+        font-size: inherit !important;
+        line-height: inherit;
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 15px;
+        color: color('advisian-blue', 'base')
+    }
 }
 
 h2 {
 	font-size: 3rem;
-	font-family: $font-secondary; 
+	font-family: $font-secondary;
+}
+
+a {
+    i {
+        display: inline-block;
+        vertical-align: middle;
+    }
 }

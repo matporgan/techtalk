@@ -16,11 +16,6 @@
                         <a href="/orgs/create" {{ Request::is('orgs/create') ? 'class=active' : null }}><i class="material-icons">add</i></a>
                     </li>
                 </ul>
-                <!-- <a href="/" class="brand-logo center" @if(Request::is('home1')) style="display: none;" @endif>
-                    <div class="site-logo @unless(Request::is('home1')) alt @endunless">
-                        <span>&lt;</span>tech talk<span>&gt;</span>
-                    </div>
-                </a> -->
                 <ul class="right hide-on-med-and-down">
                     @if(Auth::check())
                         <li><a href="/discussions/12" target="_top">Feedback</a></li>
@@ -62,7 +57,7 @@
 <script type="text/javascript">
     $('#nav-search').focus(function() {
         $('#nav-search').animate(
-            { width: 200 }, 
+            { width: 200 },
             {
                 duration: 'fast',
                 easing: 'linear'

@@ -6,7 +6,7 @@
 
 <div class="row">
 	<div class="col s12">
-		<h1 class="title center"><span>#</span>Discuss</h1>
+		<h1 class="title center"><i class="material-icons">forum</i>Discuss</h1>
 	</div>
 
 	<div class="col s12 m8 l6 offset-m2 offset-l3">
@@ -32,10 +32,10 @@
 		@else
 			<h3>{{ $discussions->total() }} @if($discussions->total() == 1) discussion @else discussions @endif</h3>
 		@endif
-		
+
 	</div>
 
-		
+
 	<div class="col s12">
 		@include('discussions._board')
 	</div>

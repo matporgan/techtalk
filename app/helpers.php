@@ -17,23 +17,23 @@ function addhttp($url) {
 
 /**
  * Get a 2D array of all the categories in the database.
- * 
+ *
  * @return array
  */
 function getCategories()
-{   
+{
     // create array for each of the industry domains
-    $industries = App\Industry::lists('name', 'id')->all();
+    $industries = App\Industry::orderBy('position')->lists('name', 'id')->all();
 
-    for ($i=1; $i<=count($industries); $i++)
-    {
-        $domains[$i] = App\Domain::where('industry_id', $i)->lists('name', 'id')->all();
-    }
+    // for ($i=1; $i<=count($industries); $i++)
+    // {
+    //     $domains[$i] = App\Domain::where('industry_id', $i)->lists('name', 'id')->all();
+    // }
 
     return [
-        'technologies' => App\Technology::lists('name', 'id')->all(),
+        'technologies' => App\Technology::orderBy('position')->lists('name', 'id')->all(),
         'industries' => $industries,
-        'domains' => $domains,
+        // 'domains' => $domains,
         'tags' => App\Tag::lists('name', 'id')->all()
     ];
 }
@@ -52,19 +52,19 @@ function getOrderedComments(Discussion $discussion)
     // check to ensure comments exist
     if(empty($comment_parent_ids))
         return null;
-    
+
     // get id and parent_id arrays and order them
     $comment_ids = array_keys($comment_parent_ids);
     $parent_ids = array_values($comment_parent_ids);
     $ordered_ids = getOrderedParentChildList($comment_ids, $parent_ids);
-    
+
     // get collections based off $ordered_ids
     static $comment;
     for($i=0; $i<count($discussion->comments); $i++)
     {
         if($i > 0)
-        { 
-            $previous = $comment; 
+        {
+            $previous = $comment;
             $comment = $discussion->comments->where('id', $ordered_ids[$i][0])->first();
             $comment->setLevel($ordered_ids[$i][1]);
             $comment->setParentName($previous->user->getNameAndCity());
@@ -76,12 +76,12 @@ function getOrderedComments(Discussion $discussion)
         }
         $comments[] = $comment;
     }
-    
+
     return $comments;
 }
 
 /**
- * Orders an array of ids based on an array of parent ids. 
+ * Orders an array of ids based on an array of parent ids.
  * Also adds a 'level' attribute to each id for css indenting.
  * E.g. [ID]   [PID]     [ID,Level]
  *      [ 1]   [  -]     [  1,0   ]
@@ -93,7 +93,7 @@ function getOrderedComments(Discussion $discussion)
  *      [ 7]   [  2]     [  6,1   ]
  *      [ 8]   [  4]     [  2,0   ]
  *      [ 9]   [  4]     [  7,1   ]
- * 
+ *
  * @param  array $ids
  * @param  array $parent_ids
  * @param  array $ordered_ids = null
@@ -106,7 +106,7 @@ function getOrderedParentChildList($ids, $parent_ids, $ordered_ids = array(null)
 
     if(! empty($ids)) // if ids remain
     {
-        
+
         // if null, look for the next root id
         if($position === null)
         {
@@ -116,7 +116,7 @@ function getOrderedParentChildList($ids, $parent_ids, $ordered_ids = array(null)
         // place $id at $position into ordered array
         $id = $ids[$position];
         $ordered_ids[] = [$id, $level];
-        
+
         // remove ids from lists and re-key
         unset($ids[$position]);
         $ids = array_values($ids);
@@ -129,7 +129,7 @@ function getOrderedParentChildList($ids, $parent_ids, $ordered_ids = array(null)
         if(! empty($children)) // children found
         {
             // increase indent level
-            $level++; 
+            $level++;
 
             // get ids of children
             foreach($children as $child)
@@ -144,7 +144,7 @@ function getOrderedParentChildList($ids, $parent_ids, $ordered_ids = array(null)
 
                 // call getOrderedParentChildList on that child
                 $results = getOrderedParentChildList($ids, $parent_ids, $ordered_ids, $next_pos);
-                
+
                 // put results back into arrays
                 $ids = $results[0];
                 $parent_ids = $results[1];
@@ -155,12 +155,12 @@ function getOrderedParentChildList($ids, $parent_ids, $ordered_ids = array(null)
             $level--;
         }
 
-        if($level != 0) 
+        if($level != 0)
         {
             // pass arrays back to parent
             return [$ids, $parent_ids, $ordered_ids];
         }
-        else 
+        else
         {
             // move on to next root id
             return getOrderedParentChildList($ids, $parent_ids, $ordered_ids);
