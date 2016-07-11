@@ -92,8 +92,8 @@ class PagesController extends Controller
                 'stable' => Technology::where('subcategory', 'Stable')->get(),
                 'accelerating' => Technology::where('subcategory', 'Accelerating')->get(),
             ],
-            'industries' => $industries->chunk(ceil($industries->count() / 4)),
-            'tags' => $tags->chunk(ceil($tags->count() / 4)),
+            'industries' => $industries->chunk(max(1, ceil($industries->count() / 4))), // max for case where count() == 0
+            'tags' => $tags->chunk(max(1, ceil($tags->count() / 4))), // max for case where count() == 0
             //'domains' => Domain::all()->groupBy('industry_id')->chunk(3),
         ];
 
