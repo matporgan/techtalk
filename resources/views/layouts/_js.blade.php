@@ -9,6 +9,7 @@
 		//$('.scrollspy').scrollSpy();
 		//$('.tooltipped').tooltip({delay: 50});
 		$('.parallax').parallax();
+		$('.linkify').linkify();
 	});
 
 	onReady(function () {

@@ -59,7 +59,6 @@ class OrgsController extends Controller
     {
         // make tag string lowercase and explode. conversion: "tag 1, TAG 2, Tag 3" => ["tag1", "tag 2", "tag 3"]
         $request->merge(array('tag_list' => explode(",", strtolower($request->tag_list))));
-        $request->merge(array('website' => addHttp($request->website)));
 
         $user = Auth::user();
 
@@ -111,10 +110,11 @@ class OrgsController extends Controller
         // authorization
         if (Gate::denies('update-org', $org)) abort(403);
 
+        $orgs = Org::lists('name')->all();
         $categories = getCategories();
         $selections = $this->getSelections($org);
 
-        return view('orgs.edit', compact('org', 'categories', 'selections'));
+        return view('orgs.edit', compact('org', 'orgs', 'categories', 'selections'));
     }
 
     /**
@@ -172,6 +172,8 @@ class OrgsController extends Controller
     public function moveLogo(Request $request, Org $org)
     {
         $storage = 'storage/logos/';
+        // make directory if it doesn't exist
+        file_exists($storage) ? /* do nothing */ : mkdir($storage); 
 
         // open image file
         $file = $request->file('logo');

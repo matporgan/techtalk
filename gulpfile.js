@@ -20,9 +20,9 @@ elixir(function(mix) {
        		'libs/select2.css',
             'libs/materialize-tags.css',
             'libs/jquery.fancybox.css',
+            'libs/jquery.mentionsInput.css',
        	], './public/css/libs.css')
        .scripts([
-            'libs/jquery-2.2.3.min.js',
             'libs/materialize.js',
             'libs/select2.min.js',
             'libs/dropzone.js',
@@ -31,6 +31,10 @@ elixir(function(mix) {
             'libs/jquery.fancybox.js',
             'libs/moment.js',
             'libs/typed.js',
+            'libs/jquery.textcomplete.js',
+            'libs/jquery.overlay.js',
+            'libs/linkify.js',
+            'libs/linkify-jquery.js'
        	], './public/js/libs.js')
        	.scripts([
        		'helpers.js',

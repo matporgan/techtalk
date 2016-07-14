@@ -55,6 +55,11 @@
 </div>
 
 <script type="text/javascript">
+    $.validator.addMethod("emaildomain", function(value, element) {
+        var domain = value.split('@')[1]; // get the string after @
+        return domain == "advisian.com" || domain == "worleyparsons.com";
+    }, "Email must be \@advisian.com or \@worleyparsons.com");
+
     $("#register").validate({
         rules: {
             first_name: "required",
@@ -62,7 +67,8 @@
             office_city: "required",
             email: {
                 required: true,
-                email: true
+                email: true,
+                emaildomain: true,
             },
             password: {
                 required: true,

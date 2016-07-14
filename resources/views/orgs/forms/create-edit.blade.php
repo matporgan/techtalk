@@ -172,7 +172,6 @@
 	});
 
 	$.validator.addMethod("unique_value", function(value, element, array) {
-		console.log($.inArray(value.toLowerCase(), array) != -1);
 	    return this.optional(element) || ($.inArray(value.toLowerCase(), array) == -1);
 	}, 'This organisation already exists.');
 

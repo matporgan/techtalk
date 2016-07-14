@@ -3,7 +3,7 @@
 </div>
 
 <div class="row">
-	<a href="{{ $org->website }}">{{ $org->website }}</a>
+	<p class="linkify">{{ $org->website }}</p>
 </div>
 
 <div class="row">

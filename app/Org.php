@@ -46,7 +46,7 @@ class Org extends Model implements SearchableInterface
      */
     public function users()
     {
-        return $this->belongsToMany('App\User', 'org_user', 'org_id', 'user_id')->withPivot('org_role')->withTimestamps();
+        return $this->belongsToMany('App\User', 'org_user', 'org_id', 'user_id')->withPivot('org_role', 'watcher')->withTimestamps();
     }
 
     /**

@@ -1,13 +1,7 @@
-<div class="card-panel org-header advisian-blue white-text">
+<div class="card-panel org-header">
 	<div class="row header-btn-wrapper">
-		<div class="col">
-			<h1>{!! $org->name !!}</h1>
-			Created by 
-			@foreach($org->users as $user)
-				@if($user->pivot->org_role == 'owner')
-					<a href="mailto:{{ $user->email }}" class="white-text">{{ $user->getNameAndCity() }}</a>
-				@endif
-			@endforeach
+		<div class="col s12">
+			<h1 class="advisian-blue-text">{!! $org->name !!}</h1>
 		</div>
 		<div class="header-btn">
 			<div class="btn-group">
@@ -18,13 +12,30 @@
 			</div>
 		</div>
 	</div>
-</div>
-<div class="card-panel org-body">
 	<div class="row">
-		<h2>Description</h2>
-
-		<p>{!! nl2br($org->short_desc) !!}</p>
-
-    	<p>{!! nl2br($org->long_desc) !!}</p>
+		<div class="col s12">
+			<p>{!! nl2br($org->short_desc) !!}</p>
+	    	<p class="linkify">{!! nl2br($org->long_desc) !!}</p>
+	    </div>
 	</div>
+
+{{-- 	@if($org->users->where('id', Auth::user()->id)->first()->pivot->watcher)
+		<a href="{{ $org->id }}/watch" class="btn unwatch"><i class="material-icons left">visibility</i>Watch</a>
+	@else
+		<a href="{{ $org->id }}/watch" class="btn-flat watch"><i class="material-icons left">visibility</i>Watch</a>
+	@endif
+	
+	<script type="text/javascript">
+		$('.unwatch').hover(function() {
+			$(this)
+				.removeClass('btn')
+				.addClass('btn-flat')
+				.html('<i class="material-icons left">visibility_off</i>Watch');
+		}, function() {
+			$(this)
+				.addClass('btn')
+				.removeClass('btn-flat')
+				.html('<i class="material-icons left">visibility</i>Watch');
+		});
+	</script> --}}
 </div>

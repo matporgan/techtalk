@@ -3,19 +3,6 @@
 use App\Discussion;
 
 /**
- * Add http if not already present.
- *
- * @param  string $url
- * @return string
- */
-function addhttp($url) {
-    if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
-        $url = "http://" . $url;
-    }
-    return $url;
-}
-
-/**
  * Get a 2D array of all the categories in the database.
  *
  * @return array

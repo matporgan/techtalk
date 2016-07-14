@@ -21,11 +21,13 @@ Route::auth();
 Route::get('discover', 'OrgsController@index');
 Route::resource('orgs', 'OrgsController');
 Route::get('orgs/{id}/delete', 'OrgsController@destroy');
-Route::post('orgs/{id}/adduser', 'OrgsController@addUser');
+//Route::post('orgs/{id}/adduser', 'OrgsController@addUser');
 
-// Organisation contributors
+// Organisation users
 Route::post('orgs/{id}/contributor', 'ContributorsController@store');
 Route::get('orgs/{id}/contributor/{user_id}/delete', 'ContributorsController@destroy');
+Route::get('orgs/{id}/watch', 'ContributorsController@watch');
+Route::get('orgs/{id}/unwatch', 'ContributorsController@unwatch');
 
 // Organisation documents
 Route::post('orgs/{id}/document', 'DocumentsController@store');

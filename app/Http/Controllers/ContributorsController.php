@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use Auth;
 use Gate;
 use Response;
 use Session;
@@ -65,5 +66,31 @@ class ContributorsController extends Controller
         $org->users()->detach($user_id);
 
     	return back();
+    }
+
+    /**
+     * Set the current user to 'watch/unwatch' the org.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function watch($id)
+    {
+        $org = Org::findOrFail($id);
+        
+        // authorization
+        if (!Auth::check()) { abort(403); }
+
+        // check if they are a watcher or not
+        if ($org->users->where('id', Auth::user()->id)->first()->pivot->watcher)
+        {
+            $org->users()->updateExistingPivot(Auth::user()->id, ['watcher' => 0]);
+        }
+        else
+        {
+            $org->users()->updateExistingPivot(Auth::user()->id, ['watcher' => 1]);
+        }
+
+        return back();
     }
 }

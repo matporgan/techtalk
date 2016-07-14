@@ -16,11 +16,11 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('city');
+            $table->string('office_city');
             $table->string('email')->unique();
             $table->string('role')->default('contributor');
             $table->string('notify_frequency')->default('Weekly');
-            $table->timestamp('last_notified')->default('1900-01-01');
+            $table->timestamp('last_notified')->useCurrent();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
@@ -33,6 +33,7 @@ class CreateUsersTable extends Migration
             $table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('org_role')->default('contributor');
+            $table->boolean('watcher')->default(0);
             $table->timestamps();
         });
     }

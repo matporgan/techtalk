@@ -76,7 +76,7 @@ class User extends Authenticatable
      */
     public function orgs()
     {
-        return $this->belongsToMany('App\Org', 'org_user', 'user_id', 'org_id')->withPivot('org_role')->withTimestamps();
+        return $this->belongsToMany('App\Org', 'org_user', 'user_id', 'org_id')->withPivot('org_role', 'watcher')->withTimestamps();
     }
 
     /**

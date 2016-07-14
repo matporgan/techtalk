@@ -34,7 +34,7 @@
 
 				<div class="comment-body" id="comment-body-{{ $comment->id }}">
 
-					<div class="comment-text">
+					<div class="comment-text linkify">
 						{{ $comment->body }}
 					</div>
 

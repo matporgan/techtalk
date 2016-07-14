@@ -572,3 +572,12 @@ footer.page-footer {
 .select-placeholder {
     color: $placeholder-text-color;
 }
+
+.watch {
+	border: 1px solid #aaa;
+	&:hover {
+		border: 1px solid color('advisian-blue', 'base');
+		background: color('advisian-blue', 'base');
+		color: #fff
+	}
+}

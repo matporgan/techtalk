@@ -22,7 +22,7 @@
 			<div class="col s12">
 				<div class="card-panel advisian-blue white-text">
 					<h2>{{ $discussion->name }}</h2>
-					<p>{!! $discussion->prompt !!}</p>
+					<p class="linkify">{!! $discussion->prompt !!}</p>
 					<div>
 						Created <span id="discussion-time" class="advisian-charcoal-text">{{ $discussion->created_at.' UTC' }}</span>
 						by <span class="advisian-charcoal-text">{{ $discussion->user->getNameAndCity() }}</span> 
