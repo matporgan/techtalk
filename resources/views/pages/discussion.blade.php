@@ -6,12 +6,14 @@
 
 @if($discussion->org_id != null)
 	<script type="text/javascript">
-	    window.location = "/orgs/{{ $discussion->org_id }}#discussion";//here double curly bracket
+	    window.location = "/orgs/{{ $discussion->org_id }}#discussion"; 
 	</script>
 @endif
 
 <div class="row">
-	<h1 class="center">{{ $discussion->type }}</h1>
+	<div class="col s12">
+		<h1 class="center">{{ $discussion->type }}</h1>
+	</div>
 </div>
 
 <div class="row">
@@ -20,12 +22,12 @@
 
 		<div class="row">
 			<div class="col s12">
-				<div class="card-panel advisian-blue white-text">
-					<h2>{{ $discussion->name }}</h2>
+				<div class="card-panel">
+					<h2 class="advisian-blue-text">{{ $discussion->name }}</h2>
 					<p class="linkify">{!! $discussion->prompt !!}</p>
 					<div>
-						Created <span id="discussion-time" class="advisian-charcoal-text">{{ $discussion->created_at.' UTC' }}</span>
-						by <span class="advisian-charcoal-text">{{ $discussion->user->getNameAndCity() }}</span> 
+						Created <span id="discussion-time" class="advisian-gold-text">{{ $discussion->created_at.' UTC' }}</span>
+						by <span class="advisian-gold-text">{{ $discussion->user->getNameAndCity() }}</span> 
 					</div>
 				</div>
 			</div>

@@ -78,17 +78,27 @@ class ContributorsController extends Controller
     {
         $org = Org::findOrFail($id);
         
-        // authorization
-        if (!Auth::check()) { abort(403); }
+        // redirect if not logged in
+        if (Auth::guest()) return redirect()->guest('login');
+        $user = Auth::user();
 
-        // check if they are a watcher or not
-        if ($org->users->where('id', Auth::user()->id)->first()->pivot->watcher)
+        // get relationship (if any)
+        $org_user = $org->users->where('id', $user->id)->first();
+
+        // create relationship if one doesn't exist
+        // else if a watcher already, cancel it
+        // else make a watcher
+        if ($org_user == null)
         {
-            $org->users()->updateExistingPivot(Auth::user()->id, ['watcher' => 0]);
+            $org->users()->attach($user->id, ['org_role' => 'watcher', 'watcher' => 1]);
         }
-        else
+        elseif ($org_user->pivot->watcher == 1)
         {
-            $org->users()->updateExistingPivot(Auth::user()->id, ['watcher' => 1]);
+            $org->users()->updateExistingPivot($user->id, ['watcher' => 0]);
+        }
+        else 
+        {
+            $org->users()->updateExistingPivot($user->id, ['watcher' => 1]);
         }
 
         return back();

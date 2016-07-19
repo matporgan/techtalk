@@ -248,10 +248,17 @@ h2 {
 	position: relative;
 }
 
-.header-btn-wrapper .header-btn {
-	position: absolute;
-	bottom: 0;
-	right: 0;
+.header-btn-wrapper {
+	.header-btn {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+	}
+	.header-btn-org {
+		position: absolute;
+		top: 3.5rem;
+		right: 1.5rem;
+	}
 }
 
 /* Layout Styles
@@ -574,9 +581,10 @@ footer.page-footer {
 }
 
 .watch {
-	border: 1px solid #aaa;
+	// border: 1px solid #aaa;
+	background: color('grey', 'lighten-2');
 	&:hover {
-		border: 1px solid color('advisian-blue', 'base');
+		// border: 1px solid color('advisian-blue', 'base');
 		background: color('advisian-blue', 'base');
 		color: #fff
 	}

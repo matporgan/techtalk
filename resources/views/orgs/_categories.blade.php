@@ -1,5 +1,5 @@
 <div class="row" style="margin-top:20px;">
-	<img src="{{ $org->logo }}" alt="{{ $org->name . " - Logo" }}" class="logo" />
+	<img src="{{ $org->logo }}" alt="{{ $org->name . " - Logo" }}" class="logo responsive-img" />
 </div>
 
 <div class="row">

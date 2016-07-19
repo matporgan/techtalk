@@ -33,7 +33,7 @@ class CreateUsersTable extends Migration
             $table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('org_role')->default('contributor');
-            $table->boolean('watcher')->default(0);
+            $table->boolean('watcher')->default(1);
             $table->timestamps();
         });
     }

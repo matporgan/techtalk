@@ -40,7 +40,7 @@ class AuthServiceProvider extends ServiceProvider
                 {
                     return true;
                 }
-                elseif ($user_org->pivot->org_id == $org->id) 
+                elseif ($user_org->pivot->org_id == $org->id && $user_org->pivot->org_role != 'watcher') 
                 {
                     return true;
                 }

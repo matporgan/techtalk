@@ -108,7 +108,11 @@ class Notifications
                 // user's organisations
                 if ($discussion->org->users->where('id', $user->id)->first() != null)
                 {
-                    $userDiscussions[] = $discussion;
+                    // orgs user is watching
+                    if ($discussion->org->users->where('id', $user->id)->first()->pivot->watcher == 1)
+                    {
+                        $userDiscussions[] = $discussion;
+                    }
                 }
                 // org discussions user has contributed to
                 elseif ($discussion->comments->where('user_id', $user->id)->first() != null)
