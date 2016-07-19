@@ -1,11 +1,12 @@
 <div id="popup-search">
 	{!! Form::open(['method' => 'POST', 'action' => ['SearchController@' . $type], 'id' => 'popup-search-form']) !!}
+		<!-- IE fix for sumission on enter -->
+		<button type="submit" name="action" class="btn" style="width:0;height:0;margin:0;padding:0;"></button>
+
 		<div id="search-box" class="input-field search-box card">
 			<input name="search" id="search" type="search" placeholder="@if($type=='discussions')Search discussions...@elseif($type=='orgs')Search organisations...@endif" @if(isset($query))value="{{ $query }}"@endif>
 			<label for="search"><i class="material-icons prefix">search</i></label>
 		</div>
-
-		<button type="submit" name="action" style="display: none;"></button>
 
 		<div id="search-filter" class="modal modal-left">
 			<div class="modal-content">
