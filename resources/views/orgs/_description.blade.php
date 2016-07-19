@@ -16,7 +16,7 @@
 					<a href="{{ $org->id }}/watch" class="btn-flat watch tooltipped" data-position="bottom" data-delay="50" data-tooltip="Get notified of discussions about this organisation."><i class="material-icons left">visibility</i>Watch</a>
 				@endif
 			@else
-				<a href="login" class="btn-flat watch tooltipped" data-position="bottom" data-delay="50" data-tooltip="Get notified of discussions about this organisation."><i class="material-icons left">visibility</i>Watch</a>
+				<a href="/login" class="btn-flat watch tooltipped" data-position="bottom" data-delay="50" data-tooltip="Get notified of discussions about this organisation."><i class="material-icons left">visibility</i>Watch</a>
 			@endif
 		</div>
 		<div class="btn-group" style="margin-left: 10px;">
