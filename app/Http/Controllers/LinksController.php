@@ -28,11 +28,9 @@ class LinksController extends Controller
         // authorization
         if (Gate::denies('update-org', $org)) { abort(403); }
 
-        $url = addHttp($request->url);
-
         // create DB entry
         $org->links()->create([
-            'url' => $url,
+            'url' => $request->url,
             'description' => $request->description
         ]);
         

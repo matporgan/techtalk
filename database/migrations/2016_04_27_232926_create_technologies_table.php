@@ -42,6 +42,7 @@ class CreateTechnologiesTable extends Migration
             [8 , 'Stable', 'Software Development'],
             [9 , 'Stable', 'Operations Systems'],
             [10, 'Stable', 'Visualization'],
+            [10, 'Stable', 'GIS / Geospatial'],
             [11, 'Stable', 'Digitization'],
             [12, 'Stable', 'Computer Aided Design'],
             [13, 'Stable', 'Computer Aided Construction'],

@@ -76,6 +76,8 @@ class DiscussionsController extends Controller
      */
     public function show($id)
     {
+        if (! is_int($id) ) abort(404);
+
         $discussion = Discussion::with('comments')->findOrFail($id);
 
         $comments = getOrderedComments($discussion);

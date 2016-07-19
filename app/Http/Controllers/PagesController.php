@@ -119,7 +119,10 @@ class PagesController extends Controller
         ];
 
         $orgs = $orgs->sortByDesc('id')->take(4);
-        $discussions = $discussions->sortByDesc('id')->take(4);
+        $discussions = Discussion::with('comments')
+            ->where('updated', '!=', 'NULL')
+            ->orderBy('updated', 'desc')
+            ->get()->take(4);
 
         return view('pages.home', compact('orgs', 'discussions', 
             'top_contributors', 'top_commentors', 'stats', 'categories'));

@@ -89,6 +89,8 @@ class OrgsController extends Controller
      */
     public function show($id)
     {
+        if (! is_int($id) ) abort(404);
+
         $org = Org::with('discussion')->findOrFail($id);
         //$users = User::lists('email')->all();
         $discussion = $org->discussion;
