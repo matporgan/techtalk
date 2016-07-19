@@ -1,5 +1,5 @@
 <?php
-    $websiteURL = 'http://sgazrttk01v.southeastasia.cloudapp.azure.com/';
+    $websiteURL = 'http://techtalk.advisian.com/';
     $notificationsURL = $websiteURL . 'account';
 ?>
 
