@@ -73,7 +73,7 @@
 							<div class="collapsible-body">
 								<p>
 									{!! nl2br($link->description) !!}<br /><br />
-									<a class="btn" href="{{ $link->url }}" target="_blank"><i class="material-icons left">open_in_new</i>Go To</a>
+									<a class="btn" href="{{ '//'.$link->url }}" target="_blank"><i class="material-icons left">open_in_new</i>Go To</a>
 									@can('update-org', $org)
 										<a class="btn red right modal-trigger" href="#delete-link-{{ $link->id }}"><i class="material-icons">close</i></a>
 										<a class="btn green right margin-right modal-trigger" href="#edit-link-{{ $link->id }}"><i class="material-icons">edit</i></a>
