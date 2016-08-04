@@ -29,6 +29,14 @@
             <span class="subtitle"><a href="/password/reset">Forgot your password?</a></span>
         </div>
 
+        @if (count($errors))
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li class="worleyparsons-red-text">{{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
+
         <div class="input-field">
             <input type="checkbox" name="remember" id="remember" />
             <label for="remember">Remember Me</label>

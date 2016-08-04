@@ -72,7 +72,7 @@ Route::get('comment/{comment_id}/delete', 'CommentsController@destroy');
 
 // Search
 Route::post('discuss/search', 'SearchController@discussions');
-Route::post('discover/search', 'SearchController@orgs');
+Route::post('discover', 'SearchController@orgs');
 Route::get('discover/search', 'SearchController@continue');
 
 // Test

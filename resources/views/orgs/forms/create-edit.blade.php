@@ -215,21 +215,27 @@
 	function validateForm() {
 		var result = true;
 	    if ($('#technology_list').val() == "") {
-	        document.getElementById("technology-error").style.display='block';
+	    	$('#technology-error').show();
 	        result = false;
+	    } 
+	    else {
+	    	$('#technology-error').hide();
 	    }
 	    if ($('#industry_list').val() == "") {
-	        document.getElementById("industry-error").style.display='block';
+	        $('#industry-error').show();
 	        result = false;
+	    } 
+	    else {
+	    	$('#industry-error').hide();
 	    }
-		for(var i = 1; i <= industryCount; i++) {
-			if($('#industry_list').val().indexOf(i.toString()) >= 0) {
-				if ($('#domain_list_'+i).val() == null) {
-					document.getElementById("domain-error-"+i).style.display='block';
-			        result = false;
-			    }
-			}
-		}
+		// for(var i = 1; i <= industryCount; i++) {
+		// 	if($('#industry_list').val().indexOf(i.toString()) >= 0) {
+		// 		if ($('#domain_list_'+i).val() == null) {
+		// 			document.getElementById("domain-error-"+i).style.display='block';
+		// 	        result = false;
+		// 	    }
+		// 	}
+		// }
 	    return result;
 	}
 

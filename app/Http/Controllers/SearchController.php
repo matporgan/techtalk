@@ -18,25 +18,6 @@ use App\Tag;
 
 class SearchController extends Controller
 {
-    // /**
-    //  * Implements laravel-lucene-search to find query results
-    //  *
-    //  * @param  Request $request
-    //  * @return \Illuminate\Http\Response
-    //  */aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-    // public function search(Request $request)
-    // {
-    //     $url = URL::previous();
-    //     $origin = substr($url, strrpos($url, '/') + 1);
-
-    //     if($origin == 'discuss') {
-    //         return $this->searchDiscussions($request);
-    //     }
-    //     else{
-    //         return $this->searchOrgs($request);
-    //     }
-    // }
-
     /**
      * Implements laravel-lucene-search to find org query results
      *
@@ -45,8 +26,16 @@ class SearchController extends Controller
      */
     public function orgs(Request $request)
     {
+        $post = false;
+        if ($request->isMethod('post'))
+        {
+            $post = true;
+        }
+
+        $term = $request->search;
+
         // laravel-lucene-search bug fixes
-        $fixed_query = $this->luceneBugPatch($request);
+        $fixed_query = $this->luceneBugPatch($term);
 
         // if query is empty, return all orgs (using lucene_search table column)
         if (trim($fixed_query) == "")
@@ -56,7 +45,11 @@ class SearchController extends Controller
 
         // get search results and filter
         $result = Search::query($fixed_query, '*', ['phrase' => false, 'fuzzy' => 0.5]);
-        $result = $this->filterOrgs($request, $result);
+        // filtering disabled... for now.
+        // if ($post)
+        // {
+        //     $result = $this->filterOrgs($request, $result);
+        // }
 
         // get orgs and their ids
         $orgs = $result->get();
@@ -69,10 +62,22 @@ class SearchController extends Controller
         // re-get orgs and paginate
         $orgs = Org::whereIn('id', $ids)->paginate(12);
 
+        if ($post)
+        {
+            if ($term != "")
+                return redirect('/discover?search=' . $term);
+            else
+                return redirect('/discover');
+        }
+        else
+        {
+            return $orgs;
+        }
         // display results
-        $query = $request->search; // original query
-        $categories = $this->getCategories();
-        return view('pages.orgs', compact('orgs', 'query', 'categories'));
+        //$query = $request->search; // original query
+        //$categories = $this->getCategories();
+        
+        //return view('pages.orgs', compact('orgs', 'query', 'categories'));
     }
 
     /**
@@ -83,8 +88,16 @@ class SearchController extends Controller
      */
     public function discussions(Request $request)
     {
+        $post = false;
+        if ($request->isMethod('post'))
+        {
+            $post = true;
+        }
+
+        $term = $request->search;
+
         // laravel-lucene-search bug fixes
-        $fixed_query = $this->luceneBugPatch($request);
+        $fixed_query = $this->luceneBugPatch($term);
 
         // if query is empty, return all discussions
         if (trim($fixed_query) == "")
@@ -101,6 +114,7 @@ class SearchController extends Controller
             $search = Search::query($fixed_query, '*', ['phrase' => false, 'fuzzy' => 0.5]);
 
             $results = $search->get();
+
             $ids = null;
             foreach ($results as $result)
             {
@@ -122,10 +136,22 @@ class SearchController extends Controller
                 ->paginate(10);
         }
 
+        if ($post)
+        {
+            if ($term != "")
+                return redirect('/discuss?search=' . $term);
+            else
+                return redirect('/discuss');
+        }
+        else
+        {
+            return $discussions;
+        }
+
         // display results
-        $query = $request->search; // original query
-        $categories = $this->getCategories();
-        return view('pages.discussions', compact('discussions', 'query', 'categories'));
+        //$query = $request->search; // original query
+        //$categories = $this->getCategories();
+        //return view('pages.discussions', compact('discussions', 'query', 'categories'));
     }
 
     /**
@@ -135,8 +161,8 @@ class SearchController extends Controller
      * @param  Request $request
      * @return Result $result
      */
-    private function luceneBugPatch(Request $request) {
-        $fixed_query = str_replace('and', '', $request->search);
+    private function luceneBugPatch($search) {
+        $fixed_query = str_replace('and', '', $search);
         $fixed_query = str_replace('or', '', $fixed_query);
         $fixed_query = str_replace('xor', '', $fixed_query);
         $fixed_query = str_replace('not', '', $fixed_query);

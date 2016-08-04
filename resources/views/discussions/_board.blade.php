@@ -61,25 +61,35 @@
 	@endif
 </div>
 
+<?php
+	if (isset($_GET['search']))
+	{
+		$search = '&search=' . $_GET['search'];
+	}
+	else 
+	{
+		$search = "";
+	}
+?>
 @if(method_exists($discussions, 'lastPage') && $discussions->lastPage() > 1)
 	<div class="divider"></div>
 	<div class="row center">
 		<ul class="pagination">
 			@if($discussions->lastPage() == 1)
 				<li class="disabled"><i class="material-icons">chevron_left</i></li>
-				<li class="active"><a href="{{ $discussions->currentPage() }}">1</a></li>
+				<li class="active"><a href="{{ $discussions->currentPage() . $search }}">1</a></li>
 				<li class="disabled"><i class="material-icons">chevron_right</i></li>
 			@else
 				<li class=@if($discussions->currentPage() == 1)"disabled"@endif>
-					<a href="{{ $discussions->previousPageUrl() }}"><i class="material-icons">chevron_left</i></a>
+					<a href="{{ $discussions->previousPageUrl() . $search }}"><i class="material-icons">chevron_left</i></a>
 				</li>
 				@for($i = 1; $i <= $discussions->lastPage(); $i++)
 					<li class=@if($discussions->currentPage() == $i)"active"@else"waves-effect"@endif>
-						<a href="{{ $discussions->url($i) }}">{{ $i }}</a>
+						<a href="{{ $discussions->url($i) . $search }}">{{ $i }}</a>
 					</li>
 				@endfor
 				<li class=@if($discussions->currentPage() == $discussions->lastPage())"disabled"@endif>
-					<a href="{{ $discussions->nextPageUrl() }}"><i class="material-icons">chevron_right</i></a>
+					<a href="{{ $discussions->nextPageUrl() . $search }}"><i class="material-icons">chevron_right</i></a>
 				</li>
 			@endif
 		</ul>

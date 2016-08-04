@@ -4,6 +4,7 @@
 		<button type="submit" name="action" class="btn" style="width:0;height:0;margin:0;padding:0;"></button>
 
 		<div id="search-box" class="input-field search-box card">
+			<?php $query = isset($_GET['search']) ? $_GET['search'] : "" ?>
 			<input name="search" id="search" type="search" placeholder="@if($type=='discussions')Search discussions...@elseif($type=='orgs')Search organisations...@endif" @if(isset($query))value="{{ $query }}"@endif>
 			<label for="search"><i class="material-icons prefix">search</i></label>
 		</div>
@@ -83,9 +84,9 @@
 	{!! Form::close() !!}
 
 	<a id="browse-all" href="@if($type=='discussions') /discuss @else /discover @endif" class="search-subtitle alink">Browse All</a>
-	@if ($type == 'orgs')
+{{-- 	@if ($type == 'orgs')
 		<a id="advanced-search" class="search-subtitle alink">Advanced Search</a>
-	@endif
+	@endif --}}
 </div>
 
 <script type="text/javascript">

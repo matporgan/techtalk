@@ -22,6 +22,7 @@
 		</div>
 	</div>
 
+	<?php $query = isset($_GET['search']) ? $_GET['search'] : "" ?>
 	<div class="col s12">
 		@if(isset($query) && $query != "")
 			<h3>{{ $discussions->total() }} @if($discussions->total() == 1) discussion @else discussions @endif found for:&nbsp;</h3>

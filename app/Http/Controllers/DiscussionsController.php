@@ -19,13 +19,22 @@ class DiscussionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        // sort discussions by last update
-        $discussions = Discussion::with('comments')
-            ->where('updated', '!=', 'NULL')
-            ->orderBy('updated', 'desc')
-            ->paginate(10);
+        $search = $request->get('search');
+
+        if ($search != "")
+        {
+            $discussions = app('App\Http\Controllers\SearchController')->discussions($request);
+        }
+        else 
+        {
+            // sort discussions by last update
+            $discussions = Discussion::with('comments')
+                ->where('updated', '!=', 'NULL')
+                ->orderBy('updated', 'desc')
+                ->paginate(10);
+        }
 
         return view('pages.discussions', compact('discussions'));
     }

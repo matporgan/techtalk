@@ -22,8 +22,9 @@
 		</div>
 	</div>
 
+	<?php $query = isset($_GET['search']) ? $_GET['search'] : "" ?>
 	<div class="col s12">
-		@if(isset($query) && $query != "")
+		@if($query != "")
 			<h3>{{ $orgs->total() }} @if($orgs->total() == 1) organisation @else organisations @endif found for:&nbsp;</h3>
 			<h2>{{ $query }}</h2>
 		@elseif(isset($category) && $category != "")

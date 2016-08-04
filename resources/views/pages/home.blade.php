@@ -20,7 +20,7 @@
 				</div>
 			{!! Form::close() !!}
 
-			<a href="discover?s=advanced" class="alink">Advanced Search</a>
+			{{-- <a href="discover?s=advanced" class="alink">Advanced Search</a> --}}
 		</div>
 
 		<div class="landing-browse">

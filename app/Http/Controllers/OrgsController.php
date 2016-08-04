@@ -24,9 +24,18 @@ class OrgsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orgs = Org::orderBy('id', 'desc')->paginate(12);
+        $search = $request->get('search');
+
+        if ($search != "")
+        {
+            $orgs = app('App\Http\Controllers\SearchController')->orgs($request);
+        }
+        else 
+        {
+            $orgs = Org::orderBy('id', 'desc')->paginate(12);
+        }
 
         $categories = getCategories();
 
