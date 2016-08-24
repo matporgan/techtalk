@@ -35,11 +35,11 @@ class TestController extends Controller
         //     $m->to($user->email, $user->name)->subject('Test Email abc!');
         // });
 
-        Mail::send('emails.notification1', ['user' => $user, 'discussions' => $discussions], function ($m) use ($user) {
+        Mail::send('emails.notification', ['user' => $user, 'discussions' => $discussions], function ($m) use ($user) {
             $m->from('techtalk@advisian.com', 'Tech Talk');
             $m->to($user->email, $user->name)->subject('Tech Talk Notifications');
         });
 
-        return view('emails.notification1', compact('discussions'));
+        return view('emails.notification', compact('discussions'));
     }
 }
