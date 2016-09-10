@@ -23,8 +23,8 @@
 	<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.js"></script>
 	<script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
-	<script src="https://npmcdn.com/masonry-layout@4.0.0/dist/masonry.pkgd.min.js"></script>
-	<script src="https://npmcdn.com/imagesloaded@4.1.0/imagesloaded.pkgd.js"></script>
+	<script src="https://unpkg.com/masonry-layout@4.0.0/dist/masonry.pkgd.min.js"></script>
+	<script src="https://unpkg.com/imagesloaded@4.1.0/imagesloaded.pkgd.js"></script>
 	<script src=""></script>
 
 </head>
